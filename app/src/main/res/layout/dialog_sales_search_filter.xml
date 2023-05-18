@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_search_type_bg"
+    android:orientation="vertical">
+
+    <com.baihe.common.view.FontTextView
+        android:id="@+id/filter_phone_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="手机号"
+        android:textColor="#4A4C5C"
+        android:textSize="16sp"
+        app:font_textStyle="LIGHT" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp"
+        android:background="#ECECF0" />
+
+    <com.baihe.common.view.FontTextView
+        android:id="@+id/filter_groupid_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="客户编号"
+        android:textColor="#4A4C5C"
+        android:textSize="16sp"
+        app:font_textStyle="LIGHT" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp"
+        android:background="#ECECF0" />
+
+    <com.baihe.common.view.FontTextView
+        android:id="@+id/filter_order_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="订单号"
+        android:textColor="#4A4C5C"
+        android:textSize="16sp"
+        app:font_textStyle="LIGHT" />
+
+</LinearLayout>

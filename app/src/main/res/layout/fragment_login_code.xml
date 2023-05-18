@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_common_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="输入验证码"
+            android:textColor="#ff4a4c5c"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            android:text="验证码已发送至 +86 185 1354 1545"
+            android:textColor="#ff4a4c5c"
+            android:textSize="12sp" />
+
+        <me.leefeng.libverify.VerificationView
+            android:id="@+id/verificationView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:vAutoShowInputBoard="true"
+            app:vCursorDrawable="@color/login_code_color"
+            app:vTextColor="#ff4a4c5c"
+            app:vTextCount="6"
+            app:vTextSize="28dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvGetCodeHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60 秒后重新获取验证码"
+                android:textColor="#ffc5c5ce"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvGetCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重新获取验证码"
+                android:textColor="#ff8dd2ec"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

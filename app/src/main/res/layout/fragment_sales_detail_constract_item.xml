@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_card_white_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical">
+
+        <com.baihe.common.view.FontTextView
+            android:id="@+id/constact_item_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合同 HT1242394002"
+            android:textColor="#4A4C5C"
+            android:textSize="16sp"
+            app:font_textStyle="HALF_BOLD" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+
+            <com.baihe.lihepro.view.FlowLayout
+                android:id="@+id/constact_item_label_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:label_horizontal_space="4dp"
+                app:label_textColor="#FFFFFF"
+                app:label_textSize="10sp"
+                app:singleLine="true" />
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="40dp"
+                android:layout_height="16dp"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"
+                android:text="可编辑"
+                android:background="@drawable/bg_edit_tag"
+                android:textColor="#8CDCE6"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/constact_item_go_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:src="@drawable/arrow_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="12dp"
+        android:background="#ECECF0" />
+
+    <com.baihe.lihepro.view.KeyValueLayout
+        android:id="@+id/constact_item_data_kvl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:kv_value_maxLine="2"
+        app:kv_key_equal_width="true"
+        app:kv_key_textColor="#8B8B99"
+        app:kv_kv_space="5dp"
+        app:kv_value_textColor="#8B8B99" />
+
+</LinearLayout>

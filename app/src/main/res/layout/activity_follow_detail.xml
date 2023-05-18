@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F8"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/item_card_white_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:id="@+id/follow_list_head_iv"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_head_default" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@+id/follow_list_head_iv"
+                android:orientation="vertical">
+
+                <com.baihe.common.view.FontTextView
+                    android:id="@+id/follow_list_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张丹丹"
+                    android:textColor="#4A4C5C"
+                    android:textSize="16sp"
+                    app:font_textStyle="HALF_BOLD" />
+
+                <com.baihe.common.view.FontTextView
+                    android:id="@+id/follow_list_wedding_time_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="婚期："
+                    android:textColor="#4A4C5C"
+                    android:textSize="12sp"
+                    app:font_textStyle="NORMAL" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="16dp"
+            android:background="#ECECF0" />
+
+        <com.baihe.lihepro.view.KeyValueLayout
+            android:id="@+id/follow_list_data_kvl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="vertical"
+            app:kv_key_colon="false"
+            app:kv_key_equal_width="true"
+            app:kv_kv_space="16dp"
+            app:kv_value_textStyle="NORMAL" />
+
+    </LinearLayout>
+
+    <com.baihe.common.view.FontTextView
+        android:id="@+id/follow_list_attachment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="15dp"
+        android:text="附件"
+        android:textColor="#4A4C5C"
+        android:textSize="20sp"
+        app:font_textStyle="HALF_BOLD" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/follow_detail_attachment_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/item_card_white_bg" />
+
+</LinearLayout>

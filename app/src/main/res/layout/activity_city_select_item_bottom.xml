@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_card_bottom_white_bg"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/city_select_item_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.baihe.common.view.FontTextView
+            android:id="@+id/city_select_item_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="王岗子"
+            android:textColor="#4A4C5C"
+            android:textSize="16sp"
+            app:font_textStyle="HALF_BOLD" />
+
+        <ImageView
+            android:id="@+id/city_select_item_select_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/selector_checkbox_select" />
+    </LinearLayout>
+
+</LinearLayout>

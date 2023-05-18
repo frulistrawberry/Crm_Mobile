@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/arrival_time_round_drawable"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.baihe.lihepro.view.KeyValueLayout
+        android:id="@+id/arrival_time_kvl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:kv_key_textColor="#8B8B99"
+        app:kv_item_space="12dp"
+        app:kv_key_textSize="12sp"
+        app:kv_value_textColor="#8B8B99"
+        app:kv_value_textSize="12sp" />
+
+</LinearLayout>

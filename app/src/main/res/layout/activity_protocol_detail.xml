@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F6F6F8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/item_card_white_bg"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <com.baihe.common.view.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="协议编号"
+                            android:textColor="#4A4C5C"
+                            android:textSize="16sp"
+                            app:font_textStyle="HALF_BOLD" />
+                        <com.baihe.common.view.FontTextView
+                            android:id="@+id/tv_agreement_num"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="15dp"
+                            android:text=""
+                            android:textColor="#4A4C5C"
+                            android:textSize="16sp"
+                            app:font_textStyle="HALF_BOLD" />
+                        <TextView
+                            android:id="@+id/btn_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="#4A4C5C"
+                            android:text="编辑"
+                            android:drawablePadding="5dp"
+                            android:drawableLeft="@drawable/icon_edit"
+                            />
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:background="#ECECF0"/>
+                    <com.baihe.common.view.FontTextView
+                        android:id="@+id/protocol_add_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="增项协议"
+                        android:layout_marginTop="16dp"
+                        android:textColor="#4A4C5C"
+                        android:textSize="16sp"
+                        app:font_textStyle="HALF_BOLD" />
+                    <com.baihe.lihepro.view.KeyValueLayout
+                        android:id="@+id/protocol_add_kvl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:kv_key_colon="true"
+                        android:layout_marginTop="16dp"
+                        app:kv_key_equal_width="true"
+                        app:kv_kv_space="4dp"
+                        app:kv_value_textStyle="NORMAL" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:background="#ECECF0"/>
+                    <com.baihe.common.view.FontTextView
+                        android:id="@+id/protocol_del_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="减项协议"
+                        android:layout_marginTop="16dp"
+                        android:textColor="#4A4C5C"
+                        android:textSize="16sp"
+                        app:font_textStyle="HALF_BOLD" />
+                    <com.baihe.lihepro.view.KeyValueLayout
+                        android:id="@+id/protocol_del_kvl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:kv_key_colon="true"
+                        android:layout_marginTop="16dp"
+                        app:kv_key_equal_width="true"
+                        app:kv_kv_space="4dp"
+                        app:kv_value_textStyle="NORMAL" />
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/item_card_white_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#4A4C5C"
+                        android:text="增项"/>
+
+                    <TextView
+                        android:id="@+id/tv_add_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#4A4C5C"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#4A4C5C"
+                        android:text="减项"/>
+
+                    <TextView
+                        android:id="@+id/tv_del_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#4A4C5C"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#ECECF0"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#4A4C5C"
+                        android:text="合计金额"/>
+
+                    <TextView
+                        android:id="@+id/tv_sum_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#2DB4E6"
+                        android:layout_marginLeft="15dp"
+                        android:text=""/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

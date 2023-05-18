@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="commont_title_height">45dp</dimen>
+    <dimen name="commont_title_textSize">20sp</dimen>
+    <dimen name="commont_sub_title_textSize">16sp</dimen>
+    <dimen name="commont_super_big_textSize">20sp</dimen>
+    <dimen name="commont_big_textSize">18sp</dimen>
+    <dimen name="commont_textSize">16sp</dimen>
+    <dimen name="commont_small_textSize">14sp</dimen>
+    <dimen name="commont_super_small_textSize">12sp</dimen>
+    <dimen name="commont_line_height">0.5dp</dimen>
+    <dimen name="commont_left_right_magin">15dp</dimen>
+</resources>

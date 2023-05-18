@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rl_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_height="48dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl_day"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/calendar_round_blue"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_lunar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="初一"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_level"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_alignRight="@id/ll_item"
+                android:layout_alignTop="@id/ll_item"
+                android:visibility="visible"
+                >
+                <com.baihe.lihepro.view.calendar.CirCleView
+                    android:id="@+id/v_circle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <TextView
+                    android:id="@+id/v_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="A"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/start_date_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/start_date"/>
+            <ImageView
+                android:id="@+id/end_date_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:src="@drawable/end_date"/>
+            <View
+                android:id="@+id/v_point"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:visibility="visible"
+                android:background="@drawable/calendar_point"
+                android:layout_alignBottom="@id/ll_item"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <View
+                android:id="@+id/v_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#222DB4E6"/>
+            <View
+                android:id="@+id/v_bg_left"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_height="match_parent"
+                android:background="#222DB4E6"/>
+            <View
+                android:id="@+id/v_bg_right"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginRight="2dp"
+                android:layout_height="match_parent"
+                android:background="#222DB4E6"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.baihe.lihepro.view.ChildPresenter
+        android:id="@+id/recyclerView"
+        android:visibility="visible"
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="219dp"/>
+
+
+</LinearLayout>

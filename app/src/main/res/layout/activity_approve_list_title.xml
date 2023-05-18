@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_round_white_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/approve_list_title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/approve_list_title_tb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            app:navigationIcon="@drawable/navigation_icon">
+
+            <com.baihe.common.view.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="我的审批"
+                android:textColor="#4A4C5C"
+                android:textSize="@dimen/commont_title_textSize"
+                app:font_textStyle="HALF_BOLD" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/approve_list_title_sort_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.baihe.lihepro.view.SliderRadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                app:slider_color="#00B6EB"
+                app:slider_height="2.5dp"
+                app:slider_refer_spacing="8dp"
+                app:slider_round="1.25dp"
+                app:slider_width_weight="0.5">
+
+                <RadioButton
+                    android:id="@+id/approve_list_title_sort_rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableTop="@null"
+                    android:clickable="false"
+                    android:gravity="center"
+                    android:text="待审批"
+                    android:textColor="#4A4C5C"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </com.baihe.lihepro.view.SliderRadioGroup>
+
+            <ImageView
+                android:id="@+id/approve_list_title_arrow_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:src="@drawable/arrow_down" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1.0" />
+
+        <LinearLayout
+            android:id="@+id/approve_list_title_filter_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="19dp"
+                android:background="#C5C5CE" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/title_filter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="15dp"
+                android:text="筛选"
+                android:textColor="#4A4C5C"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

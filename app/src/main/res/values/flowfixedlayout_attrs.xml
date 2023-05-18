@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FlowFixedLayout">
+        <!-- label固定列数 -->
+        <attr name="ffl_label_rows" format="integer"/>
+        <!-- label背景图 -->
+        <attr name="ffl_label_background" format="reference"/>
+        <!-- label文字大小-->
+        <attr name="ffl_label_textSize" format="dimension"/>
+        <!-- label文字颜色-->
+        <attr name="ffl_label_textColor" format="color"/>
+        <!-- label文字选中颜色-->
+        <attr name="ffl_label_select_textColor" format="color"/>
+        <!-- label横向间距 -->
+        <attr name="ffl_label_horizontal_space" format="dimension"/>
+        <!-- label纵向间距 -->
+        <attr name="ffl_label_vertical_space" format="dimension"/>
+        <!--label文字内部左边距-->
+        <attr name="ffl_label_text_maginLeft" format="dimension"/>
+        <!--label文字内部上边距-->
+        <attr name="ffl_label_text_maginTop" format="dimension"/>
+        <!--label文字内部右边距-->
+        <attr name="ffl_label_text_maginRight" format="dimension"/>
+        <!--label文字内部下边距-->
+        <attr name="ffl_label_text_maginBottom" format="dimension"/>
+        <!-- label选中背景图 -->
+        <attr name="ffl_label_select_background" format="reference"/>
+        <!-- label选中是否多选 -->
+        <attr name="ffl_label_multiSelect" format="boolean"/>
+        <!-- label选中多选最大选择的个数 -->
+        <attr name="ffl_label_multiSelect_maxNum" format="integer"/>
+        <!-- label选中多选最小选择的个数 -->
+        <attr name="ffl_label_multiSelect_minNum" format="integer"/>
+        <!-- label是否开启填充模式，默认开启（文字无法排下时，自动占据下一个单元label，直到本行无label时文字变成省略号） -->
+        <attr name="ffl_label_fill_mode" format="boolean"/>
+    </declare-styleable>
+
+</resources>

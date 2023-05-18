@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.common.view.StatusLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customer_demand_sl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/customer_demand_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:scrollbars="none" />
+
+</com.baihe.common.view.StatusLayout>

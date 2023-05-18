@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F8"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="3dp">
+
+
+                <FrameLayout
+                    android:id="@+id/fl_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:id="@+id/v_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:alpha="0.1"/>
+                    <LinearLayout
+                        android:id="@+id/btn_approve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:textSize="14sp"/>
+                        <ImageView
+                            android:id="@+id/iv_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/arrow_right_copy"
+                            android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+                </FrameLayout>
+
+
+                <com.baihe.common.view.FontTextView
+                    android:id="@+id/reserve_detail_schedule_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="15dp"
+                    android:text="档期信息"
+                    android:textColor="#4A4C5C"
+                    android:textSize="20sp"
+                    app:font_textStyle="HALF_BOLD" />
+
+                <LinearLayout
+                    android:id="@+id/reserve_detail_schedule_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/item_card_white_bg"
+                    android:orientation="vertical">
+
+                    <com.baihe.lihepro.view.KeyValueLayout
+                        android:id="@+id/reserve_detail_schedule_kvl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical"
+                        app:kv_item_space="20dp"
+                        app:kv_key_textSize="16sp"
+                        app:kv_key_textStyle="LIGHT"
+                        app:kv_kv_space="19dp"
+                        app:kv_value_textSize="16sp"
+                        app:kv_value_textStyle="NORMAL" />
+
+                </LinearLayout>
+
+
+                <com.baihe.common.view.FontTextView
+                    android:id="@+id/reserve_detail_customer_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="15dp"
+                    android:text="合同信息"
+                    android:textColor="#4A4C5C"
+                    android:textSize="20sp"
+                    app:font_textStyle="HALF_BOLD" />
+
+                <LinearLayout
+                    android:id="@+id/reserve_detail_customer_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/item_card_white_bg"
+                    android:orientation="vertical">
+
+                    <com.baihe.lihepro.view.KeyValueLayout
+                        android:id="@+id/reserve_detail_customer_kvl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical"
+                        app:kv_item_space="20dp"
+                        app:kv_key_textSize="16sp"
+                        app:kv_key_textStyle="LIGHT"
+                        app:kv_kv_space="19dp"
+                        app:kv_value_textSize="16sp"
+                        app:kv_value_textStyle="NORMAL" />
+
+                </LinearLayout>
+
+                <com.baihe.common.view.FontTextView
+                    android:id="@+id/reserve_detail_reserve_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="15dp"
+                    android:text="预订信息"
+                    android:textColor="#4A4C5C"
+                    android:textSize="20sp"
+                    app:font_textStyle="HALF_BOLD" />
+
+                <LinearLayout
+                    android:id="@+id/reserve_detail_reserve_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/item_card_white_bg"
+                    android:orientation="vertical">
+
+                    <com.baihe.lihepro.view.KeyValueLayout
+                        android:id="@+id/reserve_detail_reserve_kvl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical"
+                        app:kv_item_space="20dp"
+                        app:kv_key_textSize="16sp"
+                        app:kv_key_textStyle="LIGHT"
+                        app:kv_kv_space="19dp"
+                        app:kv_value_textSize="16sp"
+                        app:kv_value_textStyle="NORMAL" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/reserve_detail_bottom_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-16dp"
+            android:background="@drawable/top_round_white_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/reserve_detail_botton1_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/button_round_white"
+                android:gravity="center"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:textColor="#2DB4E6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/reserve_detail_botton2_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/button_round_white"
+                android:gravity="center"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:textColor="#2DB4E6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/reserve_detail_botton3_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/button_round_blue2"
+                android:gravity="center"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

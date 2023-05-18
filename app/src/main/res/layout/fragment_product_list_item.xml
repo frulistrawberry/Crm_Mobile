@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/product_list_item_check_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:src="@drawable/unchecked_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/item_card_white_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.baihe.common.view.FontTextView
+                android:id="@+id/product_list_item_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="39999春季套系"
+                android:textColor="#4A4C5C"
+                android:textSize="16sp"
+                app:font_textStyle="HALF_BOLD" />
+
+            <com.baihe.lihepro.view.FlowLayout
+                android:id="@+id/product_list_item_label_fl"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                app:label_horizontal_space="4dp"
+                app:label_textColor="#FFFFFF"
+                app:label_textSize="10sp"/>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#ECECF0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.baihe.common.view.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品价格："
+                android:textColor="#4A4C5C"
+                android:textSize="14sp"
+                app:font_textStyle="LIGHT" />
+
+            <com.baihe.common.view.FontTextView
+                android:id="@+id/product_list_item_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="399999元"
+                android:textColor="#4A4C5C"
+                android:textSize="14sp"
+                app:font_textStyle="LIGHT" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <com.baihe.common.view.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品图片："
+                android:textColor="#4A4C5C"
+                android:textSize="14sp"
+                app:font_textStyle="LIGHT" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_list_item_pic_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

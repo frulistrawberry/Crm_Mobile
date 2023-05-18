@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_card_white_bg"
+    android:orientation="vertical">
+
+    <com.baihe.lihepro.view.KeyValueLayout
+        android:id="@+id/kv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:kv_key_textStyle="LIGHT"
+        app:kv_value_textSize="16sp"
+        app:kv_item_space="20dp"
+        app:kv_kv_space="19dp"
+        app:kv_key_textSize="16sp"
+        app:kv_value_textStyle="NORMAL" />
+
+</LinearLayout>

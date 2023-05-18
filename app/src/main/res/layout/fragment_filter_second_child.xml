@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lihepro.view.FlowFixedLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/filter_second_child_label_ffl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    app:ffl_label_fill_mode="true"
+    app:ffl_label_rows="3"
+    app:ffl_label_select_background="@drawable/light_blue_round_drawable"
+    app:ffl_label_select_textColor="@color/colorWhite" />
