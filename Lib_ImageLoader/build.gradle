@@ -1,0 +1,55 @@
+apply plugin:'maven'
+apply from: "../common_config.gradle"
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.baihe.lib_imageloader"
+        }
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //统一资源前缀，规范资源引用
+    resourcePrefix "image_"
+}
+
+dependencies {
+    implementation project(':common')
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    testImplementation 'junit:junit:4.+'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.version = '1.0.0.0-SNAPSHOT'
+            pom.artifactId = 'imageloader'
+            pom.groupId = 'com.wedding.crm.lib'
+            pom.packaging = 'aar'
+            repository(url: 'http://10.240.210.158:8081/repository/jiayuan/') {
+                // maven授权信息
+                authentication(userName: 'jiayuandev', password: 'jyandroid')
+            }
+        }
+
+    }
+}

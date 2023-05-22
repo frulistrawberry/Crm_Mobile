@@ -248,7 +248,7 @@
         <activity android:name=".activity.ScheduleMultiBookActivity" />
         <activity android:name=".activity.ScheduleMultiReserveActivity" />
         <activity android:name=".activity.NewResetBookActivity" />
-
+        <activity android:name=".demo.DemoActivity" />
         <receiver
             android:name="com.tencent.android.tpush.XGPushReceiver"
             android:exported="false"

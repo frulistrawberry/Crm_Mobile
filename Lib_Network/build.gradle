@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin:'maven'
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+    }
+
+    // 使用 JDK 1.8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        // 剔除这个包下的所有文件（不会移除签名信息）
+        exclude 'META-INF/*******'
+    }
+
+    android.libraryVariants.all { variant ->
+        // aar 输出文件名配置
+        variant.outputs.all { output ->
+            outputFileName = "${rootProject.name}-${android.defaultConfig.versionName}.aar"
+        }
+    }
+}
+
+afterEvaluate {
+    // 排除 BuildConfig.class 和 R.class
+    generateReleaseBuildConfig.enabled = false
+    generateDebugBuildConfig.enabled = false
+    generateReleaseResValues.enabled = false
+    generateDebugResValues.enabled = false
+}
+
+dependencies {
+    // noinspection GradleDependency
+    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+    // noinspection GradleDependency
+    implementation 'androidx.lifecycle:lifecycle-common:2.1.0'
+    // noinspection GradleDependency
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0'
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.version = '1.0.0.0-SNAPSHOT'
+            pom.artifactId = 'network'
+            pom.groupId = 'com.wedding.crm.lib'
+            pom.packaging = 'aar'
+            repository(url: 'http://10.240.210.158:8081/repository/jiayuan/') {
+                // maven授权信息
+                authentication(userName: 'jiayuandev', password: 'jyandroid')
+            }
+        }
+
+    }
+}

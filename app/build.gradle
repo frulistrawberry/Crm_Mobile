@@ -3,8 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.huawei.agconnect'
-
-
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
@@ -31,6 +29,13 @@ android {
                 VIVO_APPID:"103013008",
                 VIVO_APPKEY:"a04b9399b60ae4eef5692a6751ec4598",
         ]
+
+        //阿里路由框架配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     compileOptions {
@@ -90,9 +95,12 @@ repositories {
 }
 
 dependencies {
+   }
+dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //kotlin标准库
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdlibVersion"
+    configurations.all { resolutionStrategy { force "org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdlibVersion" } }
+    configurations.all { resolutionStrategy { force "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinStdlibVersion" } }
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test:runner:$androidTestVersion"
@@ -124,6 +132,9 @@ dependencies {
 
     implementation project(':common')
     implementation project(':http')
+    implementation project(':Lib_Customer')
+    implementation project(':Lib_Network')
+    implementation project(':Lib_ImageLoader')
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
@@ -145,6 +156,7 @@ dependencies {
     implementation 'com.tencent.tpns:oppo:1.3.5.0-release'
     implementation 'commons-codec:commons-codec:1.15'
     implementation 'com.tencent.bugly:crashreport:latest.release'
-
+    implementation 'com.alibaba:arouter-api:1.5.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
 
 }

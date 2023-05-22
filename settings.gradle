@@ -1,2 +1,3 @@
-include ':app', 'http', 'common'
+include ':app', 'http', 'common','Lib_Customer','Lib_Network','Lib_ImageLoader'
 rootProject.name = "LiheCrm"
+include ':Lib_Customer'

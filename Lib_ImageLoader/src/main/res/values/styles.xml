@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColorPrimary">@android:color/black</item> <!-- 标题颜色 -->
+        <item name="android:windowBackground">@android:color/white</item> <!-- 窗口背景色 -->
+        <item name="colorAccent">@android:color/darker_gray</item>  <!-- 控件激活状态、光标的颜色 -->
+    </style>
+
+</resources>
