@@ -1,0 +1,27 @@
+apply from: "../common_config.gradle"
+
+android {
+    namespace 'com.baihe.lib_login'
+
+    defaultConfig {
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.baihe.lib_login"
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    resourcePrefix "login_"
+}
+
+dependencies {
+
+    api project(path: ':Lib_Common')
+}

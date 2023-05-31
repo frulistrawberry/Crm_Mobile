@@ -9,8 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
 import com.baihe.lihepro.R
-import kotlinx.android.synthetic.main.layout_home_add.view.*
 
 class HomeAddView:FrameLayout {
 
@@ -23,6 +24,9 @@ class HomeAddView:FrameLayout {
     private lateinit var contentView: View
     private var listener: OnHomeAddViewClickListener? = null
     private var isAnimating = false
+    private var homeAddContract: LinearLayout? = null
+    private var homeAddCustomer: LinearLayout? = null
+    private var homeAddMore: ImageView? = null
 
     private val DELAY_TIME = 50L
     private val ANIMATOR_TIME = 100L
@@ -30,18 +34,21 @@ class HomeAddView:FrameLayout {
     private fun initView() {
         contentView = LayoutInflater.from(context).inflate(R.layout.layout_home_add, this, true)
         contentView.setOnClickListener { hide() }
-        contentView.home_add_customer.visibility = View.INVISIBLE
-        contentView.home_add_contract.visibility = View.INVISIBLE
+        homeAddCustomer = contentView.findViewById<LinearLayout>(R.id.home_add_customer)
+        homeAddContract = contentView.findViewById<LinearLayout>(R.id.home_add_contract)
+        homeAddMore = contentView.findViewById<ImageView>(R.id.home_add_more)
+        homeAddCustomer?.visibility = View.INVISIBLE
+        homeAddContract?.visibility = View.INVISIBLE
 
-        contentView.home_add_customer.setOnClickListener {
+        homeAddCustomer?.setOnClickListener {
             listener?.onNewCustomerClick()
             hide()
         }
-        contentView.home_add_contract.setOnClickListener {
+        homeAddContract?.setOnClickListener {
             listener?.onNewContractClick()
             hide()
         }
-        contentView.home_add_more.setOnClickListener {
+        homeAddMore?.setOnClickListener {
             listener?.onCloseClick()
             hide()
         }
@@ -55,8 +62,8 @@ class HomeAddView:FrameLayout {
             val parentView = activity.findViewById<ViewGroup>(android.R.id.content)
             parentView.addView(this,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
 
-            animator(contentView.home_add_customer,true,false,null)
-            animator(contentView.home_add_contract,true,true){
+            animator(homeAddCustomer!!,true,false,null)
+            animator(homeAddContract!!,true,true){
                 isAnimating = false
             }
         }
@@ -66,8 +73,8 @@ class HomeAddView:FrameLayout {
         if(isAnimating) return
         if(context != null && context is Activity){
             isAnimating = true
-            animator(contentView.home_add_contract,false,false,null)
-            animator(contentView.home_add_customer,false,true){
+            animator(homeAddContract!!,false,false,null)
+            animator(homeAddCustomer!!,false,true){
                 val activity = context as Activity
                 val parentView = activity.findViewById<ViewGroup>(android.R.id.content)
                 parentView.removeView(this)
@@ -96,17 +103,19 @@ class HomeAddView:FrameLayout {
             view.requestLayout()
         }
         valueAnimator.addListener(object :Animator.AnimatorListener{
-            override fun onAnimationRepeat(animation: Animator?) {}
+            override fun onAnimationRepeat(animation: Animator) {}
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 if (endAnim != null) {
                     endAnim()
                 }
             }
-            override fun onAnimationCancel(animation: Animator?) {}
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationStart(animation: Animator) {
                 view.visibility = View.VISIBLE
             }
+
+
         })
         valueAnimator.start()
     }

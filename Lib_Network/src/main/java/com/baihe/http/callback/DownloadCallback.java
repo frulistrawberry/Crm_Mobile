@@ -7,9 +7,7 @@ import androidx.annotation.NonNull;
 import com.baihe.http.EasyLog;
 import com.baihe.http.EasyUtils;
 import com.baihe.http.config.IRequestInterceptor;
-import com.baihe.http.exception.FileMd5Exception;
-import com.baihe.http.exception.NullBodyException;
-import com.baihe.http.exception.ResponseException;
+import com.baihe.http.exception.HttpException;
 import com.baihe.http.lifecycle.HttpLifecycleManager;
 import com.baihe.http.listener.OnDownloadListener;
 import com.baihe.http.request.HttpRequest;
@@ -93,8 +91,7 @@ public final class DownloadCallback extends BaseCallback {
         }
 
         if (!response.isSuccessful())  {
-            throw new ResponseException("The request failed, responseCode: " +
-                    response.code() + ", message: " + response.message(), response);
+            throw new HttpException(response);
         }
 
         // 如果没有指定文件的 md5 值
@@ -113,7 +110,7 @@ public final class DownloadCallback extends BaseCallback {
         }
         ResponseBody body = response.body();
         if (body == null) {
-            throw new NullBodyException("The response body is empty");
+            throw new NullPointerException("The response body is empty");
         }
 
         mTotalByte = body.contentLength();
@@ -146,7 +143,7 @@ public final class DownloadCallback extends BaseCallback {
         String md5 = EasyUtils.getFileMd5(EasyUtils.openFileInputStream(mFile));
         if (!TextUtils.isEmpty(mMd5) && !mMd5.equalsIgnoreCase(md5)) {
             // 文件 MD5 值校验失败
-            throw new FileMd5Exception("MD5 verify failure", md5);
+            throw new RuntimeException("MD5 verify failure:"+md5);
         }
 
         // 下载成功

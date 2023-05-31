@@ -3,6 +3,8 @@ package com.baihe.imageloader;
 import android.content.Context;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
+
 import com.baihe.imageloader.glide.GlideLoaderStrategy;
 import com.baihe.lib_imageloader.R;
 
@@ -30,8 +32,12 @@ public class ImageLoaderUtils {
      */
     public static void init() {
         //默认使用Glide框架
+        init(mDefaultConfig);
+    }
+
+    public static void init(ImageLoaderConfig config){
         sImageLoaderStrategy = new GlideLoaderStrategy();
-        sImageLoaderStrategy.setLoaderConfig(mDefaultConfig);
+        sImageLoaderStrategy.setLoaderConfig(config);
     }
 
     /**
@@ -56,7 +62,7 @@ public class ImageLoaderUtils {
      *
      * @param strategy 图片框架策略
      */
-    public void setImageLoaderStrategy(BaseImageLoaderStrategy strategy) {
+    public static void setImageLoaderStrategy(BaseImageLoaderStrategy strategy) {
         sImageLoaderStrategy = strategy;
         //设置默认参数，防止用户没有设置
         setImageLoaderConfig(mDefaultConfig);
@@ -68,7 +74,7 @@ public class ImageLoaderUtils {
      * @param config 配置
      * @return BaseImageLoaderStrategy
      */
-    public BaseImageLoaderStrategy setImageLoaderConfig(ImageLoaderConfig config) {
+    public static BaseImageLoaderStrategy setImageLoaderConfig(ImageLoaderConfig config) {
         sImageLoaderStrategy.setLoaderConfig(config);
         return sImageLoaderStrategy;
     }
@@ -86,6 +92,20 @@ public class ImageLoaderUtils {
     }
 
     /**
+     * 加载图片自定义错误图片和占位图
+     *
+     * @param context   上下文
+     * @param imageView View控件
+     * @param imgUrl    图片Url
+     * @param errorRes 错误图片
+     * @param placeRes 占位图
+     */
+    public BaseImageLoaderStrategy loadImage(Context context, ImageView imageView, Object imgUrl,int errorRes,int placeRes) {
+        sImageLoaderStrategy.loadImage(context, imageView, imgUrl,errorRes,placeRes);
+        return sImageLoaderStrategy;
+    }
+
+    /**
      * 加载本地的Drawable图片
      *
      * @param context   上下文
@@ -98,13 +118,13 @@ public class ImageLoaderUtils {
     }
 
     /**
-     * 加载本地的Drawable图片
+     * 加载SDCard图片
      *
      * @param uri       图片资源路径
      * @param imageView View控件
      */
-    public BaseImageLoaderStrategy displayFromSD(String uri, ImageView imageView) {
-        sImageLoaderStrategy.displayFromSDCard(uri, imageView);
+    public BaseImageLoaderStrategy displayFromSD(Context context,String uri, ImageView imageView) {
+        sImageLoaderStrategy.displayFromSDCard(context,uri, imageView);
         return sImageLoaderStrategy;
     }
 

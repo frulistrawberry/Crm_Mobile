@@ -5,15 +5,38 @@ if (isBuildModule.toBoolean()) {
     //作为组件运行
     apply plugin: 'com.android.library'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
 android {
+    compileSdk rootProject.android.compileSdk
     defaultConfig {
+        minSdkVersion rootProject.android.minSdk
+        targetSdkVersion rootProject.android.targetSdk
+
         //阿里路由框架配置
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
+
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    packagingOptions {
+        // 剔除这个包下的所有文件（不会移除签名信息）
+        exclude 'META-INF/*******'
+    }
+
     sourceSets {
         main {
             if (isBuildModule.toBoolean()) {
@@ -29,6 +52,8 @@ android {
             }
         }
     }
-    buildTypes {
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }

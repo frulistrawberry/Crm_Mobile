@@ -4,18 +4,19 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.widget.ImageView;
 
 import com.baihe.imageloader.BaseImageLoaderStrategy;
-import com.baihe.imageloader.CropCircleTransformation;
 import com.baihe.imageloader.ImageLoaderConfig;
-import com.baihe.imageloader.RoundedCornersTransformation;
 import com.baihe.lib_imageloader.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+
+import java.io.File;
 
 /**
  * Glide的策略实现类
@@ -28,8 +29,10 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     private ImageLoaderConfig mImageLoaderConfig;
 
-    private RequestOptions mOptions1;
+    private RequestOptions mOptions;
     private RequestOptions mOptionsCircle;
+
+    private RequestOptions mOptionsCustom;
 
     /**
      * 常量
@@ -47,17 +50,37 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      * @param config ImageLoaderConfig
      */
     @SuppressLint("CheckResult")
-    private RequestOptions getOptions1(ImageLoaderConfig config) {
-        if (mOptions1 == null) {
-            mOptions1 = new RequestOptions();
-            mOptions1.error(config.getErrorPicRes())
+    private RequestOptions getOptions(ImageLoaderConfig config) {
+        if (mOptions == null) {
+            mOptions = new RequestOptions();
+            mOptions.error(config.getErrorPicRes())
                     .placeholder(config.getPlacePicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
         }
-        return mOptions1;
+        return mOptions;
+    }
+
+
+    /**
+     * 初始化自定义配置
+     * @param errorRes 加载失败图片
+     * @param placeRes 占位图
+     */
+    @SuppressLint("CheckResult")
+    private RequestOptions getOptionsCustom(int errorRes,int placeRes) {
+        if (mOptionsCustom == null) {
+            mOptionsCustom = new RequestOptions();
+        }
+        mOptionsCustom.error(errorRes)
+                .placeholder(placeRes)
+                //下载的优先级
+                .priority(Priority.NORMAL)
+                //缓存策略
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        return mOptionsCustom;
     }
 
     /**
@@ -84,16 +107,16 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      */
     @SuppressLint("CheckResult")
     private RequestOptions getGifOptions(ImageLoaderConfig config) {
-        if (mOptions1 == null) {
-            mOptions1 = new RequestOptions();
-            mOptions1.error(config.getErrorPicRes())
+        if (mOptions == null) {
+            mOptions = new RequestOptions();
+            mOptions.error(config.getErrorPicRes())
                     .placeholder(config.getPlacePicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.NONE);
         }
-        return mOptions1;
+        return mOptions;
     }
 
     @Override
@@ -105,10 +128,19 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void loadImage(Context context, ImageView view, Object imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .apply(getOptions1(mImageLoaderConfig))
+                .apply(getOptions(mImageLoaderConfig))
                 //先加载缩略图 然后在加载全图
                 .thumbnail(Contants.THUMB_SIZE)
                 .into(view);
+    }
+
+    @Override
+    public void loadImage(Context context, ImageView imageView, Object imgUrl, int errorRes, int placeRes) {
+        Glide.with(context)
+                .load(imgUrl)
+                .apply(getOptionsCustom(errorRes,placeRes))
+                .thumbnail(Contants.THUMB_SIZE)
+                .into(imageView);
     }
 
     @Override
@@ -116,12 +148,17 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         Glide.with(context)
                 .load(imageId)
                 .thumbnail(Contants.THUMB_SIZE)
-                .apply(getOptions1(mImageLoaderConfig))
+                .apply(getOptions(mImageLoaderConfig))
                 .into(imageView);
     }
 
     @Override
-    public void displayFromSDCard(String uri, ImageView imageView) {
+    public void displayFromSDCard(Context context,String uri, ImageView imageView) {
+        Glide.with(context)
+                .load(Uri.fromFile(new File(uri)))
+                .thumbnail(Contants.THUMB_SIZE)
+                .apply(getOptions(mImageLoaderConfig))
+                .into(imageView);
     }
 
     @Override
@@ -147,7 +184,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         Glide.with(context)
                 .load(imgUrl)
                 .thumbnail(Contants.THUMB_SIZE)
-                .apply(getOptions1(mImageLoaderConfig))
+                .apply(getOptions(mImageLoaderConfig))
                 .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
                 .into(imageView);
     }

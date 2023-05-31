@@ -163,16 +163,13 @@ public class LoginUserProtocolActivity extends BaseActivity {
         webview.getSettings().setGeolocationDatabasePath(dir);
         // 最重要的方法，一定要设置，这就是出不来的主要原因
         webview.getSettings().setDomStorageEnabled(true);
-        webview.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
         String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
-        webview.getSettings().setAppCachePath(appCachePath);
 
         // 支持缩放
         webview.setInitialScale(100);
         webview.getSettings().setBuiltInZoomControls(true);
         webview.setScrollbarFadingEnabled(true);
         // 设置H5的缓存打开,默认关闭
-        webview.getSettings().setAppCacheEnabled(true);
         // 启用地理定位
         webview.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         webview.setWebViewClient(mWebViewClient);

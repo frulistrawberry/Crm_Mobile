@@ -11,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baihe.common.R;
-import com.blankj.utilcode.util.ScreenUtils;
+import com.baihe.common.util.CommonUtils;
+import com.baihe.common.util.DeviceUtils;
 
 import q.rorbin.badgeview.QBadgeView;
 
@@ -82,7 +83,7 @@ public class MsgDialog extends Dialog {
             Window window = dialog.getWindow();
             WindowManager.LayoutParams params = window.getAttributes();
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
-            params.height  = (int) (ScreenUtils.getScreenHeight() * 0.4);
+            params.height  = (int) (CommonUtils.getScreenHeight(context) * 0.4);
             window.setWindowAnimations(R.style.dialog_style);
             window.setGravity(Gravity.BOTTOM);
             initView(dialog);

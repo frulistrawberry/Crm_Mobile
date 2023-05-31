@@ -1,39 +1,105 @@
 ext {
-    //java/kotlin编译版本
-    javaVersion = JavaVersion.VERSION_1_8
-    kotlinVersion = '1.3.61'
 
-    //android构建版本
-    minSdkVersion = 23
-    targetSdkVersion = 29
-    compileSdkVersion = 29
-    buildToolsVersion = "29.0.3"
+    android = [
+            compileSdk       : 33,
+            buildToolsVersion: '29.0.3',
+            minSdk           : 21,
+            targetSdk        : 29,
 
-    //主要依赖库版本
-    kotlinStdlibVersion = '1.3.61'
-    appcompatVersion = '1.0.2'
-    recyclerviewVersion = '1.1.0'
-    cardviewVersion = '1.0.0'
-    lifecycleVersion = '2.2.0-rc03'
-    navigationVersion = '2.3.0'
-    constraintlayoutVersion = '1.1.3'
-    junitVersion = '4.13'
-    androidTestVersion = '1.2.0'
-    androidEspressoVersion = '3.2.0'
+            versionCode      : 25,
+            versionName      : "2.3.4",
+    ]
 
-    fastjsonVersion = '1.2.58'
-    loggerVersion = '2.2.0'
-    okhttpVersion = '4.3.1'
-    okioVersion = '2.4.3'
-    ormliteCoreVersion = '5.1'
-    ormliteAndroidVersion ='5.1'
-    utilCodexVersion = '1.26.0'
-    multidexVersion = '2.0.0'
-    statusbarVersion = '1.0.1'
-    permissionVersion = '2.0.3'
-    loggingInterceptorVersion = '3.5.0'
+    dependVersion = [
+            //test
+            junitVersion            : '4.13.2',
+            androidTestVersion      : '1.1.5',
+            androidEspressoVersion  : '3.5.1',
+            //androidx
+            appcompatVersion        : '1.6.1',
+            multidexVersion         : '2.0.1',
+            annotationVersion       : '1.5.0',
+            coreVersion             : '1.9.0',
+            lifecycleVersion        : '2.5.1',
+            materialVersion         : '1.4.0',
+            recyclerviewVersion     : '1.2.1',
+            logVersion              : '2.6.9',
+            //ARouter
+            aroutreApiVersion       : '1.5.2',
+            arouterCompilerVersion  : '1.5.2',
+            //Okhttp
+            okhttpVersion           : '4.10.0',
+            okioVersion             : '3.0.0',
+            //Glide
+            glideVersion            : '4.15.0',
+            //fastJson
+            fastJsonVersion         : '1.2.76',
+            //mmkv
+            mmkvVersion             : '1.2.15',
+            //腾讯x5
+            tbssdkVersion           : '44132',
+            //下拉刷新
+            refreshVersion          : '2.0.1',
+            //Rx
+            rxjavaVersion           : '3.1.6',
+            rxandroidVersion        : '3.0.2',
+            //权限
+            permissionsVersion      : '0.12',
+            //推送
+            tpsVersion             : '1.3.5.0-release'
+    ]
 
-    //应用版本
-    versionCode = 25
-    versionName = '2.3.4'
+    depsLibs = [
+
+            //test
+            junit             : "junit:junit:${dependVersion["junitVersion"]}",
+            extJunit          : "androidx.test.ext:junit:${dependVersion["androidTestVersion"]}",
+            espressoCore      : "androidx.test.espresso:espresso-core:${dependVersion["androidEspressoVersion"]}",
+
+            //androidx
+            coreJava          : "androidx.core:core:${dependVersion["coreVersion"]}",
+            coreKtx           : "androidx.core:core-ktx:${dependVersion["coreVersion"]}",
+            appcompat         : "androidx.appcompat:appcompat:${dependVersion["appcompatVersion"]}",
+            material          : "com.google.android.material:material:${dependVersion["materialVersion"]}",
+            multidex          : "androidx.multidex:multidex:${dependVersion["multidexVersion"]}",
+            annotation        : " androidx.annotation:annotation:${dependVersion["annotationVersion"]}",
+            //lifecycle
+            liveDataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion["lifecycleVersion"]}",
+            viewModelKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion["lifecycleVersion"]}",
+            lifecycleOnly     : "androidx.lifecycle:lifecycle-runtime:${dependVersion["lifecycleVersion"]}",
+            //json解析
+            fastJson              : "com.alibaba:fastjson:${dependVersion["fastJsonVersion"]}",
+            //网络
+            okhttp            : "com.squareup.okhttp3:okhttp:${dependVersion["okhttpVersion"]}",
+            okio              : "com.squareup.okio:okio:${dependVersion["okioVersion"]}",
+            //图片
+            glide             : "com.github.bumptech.glide:glide:${dependVersion["glideVersion"]}",
+            glideCompiler     : "com.github.bumptech.glide:compiler:${dependVersion["glideVersion"]}",
+            //数据存储
+            mmkv              : "com.tencent:mmkv:${dependVersion["mmkvVersion"]}",
+            //下拉刷新
+            refreshLayout     : "io.github.scwang:refresh-layout-kernel:${dependVersion["refreshVersion"]}",
+            refreshHeader     : "io.github.scwang:refresh-header-classics:${dependVersion["refreshVersion"]}",
+            refreshFooter     : "io.github.scwang:refresh-footer-classics:${dependVersion["refreshVersion"]}",
+            //腾讯X5
+            tbssdk            : "com.tencent.tbs:tbssdk:${dependVersion["tbssdkVersion"]}",
+
+            //路由
+            aroutreApi        : "com.alibaba:arouter-api:${dependVersion["aroutreApiVersion"]}",
+            arouterCompiler   : "com.alibaba:arouter-compiler:${dependVersion["arouterCompilerVersion"]}",
+            //权限处理
+            rxPermission      : "com.github.tbruyelle:rxpermissions:${dependVersion["permissionsVersion"]}",
+            rxjava            : "io.reactivex.rxjava3:rxjava:${dependVersion["rxjavaVersion"]}",
+            rxandroid         : "io.reactivex.rxjava3:rxandroid:${dependVersion["rxandroidVersion"]}",
+            //推送
+            tps               : "com.tencent.tpns:tpns:${dependVersion["tpsVersion"]}",
+            //日志
+            logCore           : "com.github.fengzhizi715.SAF-Kotlin-log:core:${dependVersion["logVersion"]}",
+            logConvert        : "com.github.fengzhizi715.SAF-Kotlin-log:fastjson:${dependVersion["logVersion"]}",
+            logHttp           : "com.github.fengzhizi715.SAF-Kotlin-log:okhttp:${dependVersion["logVersion"]}"
+
+
+    ]
+
+
 }

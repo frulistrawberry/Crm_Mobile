@@ -1,57 +1,40 @@
 package com.baihe.http.exception;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-/**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/EasyHttp
- *    time   : 2019/05/19
- *    desc   : 网络请求异常
- */
-public class HttpException extends Exception {
+import java.util.Objects;
 
-    private String mMessage;
-    private Throwable mThrowable;
+import okhttp3.Response;
 
-    public HttpException(String message) {
-        super(message);
-        mMessage = message;
+public class HttpException extends RuntimeException{
+    private static String getMessage(Response response){
+        Objects.requireNonNull(response,"response == null");
+        return "HTTP "+ response.code() + " " + response.message();
     }
 
-    public HttpException(String message, Throwable cause) {
-        super(message, cause);
-        mMessage = message;
-        mThrowable = cause;
+    private final int code;
+    private final String message;
+    private final transient Response response;
+
+    public HttpException(Response response){
+        super(getMessage(response));
+        this.code = response.code();
+        this.message = response.message();
+        this.response = response;
     }
 
-    public void setMessage(String message) {
-        mMessage = message;
+
+    public int code() {
+        return code;
     }
 
-    /**
-     * 获取错误信息
-     */
-    @Override
-    public String getMessage() {
-        return mMessage;
+
+    public String message() {
+        return message;
     }
 
-    @NonNull
-    @Override
-    public StackTraceElement[] getStackTrace() {
-        if (mThrowable != null) {
-            return mThrowable.getStackTrace();
-        }
-        return super.getStackTrace();
-    }
 
-    @Nullable
-    @Override
-    public synchronized Throwable getCause() {
-        if (mThrowable != null) {
-            return mThrowable.getCause();
-        }
-        return super.getCause();
+    public @Nullable Response response() {
+        return response;
     }
 }

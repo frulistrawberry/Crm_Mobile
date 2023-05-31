@@ -1,3 +1,36 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://repo1.maven.org/maven2/'}
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven {
+            allowInsecureProtocol = true
+            url "http://10.240.210.158:8081/repository/maven-public/"
+        }
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://repo1.maven.org/maven2/'}
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven {
+            allowInsecureProtocol = true
+            url "http://10.240.210.158:8081/repository/maven-public/"
+        }
+    }
+}
+
+
+
+
 include ':app', 'http', 'common','Lib_Customer','Lib_Network','Lib_ImageLoader'
 rootProject.name = "LiheCrm"
-include ':Lib_Customer'
+include ':Lib_Framework'
+include ':Lib_Common'
+include ':Lib_Login'

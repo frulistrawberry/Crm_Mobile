@@ -1,17 +1,10 @@
 apply from: "../common_config.gradle"
-apply plugin:'maven'
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
-
+    namespace 'com.baihe.lib_customer'
     defaultConfig {
         if (isBuildModule.toBoolean()) {
             applicationId "com.baihe.lib_customer"
         }
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,35 +15,40 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
     //统一资源前缀，规范资源引用
     resourcePrefix "customer_"
 }
 
 dependencies {
-    implementation project(':common')
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    testImplementation 'junit:junit:4.+'
-    api 'com.alibaba:arouter-api:1.5.2'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
+    implementation project(path: ':Lib_Common')
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.version = '1.0.0.0-SNAPSHOT'
-            pom.artifactId = 'customer'
-            pom.groupId = 'com.wedding.crm.lib'
-            pom.packaging = 'aar'
-            repository(url: 'http://10.240.210.158:8081/repository/jiayuan/') {
-                // maven授权信息
-                authentication(userName: 'jiayuandev', password: 'jyandroid')
+publishing {
+    publications {
+        mavenAar(MavenPublication) {
+            groupId 'com.wedding.crm.lib'
+            artifactId 'common'
+            version '1.0.0.0-SNAPSHOT'
+            artifact("$buildDir/outputs/aar/customer-release.aar")
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
             }
         }
-
+    }
+    repositories {
+        maven {
+            url 'http://10.240.210.158:8081/repository/jiayuan/'
+            credentials {
+                username = 'jiayuandev'
+                password = 'jyandroid'
+            }
+        }
     }
 }

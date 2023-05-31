@@ -1,20 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.huawei.agconnect'
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
-
-
-
+    compileSdk rootProject.android.compileSdk
     defaultConfig {
         applicationId "com.baihe.lihepro"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        minSdkVersion rootProject.android.minSdk
+        targetSdkVersion rootProject.android.targetSdk
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
         flavorDimensions "version"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -88,35 +83,24 @@ android {
     }
 }
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
-
-dependencies {
-   }
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    //kotlin标准库
-    configurations.all { resolutionStrategy { force "org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdlibVersion" } }
-    configurations.all { resolutionStrategy { force "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinStdlibVersion" } }
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test:runner:$androidTestVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$androidEspressoVersion"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
 
-    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment:2.4.1"
+    implementation "androidx.navigation:navigation-ui:2.4.1"
     implementation 'com.github.limxing:Kotlin-VerificationView:1.0'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
     implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
     implementation 'com.yanzhenjie:permission:2.0.3'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
     implementation 'com.airbnb.android:lottie:3.4.1'
     implementation 'com.github.lzyzsd:jsbridge:1.0.4'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     /* 友盟分享开始  */
     implementation  'com.umeng.umsdk:common:9.3.8'//必选
@@ -124,9 +108,8 @@ dependencies {
     implementation  'com.umeng.umsdk:share-core:7.1.4'//分享核心库，必选
 
     implementation  'com.umeng.umsdk:share-wx:7.1.4'
-    implementation  'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.6.5'//微信官方SDK依赖库
+    implementation  'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'//微信官方SDK依赖库
     /* 友盟分享结束  */
-
     implementation 'com.tencent.tpns:tpns:1.3.5.0-release'
 
 
@@ -136,7 +119,7 @@ dependencies {
     implementation project(':Lib_Network')
     implementation project(':Lib_ImageLoader')
 
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 
@@ -155,7 +138,7 @@ dependencies {
     implementation 'com.huawei.hms:push:6.5.0.300'
     implementation 'com.tencent.tpns:oppo:1.3.5.0-release'
     implementation 'commons-codec:commons-codec:1.15'
-    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.tencent.bugly:crashreport:4.1.9.2'
     implementation 'com.alibaba:arouter-api:1.5.2'
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
 

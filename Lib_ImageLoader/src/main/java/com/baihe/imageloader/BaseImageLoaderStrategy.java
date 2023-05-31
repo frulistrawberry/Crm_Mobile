@@ -25,6 +25,17 @@ public interface BaseImageLoaderStrategy{
     void loadImage(Context context, ImageView imageView, Object imgUrl);
 
     /**
+     * 默认方式加载图片
+     *
+     * @param context   上下文
+     * @param imageView View控件
+     * @param imgUrl    图片Url
+     * @param errorRes 加载失败图片
+     * @param placeRes 占位图
+     */
+    void loadImage(Context context, ImageView imageView, Object imgUrl,int errorRes,int placeRes);
+
+    /**
      * 从drawable中异步加载本地图片
      *
      * @param context   上下文
@@ -36,10 +47,11 @@ public interface BaseImageLoaderStrategy{
     /**
      * 从内存卡中异步加载本地图片
      *
+     * @param context 上下文
      * @param uri       路径
      * @param imageView View控件
      */
-    void displayFromSDCard(String uri, ImageView imageView);
+    void displayFromSDCard(Context context,String uri, ImageView imageView);
 
     /**
      * 加载圆角图片

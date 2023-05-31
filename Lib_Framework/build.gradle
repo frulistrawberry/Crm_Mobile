@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.baihe.lib_framework'
+    compileSdk rootProject.android.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.android.minSdk
+        targetSdkVersion rootProject.android.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api rootProject.depsLibs.junit
+    api rootProject.depsLibs.extJunit
+    api rootProject.depsLibs.espressoCore
+
+    api rootProject.depsLibs.coreKtx
+    api rootProject.depsLibs.appcompat
+    api rootProject.depsLibs.material
+    api rootProject.depsLibs.liveDataKtx
+    api rootProject.depsLibs.viewModelKtx
+    api rootProject.depsLibs.fastJson
+    api rootProject.depsLibs.mmkv
+
+    implementation rootProject.depsLibs.logCore
+    implementation rootProject.depsLibs.logConvert
+
+
+//    api rootProject.depsLibs.refreshLayout
+    api rootProject.depsLibs.tbssdk
+
+    api project(path: ':Lib_Network')
+    api project(path: ':Lib_ImageLoader')
+}

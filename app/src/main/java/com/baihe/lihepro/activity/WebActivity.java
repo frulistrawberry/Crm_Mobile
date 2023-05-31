@@ -78,8 +78,8 @@ public class WebActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitleText("");
         setContentView(R.layout.activity_webview);
-        title_text_tv = findViewById(com.baihe.common.R.id.title_text_tv);
-        title_tb = findViewById(com.baihe.common.R.id.title_tb);
+        title_text_tv = findViewById(R.id.title_text_tv);
+        title_tb = findViewById(R.id.title_tb);
         initData();
         initView();
         initUrl();
@@ -179,16 +179,13 @@ public class WebActivity extends BaseActivity {
         webview.getSettings().setGeolocationDatabasePath(dir);
         // 最重要的方法，一定要设置，这就是出不来的主要原因
         webview.getSettings().setDomStorageEnabled(true);
-        webview.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
         String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
-        webview.getSettings().setAppCachePath(appCachePath);
 
         // 支持缩放
         webview.setInitialScale(100);
         webview.getSettings().setBuiltInZoomControls(true);
         webview.setScrollbarFadingEnabled(true);
         // 设置H5的缓存打开,默认关闭
-        webview.getSettings().setAppCacheEnabled(true);
         // 启用地理定位
         webview.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         mWebViewClient = new BridgeWebViewClient(webview) {

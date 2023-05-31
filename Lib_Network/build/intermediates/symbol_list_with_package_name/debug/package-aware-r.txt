@@ -1,0 +1,12 @@
+com.baihe.lib_network
+id view_tree_lifecycle_owner
+string http_data_explain_error
+string http_network_error
+string http_request_cancel
+string http_response_error
+string http_response_md5_error
+string http_response_null_body
+string http_server_error
+string http_server_out_time
+string http_token_error
+string http_unknown_error
