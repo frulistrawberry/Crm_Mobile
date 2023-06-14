@@ -1,5 +1,6 @@
 package com.baihe.common.base;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -217,6 +218,7 @@ public class BaseActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             }).setOnCancelClickListener(new MsgDialog.OnCancelClickListener() {
+                @SuppressLint("SuspiciousIndentation")
                 @Override
                 public void onCancel(Dialog dialog) {
                     String msgListJson = userSp.getString("msgList","[]");

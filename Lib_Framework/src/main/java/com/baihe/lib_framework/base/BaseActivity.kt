@@ -8,12 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.baihe.lib_framework.R
 import com.baihe.lib_framework.loading.CenterLoadingView
 import com.baihe.lib_framework.toast.TipsToast
+import com.baihe.lib_framework.utils.StatusBarSettingHelper
+import com.baihe.lib_framework.widget.state.ktx.Decorative
+import com.baihe.lib_framework.widget.state.ktx.LoadingState
+import com.baihe.lib_framework.widget.state.ktx.LoadingStateDelegate
+import com.dylanc.loadingstateview.OnReloadListener
 
 
 /**
  * Activity 基类
  */
-abstract class BaseActivity : AppCompatActivity(){
+abstract class BaseActivity : AppCompatActivity(), LoadingState by LoadingStateDelegate(),
+    OnReloadListener, Decorative {
     protected var TAG: String? = this::class.java.simpleName
     var loadingDialog:Dialog? = null
 
@@ -23,6 +29,8 @@ abstract class BaseActivity : AppCompatActivity(){
         setContentLayout()
         initView(savedInstanceState)
         initData()
+        StatusBarSettingHelper.setStatusBarTranslucent(this)
+
     }
 
     /**
@@ -30,6 +38,7 @@ abstract class BaseActivity : AppCompatActivity(){
      */
     open fun setContentLayout() {
         setContentView(getLayoutResId())
+        decorateContentView(this, this)
     }
 
     /**

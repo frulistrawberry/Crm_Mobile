@@ -63,6 +63,7 @@ object StatusBarSettingHelper {
      *
      * @param activity
      */
+    @JvmStatic
     fun setRootViewFitsSystemWindows(
         activity: Activity,
         fitSystemWindows: Boolean
@@ -82,28 +83,23 @@ object StatusBarSettingHelper {
     /**
      * 通过该方法可设置状态栏透明
      */
-    @TargetApi(19)
     fun setStatusBarTranslucent(activity: Activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (!isEMUI3_x) {
-                // 适配华为5.1与5.0版本的手机
-                //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
-                val window = activity.window
-                val decorView = window.decorView
-                //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
-                val option = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-                decorView.systemUiVisibility = option
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                window.statusBarColor = Color.TRANSPARENT
-            } else {
-                initBarBelowLOLLIPOP(activity)
-            }
-            //导航栏颜色也可以正常设置
-            //window.setNavigationBarColor(Color.TRANSPARENT);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (!isEMUI3_x) {
+            // 适配华为5.1与5.0版本的手机
+            //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
+            val window = activity.window
+            val decorView = window.decorView
+            //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+            val option = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            decorView.systemUiVisibility = option
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.TRANSPARENT
+        } else {
             initBarBelowLOLLIPOP(activity)
         }
+        //导航栏颜色也可以正常设置
+        //window.setNavigationBarColor(Color.TRANSPARENT);
     }
 
     /**
@@ -117,8 +113,6 @@ object StatusBarSettingHelper {
         //int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
         //attributes.flags |= flagTranslucentNavigation;
         window.attributes = attributes
-        //创建一个假的状态栏
-        setupStatusBarView(activity, false)
     }
 
     /**
@@ -160,19 +154,7 @@ object StatusBarSettingHelper {
             ) //此处默认设置0.2f的透明度，防止在4.4的部分机器上无法设置状态栏字体颜色的问题
         }
     }
-    /* */
-    /**
-     * 适配刘海屏
-     * Fits notch screen.
-     */
-/*
-    private void fitsNotchScreen() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && !mInitialized) {
-            WindowManager.LayoutParams lp = mWindow.getAttributes();
-            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
-            mWindow.setAttributes(lp);
-        }
-    }*/
+
     /**
      * 是否设置 状态栏的深色模式（因为白底再有些手机上状态栏的字也是白色所以看不见）
      */
@@ -187,7 +169,7 @@ object StatusBarSettingHelper {
      * @param context
      * @return
      */
-    private fun getStatusBarHeight(context: Context): Int {
+     fun getStatusBarHeight(context: Context): Int {
         val result = 0
         try {
             val resourceId = Resources.getSystem()

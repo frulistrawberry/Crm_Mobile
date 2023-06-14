@@ -115,9 +115,6 @@ dependencies {
 
     implementation project(':common')
     implementation project(':http')
-    implementation project(':Lib_Customer')
-    implementation project(':Lib_Network')
-    implementation project(':Lib_ImageLoader')
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 

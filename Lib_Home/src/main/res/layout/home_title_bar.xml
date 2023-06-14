@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smart.refresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/srl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/COLOR_F6F7FC">
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:id="@+id/fl_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_216">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/home_bg_title"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/dp_150"
+                            android:background="@drawable/home_bg_title_bottom"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_100"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_marginEnd="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_100"
+                            app:cardBackgroundColor="@color/COLOR_FFFFFF"
+                            app:cardCornerRadius="@dimen/dp_50"
+                            app:contentPaddingRight="@dimen/dp_20"
+                            app:contentPaddingLeft="@dimen/dp_20"
+                            app:contentPaddingTop="@dimen/dp_16"
+                            app:contentPaddingBottom="@dimen/dp_16"
+                            app:cardElevation="@dimen/dp_8">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <com.baihe.lib_common.widget.font.FontTextView
+                                    android:id="@+id/btn_opportunity"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:drawablePadding="@dimen/dp_3"
+                                    android:drawableTop="@mipmap/home_ic_opportunity"
+                                    android:layout_height="match_parent"
+                                    style="@style/font_normal_12_4A4C5C"
+                                    android:text="机会"/>
+                                <com.baihe.lib_common.widget.font.FontTextView
+                                    android:id="@+id/btn_customer"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:drawablePadding="@dimen/dp_3"
+                                    android:drawableTop="@mipmap/home_ic_customer"
+                                    android:layout_height="match_parent"
+                                    style="@style/font_normal_12_4A4C5C"
+                                    android:text="客户"/>
+                                <com.baihe.lib_common.widget.font.FontTextView
+                                    android:id="@+id/btn_order"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:drawablePadding="@dimen/dp_3"
+                                    android:drawableTop="@mipmap/home_ic_order"
+                                    android:layout_height="match_parent"
+                                    style="@style/font_normal_12_4A4C5C"
+                                    android:text="订单"/>
+                                <com.baihe.lib_common.widget.font.FontTextView
+                                    android:id="@+id/btn_contract"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:drawablePadding="@dimen/dp_3"
+                                    android:drawableTop="@mipmap/home_ic_contract"
+                                    android:layout_height="match_parent"
+                                    style="@style/font_normal_12_4A4C5C"
+                                    android:text="合同"/>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                    </RelativeLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/content_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/v_status_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_25"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:minHeight="@dimen/dp_50">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_boss_sea"
+                    android:layout_width="@dimen/dp_255"
+                    android:layout_height="@dimen/dp_32"
+                    android:layout_centerInParent="true"
+                    app:cardElevation="@dimen/dp_0"
+                    app:cardBackgroundColor="@color/COLOR_33FFFFFF"
+                    app:cardCornerRadius="@dimen/dp_16">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        >
+                        <com.baihe.lib_common.widget.font.FontTextView
+                            android:id="@+id/tv_boss"
+                            style="@style/font_half_bold_16_FFFFFF"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="喜铺销售经理" />
+                        <ImageView
+                            android:id="@+id/iv_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_6"
+                            android:src="@mipmap/home_arrow_down_white"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/btn_create"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/home_ic_add"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+</com.scwang.smart.refresh.layout.SmartRefreshLayout>
+

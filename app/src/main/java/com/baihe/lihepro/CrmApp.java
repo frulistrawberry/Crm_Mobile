@@ -35,7 +35,7 @@ public class CrmApp extends BaseApplication {
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
-        StatusLayout.setDefaultExpandLayoutId(R.layout.layout_net_no_data);
+//        StatusLayout.setDefaultExpandLayoutId(R.layout.layout_net_no_data);
     }
 
     @Override

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:orientation="vertical">
+
+
+
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/login_input_verify_code"
+            style="@style/font_half_bold_28_4A4C5C" />
+
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text=""
+            style="@style/font_normal_12_4A4C5C"
+             />
+
+        <me.leefeng.libverify.VerificationView
+            android:id="@+id/vv_code"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:vAutoShowInputBoard="true"
+            app:vCursorDrawable="@color/COLOR_C5C5CE"
+            app:vTextColor="#ff4a4c5c"
+            app:vTextCount="6"
+            app:vTextSize="28dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/font_normal_12_C5C5CE"
+                />
+
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/btn_send_verify_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_get_verify_code_again"
+                style="@style/font_normal_12_6C8EFF"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

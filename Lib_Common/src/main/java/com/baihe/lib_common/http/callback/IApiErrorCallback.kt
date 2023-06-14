@@ -14,10 +14,4 @@ interface IApiErrorCallback {
         TipsToast.showTips(error)
     }
 
-    /**
-     * 登录失效处理
-     */
-    fun onLoginFail(code: Int?, error: String?) {
-        TipsToast.showTips(error)
-    }
 }

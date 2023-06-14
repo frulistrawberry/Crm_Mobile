@@ -20,7 +20,7 @@
             android:id="@+id/ivImage"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
-            android:background="@mipmap/ic_loading" />
+            android:background="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tvMsg"

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_data">没有内容~</string>
+    <string name="net_err">抱歉，服务器开小差了~</string>
+</resources>

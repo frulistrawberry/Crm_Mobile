@@ -1,0 +1,87 @@
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/java/com/baihe/http/EasyUtils.java:549: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+            return sb.toString().toLowerCase();
+                                 ~~~~~~~~~~~
+
+   Explanation for issues of type "DefaultLocale":
+   Calling String#toLowerCase() or #toUpperCase() without specifying an
+   explicit locale is a common source of bugs. The reason for that is that
+   those methods will use the current locale on the user's device, and even
+   though the code appears to work correctly when you are developing the app,
+   it will fail in some locales. For example, in the Turkish locale, the
+   uppercase replacement for i is not I.
+
+   If you want the methods to just perform ASCII replacement, for example to
+   convert an enum name, call String#toUpperCase(Locale.US) instead. If you
+   really want to use the current locale, call
+   String#toUpperCase(Locale.getDefault()) instead.
+
+   https://developer.android.com/reference/java/util/Locale.html#default_locale
+
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/java/com/baihe/http/ssl/UnSafeTrustManager.java:15: Warning: Implementing a custom X509TrustManager is error-prone and likely to be insecure. It is likely to disable certificate validation altogether, and is non-trivial to implement correctly without calling Android's default implementation. [CustomX509TrustManager]
+public final class UnSafeTrustManager implements X509TrustManager {
+                   ~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "CustomX509TrustManager":
+   This check looks for custom X509TrustManager implementations.
+
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/xml/network_security_config.xml:3: Warning: Insecure Base Configuration [InsecureBaseConfiguration]
+    <base-config cleartextTrafficPermitted="true" />
+                                            ~~~~
+
+   Explanation for issues of type "InsecureBaseConfiguration":
+   Permitting cleartext traffic could allow eavesdroppers to intercept data
+   sent by your app, which impacts the privacy of your users. Consider only
+   allowing encrypted traffic by setting the cleartextTrafficPermitted tag to
+   "false".
+
+   https://developer.android.com/preview/features/security-config.html
+
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/xml/network_security_config.xml:2: Warning: The resource R.xml.network_security_config appears to be unused [UnusedResources]
+<network-security-config>
+^
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:3: Warning: The resource R.string.http_unknown_error appears to be unused [UnusedResources]
+    <string name="http_unknown_error">请求出错，未知错误</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:4: Warning: The resource R.string.http_token_error appears to be unused [UnusedResources]
+    <string name="http_token_error">登录失效，请重新登录</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:5: Warning: The resource R.string.http_data_explain_error appears to be unused [UnusedResources]
+    <string name="http_data_explain_error">数据解析异常，请稍后</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:6: Warning: The resource R.string.http_server_out_time appears to be unused [UnusedResources]
+    <string name="http_server_out_time">服务器请求超时，请稍后再试</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:7: Warning: The resource R.string.http_network_error appears to be unused [UnusedResources]
+    <string name="http_network_error">请求失败，请检查网络设置</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:8: Warning: The resource R.string.http_response_error appears to be unused [UnusedResources]
+    <string name="http_response_error">服务器响应异常，请稍后再试，响应码：%d，响应信息：%s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:9: Warning: The resource R.string.http_server_error appears to be unused [UnusedResources]
+    <string name="http_server_error">服务器连接异常，请稍后再试</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:10: Warning: The resource R.string.http_request_cancel appears to be unused [UnusedResources]
+    <string name="http_request_cancel">请求被中断，请重试</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:11: Warning: The resource R.string.http_response_null_body appears to be unused [UnusedResources]
+    <string name="http_response_null_body">服务器数据返回异常，请稍后再试</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res/values/strings_http.xml:12: Warning: The resource R.string.http_response_md5_error appears to be unused [UnusedResources]
+    <string name="http_response_md5_error">下载失败，文件 md5 校验失败</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+0 errors, 14 warnings

@@ -1,8 +1,9 @@
 package com.baihe.lib_common.http.response
 
-import com.alibaba.fastjson.annotation.JSONField
+import com.google.gson.annotations.SerializedName
 
-data class BaseResponse<out T> (
+
+data class BaseResponse<out T>  (
     val code:Int,
     val msg:String,
     val data: Data<T>?
@@ -14,8 +15,8 @@ data class BaseResponse<out T> (
 }
 
 data class Data<out T>(
-    val other:Int,
-    @JSONField(name = "apver")
-    val appVersion:String,
-    val result:T?
-    )
+    val result:T?,
+    val other: Int,
+    @SerializedName("apver")
+    val appVersion:String
+)

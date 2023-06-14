@@ -11,13 +11,16 @@ import com.baihe.lib_framework.R
 import com.baihe.lib_framework.loading.CenterLoadingView
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_framework.toast.TipsToast
+import com.baihe.lib_framework.widget.state.ktx.Decorative
+import com.baihe.lib_framework.widget.state.ktx.LoadingState
+import com.baihe.lib_framework.widget.state.ktx.LoadingStateDelegate
+import com.dylanc.loadingstateview.OnReloadListener
 
 /**
- * @author mingyan.su
- * @date   2023/2/20 12:34
  * @desc Fragment基类
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), LoadingState by LoadingStateDelegate(), OnReloadListener,
+    Decorative {
     protected var TAG: String? = this::class.java.simpleName
     var loadingDialog: Dialog? = null
     protected var mIsViewCreate = false
@@ -36,7 +39,12 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mIsViewCreate = true
         initView(view, savedInstanceState)
+        initListener()
         initData()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -69,7 +77,8 @@ abstract class BaseFragment : Fragment() {
      * 设置布局View
      */
     open fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
-        return inflater.inflate(getLayoutResId(), null)
+        val root = inflater.inflate(getLayoutResId(), container,false)
+        return root.decorate(this, this)
     }
 
     /**
@@ -89,6 +98,8 @@ abstract class BaseFragment : Fragment() {
      * 初始化数据
      */
     open fun initData() {}
+
+    open fun initListener(){}
 
 
     /**

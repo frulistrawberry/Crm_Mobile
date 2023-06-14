@@ -1,10 +1,8 @@
 package com.baihe.lib_framework.utils
 
 import android.graphics.drawable.ColorDrawable
-import androidx.annotation.ArrayRes
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.StringRes
+import android.graphics.drawable.Drawable
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import com.baihe.lib_framework.helper.AppHelper
 
@@ -27,10 +25,15 @@ fun getColorFromResource(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(AppHelper.getApplication(), colorRes)
 }
 
+fun getImageFromResource(@DrawableRes drawableRes: Int):Drawable?{
+    return ContextCompat.getDrawable(AppHelper.getApplication(),drawableRes)
+}
+
 fun getDimensionFromResource(@DimenRes dimenRes: Int): Int {
     return AppHelper.getApplication().resources
             .getDimensionPixelSize(dimenRes)
 }
+
 
 fun getColorDrawable(@ColorRes colorRes: Int): ColorDrawable? {
     return ColorDrawable(

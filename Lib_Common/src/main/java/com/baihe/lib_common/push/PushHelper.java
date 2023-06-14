@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 
+import com.baihe.http.EasyConfig;
 import com.baihe.lib_common.provider.UserServiceProvider;
 import com.baihe.lib_framework.helper.AppHelper;
 import com.baihe.lib_framework.log.LogUtil;
 import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
 
 
@@ -32,6 +34,7 @@ public class PushHelper {
             @Override
             public void onSuccess(Object data, int flag) {
                 LogUtil.i("LihePush", "绑定TPush成功  uid=" + userId);
+                EasyConfig.getInstance().addParam("device_token", XGPushConfig.getToken(context));
             }
 
             @Override
@@ -58,6 +61,8 @@ public class PushHelper {
             @Override
             public void onSuccess(Object data, int flag) {
                 LogUtil.i("LihePush", "解绑TPush成功  uid=" + userId);
+                EasyConfig.getInstance().addParam("device_token", "");
+
             }
 
             @Override

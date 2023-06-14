@@ -18,34 +18,44 @@ object DeviceInfoUtils {
     private lateinit var appContext: Context
 
     // 设备imei号
+    @JvmStatic
     var imei: String = ""
         private set
 
     // 设备imsi号
+    @JvmStatic
     var imsi: String = ""
         private set
 
     // androidId
+    @JvmStatic
     var androidId: String = ""
         private set
 
     // 设备mac地址
+    @JvmStatic
     var mac: String = ""
         private set
 
     // WiFi mac地址
+    @JvmStatic
     var wifiMacAddress: String = ""
         private set
 
     // WiFi ssid号
+    @JvmStatic
     var wifiSSID: String = ""
         private set
+    @JvmStatic
     var phoneModel: String = ""
         private set
+    @JvmStatic
     var phoneBrand: String = ""
         private set
+    @JvmStatic
     var phoneManufacturer: String = ""
         private set
+    @JvmStatic
     var phoneDevice: String = ""
         private set
 

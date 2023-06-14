@@ -1,5 +1,8 @@
 package com.baihe.lib_framework.ext
 
+import android.annotation.SuppressLint
+import java.text.SimpleDateFormat
+
 //秒的long时间转化
 fun Long.getDay(): String = (this / (3600 * 24)).asTwoDigit()
 fun Long.getHour(): String = (this % (3600 * 24) / 3600).asTwoDigit()
@@ -17,6 +20,12 @@ fun Long.formattedTime(keepHours: Boolean = false): String {
     } else {
         "${h.asTwoDigit()}:${m.asTwoDigit()}:${s.asTwoDigit()}"
     }
+}
+
+@SuppressLint("SimpleDateFormat")
+fun Long.formattedDate():String {
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    return sdf.format(this)
 }
 
 fun Long.asTwoDigit(): String {

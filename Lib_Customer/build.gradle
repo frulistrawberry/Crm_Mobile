@@ -23,27 +23,62 @@ android {
 dependencies {
     implementation project(path: ':Lib_Common')
 }
-
 publishing {
     publications {
-        mavenAar(MavenPublication) {
+        Arr(MavenPublication) {
             groupId 'com.wedding.crm.lib'
-            artifactId 'common'
-            version '1.0.0.0-SNAPSHOT'
-            artifact("$buildDir/outputs/aar/customer-release.aar")
+            artifactId 'customer'
+            version rootProject.depsLibs.customerLibVersion
+            artifact("$buildDir/outputs/aar/Lib_Customer-release.aar")
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
-                configurations.compile.allDependencies.each {
-                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
+
+                def scopes = [configurations.implementation]
+                if (configurations.hasProperty("api")) {
+                    scopes.add(configurations.api)
+                }
+                if (configurations.hasProperty("implementation")) {
+                    scopes.add(configurations.implementation)
+                }
+                if (configurations.hasProperty("debugImplementation")) {
+                    scopes.add(configurations.debugImplementation)
+                }
+                if (configurations.hasProperty("releaseImplementation")) {
+                    scopes.add(configurations.releaseImplementation)
+                }
+
+                scopes.each { scope ->
+                    scope.allDependencies.each {
+                        if (it instanceof ModuleDependency) {
+                            boolean isTransitive = ((ModuleDependency) it).transitive
+                            if (!isTransitive) {
+                                println "<<<< not transitive dependency: [${it.group}, ${it.name}, ${it.version}]"
+                                return
+                            }
+                        }
+
+                        if (it.group == "${project.rootProject.name}.libs" || it.version == 'unspecified') {
+                            return
+                        }
+
+                        if (it.group && it.name && it.version) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            dependencyNode.appendNode('scope', scope.name)
+                        }
+                    }
                 }
             }
+
         }
+
+
     }
     repositories {
         maven {
+            allowInsecureProtocol = true
             url 'http://10.240.210.158:8081/repository/jiayuan/'
             credentials {
                 username = 'jiayuandev'

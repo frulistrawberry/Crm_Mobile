@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <View
+        android:id="@+id/v_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_25"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_50">
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:src="@mipmap/navigation_icon"
+            android:layout_centerVertical="true"
+            />
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dp_50"
+            android:minWidth="@dimen/dp_50"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            android:gravity="center"
+            android:visibility="gone"
+            style="@style/font_normal_14_4A4C5C"
+            />
+
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:maxEms="10"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/font_half_bold_18_4A4C5C" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:scaleType="centerInside"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dp_50"
+            android:minWidth="@dimen/dp_50"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            style="@style/font_normal_14_4A4C5C"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

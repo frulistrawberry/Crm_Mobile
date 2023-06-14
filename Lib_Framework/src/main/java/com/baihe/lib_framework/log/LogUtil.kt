@@ -1,19 +1,15 @@
 package com.baihe.lib_framework.log
 
-import android.app.Application
-import android.nfc.Tag
-import android.util.Log
 import com.safframework.log.L
 import com.safframework.log.LogLevel
-import com.safframework.log.configL
-import com.safframework.log.converter.fastjson.FastJSONConverter
+import com.safframework.log.bean.JSONConfig
 import com.safframework.log.printer.Printer
 
 /**
  *  API is the same to {@link android.util.Log}
  */
 object LogUtil {
-    private const val TAG = "LogUtil"
+    private var TAG = "LogUtil"
     private var isDebug = false
 
 
@@ -21,11 +17,14 @@ object LogUtil {
     @JvmStatic
     @JvmOverloads
     fun init( isDebug: Boolean = false,globalTag: String = TAG,header:String? = null) {
-        configL {
-            tag = globalTag
-            this.header = header
-            converter = FastJSONConverter()
-        }
+        this.isDebug = isDebug
+        TAG = globalTag
+        L.init(globalTag)
+        L.logLevel = LogLevel.DEBUG
+        L.displayThreadInfo(true)
+        L.displayClassInfo(true)
+        L.converter(LogConverter())
+        L.header(header)
     }
 
     @JvmStatic
@@ -103,6 +102,18 @@ object LogUtil {
         if (!isDebug)
             return
         L.print(logLevel,tag,msg,printer)
+    }
+
+
+    @JvmStatic
+    fun json(obj: Any?){
+        json(TAG,obj)
+    }
+
+    @JvmStatic
+    fun json(tag: String,obj: Any?){
+        if (!isDebug)
+            L.json(obj, JSONConfig(L.logLevel, tag, L.printers()))
     }
 
 

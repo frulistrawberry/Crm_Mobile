@@ -8,17 +8,27 @@ interface IUserService :IProvider{
      * 保存用户信息
      * @param user 用户信息
      */
-    fun saveUserInfo(user:UserEntity)
+    fun saveUserInfo(user:UserEntity?)
+
+    /**
+     * 获取用户信息
+     */
+    fun getUserInfo():UserEntity?
 
     /**
      * 获取用户ID
      */
-    fun getUserId():String
+    fun getUserId():String?
 
     /**
      * 获取用户手机号
      */
-    fun getPhoneNum():String
+    fun getPhoneNum():String?
+
+    /**
+     * 获取用户公司id
+     */
+    fun getCompanyId():String?
 
     /**
      * 清除与用户信息

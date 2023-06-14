@@ -16,11 +16,8 @@ object LoginServiceProvider  {
         ARouter.getInstance().inject(this)
     }
 
-    fun logout(context: Context,
-               lifecycleOwner: LifecycleOwner,
-               observer: Observer<Boolean>
-    ){
-        loginService.logout(context,lifecycleOwner,observer)
+    fun logout(context: Context, lifecycleOwner: LifecycleOwner){
+        loginService.logout(context,lifecycleOwner)
     }
 
     fun login(context: Context){

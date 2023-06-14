@@ -11,7 +11,7 @@ import java.util.Map;
  * Time：2018-12-28
  * Description：json参数
  */
-public class JsonParam {
+public class  JsonParam {
     private String paramKey;
     private JSONObject paramValueJSONObject;
 

@@ -9,11 +9,6 @@ import com.alibaba.android.arouter.facade.template.IProvider
  * 登录服务相关接口
  */
 interface ILoginService : IProvider {
-    /**
-     * 是否登录
-     * @return Boolean
-     */
-    fun isLogin(): Boolean
 
     /**
      * 跳转登录页
@@ -21,11 +16,6 @@ interface ILoginService : IProvider {
      */
     fun login(context: Context)
 
-    /**
-     * 跳转隐私协议
-     * @param context
-     */
-    fun readPolicy(context: Context)
 
     /**
      * 登出
@@ -34,9 +24,11 @@ interface ILoginService : IProvider {
      * @param observer
      */
     fun logout(
-        context: Context,
-        lifecycleOwner: LifecycleOwner?,
-        observer: Observer<Boolean>
+    context: Context,
+    lifecycleOwner: LifecycleOwner?
     )
 
+    override fun init(context: Context?) {
+
+    }
 }

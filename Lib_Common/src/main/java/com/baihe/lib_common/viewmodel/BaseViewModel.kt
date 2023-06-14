@@ -1,7 +1,6 @@
 package com.baihe.lib_common.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.baihe.lib_common.http.callback.IApiErrorCallback
 import com.baihe.lib_common.http.exception.ApiException
 import com.baihe.lib_common.http.exception.ERROR
@@ -17,7 +16,21 @@ import kotlinx.coroutines.withTimeout
 /**
  *viewModel基类
  */
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel(),LifecycleOwner{
+
+
+    private val mLifecycle by lazy { LifecycleRegistry(this) }
+
+    init {
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
+    }
+
     /**
      * 运行在主线程中，可直接调用
      * @param errorBlock 错误回调
@@ -83,6 +96,10 @@ open class BaseViewModel : ViewModel() {
             errorCall?.onError(e.errCode, e.errMsg)
         }
         return null
+    }
+
+    override fun getLifecycle(): Lifecycle {
+        return mLifecycle
     }
 
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baihe.lib_contract">
+    <application
+        android:name="com.baihe.lib_common.CommonApp"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/user_app_name">
+
+    </application>
+
+</manifest>

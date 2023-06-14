@@ -1,0 +1,9 @@
+com.baihe.lib_network.Lib_Network-lifecycle-runtime-2.5.1-0 /Users/chenguanxi/.gradle/caches/transforms-3/79d3c6a24c427294c4638f9e07633197/transformed/lifecycle-runtime-2.5.1/res
+com.baihe.lib_network.Lib_Network-pngs-1 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/build/generated/res/pngs/release
+com.baihe.lib_network.Lib_Network-resValues-2 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/build/generated/res/resValues/release
+com.baihe.lib_network.Lib_Network-rs-3 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/build/generated/res/rs/release
+com.baihe.lib_network.Lib_Network-mergeReleaseResources-4 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.baihe.lib_network.Lib_Network-mergeReleaseResources-5 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.baihe.lib_network.Lib_Network-merged_res-6 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/build/intermediates/merged_res/release
+com.baihe.lib_network.Lib_Network-main-7 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/main/res
+com.baihe.lib_network.Lib_Network-release-8 /Users/chenguanxi/Develop/Android/Crm_Mobile/Lib_Network/src/release/res

@@ -6,11 +6,29 @@ ext {
             minSdk           : 21,
             targetSdk        : 29,
 
-            versionCode      : 25,
-            versionName      : "2.3.4",
+            versionCode      : 26,
+            versionName      : "3.5.0",
     ]
 
     dependVersion = [
+            //libs
+            frameworkLibVersion    :'1.0.0.0-SNAPSHOT',
+            networkLibVersion      :'1.0.0.0-SNAPSHOT',
+            imageLoaderLibVersion  :'1.0.0.0-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-SNAPSHOT',
+
+
+            //models
+            userLibVersion         :'1.0.0.0-SNAPSHOT',
+            homeLibVersion         :'1.0.0.0-SNAPSHOT',
+            loginLibVersion        :'1.0.0.0-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-SNAPSHOT',
+            messageLibVersion      :'1.0.0.0-SNAPSHOT',
+            orderLibVersion        :'1.0.0.0-SNAPSHOT',
+            opportunityLibVersion  :'1.0.0.0-SNAPSHOT',
+            contractLibVersion     :'1.0.0.0-SNAPSHOT',
+
+
             //test
             junitVersion            : '4.13.2',
             androidTestVersion      : '1.1.5',
@@ -23,6 +41,8 @@ ext {
             lifecycleVersion        : '2.5.1',
             materialVersion         : '1.4.0',
             recyclerviewVersion     : '1.2.1',
+            navigationVersion       : '2.5.3',
+            //log
             logVersion              : '2.6.9',
             //ARouter
             aroutreApiVersion       : '1.5.2',
@@ -34,12 +54,14 @@ ext {
             glideVersion            : '4.15.0',
             //fastJson
             fastJsonVersion         : '1.2.76',
+            //gson
+            gsonVersion             : '2.10.1',
             //mmkv
             mmkvVersion             : '1.2.15',
             //腾讯x5
             tbssdkVersion           : '44132',
             //下拉刷新
-            refreshVersion          : '2.0.1',
+            refreshVersion          : '2.0.6',
             //Rx
             rxjavaVersion           : '3.1.6',
             rxandroidVersion        : '3.0.2',
@@ -50,6 +72,20 @@ ext {
     ]
 
     depsLibs = [
+            //libs
+            frameworkLib      : "com.wedding.crm.lib:framework:${dependVersion["frameworkLibVersion"]}",
+            networkLib        : "com.wedding.crm.lib:network:${dependVersion["networkLibVersion"]}",
+            imageLoaderLib    : "com.wedding.crm.lib:imageloader:${dependVersion["imageLoaderLibVersion"]}",
+            commonLib         : "com.wedding.crm.lib:common:${dependVersion["commonLibVersion"]}",
+            loginLib          : "com.wedding.crm.lib:login:${dependVersion["loginLibVersion"]}",
+            userLib           : "com.wedding.crm.lib:user:${dependVersion["userLibVersion"]}",
+            homeLib           : "com.wedding.crm.lib:home:${dependVersion["homeLibVersion"]}",
+            customerLib       : "com.wedding.crm.lib:customer:${dependVersion["customerLibVersion"]}",
+            opportunityLib    : "com.wedding.crm.lib:opportunity:${dependVersion["opportunityLibVersion"]}",
+            orderLib          : "com.wedding.crm.lib:order:${dependVersion["orderLibVersion"]}",
+            contractLib       : "com.wedding.crm.lib:contract:${dependVersion["contractLibVersion"]}",
+            messageLib        : "com.wedding.crm.lib:message:${dependVersion["messageLibVersion"]}",
+
 
             //test
             junit             : "junit:junit:${dependVersion["junitVersion"]}",
@@ -62,13 +98,17 @@ ext {
             appcompat         : "androidx.appcompat:appcompat:${dependVersion["appcompatVersion"]}",
             material          : "com.google.android.material:material:${dependVersion["materialVersion"]}",
             multidex          : "androidx.multidex:multidex:${dependVersion["multidexVersion"]}",
-            annotation        : " androidx.annotation:annotation:${dependVersion["annotationVersion"]}",
+            annotation        : "androidx.annotation:annotation:${dependVersion["annotationVersion"]}",
+            navigationFragment: "androidx.navigation:navigation-fragment-ktx:${dependVersion["navigationVersion"]}",
+            navigationUI      : "androidx.navigation:navigation-ui-ktx:${dependVersion["navigationVersion"]}",
             //lifecycle
             liveDataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion["lifecycleVersion"]}",
             viewModelKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion["lifecycleVersion"]}",
             lifecycleOnly     : "androidx.lifecycle:lifecycle-runtime:${dependVersion["lifecycleVersion"]}",
             //json解析
-            fastJson              : "com.alibaba:fastjson:${dependVersion["fastJsonVersion"]}",
+            fastJson          : "com.alibaba:fastjson:${dependVersion["fastJsonVersion"]}",
+            //json解析
+            gson              : "com.google.code.gson:gson:${dependVersion["gsonVersion"]}",
             //网络
             okhttp            : "com.squareup.okhttp3:okhttp:${dependVersion["okhttpVersion"]}",
             okio              : "com.squareup.okio:okio:${dependVersion["okioVersion"]}",
@@ -78,9 +118,8 @@ ext {
             //数据存储
             mmkv              : "com.tencent:mmkv:${dependVersion["mmkvVersion"]}",
             //下拉刷新
-            refreshLayout     : "io.github.scwang:refresh-layout-kernel:${dependVersion["refreshVersion"]}",
-            refreshHeader     : "io.github.scwang:refresh-header-classics:${dependVersion["refreshVersion"]}",
-            refreshFooter     : "io.github.scwang:refresh-footer-classics:${dependVersion["refreshVersion"]}",
+            refreshLayout     : "io.github.scwang90:refresh-layout-kernel:${dependVersion["refreshVersion"]}",
+            refreshFooter     : "io.github.scwang90:refresh-footer-classics:${dependVersion["refreshVersion"]}",
             //腾讯X5
             tbssdk            : "com.tencent.tbs:tbssdk:${dependVersion["tbssdkVersion"]}",
 
@@ -95,8 +134,15 @@ ext {
             tps               : "com.tencent.tpns:tpns:${dependVersion["tpsVersion"]}",
             //日志
             logCore           : "com.github.fengzhizi715.SAF-Kotlin-log:core:${dependVersion["logVersion"]}",
-            logConvert        : "com.github.fengzhizi715.SAF-Kotlin-log:fastjson:${dependVersion["logVersion"]}",
-            logHttp           : "com.github.fengzhizi715.SAF-Kotlin-log:okhttp:${dependVersion["logVersion"]}"
+            logHttp           : "com.squareup.okhttp3:logging-interceptor:3.11.0",
+
+            //验证码View
+            verificationView  : 'com.github.limxing:Kotlin-VerificationView:1.0',
+            //状态视图
+            LoadingStateView  : 'com.github.DylanCaiCoding.LoadingStateView:loadingstateview:4.0.2',
+            //图表
+            MPChartAndroid    : 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
 
     ]

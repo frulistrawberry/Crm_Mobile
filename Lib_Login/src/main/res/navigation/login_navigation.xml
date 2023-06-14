@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/login_send_verify_code_fragment">
+
+    <fragment
+        android:id="@+id/login_send_verify_code_fragment"
+        android:name="com.baihe.lib_login.login.fragment.SendVerifyCodeFragment"
+        android:label="SendVerifyCodeFragment"
+        tools:layout="@layout/login_fragment_send_verify_code">
+        <action
+            android:id="@+id/login_action_login_send_verify_code_fragment_to_login_password_login_fragment"
+            app:destination="@id/login_password_login_fragment" />
+        <action
+            android:id="@+id/login_action_login_send_verify_code_fragment_to_login_verify_login_fragment"
+            app:destination="@id/login_verify_login_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/login_password_login_fragment"
+        android:name="com.baihe.lib_login.login.fragment.PasswordLoginFragment"
+        android:label="PasswordLoginFragment"
+        tools:layout="@layout/login_fragment_password_login"/>
+    <fragment
+        android:id="@+id/login_verify_login_fragment"
+        android:name="com.baihe.lib_login.login.fragment.VerifyLoginFragment"
+        android:label="VerifyLoginFragment"
+        tools:layout="@layout/login_fragment_verify_login"/>
+    <fragment
+        android:id="@+id/login_testfragment"
+        android:name="com.baihe.lib_login.login.fragment.TestFragment"
+        android:label="TestFragment" />
+</navigation>

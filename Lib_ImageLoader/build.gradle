@@ -32,7 +32,10 @@ android {
 }
 
 dependencies {
-    compileOnly rootProject.depsLibs.glide
+    compileOnly rootProject.depsLibs.junit
+    compileOnly rootProject.depsLibs.extJunit
+    compileOnly rootProject.depsLibs.espressoCore
+    implementation rootProject.depsLibs.glide
     kapt rootProject.depsLibs.glideCompiler
 }
 
@@ -40,9 +43,9 @@ publishing {
     publications {
         mavenAar(MavenPublication) {
             groupId 'com.wedding.crm.lib'
-            artifactId 'common'
-            version '1.0.0.0-SNAPSHOT'
-            artifact("$buildDir/outputs/aar/imageloader-release.aar")
+            artifactId 'imageloader'
+            version rootProject.depsLibs.imageLoaderLibVersion
+            artifact("$buildDir/outputs/aar/Lib_ImageLoader-release.aar")
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
                 configurations.compile.allDependencies.each {

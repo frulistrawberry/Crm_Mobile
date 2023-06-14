@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+apply plugin: 'kotlin-kapt'
+
+android {
+    namespace 'com.baihe.lihepro'
+    compileSdk rootProject.android.compileSdk
+
+    defaultConfig {
+        applicationId "com.baihe.lihepro"
+        minSdkVersion rootProject.android.minSdk
+        targetSdkVersion rootProject.android.targetSdk
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+
+        manifestPlaceholders = [
+                XG_ACCESS_ID : "1580001576",
+                XG_ACCESS_KEY : "AJMRFQTVY2L8"
+        ]
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+
+
+dependencies{
+    implementation(fileTree("libs"))
+    implementation project(path: ':Lib_Common')
+    implementation rootProject.depsLibs.verificationView
+    implementation rootProject.depsLibs.aroutreApi
+    kapt rootProject.depsLibs.arouterCompiler
+}

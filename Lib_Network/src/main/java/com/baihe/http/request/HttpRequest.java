@@ -403,7 +403,7 @@ public abstract class HttpRequest<T extends HttpRequest<?>> {
 
         } catch (Exception exception) {
 
-            EasyLog.printThrowable(this, exception);
+//            EasyLog.printThrowable(this, exception);
 
             // 如果设置了只在网络请求失败才去读缓存
             if (exception instanceof IOException && cacheMode == CacheMode.USE_CACHE_AFTER_FAILURE) {
@@ -419,11 +419,10 @@ public abstract class HttpRequest<T extends HttpRequest<?>> {
                 }
             }
 
-            Exception finalException = mRequestHandler.requestFail(this, exception);
-            if (finalException != exception) {
-                EasyLog.printThrowable(this, finalException);
-            }
-            throw finalException;
+            //            if (finalException != exception) {
+//                EasyLog.printThrowable(this, finalException);
+//            }
+            throw mRequestHandler.requestFail(this, exception);
         }
     }
 

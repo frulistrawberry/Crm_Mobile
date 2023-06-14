@@ -210,6 +210,7 @@ object AppManager {
     /**
      * 获取版本名称
      */
+    @JvmStatic
     fun getAppVersionName(context: Context): String {
         var versionName = ""
         try {
@@ -242,6 +243,20 @@ object AppManager {
             LogUtil.e("getAppVersionCode-${e.message}")
         }
         return appVersionCode
+    }
+
+    fun getApplicationId(context: Context):String?{
+        var applicationId:String? = null
+        try {
+            val packageName = context.packageName
+            val packageInfo = context.applicationContext
+                .packageManager
+                .getPackageInfo(packageName, 0)
+            applicationId = packageInfo.packageName
+        } catch (e: PackageManager.NameNotFoundException) {
+            LogUtil.e("getApplicationId-${e.message}")
+        }
+        return applicationId
     }
 
     override fun toString(): String {

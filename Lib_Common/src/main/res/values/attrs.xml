@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <attr name="font_textStyle" format="enum">
+        <enum name="LIGHT" value="0" />
+        <enum name="NORMAL" value="1" />
+        <enum name="HALF_BOLD" value="2" />
+        <enum name="BOLD" value="3" />
+    </attr>
+
+    <declare-styleable name="FontTextView">
+        <!-- 字体样式, 默认细体-->
+        <attr name="font_textStyle" />
+    </declare-styleable>
+
+    <declare-styleable name="FontEditText">
+        <!-- 字体样式, 默认细体-->
+        <attr name="font_textStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="RadiusCardView">
+        <!--        左上圆角大小-->
+        <attr name="rcv_topLeftRadius" format="dimension" />
+        <!--        右上圆角大小-->
+        <attr name="rcv_topRightRadius" format="dimension" />
+        <!--        右下圆角大小-->
+        <attr name="rcv_bottomRightRadius" format="dimension" />
+        <!--        左下圆角大小-->
+        <attr name="rcv_bottomLeftRadius" format="dimension" />
+    </declare-styleable>
+</resources>

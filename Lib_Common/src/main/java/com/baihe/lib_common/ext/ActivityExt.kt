@@ -2,6 +2,8 @@ package com.baihe.lib_common.ext
 
 import com.baihe.lib_common.dialog.LoadingDialog
 import com.baihe.lib_framework.base.BaseActivity
+import com.baihe.lib_framework.base.BaseFragment
+import com.baihe.lib_framework.log.LogUtil
 
 /**
  * 显示通用加载弹窗
@@ -27,4 +29,14 @@ fun BaseActivity.dismissLoadingDialog(){
             it.dismiss()
         }
     }
+}
+
+fun BaseActivity.printBackStack(){
+    val backStackCount = supportFragmentManager.backStackEntryCount
+    for (i in 0 until backStackCount) {
+        val backStackEntry = supportFragmentManager.getBackStackEntryAt(i)
+        val fragmentName = backStackEntry.name
+        LogUtil.d("BackStackInfo", "Fragment $i: $fragmentName")
+    }
+
 }

@@ -90,8 +90,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private RequestOptions getOptionsCircle() {
         if (mOptionsCircle == null) {
             mOptionsCircle = new RequestOptions();
-            mOptionsCircle.placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
+            mOptionsCircle.placeholder(R.drawable.image_load_default)
+                    .error(R.drawable.image_load_default)
                     //下载的优先级
                     .priority(Priority.NORMAL)
                     //缓存策略

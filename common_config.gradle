@@ -13,14 +13,22 @@ android {
     defaultConfig {
         minSdkVersion rootProject.android.minSdk
         targetSdkVersion rootProject.android.targetSdk
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
 
         //阿里路由框架配置
         kapt {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
-
         }
+
+        manifestPlaceholders = [
+                XG_ACCESS_ID : "1580001576",
+                XG_ACCESS_KEY : "AJMRFQTVY2L8"
+        ]
+
+        buildConfigField('Boolean', 'IS_BUILD_MODULE', isBuildModule)
     }
 
     compileOptions {
@@ -55,5 +63,9 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+    }
+    dependencies {
+        implementation rootProject.depsLibs.aroutreApi
+        kapt rootProject.depsLibs.arouterCompiler
     }
 }

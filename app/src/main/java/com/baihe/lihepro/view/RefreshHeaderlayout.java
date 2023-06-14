@@ -1,5 +1,6 @@
 package com.baihe.lihepro.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
@@ -25,6 +26,7 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
  * Time：2020-07-24
  * Description：
  */
+@SuppressLint("RestrictedApi")
 public class RefreshHeaderlayout extends LinearLayout implements RefreshHeader {
     private View refreshView;
     private boolean isRefresh;

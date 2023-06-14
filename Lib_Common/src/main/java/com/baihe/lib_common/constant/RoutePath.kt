@@ -13,4 +13,4 @@ const val USER_SERVICE_USER = "/user/service/user"
 /**
  * 主页模块-主页
  */
-const val MAIN_SERVICE_HOME = "/main/service/home"
+const val HOME_SERVICE_HOME = "/home/service/home"

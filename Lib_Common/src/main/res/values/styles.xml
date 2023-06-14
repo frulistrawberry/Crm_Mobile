@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColorPrimary">@android:color/black</item> <!-- 标题颜色 -->
+        <item name="android:windowBackground">@color/COLOR_F6F7FC</item> <!-- 窗口背景色 -->
+        <item name="android:colorAccent">@android:color/darker_gray</item>  <!-- 控件激活状态、光标的颜色 -->
+    </style>
+
+
+
+    <style name="font_half_bold_28_4A4C5C">
+        <item name="font_textStyle">HALF_BOLD</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_half_bold_18_4A4C5C">
+        <item name="font_textStyle">HALF_BOLD</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_20_4A4C5C">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_20_C5C5CE">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#C5C5CE</item>
+    </style>
+    <style name="font_half_bold_15_FFFFFF">
+        <item name="font_textStyle">HALF_BOLD</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="font_half_bold_16_FFFFFF">
+        <item name="font_textStyle">HALF_BOLD</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="font_half_bold_16_4A4C5C">
+        <item name="font_textStyle">HALF_BOLD</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_12_6C8EFF">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#6C8EFF</item>
+    </style>
+    <style name="font_normal_12_C5C5CE">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#C5C5CE</item>
+    </style>
+    <style name="font_normal_12_4A4C5C">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_12_D21818">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#D21818</item>
+    </style>
+    <style name="font_light_12_4A4C5C">
+        <item name="font_textStyle">LIGHT</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_light_14_4A4C5C">
+        <item name="font_textStyle">LIGHT</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_14_4A4C5C">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_15_4A4C5C">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#4A4C5C</item>
+    </style>
+</resources>

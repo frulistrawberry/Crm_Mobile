@@ -23,8 +23,8 @@ public class ImageLoaderUtils {
     private static ImageLoaderConfig mDefaultConfig = new ImageLoaderConfig.Builder()
             .setMaxDiskCache(1024 * 1024 * 50)
             .setMaxMemoryCache(1024 * 1024 * 10)
-            .errorPicRes(R.mipmap.ic_launcher)
-            .placePicRes(R.mipmap.ic_launcher)
+            .errorPicRes(R.drawable.image_load_default)
+            .placePicRes(R.drawable.image_load_default)
             .build();
 
     /**
