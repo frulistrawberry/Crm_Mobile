@@ -3,7 +3,7 @@ package com.baihe.lib_user.service
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.baihe.http.EasyConfig
-import com.baihe.lib_common.constant.USER_SERVICE_USER
+import com.baihe.lib_common.constant.RoutePath.USER_SERVICE_USER
 import com.baihe.lib_common.entity.UserEntity
 import com.baihe.lib_common.service.IUserService
 import com.baihe.lib_framework.storage.StorageManager

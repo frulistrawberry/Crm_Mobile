@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="@dimen/dp_18"
+        android:height="@dimen/dp_4"
+        android:gravity="center">
+        <shape>
+            <corners android:topLeftRadius="4dp"
+                android:topRightRadius="4dp"/>
+            <!--color无效，源码用tabIndicatorColor-->
+            <solid android:color="#FF6C8EFF" />
+        </shape>
+    </item>
+</layer-list>

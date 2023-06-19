@@ -1,5 +1,6 @@
 package com.baihe.lihepro.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -228,7 +229,7 @@ public class DiscountActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull DiscountAdapter.Holder holder, final int position) {
+        public void onBindViewHolder(@NonNull DiscountAdapter.Holder holder, @SuppressLint("RecyclerView") final int position) {
             int viewType = getItemViewType(position);
             if (viewType == ADD_TYPE) {
                 holder.contract_add_item_add_tv.setText("添加优惠");

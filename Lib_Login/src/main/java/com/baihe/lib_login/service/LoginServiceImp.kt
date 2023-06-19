@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.baihe.lib_common.constant.LOGIN_SERVICE_LOGIN
+import com.baihe.lib_common.constant.RoutePath.LOGIN_SERVICE_LOGIN
 import com.baihe.lib_common.http.cookie.CookieJarImpl
 import com.baihe.lib_common.http.exception.ApiException
 import com.baihe.lib_common.provider.UserServiceProvider

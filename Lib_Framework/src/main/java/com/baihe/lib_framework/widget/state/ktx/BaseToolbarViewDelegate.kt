@@ -20,7 +20,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dylanc.loadingstateview.LoadingStateView
-import com.dylanc.loadingstateview.ToolbarConfig
 import com.dylanc.loadingstateview.ViewType
 
 abstract class BaseToolbarViewDelegate : LoadingStateView.ViewDelegate(ViewType.TITLE) {

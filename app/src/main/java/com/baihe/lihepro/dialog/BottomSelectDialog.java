@@ -1,5 +1,6 @@
 package com.baihe.lihepro.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -243,7 +244,7 @@ public class BottomSelectDialog extends Dialog {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull Holder holder, final int position) {
+        public void onBindViewHolder(@NonNull Holder holder, @SuppressLint("RecyclerView") final int position) {
             int viewType = getItemViewType(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

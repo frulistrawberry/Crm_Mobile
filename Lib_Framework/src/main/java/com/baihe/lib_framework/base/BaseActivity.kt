@@ -1,6 +1,5 @@
 package com.baihe.lib_framework.base
 
-import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
 import androidx.annotation.StringRes
@@ -30,7 +29,7 @@ abstract class BaseActivity : AppCompatActivity(), LoadingState by LoadingStateD
         initView(savedInstanceState)
         initData()
         StatusBarSettingHelper.setStatusBarTranslucent(this)
-
+        StatusBarSettingHelper.statusBarLightMode(this)
     }
 
     /**

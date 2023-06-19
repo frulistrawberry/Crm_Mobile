@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lib_Customer</string>
+    <string name="customer_app_name">礼合客户模块</string>
 </resources>

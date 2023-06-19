@@ -50,12 +50,12 @@ class HomeViewModel:BaseViewModel() {
         }
     }
 
-    fun getWaitingList(page:Int,pageSize:Int = 10){
+    fun getWaitingList(page:Int,type:String){
         loadingStateLiveData.value = ViewType.LOADING
         launchUI({
             _,_-> loadingStateLiveData.value = ViewType.ERROR
         }){
-            val waitingList = homeRepository.getWaitingList(page)
+            val waitingList = homeRepository.getWaitingList(page,type)
             if (waitingList==null)
                 loadingStateLiveData.value = ViewType.EMPTY
             else{

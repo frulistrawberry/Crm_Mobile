@@ -4,7 +4,7 @@
     <application
         android:name="com.baihe.lib_common.CommonApp"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/user_app_name">
+        android:label="@string/order_app_name">
 
     </application>
 

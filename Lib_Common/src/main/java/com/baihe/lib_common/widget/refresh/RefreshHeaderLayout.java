@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.baihe.lib_common.R;
-import com.baihe.lib_framework.utils.DisplayUtil;
-import com.baihe.lib_framework.utils.ResUtilsKt;
+import com.baihe.lib_framework.utils.DpToPx;
+import com.baihe.lib_framework.utils.ResUtils;
 import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshKernel;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -78,11 +78,11 @@ public class RefreshHeaderLayout extends LinearLayout implements RefreshHeader {
             return;
         }
         ImageView loading_iv = findViewById(R.id.loading_iv);
-        loading_iv.setImageDrawable(ResUtilsKt.getImageFromResource(R.drawable.icon_refresh_00000));
+        loading_iv.setImageDrawable(ResUtils.getImageFromResource(R.drawable.icon_refresh_00000));
         TextView loading_tv = findViewById(R.id.loading_tv);
 
         int textHeight = loading_tv.getMeasuredHeight();
-        int maxTranslationY = (height - textHeight + DisplayUtil.dpToPx( 5)) * 85 / 150;
+        int maxTranslationY = (height - textHeight + DpToPx.dpToPx( 5)) * 85 / 150;
         float scale = percent > 1 ? 1 : percent;
 
         int translationY = (int) (maxTranslationY * (1 - scale));
@@ -107,7 +107,7 @@ public class RefreshHeaderLayout extends LinearLayout implements RefreshHeader {
     @Override
     public void onStartAnimator(@NonNull RefreshLayout refreshLayout, int height, int extendHeight) {
         ImageView loading_iv = findViewById(R.id.loading_iv);
-        loading_iv.setImageDrawable(ResUtilsKt.getImageFromResource(R.drawable.common_loading_refresh_anim));
+        loading_iv.setImageDrawable(ResUtils.getImageFromResource(R.drawable.common_loading_refresh_anim));
         AnimationDrawable drawable = (AnimationDrawable) loading_iv.getDrawable();
         drawable.start();
     }

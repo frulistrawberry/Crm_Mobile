@@ -14,8 +14,8 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
-import com.baihe.lib_framework.ext.gone
-import com.baihe.lib_framework.ext.visible
+import com.baihe.lib_framework.ext.ViewExt.gone
+import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.log.LogUtil
 
 /**

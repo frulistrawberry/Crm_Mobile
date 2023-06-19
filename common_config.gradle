@@ -22,13 +22,12 @@ android {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
-
-        manifestPlaceholders = [
-                XG_ACCESS_ID : "1580001576",
-                XG_ACCESS_KEY : "AJMRFQTVY2L8"
-        ]
-
-        buildConfigField('Boolean', 'IS_BUILD_MODULE', isBuildModule)
+        if (isBuildModule.toBoolean()){
+            manifestPlaceholders = [
+                    XG_ACCESS_ID : rootProject.sdkConfig.XG_ACCESS_ID,
+                    XG_ACCESS_KEY : rootProject.sdkConfig.XG_ACCESS_KEY
+            ]
+        }
     }
 
     compileOptions {
@@ -45,11 +44,21 @@ android {
         exclude 'META-INF/*******'
     }
 
+
+
     sourceSets {
         main {
             if (isBuildModule.toBoolean()) {
                 //独立运行
                 manifest.srcFile 'src/main/alone/AndroidManifest.xml'
+                java.srcDirs = [
+                        'src/main/alone/java',
+                        'src/main/java'
+                ]
+                res.srcDirs = [
+                        'src/main/alone/res',
+                        'src/main/res'
+                ]
             } else {
                 //合并到宿主
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -64,8 +73,16 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    dependencies {
-        implementation rootProject.depsLibs.aroutreApi
-        kapt rootProject.depsLibs.arouterCompiler
-    }
+
+}
+
+dependencies {
+    implementation rootProject.depsLibs.commonLib
+    implementation rootProject.depsLibs.aroutreApi
+    kapt rootProject.depsLibs.arouterCompiler
+}
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.getSourceFiles()
+    classifier 'sources'
 }

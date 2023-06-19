@@ -21,33 +21,48 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':Lib_Common')
 }
 
-publishing {
-    publications {
-        mavenAar(MavenPublication) {
-            groupId 'com.wedding.crm.lib'
-            artifactId 'message'
-            version rootProject.depsLibs.messageLibVersion
-            artifact("$buildDir/outputs/aar/Lib_Message-release.aar")
-            pom.withXml {
-                def dependenciesNode = asNode().appendNode('dependencies')
-                configurations.compile.allDependencies.each {
-                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
+afterEvaluate{
+    if (!isBuildModule.toBoolean()){
+        publishing {
+            publications {
+                Arr(MavenPublication) {
+                    groupId 'com.wedding.crm.lib'
+                    artifactId 'message'
+                    version '1.0.0.0-SNAPSHOT'
+                    afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+                    artifact generateSourcesJar
+                    pom.withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        configurations.implementation.allDependencies.each {
+                            if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                                println "dependency=${it.toString()}"
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', it.group)
+                                dependencyNode.appendNode('artifactId', it.name)
+                                dependencyNode.appendNode('version', it.version)
+                                dependencyNode.appendNode('scope', 'implementation')
+
+                            }
+                        }
+                    }
+
                 }
+
+
             }
-        }
-    }
-    repositories {
-        maven {
-            url 'http://10.240.210.158:8081/repository/jiayuan/'
-            credentials {
-                username = 'jiayuandev'
-                password = 'jyandroid'
+            repositories {
+                maven {
+                    allowInsecureProtocol = true
+                    url 'http://10.240.210.158:8081/repository/jiayuan/'
+                    credentials {
+                        username = 'jiayuandev'
+                        password = 'jyandroid'
+                    }
+            }
+
+                mavenLocal()
             }
         }
     }

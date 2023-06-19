@@ -7,19 +7,21 @@ import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
-import com.baihe.lib_framework.ext.formattedDate
+import com.baihe.lib_framework.ext.TimeExt.formattedDate
 import com.baihe.lib_home.DataEntity
 import com.baihe.lib_home.HomeEntity
 import com.baihe.lib_home.WaitingEntity
 import com.baihe.lib_home.constant.UrlConstant
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 
 class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycleOwner) {
-    suspend fun getWaitingList(page:Int,pageSize:Int = 10):List<WaitingEntity>?{
+    suspend fun getWaitingList(page:Int,type:String = "1",pageSize:Int = 10):List<WaitingEntity>?{
         return requestResponse {
             val params = JsonParam.newInstance()
                 .putParamValue("page",page)
+                .putParamValue("type",type)
                 .putParamValue("pageSize",pageSize)
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.WAITING_LIST,params.getParamValue()))
@@ -30,7 +32,7 @@ class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
     suspend fun getHomeData():HomeEntity?{
         var result:HomeEntity? = null
         val waitingListFlow = flow {
-            val waitingList = getWaitingList(1,2)
+            val waitingList = getWaitingList(1, pageSize = 2)
             emit(waitingList)
         }
         val dataViewFlow = flow {
@@ -41,9 +43,10 @@ class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
                 first: List<WaitingEntity>?, second: DataEntity? ->
             HomeEntity(first,second)
         }
-        resultFlow.collect(){
-             result = it
+        resultFlow.collect {
+            result = it
         }
+
         return result
     }
 

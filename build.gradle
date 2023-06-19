@@ -1,19 +1,45 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+apply from: this.rootProject.file('ModuleLibs.gradle')
 buildscript {
+
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://repo1.maven.org/maven2/'}
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven {
+            allowInsecureProtocol = true
+            url "http://10.240.210.158:8081/repository/maven-public/"
+        }
+        maven { url 'https://jitpack.io' }
+    }
+
     dependencies {
-        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1'
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath 'com.huawei.agconnect:agcp:1.6.0.300'
     }
 }
 
-plugins {
-    id 'com.android.application' version '7.4.2' apply false
-    id 'com.android.library' version '7.4.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+
+allprojects{
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://repo1.maven.org/maven2/'}
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven {
+            allowInsecureProtocol = true
+            url "http://10.240.210.158:8081/repository/maven-public/"
+        }
+        maven { url 'https://jitpack.io' }
+    }
 }
 
-apply from: this.rootProject.file('ModuleLibs.gradle')
 
 
 

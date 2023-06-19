@@ -18,14 +18,59 @@
         <attr name="font_textStyle"/>
     </declare-styleable>
 
-    <declare-styleable name="RadiusCardView">
-        <!--        左上圆角大小-->
-        <attr name="rcv_topLeftRadius" format="dimension" />
-        <!--        右上圆角大小-->
-        <attr name="rcv_topRightRadius" format="dimension" />
-        <!--        右下圆角大小-->
-        <attr name="rcv_bottomRightRadius" format="dimension" />
-        <!--        左下圆角大小-->
-        <attr name="rcv_bottomLeftRadius" format="dimension" />
+
+    <declare-styleable name="KeyValueLayout">
+        <!-- key-value横向间距, 默认4dp-->
+        <attr name="kv_kv_space" format="dimension" />
+        <!-- key是否等宽,等宽将取key里最大宽作为所有key的宽度,默认false-->
+        <attr name="kv_key_equal_width" format="boolean" />
+        <!-- 每行的纵向间距, 默认12dp-->
+        <attr name="kv_item_space" format="dimension" />
+        <!-- key是否有冒号, 默认true-->
+        <attr name="kv_key_colon" format="boolean" />
+        <!-- key文字大小，默认14sp-->
+        <attr name="kv_key_textSize" format="dimension" />
+        <!-- key文字颜色，默认#4A4C5C-->
+        <attr name="kv_key_textColor" format="color" />
+        <!-- value文字大小，默认14sp-->
+        <attr name="kv_value_textSize" format="dimension" />
+        <!-- value文字颜色，默认#4A4C5C-->
+        <attr name="kv_value_textColor" format="color" />
+        <!-- value最大行数-->
+        <attr name="kv_value_maxLine" format="integer" />
+        <!-- key文字字体, 默认细体-->
+        <attr name="kv_key_textStyle" format="enum">
+            <enum name="LIGHT" value="0" />
+            <enum name="NORMAL" value="1" />
+            <enum name="HALF_BOLD" value="2" />
+            <enum name="BOLD" value="3" />
+        </attr>
+        <!-- value文字字体, 默认细体-->
+        <attr name="kv_value_textStyle" format="enum">
+            <enum name="LIGHT" value="0" />
+            <enum name="NORMAL" value="1" />
+            <enum name="HALF_BOLD" value="2" />
+            <enum name="BOLD" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="labels_view">
+        <attr name="selectType" format="enum">
+            <enum name="NONE" value="1" />
+            <enum name="SINGLE" value="2" />
+            <enum name="SINGLE_IRREVOCABLY" value="3" />
+            <enum name="MULTI" value="4" />
+        </attr>
+        <attr name="maxSelect" format="integer" />
+        <attr name="maxLines" format="integer" />
+        <attr name="labelTextColor" format="reference|color" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelTextPaddingLeft" format="dimension" />
+        <attr name="labelTextPaddingTop" format="dimension" />
+        <attr name="labelTextPaddingRight" format="dimension" />
+        <attr name="labelTextPaddingBottom" format="dimension" />
+        <attr name="lineMargin" format="dimension" />
+        <attr name="wordMargin" format="dimension" />
+        <attr name="labelBackground" format="reference|color" />
     </declare-styleable>
 </resources>

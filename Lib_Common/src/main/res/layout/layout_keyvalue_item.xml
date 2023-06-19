@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.baihe.lib_common.widget.font.FontTextView
+        android:id="@+id/kv_key_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false" />
+
+    <RelativeLayout
+        android:id="@+id/kv_value_rl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/kv_value_right_ll"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/kv_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/kv_value_right_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/kv_value_left_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:textColor="#4A4C5C"
+                android:textSize="12sp"
+                app:font_textStyle="LIGHT" />
+
+            <ImageView
+                android:id="@+id/kv_value_right_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_arrow_right" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout>

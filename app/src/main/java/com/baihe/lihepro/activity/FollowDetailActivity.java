@@ -1,5 +1,6 @@
 package com.baihe.lihepro.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -177,7 +178,7 @@ public class FollowDetailActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull Holder holder, final int position) {
+        public void onBindViewHolder(@NonNull Holder holder, @SuppressLint("RecyclerView") final int position) {
             String attachment = attachments.get(position);
             GlideApp.with(context).load(attachment).transform(new RoundedCornersTransformation(CommonUtils.dp2px(context, 12), 1)).placeholder(R.drawable.image_load_round_default).into(holder.follow_detail_attachment_item_iv);
             holder.itemView.setOnClickListener(new View.OnClickListener() {

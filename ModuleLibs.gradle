@@ -1,10 +1,16 @@
 ext {
 
+
+    sdkConfig = [
+            XG_ACCESS_ID : '1580001576',
+            XG_ACCESS_KEY : 'AJMRFQTVY2L8'
+    ]
+
+
     android = [
             compileSdk       : 33,
-            buildToolsVersion: '29.0.3',
             minSdk           : 21,
-            targetSdk        : 29,
+            targetSdk        : 33,
 
             versionCode      : 26,
             versionName      : "3.5.0",
@@ -34,14 +40,13 @@ ext {
             androidTestVersion      : '1.1.5',
             androidEspressoVersion  : '3.5.1',
             //androidx
-            appcompatVersion        : '1.6.1',
+            appcompatVersion        : '1.6.0',
             multidexVersion         : '2.0.1',
-            annotationVersion       : '1.5.0',
-            coreVersion             : '1.9.0',
-            lifecycleVersion        : '2.5.1',
+            coreVersion             : '1.7.0',
+            lifecycleVersion        : '2.3.1',
             materialVersion         : '1.4.0',
             recyclerviewVersion     : '1.2.1',
-            navigationVersion       : '2.5.3',
+            navigationVersion       : '2.3.5',
             //log
             logVersion              : '2.6.9',
             //ARouter
@@ -98,15 +103,12 @@ ext {
             appcompat         : "androidx.appcompat:appcompat:${dependVersion["appcompatVersion"]}",
             material          : "com.google.android.material:material:${dependVersion["materialVersion"]}",
             multidex          : "androidx.multidex:multidex:${dependVersion["multidexVersion"]}",
-            annotation        : "androidx.annotation:annotation:${dependVersion["annotationVersion"]}",
             navigationFragment: "androidx.navigation:navigation-fragment-ktx:${dependVersion["navigationVersion"]}",
             navigationUI      : "androidx.navigation:navigation-ui-ktx:${dependVersion["navigationVersion"]}",
             //lifecycle
             liveDataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion["lifecycleVersion"]}",
             viewModelKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion["lifecycleVersion"]}",
             lifecycleOnly     : "androidx.lifecycle:lifecycle-runtime:${dependVersion["lifecycleVersion"]}",
-            //json解析
-            fastJson          : "com.alibaba:fastjson:${dependVersion["fastJsonVersion"]}",
             //json解析
             gson              : "com.google.code.gson:gson:${dependVersion["gsonVersion"]}",
             //网络
@@ -141,7 +143,7 @@ ext {
             //状态视图
             LoadingStateView  : 'com.github.DylanCaiCoding.LoadingStateView:loadingstateview:4.0.2',
             //图表
-            MPChartAndroid    : 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+            MPChartAndroid    : 'com.github.PhilJay:MPAndroidChart:v3.1.0',
 
 
 

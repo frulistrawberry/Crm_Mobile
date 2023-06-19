@@ -12,25 +12,27 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 
 
-/**
- * 倒计时
- */
-fun countDownCoroutines(
-    total: Int,
-    scope: CoroutineScope,
-    onTick: (Int) -> Unit,
-    onStart: (() -> Unit)? = null,
-    onFinish: (() -> Unit)? = null,
-): Job {
-    return flow {
-        for (i in total downTo 0) {
-            emit(i)
-            delay(1000)
+object FlowExt {
+    /**
+     * 倒计时
+     */
+    fun countDownCoroutines(
+        total: Int,
+        scope: CoroutineScope,
+        onTick: (Int) -> Unit,
+        onStart: (() -> Unit)? = null,
+        onFinish: (() -> Unit)? = null,
+    ): Job {
+        return flow {
+            for (i in total downTo 0) {
+                emit(i)
+                delay(1000)
+            }
         }
-    }
             .flowOn(Dispatchers.Main)
             .onStart { onStart?.invoke() }
             .onCompletion { onFinish?.invoke() }//like java finally
             .onEach { onTick.invoke(it) }
             .launchIn(scope)
+    }
 }

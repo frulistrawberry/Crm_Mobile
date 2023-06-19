@@ -1,5 +1,6 @@
 package com.baihe.lihepro.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -820,7 +821,7 @@ public class ContractDetailActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AttachmentAdapter.Holder holder, final int position) {
+        public void onBindViewHolder(@NonNull AttachmentAdapter.Holder holder, @SuppressLint("RecyclerView") final int position) {
             final int viewType = getItemViewType(position);
             if (viewType == ITEM_NORMAL_TYPE) {
                 String attachment = attachments.get(position);

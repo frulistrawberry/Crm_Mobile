@@ -9,37 +9,39 @@ import androidx.core.view.forEach
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 
+object TextViewExt{
+    fun TextView.getViewWidth(): Float {
+        return paint.measureText(text.toString()) +
+                paddingStart + paddingEnd + marginStart + marginEnd
+    }
 
-fun TextView.getViewWidth(): Float {
-    return paint.measureText(text.toString()) +
-            paddingStart + paddingEnd + marginStart + marginEnd
-}
+    /**
+     * 给TextView添加删除线
+     */
+    fun TextView.strikeThroughText() {
+        paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
 
-/**
- * 给TextView添加删除线
- */
-fun TextView.strikeThroughText() {
-    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-}
-
-/**
- * 给TextView取消删除线
- */
-fun TextView.cancelStrikeThroughText() {
-    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-}
+    /**
+     * 给TextView取消删除线
+     */
+    fun TextView.cancelStrikeThroughText() {
+        paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
 
 
-/**
- * 设置字体加小粗
- */
-fun TextView.bold() {
-    paint.isFakeBoldText = true
-}
+    /**
+     * 设置字体加小粗
+     */
+    fun TextView.bold() {
+        paint.isFakeBoldText = true
+    }
 
-/**
- * 设置字体加大粗
- */
-fun TextView.Bold() {
-    typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+    /**
+     * 设置字体加大粗
+     */
+    fun TextView.Bold() {
+        typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+    }
+
 }

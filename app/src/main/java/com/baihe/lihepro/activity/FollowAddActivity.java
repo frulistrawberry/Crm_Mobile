@@ -1,5 +1,6 @@
 package com.baihe.lihepro.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -539,7 +540,7 @@ public class FollowAddActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull FollowAddActivity.AttachmentAddAdapter.Holder holder, final int position) {
+        public void onBindViewHolder(@NonNull FollowAddActivity.AttachmentAddAdapter.Holder holder, @SuppressLint("RecyclerView") final int position) {
             final int viewType = getItemViewType(position);
             if (viewType == ITEM_NORMAL_TYPE) {
                 String attachment = attachments.get(position);

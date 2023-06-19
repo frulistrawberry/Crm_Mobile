@@ -21,9 +21,7 @@ import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.dylanc.loadingstateview.LoadingStateView
-import com.dylanc.loadingstateview.NavBtnType
 import com.dylanc.loadingstateview.OnReloadListener
-import com.dylanc.loadingstateview.ToolbarConfig
 
 interface LoadingState {
 
@@ -65,6 +63,6 @@ interface LoadingState {
 
   @Suppress("FunctionName")
   fun ToolbarViewDelegate(
-    title: String? = null, navBtnType: NavBtnType = NavBtnType.ICON, block: (ToolbarConfig.() -> Unit)? = null
+      title: String? = null, navBtnType: NavBtnType = NavBtnType.ICON, block: (ToolbarConfig.() -> Unit)? = null
   ): BaseToolbarViewDelegate
 }

@@ -1,0 +1,140 @@
+com/baihe/http/config/IRequestApi.java
+ com.baihe.http.config.IRequestApi
+com/baihe/http/EasyUtils.java
+ com.baihe.http.EasyUtils
+ com.baihe.http.EasyUtils$1
+com/baihe/http/model/BodyType.java
+ com.baihe.http.model.BodyType
+com/baihe/http/config/IRequestClient.java
+ com.baihe.http.config.IRequestClient
+com/baihe/http/lifecycle/LifecycleService.java
+ com.baihe.http.lifecycle.LifecycleService
+com/baihe/http/request/PostRequest.java
+ com.baihe.http.request.PostRequest
+com/baihe/http/listener/OnDownloadListener.java
+ com.baihe.http.listener.OnDownloadListener
+com/baihe/http/request/PutRequest.java
+ com.baihe.http.request.PutRequest
+com/baihe/http/request/PatchRequest.java
+ com.baihe.http.request.PatchRequest
+com/baihe/http/request/TraceRequest.java
+ com.baihe.http.request.TraceRequest
+com/baihe/http/request/GetRequest.java
+ com.baihe.http.request.GetRequest
+com/baihe/http/body/TextBody.java
+ com.baihe.http.body.TextBody
+com/baihe/http/listener/OnHttpListener.java
+ com.baihe.http.listener.OnHttpListener
+com/baihe/http/config/RequestApi.java
+ com.baihe.http.config.RequestApi
+com/baihe/http/EasyHttp.java
+ com.baihe.http.EasyHttp
+com/baihe/http/callback/NormalCallback.java
+ com.baihe.http.callback.NormalCallback
+com/baihe/http/config/IRequestServer.java
+ com.baihe.http.config.IRequestServer
+com/baihe/http/request/BodyRequest.java
+ com.baihe.http.request.BodyRequest
+ com.baihe.http.request.BodyRequest$1
+com/baihe/http/listener/HttpCallback.java
+ com.baihe.http.listener.HttpCallback
+com/baihe/http/model/ThreadSchedulers.java
+ com.baihe.http.model.ThreadSchedulers
+com/baihe/http/config/DefaultHttpLogStrategy.java
+ com.baihe.http.config.DefaultHttpLogStrategy
+com/baihe/http/config/IRequestType.java
+ com.baihe.http.config.IRequestType
+com/baihe/http/config/IRequestCache.java
+ com.baihe.http.config.IRequestCache
+com/baihe/http/body/ProgressBody.java
+ com.baihe.http.body.ProgressBody
+ com.baihe.http.body.ProgressBody$WrapperSink
+com/baihe/http/request/DeleteRequest.java
+ com.baihe.http.request.DeleteRequest
+com/baihe/http/body/WrapperBody.java
+ com.baihe.http.body.WrapperBody
+com/baihe/http/exception/HttpException.java
+ com.baihe.http.exception.HttpException
+com/baihe/http/lifecycle/LifecycleAppFragment.java
+ com.baihe.http.lifecycle.LifecycleAppFragment
+com/baihe/http/request/DeleteBodyRequest.java
+ com.baihe.http.request.DeleteBodyRequest
+com/baihe/http/body/UpdateBody.java
+ com.baihe.http.body.UpdateBody
+com/baihe/http/model/CallProxy.java
+ com.baihe.http.model.CallProxy
+com/baihe/lib_network/BuildConfig.java
+ com.baihe.lib_network.BuildConfig
+com/baihe/http/request/OptionsRequest.java
+ com.baihe.http.request.OptionsRequest
+com/baihe/http/lifecycle/HttpLifecycleManager.java
+ com.baihe.http.lifecycle.HttpLifecycleManager
+com/baihe/http/config/IRequestInterceptor.java
+ com.baihe.http.config.IRequestInterceptor
+com/baihe/http/annotation/HttpRename.java
+ com.baihe.http.annotation.HttpRename
+com/baihe/http/config/IRequestHandler.java
+ com.baihe.http.config.IRequestHandler
+com/baihe/http/body/JsonBody.java
+ com.baihe.http.body.JsonBody
+com/baihe/http/EasyConfig.java
+ com.baihe.http.EasyConfig
+com/baihe/http/config/IHttpLogStrategy.java
+ com.baihe.http.config.IHttpLogStrategy
+com/baihe/http/ssl/HttpSslFactory.java
+ com.baihe.http.ssl.HttpSslFactory
+com/baihe/http/callback/BaseCallback.java
+ com.baihe.http.callback.BaseCallback
+com/baihe/http/model/ResponseClass.java
+ com.baihe.http.model.ResponseClass
+com/baihe/http/model/HttpParams.java
+ com.baihe.http.model.HttpParams
+com/baihe/http/config/DownloadApi.java
+ com.baihe.http.config.DownloadApi
+com/baihe/http/model/FileContentResolver.java
+ com.baihe.http.model.FileContentResolver
+com/baihe/http/config/IRequestHost.java
+ com.baihe.http.config.IRequestHost
+com/baihe/http/ssl/HttpSslConfig.java
+ com.baihe.http.ssl.HttpSslConfig
+com/baihe/http/model/ContentType.java
+ com.baihe.http.model.ContentType
+com/baihe/http/body/CustomTypeBody.java
+ com.baihe.http.body.CustomTypeBody
+com/baihe/http/request/UrlRequest.java
+ com.baihe.http.request.UrlRequest
+com/baihe/http/request/HttpRequest.java
+ com.baihe.http.request.HttpRequest
+com/baihe/http/callback/DownloadCallback.java
+ com.baihe.http.callback.DownloadCallback
+com/baihe/http/request/HeadRequest.java
+ com.baihe.http.request.HeadRequest
+com/baihe/http/EasyLog.java
+ com.baihe.http.EasyLog
+com/baihe/http/model/HttpHeaders.java
+ com.baihe.http.model.HttpHeaders
+com/baihe/http/lifecycle/ApplicationLifecycle.java
+ com.baihe.http.lifecycle.ApplicationLifecycle
+com/baihe/http/model/CacheMode.java
+ com.baihe.http.model.CacheMode
+com/baihe/http/model/HttpMethod.java
+ com.baihe.http.model.HttpMethod
+com/baihe/http/lifecycle/ActivityLifecycle.java
+ com.baihe.http.lifecycle.ActivityLifecycle
+com/baihe/http/request/DownloadRequest.java
+ com.baihe.http.request.DownloadRequest
+ com.baihe.http.request.DownloadRequest$1
+com/baihe/http/listener/OnUpdateListener.java
+ com.baihe.http.listener.OnUpdateListener
+com/baihe/http/annotation/HttpIgnore.java
+ com.baihe.http.annotation.HttpIgnore
+com/baihe/http/ssl/UnSafeHostnameVerifier.java
+ com.baihe.http.ssl.UnSafeHostnameVerifier
+com/baihe/http/config/RequestUrl.java
+ com.baihe.http.config.RequestUrl
+com/baihe/http/annotation/HttpHeader.java
+ com.baihe.http.annotation.HttpHeader
+com/baihe/http/ssl/UnSafeTrustManager.java
+ com.baihe.http.ssl.UnSafeTrustManager
+com/baihe/http/config/RequestServer.java
+ com.baihe.http.config.RequestServer

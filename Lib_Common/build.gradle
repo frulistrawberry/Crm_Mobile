@@ -1,7 +1,5 @@
-plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 android {
@@ -17,14 +15,9 @@ android {
         kapt {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
-                arg("AROUTER_GENERATE_DOC", true)
             }
         }
 
-        manifestPlaceholders = [
-                XG_ACCESS_ID : "1580001576",
-                XG_ACCESS_KEY : "AJMRFQTVY2L8"
-        ]
 
     }
 
@@ -47,6 +40,11 @@ android {
         viewBinding = true
     }
 
+    packagingOptions {
+        // 剔除这个包下的所有文件（不会移除签名信息）
+        exclude 'META-INF/*******'
+    }
+
 }
 
 dependencies {
@@ -54,71 +52,55 @@ dependencies {
     kapt rootProject.depsLibs.arouterCompiler
     implementation rootProject.depsLibs.tps
     implementation rootProject.depsLibs.logHttp
-    api rootProject.depsLibs.navigationFragment
-    api rootProject.depsLibs.navigationUI
-    api project(path: ':Lib_Framework')
+    implementation rootProject.depsLibs.navigationFragment
+    implementation rootProject.depsLibs.navigationUI
+    implementation rootProject.depsLibs.frameworkLib
+
 }
-publishing {
-    publications {
-        Arr(MavenPublication) {
-            groupId 'com.wedding.crm.lib'
-            artifactId 'common'
-            version rootProject.depsLibs.commonLibVersion
-            artifact("$buildDir/outputs/aar/Lib_Common-release.aar")
-            pom.withXml {
-                def dependenciesNode = asNode().appendNode('dependencies')
 
-                def scopes = [configurations.implementation]
-                if (configurationås.hasProperty("api")) {
-                    scopes.add(configurations.api)
-                }
-                if (configurations.hasProperty("implementation")) {
-                    scopes.add(configurations.implementation)
-                }
-                if (configurations.hasProperty("debugImplementation")) {
-                    scopes.add(configurations.debugImplementation)
-                }
-                if (configurations.hasProperty("releaseImplementation")) {
-                    scopes.add(configurations.releaseImplementation)
-                }
-
-                scopes.each { scope ->
-                    scope.allDependencies.each {
-                        if (it instanceof ModuleDependency) {
-                            boolean isTransitive = ((ModuleDependency) it).transitive
-                            if (!isTransitive) {
-                                println "<<<< not transitive dependency: [${it.group}, ${it.name}, ${it.version}]"
-                                return
-                            }
-                        }
-
-                        if (it.group == "${project.rootProject.name}.libs" || it.version == 'unspecified') {
-                            return
-                        }
-
-                        if (it.group && it.name && it.version) {
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.getSourceFiles()
+    classifier 'sources'
+}
+afterEvaluate{
+    publishing {
+        publications {
+            Arr(MavenPublication) {
+                groupId 'com.wedding.crm.lib'
+                artifactId 'common'
+                version '1.0.0.0-SNAPSHOT'
+                afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+                artifact generateSourcesJar
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each {
+                        if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                            println "dependency=${it.toString()}"
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', it.group)
                             dependencyNode.appendNode('artifactId', it.name)
                             dependencyNode.appendNode('version', it.version)
-                            dependencyNode.appendNode('scope', scope.name)
+                            dependencyNode.appendNode('scope', 'implementation')
+
                         }
                     }
                 }
+
             }
+
 
         }
-
-
-    }
-    repositories {
-        maven {
-            allowInsecureProtocol = true
-            url 'http://10.240.210.158:8081/repository/jiayuan/'
-            credentials {
-                username = 'jiayuandev'
-                password = 'jyandroid'
+        repositories {
+            maven {
+                allowInsecureProtocol = true
+                url 'http://10.240.210.158:8081/repository/jiayuan/'
+                credentials {
+                    username = 'jiayuandev'
+                    password = 'jyandroid'
+                }
             }
+
+            mavenLocal()
         }
     }
 }

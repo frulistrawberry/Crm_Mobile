@@ -1,28 +1,23 @@
 package com.baihe.lib_login.login.fragment
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.baihe.lib_common.ext.dismissLoadingDialog
-import com.baihe.lib_common.ext.isPhone
-import com.baihe.lib_common.ext.printBackStack
-import com.baihe.lib_common.ext.showLoadingDialog
-import com.baihe.lib_common.provider.HomeServiceProvider
-import com.baihe.lib_framework.base.BaseActivity
+import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
+import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
+import com.baihe.lib_common.ext.StringExt.isPhone
 import com.baihe.lib_framework.base.BaseMvvmFragment
-import com.baihe.lib_framework.ext.gone
-import com.baihe.lib_framework.ext.onClick
-import com.baihe.lib_framework.ext.visible
-import com.baihe.lib_framework.log.LogUtil
-import com.baihe.lib_framework.manager.AppManager
-import com.baihe.lib_login.BuildConfig
+import com.baihe.lib_framework.ext.ViewExt.gone
+import com.baihe.lib_framework.ext.ViewExt.onClick
+import com.baihe.lib_framework.ext.ViewExt.visible
+import com.baihe.lib_framework.widget.state.ktx.NavBtnType
 import com.baihe.lib_login.R
 import com.baihe.lib_login.constant.KeyConstant
 import com.baihe.lib_login.databinding.LoginFragmentVerifyLoginBinding
 import com.baihe.lib_login.login.viewmodel.LoginViewModel
-import com.dylanc.loadingstateview.NavBtnType
 
 class VerifyLoginFragment :BaseMvvmFragment<LoginFragmentVerifyLoginBinding,LoginViewModel>() {
 
@@ -46,15 +41,7 @@ class VerifyLoginFragment :BaseMvvmFragment<LoginFragmentVerifyLoginBinding,Logi
             dismissLoadingDialog()
             if (it){
                 showToast("登录成功")
-                if (BuildConfig.IS_BUILD_MODULE){
-                    if ("com.baihe.lib_home" == AppManager.getApplicationId(requireContext())){
-                        HomeServiceProvider.toHome(requireContext())
-                    }else if ("com.baihe.lib_user" == AppManager.getApplicationId(requireContext())){
-                        // TODO: 跳转用户
-                    }
-                }else{
-                    // TODO: 跳转至主页面
-                }
+                activity?.setResult(Activity.RESULT_OK)
                 activity?.finish()
             }
         }

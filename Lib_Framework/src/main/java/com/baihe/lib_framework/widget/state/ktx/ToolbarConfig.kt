@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("unused")
-
-package com.dylanc.loadingstateview
+package com.baihe.lib_framework.widget.state.ktx
 
 import android.app.Activity
 import android.content.Context

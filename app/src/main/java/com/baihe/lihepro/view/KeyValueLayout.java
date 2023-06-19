@@ -104,6 +104,7 @@ public class KeyValueLayout extends LinearLayout {
         itemSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_item_space, CommonUtils.dp2pxForInt(context, 12));
         keyTextSize = CommonUtils.pxTosp(context, typedArray.getDimension(R.styleable.KeyValueLayout_kv_key_textSize, CommonUtils.sp2px(context, 14)));
         keyTextColor = typedArray.getColor(R.styleable.KeyValueLayout_kv_key_textColor, Color.parseColor("#4A4C5C"));
+
         keyColon = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_colon, true);
         keyEqualWidth = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_equal_width, true);
         valueTextSize = CommonUtils.pxTosp(context, typedArray.getDimension(R.styleable.KeyValueLayout_kv_value_textSize, CommonUtils.sp2px(context, 14)));
@@ -399,7 +400,7 @@ public class KeyValueLayout extends LinearLayout {
             kv_unlock_mobile_ll.setVisibility(View.GONE);
         }
         //icon或name才显示右边
-        if (keyValEventEntity != null && (!TextUtils.isEmpty(keyValEventEntity.getName()) || !TextUtils.isEmpty(keyValEventEntity.getIcon()))) {
+        if (!TextUtils.isEmpty(keyValEventEntity.getName()) || !TextUtils.isEmpty(keyValEventEntity.getIcon())) {
             kv_value_right_ll.setVisibility(View.VISIBLE);
         } else {
             kv_value_right_ll.setVisibility(View.GONE);

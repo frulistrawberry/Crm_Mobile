@@ -1,5 +1,6 @@
 package com.baihe.lihepro.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -146,6 +147,7 @@ public class ReserveDetailActivity extends BaseActivity {
         });
 
         btn_approve.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View view) {
                 if (approveList!=null && approveList.size()>0)

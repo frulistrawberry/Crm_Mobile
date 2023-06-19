@@ -1,14 +1,9 @@
 package com.baihe.lib_login.login.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.baihe.http.EasyConfig
-import com.baihe.http.EasyHttp
 import com.baihe.lib_common.entity.UserEntity
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.viewmodel.BaseViewModel
-import com.baihe.lib_framework.ext.saveAs
-import com.baihe.lib_framework.log.LogUtil
-import com.baihe.lib_framework.toast.TipsToast
 import com.baihe.lib_login.api.LoginRepository
 
 class LoginViewModel:BaseViewModel() {

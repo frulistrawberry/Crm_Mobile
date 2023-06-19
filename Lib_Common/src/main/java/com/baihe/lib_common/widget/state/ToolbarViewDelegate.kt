@@ -3,14 +3,14 @@ package com.baihe.lib_common.widget.state
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import com.baihe.lib_common.databinding.CommonTitleViewBinding
 import com.baihe.lib_framework.helper.AppHelper
 import com.baihe.lib_framework.utils.StatusBarSettingHelper
 import com.baihe.lib_framework.widget.state.ktx.BaseToolbarViewDelegate
-import com.dylanc.loadingstateview.NavBtnType
-import com.dylanc.loadingstateview.ToolbarConfig
+import com.baihe.lib_framework.widget.state.ktx.NavBtnType
+import com.baihe.lib_framework.widget.state.ktx.ToolbarConfig
+
 class ToolbarViewDelegate: BaseToolbarViewDelegate() {
     lateinit var mBinding: CommonTitleViewBinding
 

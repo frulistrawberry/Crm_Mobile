@@ -1,5 +1,6 @@
 package com.baihe.lib_login.login.fragment
 
+import android.app.Activity.RESULT_OK
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -14,20 +15,26 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.baihe.lib_common.ext.dismissLoadingDialog
-import com.baihe.lib_common.ext.isPhone
-import com.baihe.lib_common.ext.showLoadingDialog
+import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
+import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
+import com.baihe.lib_common.ext.StringExt.isPhone
 import com.baihe.lib_common.provider.HomeServiceProvider
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.ext.*
+import com.baihe.lib_framework.ext.EditTextExt.textChangeFlow
+import com.baihe.lib_framework.ext.ResourcesExt.color
+import com.baihe.lib_framework.ext.ResourcesExt.string
+import com.baihe.lib_framework.ext.ViewExt.gone
+import com.baihe.lib_framework.ext.ViewExt.onClick
+import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_framework.manager.AppManager
 import com.baihe.lib_framework.toast.TipsToast
-import com.baihe.lib_login.BuildConfig
 import com.baihe.lib_login.R
 import com.baihe.lib_login.constant.KeyConstant.KET_CHECK
 import com.baihe.lib_login.constant.KeyConstant.KEY_MOBILE
+import com.baihe.lib_login.constant.RequestCodeConstant
 import com.baihe.lib_login.databinding.LoginFragmentPasswordLoginBinding
 import com.baihe.lib_login.login.viewmodel.LoginViewModel
 import kotlinx.coroutines.Dispatchers
@@ -49,14 +56,8 @@ class PasswordLoginFragment: BaseMvvmFragment<LoginFragmentPasswordLoginBinding,
             if (success){
                 showToast("登录成功")
             }
-            if ("com.baihe.lib_home" == AppManager.getApplicationId(requireContext())){
-                HomeServiceProvider.toHome(requireContext())
-            }else if ("com.baihe.lib_user" == AppManager.getApplicationId(requireContext())){
-                // TODO: 跳转用户
-            }
+            activity?.setResult(RESULT_OK)
             activity?.finish()
-
-
         }
     }
 

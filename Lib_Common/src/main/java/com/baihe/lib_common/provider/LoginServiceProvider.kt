@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.alibaba.android.arouter.launcher.ARouter
-import com.baihe.lib_common.constant.LOGIN_SERVICE_LOGIN
+import com.baihe.lib_common.constant.RoutePath.LOGIN_SERVICE_LOGIN
 import com.baihe.lib_common.service.ILoginService
 
 object LoginServiceProvider  {

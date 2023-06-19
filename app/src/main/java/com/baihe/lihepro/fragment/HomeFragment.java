@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -162,14 +161,7 @@ public class HomeFragment extends BaseFragment {
 
     private void initData() {
         home_name_tv.setText("您好，" + AccountManager.newInstance().getUser().getName());
-        //临时添加测试入口
-        home_name_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
-                ARouter.getInstance().build("/demo/activity").navigation();
-            }
-        });
+
         appMenuAdapter = new AppMenuAdapter(getContext());
         home_apps_rv.setAdapter(appMenuAdapter);
         home_apps_rv.setLayoutManager(new GridLayoutManager(getContext(), 4));

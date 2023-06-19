@@ -1,4 +1,4 @@
-apply plugin:'maven-publish'
+apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -32,38 +32,51 @@ android {
 }
 
 dependencies {
-    compileOnly rootProject.depsLibs.junit
-    compileOnly rootProject.depsLibs.extJunit
-    compileOnly rootProject.depsLibs.espressoCore
+    implementation rootProject.depsLibs.junit
+    implementation rootProject.depsLibs.extJunit
+    implementation rootProject.depsLibs.espressoCore
     implementation rootProject.depsLibs.glide
     kapt rootProject.depsLibs.glideCompiler
 }
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.getSourceFiles()
+    classifier 'sources'
+}
+afterEvaluate{
+    publishing {
+        publications {
+            mavenAar(MavenPublication) {
+                groupId 'com.wedding.crm.lib'
+                artifactId 'imageloader'
+                version '1.0.0.0-SNAPSHOT'
+                afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+                artifact generateSourcesJar
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each {
+                        if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                            println "dependency=${it.toString()}"
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            dependencyNode.appendNode('scope', 'implementation')
 
-publishing {
-    publications {
-        mavenAar(MavenPublication) {
-            groupId 'com.wedding.crm.lib'
-            artifactId 'imageloader'
-            version rootProject.depsLibs.imageLoaderLibVersion
-            artifact("$buildDir/outputs/aar/Lib_ImageLoader-release.aar")
-            pom.withXml {
-                def dependenciesNode = asNode().appendNode('dependencies')
-                configurations.compile.allDependencies.each {
-                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
+                        }
+                    }
                 }
             }
         }
-    }
-    repositories {
-        maven {
-            url 'http://10.240.210.158:8081/repository/jiayuan/'
-            credentials {
-                username = 'jiayuandev'
-                password = 'jyandroid'
+        repositories {
+            maven {
+                allowInsecureProtocol = true
+                url 'http://10.240.210.158:8081/repository/jiayuan/'
+                credentials {
+                    username = 'jiayuandev'
+                    password = 'jyandroid'
+                }
             }
+            mavenLocal()
         }
     }
 }

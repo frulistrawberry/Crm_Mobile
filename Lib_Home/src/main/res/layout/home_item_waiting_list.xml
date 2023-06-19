@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_8"
@@ -20,6 +21,7 @@
         style="@style/font_normal_12_D21818"
         android:text="逾期项目请优先处理"/>
     <LinearLayout
+        android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
@@ -27,23 +29,64 @@
         android:paddingStart="@dimen/dp_20"
         android:paddingEnd="@dimen/dp_20"
         android:paddingTop="@dimen/dp_12"
-        android:paddingBottom="@dimen/dp_12">
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:paddingBottom="@dimen/dp_8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/tv_title"
+            style="@style/font_half_bold_16_4A4C5C"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.baihe.lib_common.widget.font.FontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLength="1"
-                android:ellipsize="end"
-                style="@style/font_half_bold_16_4A4C5C"
-                />
+            android:ellipsize="end"
+            android:maxLines="1" />
 
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/tv_tag"
+            style="@style/font_normal_12_4A4C5C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_14"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_2.5"
+            android:paddingEnd="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_2.5" />
 
-        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_arrow_right" />
+
 
     </LinearLayout>
-    
+
+    <com.baihe.lib_common.widget.keyvalue.KeyValueLayout
+        android:id="@+id/kvl_waiting"
+        android:layout_below="@id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12"
+        app:kv_item_space="@dimen/dp_16"
+        app:kv_key_colon="true"
+        app:kv_key_equal_width="true"
+        app:kv_key_textColor="@color/COLOR_4A4C5C"
+        app:kv_key_textSize="@dimen/sp_14"
+        app:kv_key_textStyle="LIGHT"
+        app:kv_kv_space="@dimen/dp_6"
+        app:kv_value_maxLine="2"
+        app:kv_value_textColor="@color/COLOR_4A4C5C"
+        app:kv_value_textSize="@dimen/sp_14"
+        app:kv_value_textStyle="NORMAL" />
+
 
 </RelativeLayout>

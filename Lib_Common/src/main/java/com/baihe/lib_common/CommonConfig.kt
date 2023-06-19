@@ -100,8 +100,8 @@ object CommonConfig {
                 put("platform", "2201")
                 put("device_type", "1")
                 put("device", "${DeviceInfoUtils.phoneBrand} ${DeviceInfoUtils.phoneModel}")
-                put("userId",UserServiceProvider.getUserId()!!)
-                put("companyId",UserServiceProvider.getCompanyId()!!)
+                put("userId",UserServiceProvider.getUserId()?:"")
+                put("companyId",UserServiceProvider.getCompanyId()?:"")
             }
             this.params.putAll(params)
         }.into()

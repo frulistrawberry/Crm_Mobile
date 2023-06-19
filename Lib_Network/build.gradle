@@ -23,79 +23,59 @@ android {
         // 剔除这个包下的所有文件（不会移除签名信息）
         exclude 'META-INF/*******'
     }
-
-    android.libraryVariants.all { variant ->
-        // aar 输出文件名配置
-        variant.outputs.all { output ->
-            outputFileName = "${rootProject.name}-${android.defaultConfig.versionName}.aar"
-        }
-    }
 }
 
-afterEvaluate {
-    // 排除 BuildConfig.class 和 R.class
-    generateReleaseBuildConfig.enabled = false
-    generateDebugBuildConfig.enabled = false
-    generateReleaseResValues.enabled = false
-    generateDebugResValues.enabled = false
-}
 
 dependencies {
-    api rootProject.depsLibs.okhttp
-    api rootProject.depsLibs.okio
-    api rootProject.depsLibs.lifecycleOnly
+    implementation rootProject.depsLibs.okhttp
+    implementation rootProject.depsLibs.okio
+    implementation rootProject.depsLibs.lifecycleOnly
 }
 
-tasks.withType(Javadoc) {
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding', 'UTF-8')
-    options.addStringOption('charSet', 'UTF-8')
+
+
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.getSourceFiles()
+    classifier 'sources'
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
+afterEvaluate{
+    publishing {
+        publications {
+            mavenAar(MavenPublication) {
+                groupId 'com.wedding.crm.lib'
+                artifactId 'network'
+                version '1.0.0.0-SNAPSHOT'
+                afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+                artifact generateSourcesJar
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each {
+                        if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                            println "dependency=${it.toString()}"
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            dependencyNode.appendNode('scope', 'implementation')
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-publishing {
-    publications {
-        mavenAar(MavenPublication) {
-            groupId 'com.wedding.crm.lib'
-            artifactId 'network'
-            version rootProject.depsLibs.networkLibVersion
-            artifact("$buildDir/outputs/aar/Lib_Netwrok-release.aar")
-            pom.withXml {
-                def dependenciesNode = asNode().appendNode('dependencies')
-                configurations.compile.allDependencies.each {
-                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
+                        }
+                    }
                 }
             }
         }
-    }
-    repositories {
-        maven {
-            url 'http://10.240.210.158:8081/repository/jiayuan/'
-            credentials {
-                username = 'jiayuandev'
-                password = 'jyandroid'
+        repositories {
+            maven {
+                allowInsecureProtocol = true
+                url 'http://10.240.210.158:8081/repository/jiayuan/'
+                credentials {
+                    username = 'jiayuandev'
+                    password = 'jyandroid'
+                }
             }
+            mavenLocal()
         }
     }
+
 }

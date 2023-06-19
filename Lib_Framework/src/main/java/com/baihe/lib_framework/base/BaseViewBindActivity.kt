@@ -2,10 +2,9 @@ package com.baihe.lib_framework.base
 
 import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
-import com.baihe.lib_framework.ext.saveAs
-import com.baihe.lib_framework.ext.saveAsUnChecked
+import com.baihe.lib_framework.ext.AnyExt.saveAs
+import com.baihe.lib_framework.ext.AnyExt.saveAsUnChecked
 import java.lang.reflect.ParameterizedType
-
 /**
  * dataBinding Activity基类
  */

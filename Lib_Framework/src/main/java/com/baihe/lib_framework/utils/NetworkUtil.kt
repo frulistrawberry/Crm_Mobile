@@ -62,7 +62,6 @@ object NetworkUtil {
             TelephonyManager.NETWORK_TYPE_LTE -> NetworkType.NETWORK_4G
 
             TelephonyManager.NETWORK_TYPE_IWLAN -> NetworkType.NETWORK_WIFI
-            TelephonyManager.NETWORK_TYPE_NR -> NetworkType.NETWORK_5G
 
             else -> NetworkType.NETWORK_UNKNOWN
         }
