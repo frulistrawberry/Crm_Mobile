@@ -53,7 +53,7 @@ dependencies {
     implementation rootProject.depsLibs.material
     implementation rootProject.depsLibs.liveDataKtx
     implementation rootProject.depsLibs.viewModelKtx
-    implementation rootProject.depsLibs.coroutines
+    implementation rootProject.depsLibs.lifecycleKtx
     implementation rootProject.depsLibs.gson
     implementation rootProject.depsLibs.mmkv
 
