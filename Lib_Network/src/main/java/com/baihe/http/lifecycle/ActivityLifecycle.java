@@ -33,11 +33,6 @@ public final class ActivityLifecycle implements
             return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            mActivity.registerActivityLifecycleCallbacks(this);
-            return;
-        }
-
         mActivity.getApplication().registerActivityLifecycleCallbacks(this);
     }
 
@@ -116,11 +111,9 @@ public final class ActivityLifecycle implements
         }
 
         mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            mActivity.unregisterActivityLifecycleCallbacks(this);
-        } else {
-            mActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
-        }
+
+        mActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
+
         mActivity = null;
     }
 

@@ -4,15 +4,16 @@ apply from: this.rootProject.file('ModuleLibs.gradle')
 buildscript {
 
     repositories {
+        maven {url 'https://developer.huawei.com/repo/'}
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://repo1.maven.org/maven2/'}
-        maven {url 'https://developer.huawei.com/repo/'}
-        maven {
-            allowInsecureProtocol = true
-            url "http://10.240.210.158:8081/repository/maven-public/"
-        }
+//        maven {
+//            allowInsecureProtocol = true
+//            url "http://10.240.210.158:8081/repository/maven-public/"
+//        }
+        mavenLocal()
         maven { url 'https://jitpack.io' }
     }
 
@@ -28,14 +29,16 @@ buildscript {
 
 allprojects{
     repositories {
+        maven {url 'https://developer.huawei.com/repo/'}
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://repo1.maven.org/maven2/'}
-        maven {url 'https://developer.huawei.com/repo/'}
-        maven {
-            allowInsecureProtocol = true
-            url "http://10.240.210.158:8081/repository/maven-public/"
-        }
+
+//        maven {
+//            allowInsecureProtocol = true
+//            url "http://10.240.210.158:8081/repository/maven-public/"
+//        }
+        mavenLocal()
         maven { url 'https://jitpack.io' }
     }
 }

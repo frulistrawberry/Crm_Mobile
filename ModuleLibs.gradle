@@ -8,9 +8,9 @@ ext {
 
 
     android = [
-            compileSdk       : 33,
+            compileSdk       : 28,
             minSdk           : 21,
-            targetSdk        : 33,
+            targetSdk        : 28,
 
             versionCode      : 26,
             versionName      : "3.5.0",
@@ -18,16 +18,16 @@ ext {
 
     dependVersion = [
             //libs
-            frameworkLibVersion    :'1.0.0.0-SNAPSHOT',
-            networkLibVersion      :'1.0.0.0-SNAPSHOT',
-            imageLoaderLibVersion  :'1.0.0.0-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-SNAPSHOT',
+            frameworkLibVersion    :'1.0.0.1-SNAPSHOT',
+            networkLibVersion      :'1.0.0.1-SNAPSHOT',
+            imageLoaderLibVersion  :'1.0.0.1-SNAPSHOT',
+            commonLibVersion       :'1.0.0.1-SNAPSHOT',
 
 
             //models
-            userLibVersion         :'1.0.0.0-SNAPSHOT',
+            userLibVersion         :'1.0.0.1-SNAPSHOT',
             homeLibVersion         :'1.0.0.0-SNAPSHOT',
-            loginLibVersion        :'1.0.0.0-SNAPSHOT',
+            loginLibVersion        :'1.0.0.1-SNAPSHOT',
             customerLibVersion     :'1.0.0.0-SNAPSHOT',
             messageLibVersion      :'1.0.0.0-SNAPSHOT',
             orderLibVersion        :'1.0.0.0-SNAPSHOT',
@@ -40,13 +40,14 @@ ext {
             androidTestVersion      : '1.1.5',
             androidEspressoVersion  : '3.5.1',
             //androidx
-            appcompatVersion        : '1.6.0',
+            appcompatVersion        : '1.1.0',
             multidexVersion         : '2.0.1',
-            coreVersion             : '1.7.0',
-            lifecycleVersion        : '2.3.1',
-            materialVersion         : '1.4.0',
-            recyclerviewVersion     : '1.2.1',
-            navigationVersion       : '2.3.5',
+            coreVersion             : '1.1.0',
+            lifecycleVersion        : '2.1.0',
+            materialVersion         : '1.2.0',
+            recyclerviewVersion     : '1.1.0',
+            navigationVersion       : '2.1.0',
+            coroutinesVersion       : '1.3.9',
             //log
             logVersion              : '2.6.9',
             //ARouter
@@ -109,6 +110,7 @@ ext {
             liveDataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion["lifecycleVersion"]}",
             viewModelKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion["lifecycleVersion"]}",
             lifecycleOnly     : "androidx.lifecycle:lifecycle-runtime:${dependVersion["lifecycleVersion"]}",
+            coroutines        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${dependVersion["coroutinesVersion"]}",
             //json解析
             gson              : "com.google.code.gson:gson:${dependVersion["gsonVersion"]}",
             //网络

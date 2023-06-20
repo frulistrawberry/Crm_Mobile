@@ -31,7 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name="com.baihe.lihepro.activity.SplashActivity">
+        <activity android:name="com.baihe.lihepro.activity.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -68,7 +69,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.baihe.lihepro.activity.CustomerDetailActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -131,7 +133,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.baihe.lihepro.activity.SalesDetailActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -299,7 +302,8 @@
 
         <!-- 【可选】APP实现的Receiver，用于接收消息透传和操作结果的回调，请根据需要添加 -->
         <!-- YOUR_PACKAGE_PATH.CustomPushReceiver需要改为自己的Receiver： -->
-        <receiver android:name="com.baihe.lihepro.push.PushMessageReceiver">
+        <receiver android:name="com.baihe.lihepro.push.PushMessageReceiver"
+            android:exported="true">
             <intent-filter>
                 <!-- 接收消息透传 -->
                 <action android:name="com.tencent.android.xg.vip.action.PUSH_MESSAGE" />

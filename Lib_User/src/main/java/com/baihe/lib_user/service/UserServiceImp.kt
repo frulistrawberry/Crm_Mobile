@@ -40,8 +40,8 @@ class UserServiceImp:IUserService {
         StorageManager.remove(CacheConstant.USER_INFO_DATA)
         StorageManager.remove(CacheConstant.USER_ID)
         StorageManager.remove(CacheConstant.USER_COMPANY_ID)
-        EasyConfig.getInstance().addParam("userId","")
-        EasyConfig.getInstance().addParam("companyId","")
+        EasyConfig.getInstance().removeParam("userId")
+        EasyConfig.getInstance().removeParam("companyId")
     }
 
     override fun init(context: Context?) {

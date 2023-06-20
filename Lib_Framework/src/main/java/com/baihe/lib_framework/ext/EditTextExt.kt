@@ -3,6 +3,7 @@ package com.baihe.lib_framework.ext
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -18,12 +19,13 @@ object EditTextExt {
      * .onEach { updateUi(it) }      // 获取搜索结果并更新界面
      * .launchIn(mainScope)          // 在主线程收集搜索结果
      */
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun EditText.textChangeFlow(): Flow<String> = callbackFlow {
         val watcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                s?.let { trySend(it.toString()) }
+                s?.let { offer(it.toString()) }
             }
         }
         addTextChangedListener(watcher)

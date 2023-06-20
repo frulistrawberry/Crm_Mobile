@@ -1,4 +1,4 @@
-package com.baihe.lib_home;
+package com.baihe.lib_home.demo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.baihe.lib_home.R;
 import com.baihe.lib_framework.base.BaseActivity;
 import com.baihe.lib_framework.utils.StatusBarSettingHelper;
 import com.baihe.lib_home.home.HomeFragment;

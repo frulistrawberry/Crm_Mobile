@@ -12,7 +12,6 @@ import com.baihe.lib_home.DataEntity
 import com.baihe.lib_home.HomeEntity
 import com.baihe.lib_home.WaitingEntity
 import com.baihe.lib_home.constant.UrlConstant
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 
@@ -21,7 +20,7 @@ class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
         return requestResponse {
             val params = JsonParam.newInstance()
                 .putParamValue("page",page)
-                .putParamValue("type",type)
+                .putParamValue("newType",type)
                 .putParamValue("pageSize",pageSize)
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.WAITING_LIST,params.getParamValue()))

@@ -7,7 +7,6 @@ import android.os.Bundle
 import com.baihe.lib_common.adapter.ViewPager2Adapter
 import com.baihe.lib_common.databinding.CommonTabViewpagerBinding
 import com.baihe.lib_framework.base.BaseViewBindActivity
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class WaitingListActivity: BaseViewBindActivity<CommonTabViewpagerBinding>() {

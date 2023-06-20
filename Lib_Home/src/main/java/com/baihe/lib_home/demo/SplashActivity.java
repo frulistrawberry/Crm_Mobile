@@ -1,10 +1,10 @@
-package com.baihe.lib_home;
+package com.baihe.lib_home.demo;
 
 import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
-
+import com.baihe.lib_home.R;
 import com.baihe.lib_common.provider.HomeServiceProvider;
 import com.baihe.lib_common.provider.LoginServiceProvider;
 import com.baihe.lib_common.provider.UserServiceProvider;
