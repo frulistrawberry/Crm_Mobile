@@ -19,17 +19,17 @@ ext {
 
     dependVersion = [
             //libs
-            frameworkLibVersion    :'1.0.0.0-beta-7-SNAPSHOT',
+            frameworkLibVersion    :'1.0.0.0-beta-8-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-3-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-2-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-beta-7-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-8-SNAPSHOT',
 
 
             //models
-            userLibVersion         :'1.0.0.0-beta-4-SNAPSHOT',
-            homeLibVersion         :'1.0.0.0-beta-6-SNAPSHOT',
-            loginLibVersion        :'1.0.0.0-beta-3-SNAPSHOT',
-            customerLibVersion     :'1.0.0.0-beta-2-SNAPSHOT',
+            userLibVersion         :'1.0.0.0-beta-5-SNAPSHOT',
+            homeLibVersion         :'1.0.0.0-beta-7-SNAPSHOT',
+            loginLibVersion        :'1.0.0.0-beta-4-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-beta-3-SNAPSHOT',
             messageLibVersion      :'1.0.0.0-beta-1-SNAPSHOT',
             orderLibVersion        :'1.0.0.0-beta-1-SNAPSHOT',
             opportunityLibVersion  :'1.0.0.0-beta-1-SNAPSHOT',
