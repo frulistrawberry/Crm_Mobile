@@ -163,7 +163,6 @@ object StatusBarUtil {
                 window.attributes = lp
                 result = true
             } catch (e: Exception) {
-                LogUtil.e(e)
             }
         }
         return result

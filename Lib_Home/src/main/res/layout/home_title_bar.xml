@@ -29,6 +29,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/home_bg_title"/>
                         <View
+                            android:id="@+id/v_header_split"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/dp_150"
@@ -150,7 +151,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_6"
-                            android:src="@mipmap/home_arrow_down_white"/>
+                            android:src="@mipmap/home_ic_arrow_down_white"/>
 
                     </LinearLayout>
 

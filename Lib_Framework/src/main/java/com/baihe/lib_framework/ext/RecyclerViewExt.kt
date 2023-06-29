@@ -6,8 +6,11 @@ import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.recyclerview.widget.*
+import com.baihe.lib_framework.R
 import com.baihe.lib_framework.decoration.DividerItemDecoration
+import com.baihe.lib_framework.ext.ResourcesExt.color
 import com.baihe.lib_framework.ext.ResourcesExt.dp2px
+import com.baihe.lib_framework.utils.DpToPx
 
 object RecyclerViewExt{
     private var isLock = true
@@ -57,11 +60,13 @@ object RecyclerViewExt{
      *
      */
     fun RecyclerView.divider(
-        color: Int = Color.parseColor("#DEDEDE"),
+        color: Int = Color.parseColor("#7AC2C5DB"),
         size: Int = 1,
-        includeLast: Boolean = true
+        includeLast: Boolean = true,
+        horizontalMargin:Int = DpToPx.dpToPx(20)
     ): RecyclerView {
         val decoration = DividerItemDecoration(context, orientation)
+        decoration.mHorizontalMargin = horizontalMargin
         decoration.setDrawable(GradientDrawable().apply {
             setColor(color)
             shape = GradientDrawable.RECTANGLE

@@ -9,4 +9,12 @@
     <color name="COLOR_C2C5DB">#C2C5DB</color>
     <color name="COLOR_F6F7FC">#F6F7FC</color>
     <color name="COLOR_00000000">#00000000</color>
+    <color name="COLOR_FFFEFF86">#FFFEFF86</color>
+    <color name="COLOR_FFE5ADFF">#FFE5ADFF</color>
+    <color name="COLOR_FFFFAF92">#FFFFAF92</color>
+    <color name="COLOR_FFFFEB8B">#FFFFEB8B</color>
+    <color name="COLOR_FFCAFFC7">#FFCAFFC7</color>
+    <color name="COLOR_FFAACFFF">#FFAACFFF</color>
+    <color name="COLOR_FFB1B1B1">#FFB1B1B1</color>
+    <color name="color_spline">#7AC2C5DB</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.baihe.lib_common.http
 
+import com.baihe.http.EasyLog
 import com.baihe.http.config.IRequestHandler
 import com.baihe.http.exception.HttpException
 import com.baihe.http.request.HttpRequest
@@ -7,7 +8,6 @@ import com.baihe.lib_common.http.exception.ApiException
 import com.baihe.lib_common.http.exception.ERROR
 import com.baihe.lib_common.http.exception.ExceptionHandler
 import com.baihe.lib_common.http.response.BaseResponse
-import com.baihe.lib_framework.log.LogUtil
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import okhttp3.Response
@@ -33,9 +33,7 @@ class RequestHandler :IRequestHandler {
                 ?: throw ApiException(ERROR.UNKNOWN)
             val text = body.string()
 
-            //处理数据
 
-            LogUtil.json(text)
             val result:Any =
                 try {
                     val responseJSONObject = JsonParser.parseString(text).asJsonObject
@@ -49,8 +47,11 @@ class RequestHandler :IRequestHandler {
                 }catch (e: Exception){
                     throw e
                 }
-
-            LogUtil.json(result)
+            EasyLog.printKeyValue(httpRequest, "RequestUrl", response.request.url.toString())
+            EasyLog.printKeyValue(httpRequest, "RequestMethod", httpRequest.requestMethod)
+            EasyLog.printLine(httpRequest)
+            EasyLog.printJson(httpRequest,text)
+            EasyLog.printLine(httpRequest)
             if (result is BaseResponse<*>){
                 if (!result.isSuccess()){
                     throw ApiException(result.code,result.msg)

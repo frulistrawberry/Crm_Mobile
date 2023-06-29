@@ -25,7 +25,7 @@ dependencies {
         implementation rootProject.depsLibs.loginLib
         implementation rootProject.depsLibs.userLib
     }
-    implementation rootProject.depsLibs.MPChartAndroid
+    api rootProject.depsLibs.MPChartAndroid
 }
 
 afterEvaluate{
@@ -35,13 +35,13 @@ afterEvaluate{
                 Arr(MavenPublication) {
                     groupId 'com.wedding.crm.lib'
                     artifactId 'home'
-                    version '1.0.0.0-SNAPSHOT'
+                    version rootProject.dependVersion.homeLibVersion
                     afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                     artifact generateSourcesJar
                     pom.withXml {
                         def dependenciesNode = asNode().appendNode('dependencies')
                         configurations.implementation.allDependencies.each {
-                            if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                            if ((it.group != null && "unspecified" != it.group) && (it.name != null && "unspecified" != it.name) && (it.version != null && "unspecified" != it.version)) {
                                 println "dependency=${it.toString()}"
                                 def dependencyNode = dependenciesNode.appendNode('dependency')
                                 dependencyNode.appendNode('groupId', it.group)

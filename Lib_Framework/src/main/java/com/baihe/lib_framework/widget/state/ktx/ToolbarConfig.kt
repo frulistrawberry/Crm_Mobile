@@ -62,6 +62,10 @@ class ToolbarConfig(
     onNavClickListener = listener
   }
 
+  fun navIcon(@DrawableRes icon: Int? = navIcon) {
+    navIcon = icon
+  }
+
   fun navText(text: String, listener: View.OnClickListener) {
     navText = text
     onNavClickListener = listener
@@ -77,13 +81,14 @@ class ToolbarConfig(
     onRightClickListener = listener
   }
 }
+object ToolbarExtras{
+  fun <T> toolbarExtras() = object : ReadWriteProperty<ToolbarConfig, T?> {
+    @Suppress("UNCHECKED_CAST")
+    override fun getValue(thisRef: ToolbarConfig, property: KProperty<*>): T? =
+      thisRef.extras[property.name] as? T
 
-fun <T> toolbarExtras() = object : ReadWriteProperty<ToolbarConfig, T?> {
-  @Suppress("UNCHECKED_CAST")
-  override fun getValue(thisRef: ToolbarConfig, property: KProperty<*>): T? =
-    thisRef.extras[property.name] as? T
-
-  override fun setValue(thisRef: ToolbarConfig, property: KProperty<*>, value: T?) {
-    thisRef.extras[property.name] = value
+    override fun setValue(thisRef: ToolbarConfig, property: KProperty<*>, value: T?) {
+      thisRef.extras[property.name] = value
+    }
   }
 }

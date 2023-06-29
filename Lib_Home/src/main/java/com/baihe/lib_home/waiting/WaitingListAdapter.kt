@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
 import com.baihe.lib_framework.ext.ViewExt.gone
 import com.baihe.lib_framework.ext.ViewExt.visible
+import com.baihe.lib_framework.helper.AppHelper
 import com.baihe.lib_home.R
 import com.baihe.lib_home.WaitingEntity
 import com.baihe.lib_home.databinding.HomeItemWaitingListBinding
@@ -30,7 +30,7 @@ class WaitingListAdapter(private val context:Context): BaseRecyclerViewAdapter<W
         if (statusText!=null){
             val labelBg = statusText.bgColor
             if (!labelBg.isNullOrEmpty() && labelBg.startsWith("#")){
-                val labelDrawable = context.resources.getDrawable(R.drawable.bg_round_label) as GradientDrawable
+                val labelDrawable = AppHelper.getApplication().resources.getDrawable(R.drawable.bg_round_label_solid) as GradientDrawable
                 labelDrawable.setColor(Color.parseColor(labelBg))
                 holder.binding.tvTag.background = labelDrawable
             }else{
@@ -42,6 +42,10 @@ class WaitingListAdapter(private val context:Context): BaseRecyclerViewAdapter<W
         }else{
             holder.binding.tvTag.gone()
         }
+        if (item?.tag == "1")
+            holder.binding.tvTip.visible()
+        else
+            holder.binding.tvTip.gone()
         holder.binding.kvlWaiting.setData(item?.showArray())
 
 

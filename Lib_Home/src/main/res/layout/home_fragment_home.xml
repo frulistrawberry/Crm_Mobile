@@ -80,12 +80,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/dp_16"
-        android:padding="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_20"
         android:background="@drawable/common_top_round_white"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <LinearLayout
@@ -141,6 +144,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_16">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -197,6 +202,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/dp_16">
             <androidx.cardview.widget.CardView
@@ -275,11 +282,36 @@
                 android:layout_gravity="center_horizontal"
                 style="@style/font_half_bold_16_4A4C5C"
                 android:text="机会跟进情况"/>
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pc_opportunity"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_273"
-                android:layout_marginTop="@dimen/dp_10"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10">
+                <com.baihe.lib_home.widget.chart.PieChart
+                    android:id="@+id/pc_opportunity"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_275"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <com.baihe.lib_common.widget.font.FontTextView
+                        android:id="@+id/tv_chart_oppo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/font_half_bold_16_4A4C5C"/>
+                    <com.baihe.lib_common.widget.font.FontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/font_light_14_4A4C5C"
+                        android:text="新增机会"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_order_data_view"
@@ -293,11 +325,36 @@
                 android:layout_gravity="center_horizontal"
                 style="@style/font_half_bold_16_4A4C5C"
                 android:text="订单跟进情况"/>
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pc_order"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_273"
-                android:layout_marginTop="@dimen/dp_10"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10">
+                <com.baihe.lib_home.widget.chart.PieChart
+                    android:id="@+id/pc_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_275"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <com.baihe.lib_common.widget.font.FontTextView
+                        android:id="@+id/tv_chart_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/font_half_bold_16_4A4C5C"/>
+                    <com.baihe.lib_common.widget.font.FontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/font_light_14_4A4C5C"
+                        android:text="新增订单"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

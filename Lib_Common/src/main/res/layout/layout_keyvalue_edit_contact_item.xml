@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/kv_edit_key_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_vertical"
+            >
+
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/kv_edit_key_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4A4C5C"
+                android:textSize="15sp"
+                android:text="联系方式"
+                app:font_textStyle="NORMAL" />
+
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/kv_edit_key_required_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_2"
+                android:text="*"
+                android:textColor="#FF1E5A"
+                android:textSize="12sp"
+                app:font_textStyle="HALF_BOLD" />
+
+        </LinearLayout>
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/kv_edit_contact_tip_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            style="@style/font_normal_12_A8A9B1"
+            android:text="(至少选一项)"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/dp_20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/kv_edit_phone_key_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4A4C5C"
+                android:textSize="15sp"
+                app:font_textStyle="NORMAL"
+                android:text="电话"/>
+            <com.baihe.lib_common.widget.font.FontEditText
+                android:id="@+id/kv_edit_value_phone_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:paddingTop="@dimen/dp_12"
+                android:maxLength="11"
+                android:hint="请输入电话号"
+                app:font_textStyle="NORMAL"
+                android:includeFontPadding="false"
+                android:paddingBottom="@dimen/dp_12"
+                android:gravity="left|center_vertical"
+                android:inputType="phone"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.5"
+            android:background="#FFECECF0"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/kv_edit_wechat_key_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4A4C5C"
+                android:textSize="15sp"
+                app:font_textStyle="NORMAL"
+                android:text="微信"/>
+            <com.baihe.lib_common.widget.font.FontEditText
+                android:id="@+id/kv_edit_value_wechat_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:paddingTop="@dimen/dp_12"
+                android:includeFontPadding="false"
+                android:paddingBottom="@dimen/dp_12"
+                android:gravity="left|center_vertical"
+                android:inputType="textMultiLine"
+                app:font_textStyle="NORMAL"
+                android:hint="请输入微信号"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout>

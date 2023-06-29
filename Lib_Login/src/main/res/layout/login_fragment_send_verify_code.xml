@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:src="@mipmap/login_ic_del"
+            android:src="@mipmap/ic_del"
             android:contentDescription="@string/login_del_icon"
             android:visibility="gone"
             />

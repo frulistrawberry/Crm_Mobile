@@ -1,5 +1,6 @@
 package com.baihe.lib_login.service
 
+import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope

@@ -13,8 +13,14 @@ object RoutePath {
     const val USER_SERVICE_USER = "/user/service/user"
 
     /**
-     * 主页模块-主页
+     * 主页模块-主页服务
      */
     const val HOME_SERVICE_HOME = "/home/service/home"
+
+    /**
+     * 客户模块-客户服务
+     */
+    const val CUSTOMER_SERVICE_CUSTOMER = "/customer/service/customer"
+
 
 }

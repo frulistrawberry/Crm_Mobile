@@ -15,6 +15,8 @@ import com.baihe.lib_common.widget.state.EmptyViewDelegate
 import com.baihe.lib_common.widget.state.ErrorViewDelegate
 import com.baihe.lib_common.widget.state.LoadingViewDelegate
 import com.baihe.lib_common.widget.state.ToolbarViewDelegate
+import com.baihe.lib_common.R
+import com.baihe.lib_common.http.log.HttpLogStrategy
 import com.baihe.lib_framework.helper.AppHelper
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_framework.manager.AppManager
@@ -24,7 +26,6 @@ import com.baihe.lib_framework.utils.DeviceInfoUtils
 import com.dylanc.loadingstateview.LoadingStateView
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
 import okhttp3.internal.platform.Platform.Companion.INFO
@@ -80,12 +81,6 @@ object CommonConfig {
             .cookieJar(CookieJarImpl.getInstance())
             .sslSocketFactory(sslConfig.sslSocketFactory, sslConfig.trustManager)
             .hostnameVerifier(HttpSslFactory.generateUnSafeHostnameVerifier())
-            .addNetworkInterceptor(HttpLoggingInterceptor { message ->
-                Platform.get().log(message, INFO, null)
-            }.apply {
-                level = HttpLoggingInterceptor.Level.BODY
-
-            })
             .build()
 
         EasyConfig.with(okHttpClient).apply {
@@ -93,7 +88,9 @@ object CommonConfig {
             handler = RequestHandler()
             retryCount = 1
             retryTime = 2000
-            isLogEnabled = false
+            isLogEnabled = isDebug
+            logTag = "EasyHttp"
+//            logStrategy = HttpLogStrategy()
             val params = HashMap<String, String>().apply {
                 put("apver", AppManager.getAppVersionName(AppHelper.getApplication()))
                 put("appId", "20")

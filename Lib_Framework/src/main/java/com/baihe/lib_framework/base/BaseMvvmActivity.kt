@@ -17,7 +17,7 @@ abstract class BaseMvvmActivity<DB : ViewBinding, VM : ViewModel> : BaseViewBind
         super.onCreate(savedInstanceState)
     }
 
-    private fun initViewModel() {
+    open fun initViewModel() {
         val argument = (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
         mViewModel = ViewModelProvider(this).get(argument[1] as Class<VM>)
 

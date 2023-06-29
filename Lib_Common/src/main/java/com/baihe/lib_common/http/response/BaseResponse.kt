@@ -3,7 +3,7 @@ package com.baihe.lib_common.http.response
 import com.google.gson.annotations.SerializedName
 
 
-data class BaseResponse<out T>  (
+data class BaseResponse<T>  (
     val code:Int,
     val msg:String,
     val data: Data<T>?
@@ -14,9 +14,16 @@ data class BaseResponse<out T>  (
 
 }
 
-data class Data<out T>(
+data class Data<T>(
     val result:T?,
     val other: Int,
     @SerializedName("apver")
     val appVersion:String
+)
+
+data class ListData<T>(
+    val total:Int,
+    val page:Int,
+    val pageSize:Int,
+    val rows:MutableList<T>?
 )

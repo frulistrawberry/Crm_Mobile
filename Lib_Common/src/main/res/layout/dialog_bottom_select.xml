@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_top_round_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/bottom_select_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_37"
+                style="@style/font_half_bold_18_4A4C5C"
+                android:text="标题"/>
+            <ImageView
+                android:id="@+id/bottom_select_cancel_iv"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_14"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_close"/>
+
+
+
+
+        </RelativeLayout>
+
+        <com.baihe.lib_framework.widget.MaxRecyclerView
+            android:id="@+id/bottom_select_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:maxHeight="@dimen/dp_400"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/bottom_select_confirm_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/common_button_round_blue"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingTop="11dp"
+            android:paddingBottom="11dp"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -3,10 +3,8 @@ package com.baihe.lib_common.viewmodel
 import androidx.lifecycle.*
 import com.baihe.lib_common.http.callback.IApiErrorCallback
 import com.baihe.lib_common.http.exception.ApiException
-import com.baihe.lib_common.http.exception.ERROR
-import com.baihe.lib_common.http.exception.ExceptionHandler
 import com.baihe.lib_common.http.response.BaseResponse
-import com.baihe.lib_framework.log.LogUtil
+import com.dylanc.loadingstateview.ViewType
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

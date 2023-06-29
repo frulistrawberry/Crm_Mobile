@@ -1,32 +1,26 @@
 package com.baihe.lib_framework.base
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatDialog
 import android.content.DialogInterface
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import android.util.SparseArray
-import android.util.SparseIntArray
-import android.view.Gravity
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.TextView
 import android.os.SystemClock
+import android.util.SparseArray
+import android.util.SparseIntArray
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
-import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
-import androidx.annotation.StyleRes
+import android.widget.TextView
+import androidx.annotation.*
+import androidx.appcompat.app.AppCompatDialog
 import com.baihe.lib_framework.R
 import com.baihe.lib_framework.log.LogUtil
-import java.lang.Exception
-import java.util.ArrayList
+import com.baihe.lib_framework.utils.StatusBarSettingHelper
 
 /**
  * BaseDialog
@@ -234,7 +228,7 @@ class BaseDialog @JvmOverloads constructor(
         val RIGHT = R.style.RightAnimStyle
 
         // 默认动画效果
-        val DEFAULT = R.style.ScaleAnimStyle
+        val DEFAULT = R.style.AlphaAnimStyle
     }
 
     open class Builder<B : Builder<B>>(
@@ -246,6 +240,11 @@ class BaseDialog @JvmOverloads constructor(
     ) {
         // Dialog 布局
         protected var mContentView: View? = null
+
+        protected var attachView:View? = null
+
+        protected var attachOffsetX:Int = 0
+        protected var attachOffsetY:Int = 0
 
         /**
          * 获取当前 Dialog 对象（仅供子类调用）
@@ -299,6 +298,8 @@ class BaseDialog @JvmOverloads constructor(
         // 垂直和水平边距
         private var mVerticalMargin = 0
         private var mHorizontalMargin = 0
+
+
 
         /**
          * 延迟执行，一定要在创建了Dialog之后调用（供子类调用）
@@ -441,6 +442,21 @@ class BaseDialog @JvmOverloads constructor(
          */
         fun setHeight(height: Int): B {
             mHeight = height
+            return this as B
+        }
+
+        fun setAttachView(view:View):B{
+            attachView = view
+            return this as B
+        }
+
+        fun setAttachOffsetX(offset:Int):B{
+            attachOffsetX = offset
+            return this as B
+        }
+
+        fun setAttachOffsetY(offset:Int):B{
+            attachOffsetY = offset
             return this as B
         }
 
@@ -623,6 +639,17 @@ class BaseDialog @JvmOverloads constructor(
             params?.windowAnimations = mAnimations
             params?.horizontalMargin = mHorizontalMargin.toFloat()
             params?.verticalMargin = mVerticalMargin.toFloat()
+
+            if (attachView != null) {
+                val location = IntArray(2)
+                attachView!!.getLocationOnScreen(location)
+                val locationX = location[0] + attachView!!.measuredWidth / 2 + attachOffsetX!!
+                val locationY: Int =
+                    location[1] + attachView!!.measuredHeight - StatusBarSettingHelper.getStatusBarHeight(context) + attachOffsetY
+                params!!.x = locationX
+                params.y = locationY
+            }
+
             dialog?.window?.attributes = params
 
             // 设置文本

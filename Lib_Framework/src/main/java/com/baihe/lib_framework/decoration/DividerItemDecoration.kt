@@ -25,6 +25,7 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
+import kotlin.math.roundToInt
 
 /**
  * DividerItemDecoration is a [RecyclerView.ItemDecoration] that can be used as a divider
@@ -50,6 +51,10 @@ class DividerItemDecoration(context: Context, orientation: Int) : ItemDecoration
      */
     private var mOrientation = 0
     private val mBounds = Rect()
+
+    var mHorizontalMargin:Int = 0
+
+
 
     /**
      * Sets the orientation for this divider. This should be called if
@@ -109,9 +114,9 @@ class DividerItemDecoration(context: Context, orientation: Int) : ItemDecoration
             val childRealPosition = parent.getChildAdapterPosition(child)
             if (mDrawLastPositionDivider || childRealPosition < lastPosition) {
                 parent.getDecoratedBoundsWithMargins(child, mBounds)
-                val bottom = mBounds.bottom + Math.round(child.translationY)
+                val bottom = mBounds.bottom + child.translationY.roundToInt()
                 val top = bottom - drawable!!.intrinsicHeight
-                drawable!!.setBounds(left, top, right, bottom)
+                drawable!!.setBounds(left+mHorizontalMargin, top, right-mHorizontalMargin, bottom)
                 drawable!!.draw(canvas)
             }
         }

@@ -71,6 +71,26 @@ object ViewUtils {
     }
 
     /**
+     * 设置View底部圆角
+     */
+    fun setClipViewCornerRightRadius(view: View?, radius: Int) {
+        if (view == null) {
+            return
+        }
+        if (radius > 0) {
+            view.outlineProvider = object : ViewOutlineProvider() {
+                override fun getOutline(view: View?, outline: Outline?) {
+                    outline?.setRoundRect(-radius, 0, view?.width ?: 0, view?.height ?: 0, radius.toFloat())
+                }
+            }
+            view.clipToOutline = true
+        } else {
+            view.clipToOutline = false
+        }
+    }
+
+
+    /**
      * 设置透明沉浸式状态栏
      * @param activity 页面
      * @param isDarkText 是否状态栏文字显示深色

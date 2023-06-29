@@ -8,37 +8,38 @@ ext {
 
 
     android = [
-            compileSdk       : 28,
-            minSdk           : 21,
-            targetSdk        : 28,
+            compileSdk        : 28,
+            minSdk            : 21,
+            targetSdk         : 28,
+            buildToolsVersion : "30.0.2",
 
-            versionCode      : 26,
-            versionName      : "3.5.0",
+            versionCode       : 26,
+            versionName       : "3.5.0",
     ]
 
     dependVersion = [
             //libs
-            frameworkLibVersion    :'1.0.0.1-SNAPSHOT',
-            networkLibVersion      :'1.0.0.1-SNAPSHOT',
-            imageLoaderLibVersion  :'1.0.0.1-SNAPSHOT',
-            commonLibVersion       :'1.0.0.1-SNAPSHOT',
+            frameworkLibVersion    :'1.0.0.0-beta-7-SNAPSHOT',
+            networkLibVersion      :'1.0.0.0-beta-3-SNAPSHOT',
+            imageLoaderLibVersion  :'1.0.0.0-beta-2-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-7-SNAPSHOT',
 
 
             //models
-            userLibVersion         :'1.0.0.1-SNAPSHOT',
-            homeLibVersion         :'1.0.0.0-SNAPSHOT',
-            loginLibVersion        :'1.0.0.1-SNAPSHOT',
-            customerLibVersion     :'1.0.0.0-SNAPSHOT',
-            messageLibVersion      :'1.0.0.0-SNAPSHOT',
-            orderLibVersion        :'1.0.0.0-SNAPSHOT',
-            opportunityLibVersion  :'1.0.0.0-SNAPSHOT',
-            contractLibVersion     :'1.0.0.0-SNAPSHOT',
+            userLibVersion         :'1.0.0.0-beta-4-SNAPSHOT',
+            homeLibVersion         :'1.0.0.0-beta-6-SNAPSHOT',
+            loginLibVersion        :'1.0.0.0-beta-3-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-beta-2-SNAPSHOT',
+            messageLibVersion      :'1.0.0.0-beta-1-SNAPSHOT',
+            orderLibVersion        :'1.0.0.0-beta-1-SNAPSHOT',
+            opportunityLibVersion  :'1.0.0.0-beta-1-SNAPSHOT',
+            contractLibVersion     :'1.0.0.0-beta-1-SNAPSHOT',
 
 
             //test
-            junitVersion            : '4.13.2',
-            androidTestVersion      : '1.1.5',
-            androidEspressoVersion  : '3.5.1',
+            junitVersion            : '4.12',
+            androidTestVersion      : '1.1.0',
+            androidEspressoVersion  : '3.1.0',
             //androidx
             appcompatVersion        : '1.1.0',
             multidexVersion         : '2.0.1',
@@ -62,7 +63,7 @@ ext {
             //gson
             gsonVersion             : '2.10.1',
             //mmkv
-            mmkvVersion             : '1.2.15',
+            mmkvVersion             : '1.2.13',
             //腾讯x5
             tbssdkVersion           : '44132',
             //下拉刷新
@@ -145,6 +146,8 @@ ext {
             LoadingStateView  : 'com.github.DylanCaiCoding.LoadingStateView:loadingstateview:4.0.2',
             //图表
             MPChartAndroid    : 'com.github.PhilJay:MPAndroidChart:v3.1.0',
+            //PickerView
+            PickerView        : 'com.contrarywind:Android-PickerView:4.1.8'
 
 
 

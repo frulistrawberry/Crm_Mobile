@@ -12,6 +12,7 @@ import com.baihe.lib_home.DataEntity
 import com.baihe.lib_home.HomeEntity
 import com.baihe.lib_home.WaitingEntity
 import com.baihe.lib_home.constant.UrlConstant
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 
@@ -52,8 +53,8 @@ class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
     suspend fun getDataView(startDate:String = System.currentTimeMillis().formattedDate(), endDate:String = System.currentTimeMillis().formattedDate()):DataEntity?{
         return requestResponse {
             val params = JsonParam.newInstance()
-                .putParamValue("startDate",startDate)
-                .putParamValue("endDate",endDate)
+                .putParamValue("timeBegin",startDate)
+                .putParamValue("timeEnd",endDate)
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.DATA_VIEW,params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<DataEntity>>() {})

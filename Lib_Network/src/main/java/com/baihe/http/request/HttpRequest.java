@@ -357,7 +357,7 @@ public abstract class HttpRequest<T extends HttpRequest<?>> {
             throw new IllegalStateException("The host has been destroyed and the request cannot proceed");
         }
 
-        EasyLog.printStackTrace(this, new Throwable().getStackTrace());
+//        EasyLog.printStackTrace(this, new Throwable().getStackTrace());
 
         Type reflectType = mRequestHandler.getGenericType(responseClass);
 

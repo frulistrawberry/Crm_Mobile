@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     namespace 'com.baihe.lihepro'
     compileSdk rootProject.android.compileSdk
@@ -12,8 +13,12 @@ android {
         targetSdkVersion rootProject.android.targetSdk
         versionCode rootProject.android.versionCode
         versionName rootProject.android.versionName
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        configurations.all {
+            resolutionStrategy { force 'androidx.appcompat:appcompat:1.1.0' }
+            resolutionStrategy { force 'androidx.core:core-ktx:1.1.0' }
+        }
 
         kapt {
             arguments {
@@ -23,16 +28,36 @@ android {
 
         manifestPlaceholders = [
                 XG_ACCESS_ID : "1580001576",
-                XG_ACCESS_KEY : "AJMRFQTVY2L8"
+                XG_ACCESS_KEY: "AJMRFQTVY2L8"
         ]
     }
+    signingConfigs {
+        debug {
+            storeFile file("./doc/lihepro.jks")
+            storePassword "baihe.com"
+            keyAlias "wedding_lihepro"
+            keyPassword "baihe.com"
+        }
 
-
-
+        release {
+            storeFile file("./doc/lihepro.jks")
+            storePassword "baihe.com"
+            keyAlias "wedding_lihepro"
+            keyPassword "baihe.com"
+            v2SigningEnabled false
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled false   //是否混淆
+            shrinkResources false //去除无用的resource
+            zipAlignEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
         }
     }
     compileOptions {
@@ -42,12 +67,39 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    productFlavors {
+        ndk32 {
+            ndk {
+                abiFilters 'armeabi-v7a'
+            }
+        }
+        ndk64 {
+            ndk {
+                abiFilters 'arm64-v8a'
+            }
+        }
+        ndkAll {
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
+    }
+    lintOptions { // 移除lint检查的error
+        abortOnError false
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
     buildFeatures {
         dataBinding = true
         viewBinding = true
     }
-
+    //指定打包文件名称
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFileName = "android_lihecrm.apk"
+        }
+    }
     packagingOptions {
         exclude 'META-INF/*.kotlin_module'
     }
@@ -58,8 +110,12 @@ android {
 dependencies{
 
 
-    implementation rootProject.depsLibs.loginLib
-    implementation rootProject.depsLibs.userLib
+    implementation project(path :':Lib_Common')
+    implementation project(path :':Lib_Framework')
+    implementation project(path :':Lib_Login')
+    implementation project(path :':Lib_Home')
+    implementation project(path :':Lib_User')
+    implementation project(path :':Lib_Customer')
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 }

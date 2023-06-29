@@ -5,9 +5,9 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_framework.base.BaseActivity
 import com.baihe.lib_login.R
-import com.baihe.lib_login.constant.RequestCodeConstant
 
 class LoginActivity: BaseActivity() {
 
@@ -21,7 +21,7 @@ class LoginActivity: BaseActivity() {
                 return
             }
             if (context is Activity){
-                context.startActivityForResult(starter,RequestCodeConstant.REQUEST_LOGIN)
+                context.startActivityForResult(starter, RequestCode.REQUEST_LOGIN)
             }
         }
     }

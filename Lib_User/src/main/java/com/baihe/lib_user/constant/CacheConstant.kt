@@ -5,4 +5,5 @@ object CacheConstant {
     const val USER_PHONE_NUMBER = "user_phone_number"
     const val USER_ID = "user_id"
     const val USER_COMPANY_ID = "user_company_id"
+    const val USER_COMPANY_NAME = "user_company_name"
 }

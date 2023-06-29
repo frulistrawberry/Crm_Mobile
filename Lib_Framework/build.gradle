@@ -6,7 +6,7 @@ apply plugin: 'maven-publish'
 android {
     namespace 'com.baihe.lib_framework'
     compileSdk rootProject.android.compileSdk
-
+    buildToolsVersion rootProject.android.buildToolsVersion
     defaultConfig {
         minSdkVersion rootProject.android.minSdk
         targetSdkVersion rootProject.android.targetSdk
@@ -15,6 +15,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        configurations.all{
+            resolutionStrategy{force 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10'}
+        }
     }
 
     buildTypes {
@@ -43,26 +46,26 @@ android {
 dependencies {
 
 
-    implementation rootProject.depsLibs.logCore
+    api rootProject.depsLibs.logCore
 
-    implementation rootProject.depsLibs.junit
-    implementation rootProject.depsLibs.extJunit
-    implementation rootProject.depsLibs.espressoCore
-    implementation rootProject.depsLibs.coreKtx
-    implementation rootProject.depsLibs.appcompat
-    implementation rootProject.depsLibs.material
-    implementation rootProject.depsLibs.liveDataKtx
-    implementation rootProject.depsLibs.viewModelKtx
-    implementation rootProject.depsLibs.lifecycleKtx
-    implementation rootProject.depsLibs.gson
-    implementation rootProject.depsLibs.mmkv
+    api rootProject.depsLibs.junit
+    api rootProject.depsLibs.extJunit
+    api rootProject.depsLibs.espressoCore
+    api rootProject.depsLibs.coreKtx
+    api rootProject.depsLibs.appcompat
+    api rootProject.depsLibs.material
+    api rootProject.depsLibs.liveDataKtx
+    api rootProject.depsLibs.viewModelKtx
+    api rootProject.depsLibs.lifecycleKtx
+    api rootProject.depsLibs.gson
+    api rootProject.depsLibs.mmkv
 
-    implementation rootProject.depsLibs.refreshLayout
-    implementation rootProject.depsLibs.refreshFooter
-    implementation rootProject.depsLibs.tbssdk
-    implementation rootProject.depsLibs.LoadingStateView
-    implementation rootProject.depsLibs.networkLib
-    implementation rootProject.depsLibs.imageLoaderLib
+    api rootProject.depsLibs.refreshLayout
+    api rootProject.depsLibs.refreshFooter
+    api rootProject.depsLibs.tbssdk
+    api rootProject.depsLibs.LoadingStateView
+    api project(path:':Lib_Network')
+    api project(path:':Lib_ImageLoader')
 
 
 }
@@ -78,13 +81,13 @@ afterEvaluate{
             Arr(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'framework'
-                version '1.0.0.2-SNAPSHOT'
+                version rootProject.dependVersion.frameworkLibVersion
                 afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                 artifact generateSourcesJar
                 pom.withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')
                     configurations.implementation.allDependencies.each {
-                        if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                        if ((it.group != null && "unspecified" != it.group) && (it.name != null && "unspecified" != it.name) && (it.version != null && "unspecified" != it.version)) {
                             println "dependency=${it.toString()}"
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', it.group)

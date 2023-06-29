@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_top_round_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.baihe.lib_common.widget.font.FontTextView
+                android:id="@+id/bottom_channel_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_37"
+                style="@style/font_half_bold_18_4A4C5C"
+                android:text="选择客资来源"/>
+            <ImageView
+                android:id="@+id/bottom_channel_cancel_iv"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_14"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_close"/>
+
+
+
+
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            app:contentPaddingLeft="@dimen/dp_16"
+            app:contentPaddingRight="@dimen/dp_16"
+            app:contentPaddingTop="@dimen/dp_6"
+            app:contentPaddingBottom="@dimen/dp_6"
+            app:cardCornerRadius="@dimen/dp_20"
+            app:cardBackgroundColor="#FFF5F5F9"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_search"/>
+                <com.baihe.lib_common.widget.font.FontEditText
+                    android:id="@+id/et_search"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:font_textStyle="LIGHT"
+                    android:singleLine="true"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:textColor="@color/COLOR_4A4C5C"
+                    android:textSize="@dimen/sp_14"
+                    android:imeOptions="actionSearch"
+                    android:textColorHint="#FFC5C5CE"
+                    android:hint="请输入机会名称/手机号/客户姓名"
+                    android:background="@null"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:orientation="horizontal">
+            <com.baihe.lib_framework.widget.MaxRecyclerView
+                android:id="@+id/bottom_channel_first_level_rv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                app:maxHeight="@dimen/dp_190"
+                android:minHeight="@dimen/dp_190"
+                android:layout_height="wrap_content" />
+            <com.baihe.lib_framework.widget.MaxRecyclerView
+                android:id="@+id/bottom_channel_second_level_rv"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                app:maxHeight="@dimen/dp_190"
+                android:minHeight="@dimen/dp_190"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/bottom_select_confirm_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/common_button_round_blue"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingTop="11dp"
+            android:paddingBottom="11dp"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

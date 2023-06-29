@@ -18,8 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
 import com.baihe.lib_common.ext.StringExt.isPhone
-import com.baihe.lib_common.provider.HomeServiceProvider
-import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.ext.*
 import com.baihe.lib_framework.ext.EditTextExt.textChangeFlow
@@ -29,16 +27,13 @@ import com.baihe.lib_framework.ext.ViewExt.gone
 import com.baihe.lib_framework.ext.ViewExt.onClick
 import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.log.LogUtil
-import com.baihe.lib_framework.manager.AppManager
 import com.baihe.lib_framework.toast.TipsToast
 import com.baihe.lib_login.R
 import com.baihe.lib_login.constant.KeyConstant.KET_CHECK
 import com.baihe.lib_login.constant.KeyConstant.KEY_MOBILE
-import com.baihe.lib_login.constant.RequestCodeConstant
 import com.baihe.lib_login.databinding.LoginFragmentPasswordLoginBinding
 import com.baihe.lib_login.login.viewmodel.LoginViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

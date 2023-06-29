@@ -4,9 +4,9 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 android {
     compileSdk rootProject.android.compileSdk
+    buildToolsVersion rootProject.android.buildToolsVersion
     namespace 'com.baihe.lib_common'
     defaultConfig {
-
         minSdkVersion rootProject.android.minSdk
         targetSdkVersion rootProject.android.targetSdk
         versionCode 1
@@ -17,6 +17,11 @@ android {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
+
+        manifestPlaceholders = [
+                XG_ACCESS_ID : rootProject.sdkConfig.XG_ACCESS_ID,
+                XG_ACCESS_KEY : rootProject.sdkConfig.XG_ACCESS_KEY
+        ]
 
 
     }
@@ -50,12 +55,12 @@ android {
 dependencies {
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
-    implementation rootProject.depsLibs.tps
-    implementation rootProject.depsLibs.logHttp
-    implementation rootProject.depsLibs.navigationFragment
-    implementation rootProject.depsLibs.navigationUI
-    implementation rootProject.depsLibs.frameworkLib
-
+    api rootProject.depsLibs.tps
+    api rootProject.depsLibs.logHttp
+    api rootProject.depsLibs.navigationFragment
+    api rootProject.depsLibs.PickerView
+    api rootProject.depsLibs.navigationUI
+    api project(path:':Lib_Framework')
 }
 
 task generateSourcesJar(type: Jar) {
@@ -68,13 +73,13 @@ afterEvaluate{
             Arr(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'common'
-                version '1.0.0.2-SNAPSHOT'
+                version rootProject.dependVersion.commonLibVersion
                 afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                 artifact generateSourcesJar
                 pom.withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')
                     configurations.implementation.allDependencies.each {
-                        if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                        if ((it.group != null && "unspecified" != it.group) && (it.name != null && "unspecified" != it.name) && (it.version != null && "unspecified" != it.version)) {
                             println "dependency=${it.toString()}"
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', it.group)

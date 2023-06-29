@@ -1,19 +1,20 @@
 package com.baihe.lib_home
 
-import android.graphics.Color
 import android.graphics.Typeface
 import com.baihe.lib_common.entity.StatusText
 import com.baihe.lib_common.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.utils.ResUtils
+import com.baihe.lib_home.widget.chart.PercentValueFormatter
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.model.GradientColor
 import com.google.gson.annotations.SerializedName
 
 
 data class DataEntity(
     val cancelOrder: Int,
+    @SerializedName("customeCount")
     val customerCount: Int,
     @SerializedName("customeUnValid")
     val customerUnValid: Int,
@@ -31,9 +32,9 @@ data class DataEntity(
     val orderWait: Int,
     @SerializedName("signCustomeCount")
     val signCustomerCount: Int,
-    val signSum: Int,
+    val signSum: String,
     val successInvitation: Int,
-    val waitInvitation: Int
+    val waitInvitation: Int,
 ){
     fun isOppoDataNotEmpty():Boolean{
         return waitInvitation+successInvitation+
@@ -46,71 +47,121 @@ data class DataEntity(
     }
 
     fun generateOpportunityData(): PieData {
-        val colors = mutableListOf<Int>()
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_4A4C5C))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_6C8EFF))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_C5C5CE))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_C2C5DB))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_33FFFFFF))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_F6F7FC))
-        val pieEntityList = mutableListOf<PieEntry>()
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        val pieDataSet = PieDataSet(pieEntityList,"")
-        pieDataSet.sliceSpace = 0f; //设置饼状Item之间的间隙
-        pieDataSet.selectionShift = 10f; //设置饼状Item被选中时变化的距离
-        pieDataSet.colors = colors; //为DataSet中的数据匹配上颜色集(饼图Item颜色)
-        val pieData = PieData(pieDataSet)
-        pieData.setDrawValues(true) //设置是否显示数据实体(百分比，true:以下属性才有意义)
+        val colors = mutableListOf<Int>().apply {
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_1))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_2))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_3))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_4))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_5))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_6))
+        }
 
-        pieData.setValueTextColor(Color.BLUE) //设置所有DataSet内数据实体（百分比）的文本颜色
+        val gradientColor = mutableListOf<GradientColor>().apply {
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_1),
+                ResUtils.getColorFromResource(R.color.home_pie_end_1)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_2),
+                ResUtils.getColorFromResource(R.color.home_pie_end_2)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_3),
+                ResUtils.getColorFromResource(R.color.home_pie_end_3)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_4),
+                ResUtils.getColorFromResource(R.color.home_pie_end_4)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_5),
+                ResUtils.getColorFromResource(R.color.home_pie_end_5)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_6),
+                ResUtils.getColorFromResource(R.color.home_pie_end_6)))
+        }
 
-        pieData.setValueTextSize(12f) //设置所有DataSet内数据实体（百分比）的文本字体大小
+        val pieEntityList = mutableListOf<PieEntry>().apply {
+            add(PieEntry(successInvitation.toFloat(),"邀约成功"))
+            add(PieEntry(customerWait.toFloat(),"客户待定"))
+            add(PieEntry(customerUnValid.toFloat(),"客户无效"))
+            add(PieEntry(waitInvitation.toFloat(),"待邀约"))
+            add(PieEntry(customerValid.toFloat(),"客户有效"))
+            add(PieEntry(openInvitation.toFloat(),"已到店"))
+        }
 
-        pieData.setValueTypeface(Typeface.DEFAULT) //设置所有DataSet内数据实体（百分比）的文本字体样式
+        val pieDataSet = PieDataSet(pieEntityList,"").apply {
+            sliceSpace = 0f; //设置饼状Item之间的间隙
+            selectionShift = 0f; //设置饼状Item被选中时变化的距离
+            this.colors = colors; //为DataSet中的数据匹配上颜色集(饼图Item颜色)
+            gradientColors = gradientColor
+            valueFormatter =
+                PercentValueFormatter()
+            valueLinePart1Length = 0.47f
+            valueLinePart2Length = 0.7f
+            yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            isValueLineVariableLength = true
+            valueLinePart1OffsetPercentage = 50f
+            isUsingSliceColorAsValueLineColor = true
+        }
+        val pieData = PieData(pieDataSet).apply {
+            setDrawValues(true) //设置是否显示数据实体(百分比，true:以下属性才有意义)
+            setValueTextColor(ResUtils.getColorFromResource(R.color.COLOR_4A4C5C)) //设置所有DataSet内数据实体（百分比）的文本颜色
+            setValueTextSize(16f) //设置所有DataSet内数据实体（百分比）的文本字体大小
+            setValueTypeface(Typeface.DEFAULT) //设置所有DataSet内数据实体（百分比）的文本字体样式
+        }
 
-        pieData.setValueFormatter(PercentFormatter()) //设置所有DataSet内数据实体（百分比）的文本字体格式
         return pieData
 
 
     }
 
     fun generateOrderData(): PieData {
-        val colors = mutableListOf<Int>()
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_4A4C5C))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_6C8EFF))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_C5C5CE))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_C2C5DB))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_33FFFFFF))
-        colors.add(ResUtils.getColorFromResource(R.color.COLOR_F6F7FC))
-        val pieEntityList = mutableListOf<PieEntry>()
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        pieEntityList.add(PieEntry(1f,""))
-        val pieDataSet = PieDataSet(pieEntityList,"")
-        pieDataSet.sliceSpace = 3f; //设置饼状Item之间的间隙
-        pieDataSet.selectionShift = 10f; //设置饼状Item被选中时变化的距离
-        pieDataSet.colors = colors; //为DataSet中的数据匹配上颜色集(饼图Item颜色)
-        val pieData = PieData(pieDataSet)
-        pieData.setDrawValues(true) //设置是否显示数据实体(百分比，true:以下属性才有意义)
+        val colors = mutableListOf<Int>().apply {
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_1))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_2))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_7))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_5))
+            add(ResUtils.getColorFromResource(R.color.home_pie_line_4))
+        }
 
-        pieData.setValueTextColor(Color.BLUE) //设置所有DataSet内数据实体（百分比）的文本颜色
+        val gradientColor = mutableListOf<GradientColor>().apply {
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_1),
+                ResUtils.getColorFromResource(R.color.home_pie_end_1)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_2),
+                ResUtils.getColorFromResource(R.color.home_pie_end_2)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_7),
+                ResUtils.getColorFromResource(R.color.home_pie_end_7)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_5),
+                ResUtils.getColorFromResource(R.color.home_pie_end_5)))
+            add(GradientColor(ResUtils.getColorFromResource(R.color.home_pie_start_4),
+                ResUtils.getColorFromResource(R.color.home_pie_end_4)))
+        }
 
-        pieData.setValueTextSize(12f) //设置所有DataSet内数据实体（百分比）的文本字体大小
+        val pieEntityList = mutableListOf<PieEntry>().apply {
+            add(PieEntry(order.toFloat(),"已签约"))
+            add(PieEntry(finishOrder.toFloat(),"已完成"))
+            add(PieEntry(exitOrder.toFloat(),"已退单"))
+            add(PieEntry(cancelOrder.toFloat(),"已取消"))
+            add(PieEntry(orderWait.toFloat(),"待签约"))
+        }
 
-        pieData.setValueTypeface(Typeface.DEFAULT) //设置所有DataSet内数据实体（百分比）的文本字体样式
+        val pieDataSet = PieDataSet(pieEntityList,"").apply {
+            sliceSpace = 0f; //设置饼状Item之间的间隙
+            selectionShift = 0f; //设置饼状Item被选中时变化的距离
+            this.colors = colors; //为DataSet中的数据匹配上颜色集(饼图Item颜色)
+            gradientColors = gradientColor
+            valueFormatter =
+                PercentValueFormatter()
+            valueLinePart1Length = 0.47f
+            valueLinePart2Length = 0.7f
+            yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            isValueLineVariableLength = true
+            valueLinePart1OffsetPercentage = 50f
+            isUsingSliceColorAsValueLineColor = true
+            isAutomaticallyDisableSliceSpacingEnabled
+        }
 
-        pieData.setValueFormatter(PercentFormatter()) //设置所有DataSet内数据实体（百分比）的文本字体格式
+        val pieData = PieData(pieDataSet).apply {
+            setDrawValues(true) //设置是否显示数据实体(百分比，true:以下属性才有意义)
+            setValueTextColor(ResUtils.getColorFromResource(R.color.COLOR_4A4C5C)) //设置所有DataSet内数据实体（百分比）的文本颜色
+            setValueTextSize(16f) //设置所有DataSet内数据实体（百分比）的文本字体大小
+            setValueTypeface(Typeface.DEFAULT) //设置所有DataSet内数据实体（百分比）的文本字体样式
+        }
+
         return pieData
-
-
     }
 }
 
@@ -126,12 +177,12 @@ data class WaitingEntity(
     val followTxt: String,
     val id: Int,
     val name: String,
-    @SerializedName("nextContactTime")
-    val next_contact_time: String,
+    @SerializedName("next_contact_time")
+    val nextContactTime: String,
     val phone: String,
     val type: Int,
-    @SerializedName("type_txt")
-    val typeTxt: String
+    val tag:String
+
 ){
     fun toStatusText():StatusText{
         val statusText = StatusText()
@@ -170,14 +221,24 @@ data class WaitingEntity(
             key = "联系电话"
             `val` = phone
         })
-        showArray.add(KeyValueEntity().apply {
-            key = "计划到店时间"
-            `val` = arrivalTime
-        })
-        showArray.add(KeyValueEntity().apply {
-            key = "最新沟通记录"
-            `val` = followTxt
-        })
+        if ("2"==tag || "4"==tag){
+            showArray.add(KeyValueEntity().apply {
+                key = "下次回访时间"
+                `val` = nextContactTime
+            })
+        }
+        if ("3"==tag || "5"==tag){
+            showArray.add(KeyValueEntity().apply {
+                key = "计划到店时间"
+                `val` = arrivalTime
+            })
+        }
+        if ("1"!=tag){
+            showArray.add(KeyValueEntity().apply {
+                key = "最新沟通记录"
+                `val` = followTxt
+            })
+        }
         return showArray
     }
 }

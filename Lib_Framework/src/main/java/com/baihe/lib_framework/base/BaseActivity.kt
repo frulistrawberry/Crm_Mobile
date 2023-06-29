@@ -27,6 +27,7 @@ abstract class BaseActivity : AppCompatActivity(), LoadingState by LoadingStateD
         super.onCreate(savedInstanceState)
         setContentLayout()
         initView(savedInstanceState)
+        initListener()
         initData()
         StatusBarSettingHelper.setStatusBarTranslucent(this)
         StatusBarSettingHelper.statusBarLightMode(this)
@@ -53,12 +54,18 @@ abstract class BaseActivity : AppCompatActivity(), LoadingState by LoadingStateD
      */
     abstract fun initView(savedInstanceState: Bundle?)
 
+    open fun initListener(){
+
+    }
+
     /**
      * 初始化数据
      */
     open fun initData() {
 
     }
+
+
 
 
 
@@ -101,6 +108,11 @@ abstract class BaseActivity : AppCompatActivity(), LoadingState by LoadingStateD
                 it.dismiss()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        loadingDialog?.dismiss()
     }
 
 

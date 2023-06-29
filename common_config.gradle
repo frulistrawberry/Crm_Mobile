@@ -10,11 +10,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 android {
     compileSdk rootProject.android.compileSdk
+    buildToolsVersion rootProject.android.buildToolsVersion
     defaultConfig {
         minSdkVersion rootProject.android.minSdk
         targetSdkVersion rootProject.android.targetSdk
         versionCode rootProject.android.versionCode
         versionName rootProject.android.versionName
+
 
         //阿里路由框架配置
         kapt {
@@ -51,14 +53,14 @@ android {
             if (isBuildModule.toBoolean()) {
                 //独立运行
                 manifest.srcFile 'src/main/alone/AndroidManifest.xml'
-//                java.srcDirs = [
-//                        'src/main/alone/java',
-//                        'src/main/java'
-//                ]
-//                res.srcDirs = [
-//                        'src/main/alone/res',
-//                        'src/main/res'
-//                ]
+                java.srcDirs = [
+                        'src/main/alone/java',
+                        'src/main/java'
+                ]
+                res.srcDirs = [
+                        'src/main/alone/res',
+                        'src/main/res'
+                ]
             } else {
                 //合并到宿主
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -74,15 +76,10 @@ android {
         viewBinding = true
     }
 
-    lintOptions{
-        checkReleaseBuilds false
-        abortOnError false
-    }
-
 }
 
 dependencies {
-    implementation rootProject.depsLibs.commonLib
+    implementation project(path: ':Lib_Common')
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 }

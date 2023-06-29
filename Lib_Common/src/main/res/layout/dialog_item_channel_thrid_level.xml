@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_10">
+
+    <com.baihe.lib_common.widget.font.FontTextView
+        android:id="@+id/bottom_select_item_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:includeFontPadding="false"
+        android:textColor="#4A4C5C"
+        android:textSize="15sp"
+        app:font_textStyle="NORMAL"/>
+
+    <CheckBox
+        android:id="@+id/bottom_select_item_checked_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:button="@drawable/selector_check_box"
+        android:clickable="false"
+        android:focusable="false" />
+</LinearLayout>

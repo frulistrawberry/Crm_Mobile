@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:minHeight="@dimen/dp_50">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_boss_sea"
+                android:layout_width="@dimen/dp_255"
+                android:layout_height="@dimen/dp_32"
+                android:layout_centerInParent="true"
+                app:cardElevation="@dimen/dp_0"
+                app:cardBackgroundColor="@color/COLOR_FFFFFF"
+                app:cardCornerRadius="@dimen/dp_16">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    >
+                    <com.baihe.lib_common.widget.font.FontTextView
+                        android:id="@+id/tv_boss"
+                        style="@style/font_half_bold_16_4A4C5C"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="喜铺销售经理" />
+                    <ImageView
+                        android:id="@+id/iv_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_6"
+                        android:src="@mipmap/user_ic_arrow_up"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <com.baihe.lib_framework.widget.MaxRecyclerView
+            android:id="@+id/rv_boss_sea"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/common_round_white"
+            android:layout_width="@dimen/dp_255"
+            android:layout_height="wrap_content"
+            app:maxHeight="@dimen/dp_180"
+            android:paddingTop="@dimen/dp_8"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

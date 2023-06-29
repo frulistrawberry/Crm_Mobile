@@ -38,13 +38,13 @@ class HomeDecorViewDelegate:LoadingStateView.DecorViewDelegate() {
             )
             mBinding.nsRoot.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener {
                     _, _, scrollY, _, _ ->
-                var percent: Float = scrollY * 1f / mBinding.flHeader.height
+                var percent: Float = scrollY * 1f / mBinding.vHeaderSplit.height
                 if (percent>1)
                     percent = 1f
                 val bgColor = ViewUtil.getColor(percent, Color.TRANSPARENT,Color.WHITE)
                 val textColor = ViewUtil.getColor(percent,Color.WHITE, color(R.color.COLOR_4A4C5C))
                 val addIcon = ViewUtil.getIcon(R.mipmap.home_ic_add,percent,Color.WHITE,Color.BLACK)
-                val arrowIcon = ViewUtil.getIcon(R.mipmap.home_arrow_down_white,percent,Color.WHITE,Color.BLACK)
+                val arrowIcon = ViewUtil.getIcon(R.mipmap.home_ic_arrow_down_white,percent,Color.WHITE,Color.BLACK)
                 mBinding.llTitle.setBackgroundColor(bgColor)
                 mBinding.tvBoss.setTextColor(textColor)
                 mBinding.btnCreate.setImageDrawable(addIcon)

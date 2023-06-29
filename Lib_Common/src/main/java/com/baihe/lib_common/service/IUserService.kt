@@ -1,7 +1,9 @@
 package com.baihe.lib_common.service
 
+import android.content.Context
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.baihe.lib_common.entity.UserEntity
+import com.baihe.lib_framework.base.BaseDialog
 
 interface IUserService :IProvider{
     /**
@@ -29,6 +31,16 @@ interface IUserService :IProvider{
      * 获取用户公司id
      */
     fun getCompanyId():String?
+
+    /**
+     * 获取用户公司名称
+     */
+    fun getCompanyName():String?
+
+    /**
+     * 获取公海选择弹窗
+     */
+    fun getBossSeaDialog(context: Context,block:(id:String,name:String)->Unit):BaseDialog
 
     /**
      * 清除与用户信息

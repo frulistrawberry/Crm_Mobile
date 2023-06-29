@@ -1,11 +1,57 @@
 package com.baihe.lib_common.widget.keyvalue.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class KeyValEventEntity implements Serializable {
+    /**
+     * 动作id
+     */
     private String action;
+
+    private String paramKey;
+
+    private List<KeyValueEntity> options;
+
+    /**
+     * 文字按钮（用于KeyValueLayout）
+     */
     private String name;
+    /**
+     * 图标按钮（用于KeyValueLayout）
+     */
     private String icon;
+
+    private String format = "yyyy-MM-dd";
+
+
+
+
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getParamKey() {
+        return paramKey;
+    }
+
+    public void setParamKey(String paramKey) {
+        this.paramKey = paramKey;
+    }
+
+
+    public List<KeyValueEntity> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<KeyValueEntity> options) {
+        this.options = options;
+    }
 
     public String getAction() {
         return action;

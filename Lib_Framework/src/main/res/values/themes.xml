@@ -5,7 +5,7 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
@@ -74,4 +74,9 @@
         <item name="android:windowEnterAnimation">@anim/dialog_top_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_top_out</item>
     </style>
+    <style name="AlphaAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_alpha_out</item>
+    </style>
+
 </resources>

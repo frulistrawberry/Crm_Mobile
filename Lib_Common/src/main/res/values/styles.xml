@@ -7,6 +7,14 @@
         <item name="android:colorAccent">@android:color/darker_gray</item>  <!-- 控件激活状态、光标的颜色 -->
     </style>
 
+    <style name="ActivityTransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
+
+
 
 
     <style name="font_half_bold_28_4A4C5C">
@@ -55,6 +63,11 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#C5C5CE</item>
     </style>
+    <style name="font_normal_12_A8A9B1">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#A8A9B1</item>
+    </style>
     <style name="font_normal_12_4A4C5C">
         <item name="font_textStyle">NORMAL</item>
         <item name="android:textSize">12sp</item>
@@ -84,5 +97,15 @@
         <item name="font_textStyle">NORMAL</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#4A4C5C</item>
+    </style>
+    <style name="font_normal_15_A8A9B1">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFA8A9B1</item>
+    </style>
+    <style name="font_normal_12_FFF11E1E">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FFF11E1E</item>
     </style>
 </resources>

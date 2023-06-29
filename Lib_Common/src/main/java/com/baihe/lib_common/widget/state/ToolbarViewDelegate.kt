@@ -3,9 +3,19 @@ package com.baihe.lib_common.widget.state
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout.LayoutParams
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import com.baihe.lib_common.databinding.CommonTitleViewBinding
+import com.baihe.lib_common.widget.state.ToolbarConfigExt.onSearchListener
+import com.baihe.lib_common.widget.state.ToolbarConfigExt.showSearch
+import com.baihe.lib_framework.ext.EditTextExt.textChangeFlow
+import com.baihe.lib_framework.ext.ViewExt.click
+import com.baihe.lib_framework.ext.ViewExt.gone
+import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.helper.AppHelper
+import com.baihe.lib_framework.utils.KeyboardUtils
 import com.baihe.lib_framework.utils.StatusBarSettingHelper
 import com.baihe.lib_framework.widget.state.ktx.BaseToolbarViewDelegate
 import com.baihe.lib_framework.widget.state.ktx.NavBtnType
@@ -67,6 +77,39 @@ class ToolbarViewDelegate: BaseToolbarViewDelegate() {
                 ivRight.visibility = View.VISIBLE
             } else {
                 ivRight.visibility = View.GONE
+            }
+            if (config.showSearch == true){
+                etSearch.setOnEditorActionListener { textView, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                        val keywords = textView.text.toString().trim()
+                        if (keywords.isNotEmpty()){
+                            config.onSearchListener?.invoke(keywords)
+                        }
+                        etSearch.clearFocus()
+                        KeyboardUtils.hideInputMethod(etSearch)
+
+                        return@setOnEditorActionListener true
+                    }
+
+                    return@setOnEditorActionListener false
+                }
+                etSearch.doOnTextChanged{ text, _, _, _ ->
+                    if (text?.isNotEmpty() == true){
+                        btnCancel.visible()
+                    }else{
+                        btnCancel.gone()
+                    }
+                }
+
+                btnCancel.click {
+                    etSearch.setText("")
+                    config.onSearchListener?.invoke("")
+                    etSearch.clearFocus()
+                    KeyboardUtils.hideInputMethod(etSearch)
+                }
+                llSearch.visible()
+            }else{
+                llSearch.gone()
             }
         }
     }

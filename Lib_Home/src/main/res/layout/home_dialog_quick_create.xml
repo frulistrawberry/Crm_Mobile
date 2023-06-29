@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:src="@mipmap/ic_close_white"
+        android:scaleType="centerInside"
+        android:layout_alignParentEnd="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_14"
+        android:paddingEnd="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_50"
+        android:orientation="vertical"
+        android:background="@drawable/common_round_white">
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/btn_create_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            style="@style/font_normal_14_4A4C5C"
+            android:text="创建客户"
+            android:drawableStart="@mipmap/home_ic_quick_create_customer"
+            android:drawablePadding="@dimen/dp_2"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.5"
+            android:background="#FFC2C5DB"
+            android:layout_gravity="center_horizontal"
+            android:minWidth="@dimen/dp_75"/>
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/btn_create_opportunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/font_normal_14_4A4C5C"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="创建机会"
+            android:drawableStart="@mipmap/home_ic_quick_create_opportunity"
+            android:drawablePadding="@dimen/dp_2"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.5"
+            android:background="#FFC2C5DB"
+            android:layout_gravity="center_horizontal"
+            android:minWidth="@dimen/dp_75"/>
+        <com.baihe.lib_common.widget.font.FontTextView
+            android:id="@+id/btn_create_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/font_normal_14_4A4C5C"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="创建订单"
+            android:drawableStart="@mipmap/home_ic_quick_create_order"
+            android:drawablePadding="@dimen/dp_2"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+

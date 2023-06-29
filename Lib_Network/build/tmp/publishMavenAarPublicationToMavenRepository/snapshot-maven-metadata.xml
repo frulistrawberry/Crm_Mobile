@@ -2,29 +2,29 @@
 <metadata modelVersion="1.1.0">
   <groupId>com.wedding.crm.lib</groupId>
   <artifactId>network</artifactId>
-  <version>1.0.0.2-SNAPSHOT</version>
+  <version>1.0.0.0-beta-3-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20230620.100750</timestamp>
+      <timestamp>20230629.100343</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20230620100750</lastUpdated>
+    <lastUpdated>20230629100343</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
-        <classifier>sources</classifier>
-        <extension>jar</extension>
-        <value>1.0.0.2-20230620.100750-1</value>
-        <updated>20230620100750</updated>
+        <extension>aar</extension>
+        <value>1.0.0.0-beta-3-20230629.100343-1</value>
+        <updated>20230629100343</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0.0.2-20230620.100750-1</value>
-        <updated>20230620100750</updated>
+        <value>1.0.0.0-beta-3-20230629.100343-1</value>
+        <updated>20230629100343</updated>
       </snapshotVersion>
       <snapshotVersion>
-        <extension>aar</extension>
-        <value>1.0.0.2-20230620.100750-1</value>
-        <updated>20230620100750</updated>
+        <classifier>sources</classifier>
+        <extension>jar</extension>
+        <value>1.0.0.0-beta-3-20230629.100343-1</value>
+        <updated>20230629100343</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

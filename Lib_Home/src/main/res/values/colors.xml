@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="home_pie_start_1">#93B1FF</color>
+    <color name="home_pie_end_1">#93B1FF</color>
+    <color name="home_pie_start_2">#9EFFBC</color>
+    <color name="home_pie_end_2">#9EFFBC</color>
+    <color name="home_pie_start_3">#BF8FFF</color>
+    <color name="home_pie_end_3">#BF8FFF</color>
+    <color name="home_pie_start_4">#FFB057</color>
+    <color name="home_pie_end_4">#FFB057</color>
+    <color name="home_pie_start_5">#FF887C</color>
+    <color name="home_pie_end_5">#FF887C</color>
+    <color name="home_pie_start_6">#FFE686</color>
+    <color name="home_pie_end_6">#FFE686</color>
+    <color name="home_pie_start_7">#797979</color>
+    <color name="home_pie_end_7">#797979</color>
+    <color name="home_pie_line_1">#FF6B8CFF</color>
+    <color name="home_pie_line_2">#FF69D477</color>
+    <color name="home_pie_line_3">#FF694CFF</color>
+    <color name="home_pie_line_4">#FFFF8E00</color>
+    <color name="home_pie_line_5">#FFE14334</color>
+    <color name="home_pie_line_6">#FFFFCF6B</color>
+    <color name="home_pie_line_7">#FF4A4C5C</color>
+</resources>
