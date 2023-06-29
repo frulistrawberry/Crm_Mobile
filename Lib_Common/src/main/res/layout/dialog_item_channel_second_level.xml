@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/bottom_select_item_name_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

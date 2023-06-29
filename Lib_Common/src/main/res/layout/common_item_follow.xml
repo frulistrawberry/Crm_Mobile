@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <com.baihe.lib_common.widget.keyvalue.KeyValueLayout
+    <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
         android:id="@+id/kvl_follow"
         android:layout_width="match_parent"
         android:layout_marginLeft="@dimen/dp_10"

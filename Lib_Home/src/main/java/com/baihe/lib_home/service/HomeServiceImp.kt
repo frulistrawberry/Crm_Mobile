@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.baihe.lib_common.constant.RoutePath.HOME_SERVICE_HOME
 import com.baihe.lib_common.service.IHomeService
-import com.baihe.lib_home.home.HomeFragment
+import com.baihe.lib_home.ui.fragment.HomeFragment
 
 @Route(path = HOME_SERVICE_HOME)
 class HomeServiceImp:IHomeService {

@@ -1,6 +1,6 @@
 package com.baihe.lib_common.ext
 
-import com.baihe.lib_common.dialog.LoadingDialog
+import com.baihe.lib_common.ui.dialog.LoadingDialog
 import com.baihe.lib_framework.base.BaseActivity
 import com.baihe.lib_framework.base.BaseFragment
 import com.baihe.lib_framework.log.LogUtil

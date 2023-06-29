@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.baihe.lib_common.widget.keyvalue.KeyValueEditLayout
+    <com.baihe.lib_common.ui.widget.keyvalue.KeyValueEditLayout
         android:id="@+id/kvl_customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:paddingStart="@dimen/dp_20"
         android:paddingEnd="@dimen/dp_20"
         android:background="@drawable/common_top_round_white">
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/btn_commit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_44"

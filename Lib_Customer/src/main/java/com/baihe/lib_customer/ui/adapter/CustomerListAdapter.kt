@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.baihe.lib_common.adapter.ReqListAdapter
+import com.baihe.lib_common.ui.adapter.ReqListAdapter
 import com.baihe.lib_customer.CustomerListItemEntity
 import com.baihe.lib_customer.databinding.CustomerItemCustomerListBinding
 import com.baihe.lib_framework.adapter.BaseBindViewHolder

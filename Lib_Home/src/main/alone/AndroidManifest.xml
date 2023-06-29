@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.baihe.lib_home.waiting.WaitingListActivity"
+        <activity android:name="com.baihe.lib_home.ui.activity.WaitingListActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
     </application>

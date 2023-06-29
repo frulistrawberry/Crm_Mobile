@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/dp_50"
         android:orientation="vertical"
         android:background="@drawable/common_round_white">
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/btn_create_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:background="#FFC2C5DB"
             android:layout_gravity="center_horizontal"
             android:minWidth="@dimen/dp_75"/>
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/btn_create_opportunity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:background="#FFC2C5DB"
             android:layout_gravity="center_horizontal"
             android:minWidth="@dimen/dp_75"/>
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/btn_create_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/COLOR_FFFFFF">
-    <com.baihe.lib_login.widget.LoginBallsView
+    <com.baihe.lib_login.ui.widget.LoginBallsView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>

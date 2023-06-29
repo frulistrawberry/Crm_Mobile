@@ -29,14 +29,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/tv_name"
                         style="@style/font_half_bold_18_4A4C5C"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/btn_edit"
                         style="@style/font_light_12_4A4C5C"
                         android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                     android:layout_marginBottom="@dimen/dp_12"
                     />
 
-                <com.baihe.lib_common.widget.keyvalue.KeyValueLayout
+                <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
                     android:id="@+id/kvl_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -96,13 +96,13 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
-                            <com.baihe.lib_common.widget.font.FontTextView
+                            <com.baihe.lib_common.ui.widget.font.FontTextView
                                 style="@style/font_light_14_4A4C5C"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="跟进中机会：" />
 
-                            <com.baihe.lib_common.widget.font.FontTextView
+                            <com.baihe.lib_common.ui.widget.font.FontTextView
                                 android:id="@+id/tv_flow_oppo"
                                 style="@style/font_normal_14_4A4C5C"
                                 android:layout_width="wrap_content"
@@ -116,13 +116,13 @@
                             android:layout_weight="1"
                             android:gravity="center">
 
-                            <com.baihe.lib_common.widget.font.FontTextView
+                            <com.baihe.lib_common.ui.widget.font.FontTextView
                                 style="@style/font_light_14_4A4C5C"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="跟进中订单：" />
 
-                            <com.baihe.lib_common.widget.font.FontTextView
+                            <com.baihe.lib_common.ui.widget.font.FontTextView
                                 android:id="@+id/tv_flow_order"
                                 style="@style/font_normal_14_4A4C5C"
                                 android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:src="@mipmap/ic_sub_title_flag" />
 
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         style="@style/font_half_bold_16_4A4C5C"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

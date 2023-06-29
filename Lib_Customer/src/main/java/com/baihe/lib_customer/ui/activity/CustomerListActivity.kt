@@ -9,7 +9,7 @@ import com.baihe.lib_common.databinding.CommonSrlListBinding
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.viewmodel.CommonViewModel
-import com.baihe.lib_common.widget.state.ToolbarConfigExt.showSearch
+import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.showSearch
 import com.baihe.lib_customer.CustomerViewModel
 import com.baihe.lib_customer.R
 import com.baihe.lib_customer.ui.adapter.CustomerListAdapter

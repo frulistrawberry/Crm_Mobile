@@ -46,4 +46,16 @@ interface IUserService :IProvider{
      * 清除与用户信息
      */
     fun clearUserInfo()
+
+    /**
+     * 用户协议
+     */
+    fun readAgreement(context: Context)
+
+    /**
+     * 隐私政策
+     */
+    fun readPolicy(context: Context)
+
+
 }

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/net_no_data" />
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"

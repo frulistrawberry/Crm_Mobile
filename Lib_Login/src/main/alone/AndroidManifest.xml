@@ -9,7 +9,7 @@
         android:label="@string/login_app_name"
         tools:ignore="LockedOrientationActivity">
         <activity
-            android:name=".login.activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>

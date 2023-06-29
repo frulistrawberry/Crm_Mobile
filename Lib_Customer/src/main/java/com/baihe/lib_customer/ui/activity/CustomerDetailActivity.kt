@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.baihe.lib_common.adapter.FollowListAdapter
-import com.baihe.lib_common.widget.AxisItemDecoration
+import com.baihe.lib_common.ui.adapter.FollowListAdapter
+import com.baihe.lib_common.ui.widget.AxisItemDecoration
 import com.baihe.lib_customer.CustomerViewModel
 import com.baihe.lib_customer.R
 import com.baihe.lib_customer.databinding.CustomerActivityCustomerDetailBinding
-import com.baihe.lib_common.adapter.ReqListAdapter
+import com.baihe.lib_common.ui.adapter.ReqListAdapter
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.ext.ViewExt.gone

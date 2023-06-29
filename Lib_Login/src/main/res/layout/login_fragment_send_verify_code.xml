@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.baihe.lib_common.widget.font.FontTextView
+    <com.baihe.lib_common.ui.widget.font.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_30"
@@ -24,7 +24,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.baihe.lib_common.widget.font.FontEditText
+        <com.baihe.lib_common.ui.widget.font.FontEditText
             android:id="@+id/et_mobile"
             style="@style/font_normal_20_4A4C5C"
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
         android:layout_marginEnd="@dimen/dp_30"
         android:background="@color/COLOR_E6E6E6" />
 
-    <com.baihe.lib_common.widget.font.FontTextView
+    <com.baihe.lib_common.ui.widget.font.FontTextView
         android:id="@+id/btn_send_verify_code"
         style="@style/font_half_bold_15_FFFFFF"
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
         android:text="@string/login_get_verify_code"
         tools:ignore="TextContrastCheck" />
 
-    <com.baihe.lib_common.widget.font.FontTextView
+    <com.baihe.lib_common.ui.widget.font.FontTextView
         android:id="@+id/btn_password_login"
         style="@style/font_normal_12_6C8EFF"
         android:layout_width="match_parent"
@@ -102,7 +102,7 @@
             android:button="@drawable/login_selector_check_box"
             tools:ignore="TouchTargetSizeCheck" />
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/tv_agreement"
             style="@style/font_normal_12_C5C5CE"
             android:layout_width="wrap_content"

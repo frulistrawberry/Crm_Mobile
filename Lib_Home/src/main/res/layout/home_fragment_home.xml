@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_sub_title_flag" />
 
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 style="@style/font_half_bold_16_4A4C5C"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:text="待办" />
 
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 style="@style/font_light_12_4A4C5C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_sub_title_flag" />
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             style="@style/font_half_bold_16_4A4C5C"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:background="@drawable/home_bg_date_btn">
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:id="@+id/tv_start_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:background="@drawable/home_bg_date_btn">
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:id="@+id/tv_end_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,12 +152,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/font_light_14_4A4C5C"
                     android:text="新增订单："/>
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:id="@+id/tv_order_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,12 +169,12 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_height="wrap_content">
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/font_light_14_4A4C5C"
                     android:text="新增机会："/>
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:id="@+id/tv_oppo_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -186,12 +186,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/font_light_14_4A4C5C"
                     android:text="新增客资："/>
-                <com.baihe.lib_common.widget.font.FontTextView
+                <com.baihe.lib_common.ui.widget.font.FontTextView
                     android:id="@+id/tv_customer_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -220,12 +220,12 @@
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:gravity="center">
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/font_light_14_4A4C5C"
                         android:text="新增签约客户"/>
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/tv_sign_customer_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -253,12 +253,12 @@
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:gravity="center">
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/font_light_14_4A4C5C"
                         android:text="新增签约金额"/>
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/tv_sign_sum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -275,7 +275,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_32"
@@ -286,7 +286,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10">
-                <com.baihe.lib_home.widget.chart.PieChart
+                <com.baihe.lib_home.ui.widget.chart.PieChart
                     android:id="@+id/pc_opportunity"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_275"
@@ -297,12 +297,12 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:orientation="vertical">
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/tv_chart_oppo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/font_half_bold_16_4A4C5C"/>
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/font_light_14_4A4C5C"
@@ -318,7 +318,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_40"
@@ -330,7 +330,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10">
-                <com.baihe.lib_home.widget.chart.PieChart
+                <com.baihe.lib_home.ui.widget.chart.PieChart
                     android:id="@+id/pc_order"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_275"
@@ -341,12 +341,12 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:orientation="vertical">
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/tv_chart_order"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/font_half_bold_16_4A4C5C"/>
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/font_light_14_4A4C5C"

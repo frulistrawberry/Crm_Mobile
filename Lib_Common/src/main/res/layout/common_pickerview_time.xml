@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
-    <com.baihe.lib_common.widget.font.FontTextView
+    <com.baihe.lib_common.ui.widget.font.FontTextView
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_44"

@@ -14,7 +14,7 @@ import com.baihe.lib_common.service.ILoginService
 import com.baihe.lib_framework.helper.AppHelper
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_login.api.LoginRepository
-import com.baihe.lib_login.login.activity.LoginActivity
+import com.baihe.lib_login.ui.activity.LoginActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

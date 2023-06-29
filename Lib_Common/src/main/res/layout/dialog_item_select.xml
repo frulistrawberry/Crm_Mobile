@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/dp_20">
 
-    <com.baihe.lib_common.widget.font.FontTextView
+    <com.baihe.lib_common.ui.widget.font.FontTextView
         android:id="@+id/bottom_select_item_name_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

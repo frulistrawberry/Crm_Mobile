@@ -7,8 +7,6 @@ import android.os.Bundle
 import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
-import com.baihe.lib_common.widget.keyvalue.KeyValueEditLayout
-import com.baihe.lib_common.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_customer.CustomerViewModel
 import com.baihe.lib_customer.R
 import com.baihe.lib_customer.databinding.CustomerActivityAddOrUpdateCustomerBinding

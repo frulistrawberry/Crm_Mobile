@@ -1,10 +1,8 @@
 package com.baihe.lib_customer
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
-import com.baihe.lib_common.http.response.ListData
 import com.baihe.lib_common.viewmodel.BaseViewModel
-import com.baihe.lib_common.widget.keyvalue.entity.KeyValueEntity
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_customer.api.CustomerRepository
 import com.dylanc.loadingstateview.ViewType
 

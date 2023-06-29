@@ -2,9 +2,9 @@ package com.baihe.lib_home
 
 import android.graphics.Typeface
 import com.baihe.lib_common.entity.StatusText
-import com.baihe.lib_common.widget.keyvalue.entity.KeyValueEntity
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.utils.ResUtils
-import com.baihe.lib_home.widget.chart.PercentValueFormatter
+import com.baihe.lib_home.ui.widget.chart.PercentValueFormatter
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry

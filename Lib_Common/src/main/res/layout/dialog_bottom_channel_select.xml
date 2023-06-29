@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/bottom_channel_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_search"/>
-                <com.baihe.lib_common.widget.font.FontEditText
+                <com.baihe.lib_common.ui.widget.font.FontEditText
                     android:id="@+id/et_search"
                     android:layout_width="0dp"
                     android:layout_weight="1"

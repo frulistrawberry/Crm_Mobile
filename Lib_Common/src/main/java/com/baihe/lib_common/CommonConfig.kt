@@ -10,13 +10,11 @@ import com.baihe.lib_common.http.RequestHandler
 import com.baihe.lib_common.http.cookie.CookieJarImpl
 import com.baihe.lib_common.http.log.server.ApiServer
 import com.baihe.lib_common.provider.UserServiceProvider
-import com.baihe.lib_common.widget.refresh.RefreshHeaderLayout
-import com.baihe.lib_common.widget.state.EmptyViewDelegate
-import com.baihe.lib_common.widget.state.ErrorViewDelegate
-import com.baihe.lib_common.widget.state.LoadingViewDelegate
-import com.baihe.lib_common.widget.state.ToolbarViewDelegate
-import com.baihe.lib_common.R
-import com.baihe.lib_common.http.log.HttpLogStrategy
+import com.baihe.lib_common.ui.widget.refresh.RefreshHeaderLayout
+import com.baihe.lib_common.ui.widget.state.EmptyViewDelegate
+import com.baihe.lib_common.ui.widget.state.ErrorViewDelegate
+import com.baihe.lib_common.ui.widget.state.LoadingViewDelegate
+import com.baihe.lib_common.ui.widget.state.ToolbarViewDelegate
 import com.baihe.lib_framework.helper.AppHelper
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_framework.manager.AppManager
@@ -27,9 +25,6 @@ import com.dylanc.loadingstateview.LoadingStateView
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import okhttp3.OkHttpClient
-import okhttp3.internal.platform.Platform
-import okhttp3.internal.platform.Platform.Companion.INFO
-import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 
@@ -58,7 +53,12 @@ object CommonConfig {
 
     private fun initCommonUi() {
         LoadingStateView.setViewDelegatePool{
-            register(ToolbarViewDelegate(),LoadingViewDelegate(),EmptyViewDelegate(),ErrorViewDelegate())
+            register(
+                ToolbarViewDelegate(),
+                LoadingViewDelegate(),
+                EmptyViewDelegate(),
+                ErrorViewDelegate()
+            )
         }
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ ->
             RefreshHeaderLayout(

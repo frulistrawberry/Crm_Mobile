@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:paddingTop="@dimen/dp_16"
         android:paddingBottom="@dimen/dp_16">
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/kv_edit_key_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:textSize="15sp"
             app:font_textStyle="NORMAL" />
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/kv_edit_key_required_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,4 +54,4 @@
         android:textColorHint="#FFC5C5CE"
         tools:ignore="RtlHardcoded" />
 
-</com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout>
+</com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

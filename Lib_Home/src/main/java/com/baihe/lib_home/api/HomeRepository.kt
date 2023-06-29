@@ -29,14 +29,14 @@ class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
         }
     }
 
-    suspend fun getHomeData():HomeEntity?{
+    suspend fun getHomeData(startDate: String,endDate: String):HomeEntity?{
         var result:HomeEntity? = null
         val waitingListFlow = flow {
             val waitingList = getWaitingList(1, pageSize = 2)
             emit(waitingList)
         }
         val dataViewFlow = flow {
-            val dataView = getDataView()
+            val dataView = getDataView(startDate,endDate)
             emit(dataView)
         }
         val resultFlow = waitingListFlow.combine(dataViewFlow){

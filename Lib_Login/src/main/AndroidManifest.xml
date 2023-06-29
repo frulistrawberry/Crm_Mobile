@@ -3,7 +3,7 @@
     package="com.baihe.lib_login">
     <application >
         <activity
-            android:name=".login.activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing"/>
     </application>

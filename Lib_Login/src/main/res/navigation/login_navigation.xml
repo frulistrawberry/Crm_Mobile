@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/login_send_verify_code_fragment"
-        android:name="com.baihe.lib_login.login.fragment.SendVerifyCodeFragment"
+        android:name="com.baihe.lib_login.ui.fragment.SendVerifyCodeFragment"
         android:label="SendVerifyCodeFragment"
         tools:layout="@layout/login_fragment_send_verify_code">
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/login_password_login_fragment"
-        android:name="com.baihe.lib_login.login.fragment.PasswordLoginFragment"
+        android:name="com.baihe.lib_login.ui.fragment.PasswordLoginFragment"
         android:label="PasswordLoginFragment"
         tools:layout="@layout/login_fragment_password_login"/>
     <fragment
         android:id="@+id/login_verify_login_fragment"
-        android:name="com.baihe.lib_login.login.fragment.VerifyLoginFragment"
+        android:name="com.baihe.lib_login.ui.fragment.VerifyLoginFragment"
         android:label="VerifyLoginFragment"
         tools:layout="@layout/login_fragment_verify_login"/>
     <fragment

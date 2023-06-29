@@ -30,7 +30,7 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center"
                     >
-                    <com.baihe.lib_common.widget.font.FontTextView
+                    <com.baihe.lib_common.ui.widget.font.FontTextView
                         android:id="@+id/tv_boss"
                         style="@style/font_half_bold_16_4A4C5C"
                         android:layout_width="wrap_content"

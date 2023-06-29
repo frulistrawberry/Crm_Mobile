@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:gravity="center_vertical"
             >
 
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/kv_edit_key_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:text="联系方式"
                 app:font_textStyle="NORMAL" />
 
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/kv_edit_key_required_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 app:font_textStyle="HALF_BOLD" />
 
         </LinearLayout>
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/kv_edit_contact_tip_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/kv_edit_phone_key_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:textSize="15sp"
                 app:font_textStyle="NORMAL"
                 android:text="电话"/>
-            <com.baihe.lib_common.widget.font.FontEditText
+            <com.baihe.lib_common.ui.widget.font.FontEditText
                 android:id="@+id/kv_edit_value_phone_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/kv_edit_wechat_key_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:textSize="15sp"
                 app:font_textStyle="NORMAL"
                 android:text="微信"/>
-            <com.baihe.lib_common.widget.font.FontEditText
+            <com.baihe.lib_common.ui.widget.font.FontEditText
                 android:id="@+id/kv_edit_value_wechat_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -135,4 +135,4 @@
 
 
 
-</com.baihe.lib_common.widget.keyvalue.KeyValueItemLayout>
+</com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

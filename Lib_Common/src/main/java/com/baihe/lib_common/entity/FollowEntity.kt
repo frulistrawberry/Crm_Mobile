@@ -1,6 +1,6 @@
 package com.baihe.lib_common.entity
 
-import com.baihe.lib_common.widget.keyvalue.entity.KeyValueEntity
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 
 data class FollowEntity(

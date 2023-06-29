@@ -2,6 +2,7 @@ package com.baihe.lib_framework.ext
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
+import java.util.Date
 
 object TimeExt{
     //毫秒的long时间转化
@@ -28,6 +29,13 @@ object TimeExt{
     fun Long.formattedDate():String {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         return sdf.format(this)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun String.toMillis():Long{
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val date = sdf.parse(this)
+        return date.time
     }
 
     fun Long.asTwoDigit(): String {

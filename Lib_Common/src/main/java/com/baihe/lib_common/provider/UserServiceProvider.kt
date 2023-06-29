@@ -42,4 +42,9 @@ object UserServiceProvider {
     fun clearUserInfo(){
         userService.clearUserInfo()
     }
+
+    @JvmStatic
+    fun readAgreement(context: Context) = userService.readAgreement(context)
+    @JvmStatic
+    fun readPolicy(context: Context) = userService.readPolicy(context)
 }

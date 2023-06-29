@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.baihe.lib_common.provider.UserServiceProvider
-import com.baihe.lib_common.widget.font.FontStyle
+import com.baihe.lib_common.ui.widget.font.FontStyle
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
 import com.baihe.lib_user.BossSeaEntity

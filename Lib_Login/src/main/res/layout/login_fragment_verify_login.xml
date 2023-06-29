@@ -15,14 +15,14 @@
 
 
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="@string/login_input_verify_code"
             style="@style/font_half_bold_28_4A4C5C" />
 
-        <com.baihe.lib_common.widget.font.FontTextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/tv_mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_marginTop="18dp"
             android:orientation="horizontal">
 
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/tv_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 style="@style/font_normal_12_C5C5CE"
                 />
 
-            <com.baihe.lib_common.widget.font.FontTextView
+            <com.baihe.lib_common.ui.widget.font.FontTextView
                 android:id="@+id/btn_send_verify_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

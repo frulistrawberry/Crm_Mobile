@@ -6,9 +6,11 @@ import com.baihe.http.EasyConfig
 import com.baihe.lib_common.constant.RoutePath.USER_SERVICE_USER
 import com.baihe.lib_common.entity.UserEntity
 import com.baihe.lib_common.service.IUserService
+import com.baihe.lib_common.ui.activity.WebActivity
 import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.storage.StorageManager
 import com.baihe.lib_user.constant.CacheConstant
+import com.baihe.lib_user.constant.UrlConstant
 import com.baihe.lib_user.dialog.BossSeaDialog
 
 @Route(path = USER_SERVICE_USER)
@@ -49,6 +51,14 @@ class UserServiceImp:IUserService {
         StorageManager.remove(CacheConstant.USER_COMPANY_ID)
         EasyConfig.getInstance().removeParam("userId")
         EasyConfig.getInstance().removeParam("companyId")
+    }
+
+    override fun readAgreement(context: Context) {
+        WebActivity.start(context,"用户协议",UrlConstant.AGREEMENT_LIHE)
+    }
+
+    override fun readPolicy(context: Context) {
+        WebActivity.start(context,"隐私政策",UrlConstant.PRIVACY_POLICY)
     }
 
     override fun getBossSeaDialog(
