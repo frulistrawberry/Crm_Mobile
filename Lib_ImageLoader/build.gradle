@@ -48,7 +48,7 @@ afterEvaluate{
             mavenAar(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'imageloader'
-                version rootProject.dependVersion.imageLoaderLibVersion
+                version '1.0.0.0-beta-3-SNAPSHOT'
                 afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                 artifact generateSourcesJar
                 pom.withXml {

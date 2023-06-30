@@ -42,7 +42,7 @@ afterEvaluate{
                 Arr(MavenPublication) {
                     groupId 'com.wedding.crm.lib'
                     artifactId 'login'
-                    version rootProject.dependVersion.loginLibVersion
+                    version '1.0.0.0-beta-5-SNAPSHOT'
                     afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                     artifact generateSourcesJar
                     pom.withXml {

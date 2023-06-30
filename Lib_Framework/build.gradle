@@ -64,8 +64,9 @@ dependencies {
     api rootProject.depsLibs.refreshFooter
     api rootProject.depsLibs.tbssdk
     api rootProject.depsLibs.LoadingStateView
-    api project(path:':Lib_Network')
-    api project(path:':Lib_ImageLoader')
+    api rootProject.depsLibs.networkLib
+    api rootProject.depsLibs.imageLoaderLib
+
 
 
 }
@@ -81,7 +82,7 @@ afterEvaluate{
             Arr(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'framework'
-                version rootProject.dependVersion.frameworkLibVersion
+                version '1.0.0.0-beta-9-SNAPSHOT'
                 afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                 artifact generateSourcesJar
                 pom.withXml {
