@@ -1,7 +1,7 @@
 package com.baihe.lib_common.entity
 
 
-data class UserEntity (
+ data class UserEntity (
     /**
      * 账户
      */
