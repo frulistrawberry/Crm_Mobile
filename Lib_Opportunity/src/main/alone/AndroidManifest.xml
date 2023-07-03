@@ -5,6 +5,12 @@
         android:name="com.baihe.lib_common.CommonApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/oppo_app_name">
+        <activity android:name=".ui.activity.OpportunityListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
     </application>
 

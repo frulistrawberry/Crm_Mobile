@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_36"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:background="@drawable/common_round_white"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_title"
+                style="@style/font_half_bold_16_4A4C5C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/dp_160"
+                android:ellipsize="end"
+                android:maxLines="1" />
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_req_phase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_14"
+                android:minWidth="@dimen/dp_60"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingBottom="@dimen/dp_2"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingEnd="@dimen/dp_8"
+                android:gravity="center"
+                android:textSize="@dimen/sp_12" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_1"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_arrow_right"/>
+
+
+
+
+        </LinearLayout>
+        <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
+            android:id="@+id/kvl_opportunity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginTop="-17dp"
+        android:layout_marginStart="@dimen/dp_40"
+        android:layout_marginEnd="@dimen/dp_40"
+        android:layout_below="@id/ll_content"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:orientation="horizontal">
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/btn_call"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/common_button_round_blue_stroke"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#FF6C8EFF"
+            app:font_textStyle="HALF_BOLD"
+            android:text="打电话"/>
+        <View
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="match_parent"/>
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/btn_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/common_button_round_blue"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            app:font_textStyle="HALF_BOLD"
+            android:text=""/>
+
+    </LinearLayout>
+    <com.baihe.lib_common.ui.widget.font.FontTextView
+        android:id="@+id/tv_order_status"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_21"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12"
+        android:minWidth="@dimen/dp_79"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_centerHorizontal="true"/>
+
+
+
+</RelativeLayout>

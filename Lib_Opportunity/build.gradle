@@ -5,7 +5,6 @@ android {
         if (isBuildModule.toBoolean()) {
             applicationId "com.baihe.lib_opportunity"
         }
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -21,6 +20,8 @@ android {
 }
 
 dependencies {
+
+
 }
 
 afterEvaluate{

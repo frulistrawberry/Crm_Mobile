@@ -19,7 +19,8 @@ public class StatusText implements Serializable {
 
     public enum Mode{
         STROKE,
-        FILL
+        FILL,
+        TOP_HALF_FILL
     }
 
 

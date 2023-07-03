@@ -109,13 +109,12 @@ android {
 
 dependencies{
 
-
-    implementation project(path :':Lib_Common')
-    implementation project(path :':Lib_Framework')
-    implementation project(path :':Lib_Login')
-    implementation project(path :':Lib_Home')
-    implementation project(path :':Lib_User')
-    implementation project(path :':Lib_Customer')
+    implementation project(path:':Lib_Opportunity')
+    implementation rootProject.depsLibs.loginLib
+    implementation rootProject.depsLibs.loginLib
+    implementation rootProject.depsLibs.userLib
+    implementation rootProject.depsLibs.homeLib
+    implementation rootProject.depsLibs.customerLib
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 }

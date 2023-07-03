@@ -10,65 +10,126 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_25"
         android:background="@color/COLOR_FFFFFF"/>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:background="@color/COLOR_FFFFFF"
         android:minHeight="@dimen/dp_50">
-        <ImageView
-            android:id="@+id/iv_left"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50"
-            android:scaleType="centerInside"
-            android:visibility="gone"
-            android:src="@mipmap/navigation_icon"
-            android:layout_centerVertical="true"
-            />
-        <com.baihe.lib_common.ui.widget.font.FontTextView
-            android:id="@+id/tv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/dp_50"
+        <RelativeLayout
+            android:id="@+id/rl_left"
             android:minWidth="@dimen/dp_50"
-            android:paddingStart="@dimen/dp_20"
-            android:paddingEnd="@dimen/dp_20"
-            android:gravity="center"
-            android:visibility="gone"
-            style="@style/font_normal_14_4A4C5C"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_50"
+                android:minWidth="@dimen/dp_50"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingEnd="@dimen/dp_20"
+                android:gravity="center"
+                android:visibility="gone"
+                style="@style/font_normal_14_4A4C5C"
+                />
+            <ImageView
+                android:id="@+id/iv_left"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:scaleType="centerInside"
+                android:visibility="gone"
+                android:src="@mipmap/navigation_icon"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:maxEms="10"
+                android:maxLines="1"
+                android:ellipsize="end"
+                style="@style/font_half_bold_18_4A4C5C" />
 
-        <com.baihe.lib_common.ui.widget.font.FontTextView
-            android:id="@+id/tv_title"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:contentPaddingLeft="@dimen/dp_16"
+                app:contentPaddingRight="@dimen/dp_16"
+                app:contentPaddingTop="@dimen/dp_6"
+                app:contentPaddingBottom="@dimen/dp_6"
+                app:cardCornerRadius="@dimen/dp_20"
+                app:cardBackgroundColor="#FFF5F5F9"
+                app:cardMaxElevation="0dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_search"/>
+                    <com.baihe.lib_common.ui.widget.font.FontEditText
+                        android:id="@+id/et_search2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:font_textStyle="LIGHT"
+                        android:singleLine="true"
+                        android:layout_marginStart="@dimen/dp_12"
+                        android:textColor="@color/COLOR_4A4C5C"
+                        android:textSize="@dimen/sp_14"
+                        android:imeOptions="actionSearch"
+                        android:textColorHint="#FFC5C5CE"
+                        android:hint="请输入机会名称/手机号/客户姓名"
+                        android:background="#00000000"/>
+                    <ImageView
+                        android:id="@+id/btn_cancel2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:src="@mipmap/ic_del"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:maxEms="10"
-            android:maxLines="1"
-            android:ellipsize="end"
-            style="@style/font_half_bold_18_4A4C5C" />
-
-        <ImageView
-            android:id="@+id/iv_right"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50"
-            android:scaleType="centerInside"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
-        <com.baihe.lib_common.ui.widget.font.FontTextView
-            android:id="@+id/tv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/dp_50"
             android:minWidth="@dimen/dp_50"
-            android:paddingStart="@dimen/dp_20"
-            android:paddingEnd="@dimen/dp_20"
-            android:gravity="center"
-            android:layout_alignParentEnd="true"
-            android:visibility="gone"
-            style="@style/font_normal_14_4A4C5C"
-            />
-    </RelativeLayout>
+            >
+            <ImageView
+                android:id="@+id/iv_right"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:scaleType="centerInside"
+                android:visibility="gone" />
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_50"
+                android:minWidth="@dimen/dp_50"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingEnd="@dimen/dp_20"
+                android:gravity="center"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                style="@style/font_normal_14_4A4C5C"
+                />
+        </RelativeLayout>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_search"
         android:layout_width="match_parent"
@@ -117,17 +178,15 @@
                     android:textColorHint="#FFC5C5CE"
                     android:hint="请输入机会名称/手机号/客户姓名"
                     android:background="#00000000"/>
+                <ImageView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:src="@mipmap/ic_del"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-        <com.baihe.lib_common.ui.widget.font.FontTextView
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/font_normal_15_A8A9B1"
-            android:visibility="gone"
-            android:layout_marginStart="@dimen/dp_12"
-            android:text="取消"/>
 
     </LinearLayout>
 

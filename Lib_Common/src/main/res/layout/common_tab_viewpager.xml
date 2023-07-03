@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:background="@drawable/common_bottom_round_white"
         android:orientation="horizontal">
         <com.google.android.material.tabs.TabLayout
@@ -24,6 +25,43 @@
             app:tabMode="fixed"
             app:tabSelectedTextColor="#FF6C8EFF"
             app:tabTextColor="#FF4A4C5C"/>
+        <LinearLayout
+            android:id="@+id/ll_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="horizontal">
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/font_normal_14_4A4C5C"
+                android:text="排序"/>
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@mipmap/ic_arrow_down_black"/>
+            <View
+                android:layout_width="@dimen/dp_0.5"
+                android:layout_height="@dimen/dp_14"
+                android:background="#FFE2E3EE"
+                android:layout_marginLeft="@dimen/dp_7"/>
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/tv_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/font_normal_14_4A4C5C"
+                android:text="筛选"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:drawableRight="@mipmap/ic_fillter"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_20"/>
+
+        </LinearLayout>
 
     </LinearLayout>
     <androidx.viewpager2.widget.ViewPager2

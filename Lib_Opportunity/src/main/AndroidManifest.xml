@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baihe.lib_opportunity">
 
+    <application>
+        <activity android:name=".ui.activity.OpportunityListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.OpportunityDetailActivity"
+            android:screenOrientation="portrait"/>
+    </application>
 </manifest>

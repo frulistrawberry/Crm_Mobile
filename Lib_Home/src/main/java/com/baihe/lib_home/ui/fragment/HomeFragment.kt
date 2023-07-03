@@ -8,6 +8,7 @@ import com.baihe.lib_common.ui.dialog.DateDialogUtils
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
 import com.baihe.lib_common.provider.CustomerServiceProvider
+import com.baihe.lib_common.provider.OpportunityServiceProvider
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.base.BaseMvvmFragment
@@ -214,7 +215,7 @@ class HomeFragment: BaseMvvmFragment<HomeFragmentHomeBinding, HomeViewModel>() {
 
     private fun initHeaderListener() {
         decorDelegate.mBinding.btnOpportunity.click {
-
+            OpportunityServiceProvider.toOpportunityList(requireContext())
         }
         decorDelegate.mBinding.btnCustomer.click {
             CustomerServiceProvider.toCustomerList(requireContext())
