@@ -28,4 +28,10 @@ object RoutePath {
     const val OPPORTUNITY_SERVICE_OPPORTUNITY = "/opportunity/service/opportunity"
 
 
+    /**
+     * 主页模块-消息服务
+     */
+    const val HOME_SERVICE_MESSAGE = "/message/service/message"
+
+
 }
