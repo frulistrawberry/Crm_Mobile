@@ -114,6 +114,7 @@ dependencies{
     implementation rootProject.depsLibs.loginLib
     implementation rootProject.depsLibs.userLib
     implementation rootProject.depsLibs.homeLib
+    implementation project(path:':Lib_Message')
     implementation rootProject.depsLibs.customerLib
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
