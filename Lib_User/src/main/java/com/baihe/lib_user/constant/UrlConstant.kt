@@ -4,4 +4,8 @@ object UrlConstant {
     const val GET_BOSS_SEA = "/owner/workspace/getBossSea"
     const val AGREEMENT_LIHE = "https://liheproapp.hunli.baihe.com/static/agreement_lihe.html"
     const val PRIVACY_POLICY = "https://gcrmh5.hunli.baihe.com/tpl/yinsi.html"
+    const val SUBMIT_PASSWORD = "/x/x/x"
+
+    /*** 退出登录接口*/
+    const val USER_LOGOUT = "/outer/setting/logout"
 }
