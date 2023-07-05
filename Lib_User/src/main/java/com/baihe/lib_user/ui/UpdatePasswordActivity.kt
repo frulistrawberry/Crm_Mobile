@@ -1,14 +1,10 @@
 package com.baihe.lib_user.ui
 
 import android.os.Bundle
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
-import com.baihe.lib_common.databinding.CommonActivityFollowDetailBinding
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
-import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
-import com.baihe.lib_common.ext.StringExt.isPhone
-import com.baihe.lib_common.provider.LoginServiceProvider
-import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.service.ILoginService
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
@@ -18,9 +14,9 @@ import com.baihe.lib_user.UserViewModel
 import com.baihe.lib_user.databinding.UserActivityResetPasswordBinding
 import com.baihe.lib_user.service.UserServiceImp
 
+@Route(path = RoutePath.USER_SERVICE_RESET_PASSWORD)
 class UpdatePasswordActivity :
     BaseMvvmActivity<UserActivityResetPasswordBinding, UserViewModel>() {
-
 
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {

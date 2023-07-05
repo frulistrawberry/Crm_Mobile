@@ -22,11 +22,11 @@ ext {
             frameworkLibVersion    :'1.0.0.0-beta-9-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-4-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-3-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-xkk-6-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-byd-1-SNAPSHOT',
 
 
             //models
-            userLibVersion         :'1.0.0.0-beta-6-SNAPSHOT',
+            userLibVersion         :'1.0.0.0-beta-7-SNAPSHOT',
             homeLibVersion         :'1.0.0.0-xkk-1-SNAPSHOT',
             loginLibVersion        :'1.0.0.0-beta-5-SNAPSHOT',
             customerLibVersion     :'1.0.0.0-beta-4-SNAPSHOT',

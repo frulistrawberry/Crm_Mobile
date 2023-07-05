@@ -1,7 +1,7 @@
 package com.baihe.lib_user.ui
 
 import android.os.Bundle
-import android.widget.CompoundButton
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
 import com.baihe.lib_common.service.ILoginService
@@ -13,6 +13,7 @@ import com.baihe.lib_user.UserViewModel
 import com.baihe.lib_user.databinding.UserActivitySettingBinding
 import com.baihe.lib_user.service.UserServiceImp
 
+@Route(path = RoutePath.USER_SERVICE_SETTING)
 class SettingActivity :
     BaseMvvmActivity<UserActivitySettingBinding, UserViewModel>() {
 
