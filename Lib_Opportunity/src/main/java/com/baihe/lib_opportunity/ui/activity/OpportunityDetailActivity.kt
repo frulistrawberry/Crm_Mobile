@@ -5,9 +5,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.R
+import com.baihe.lib_common.ui.activity.FollowDetailActivity
 import com.baihe.lib_common.ui.adapter.FollowListAdapter
 import com.baihe.lib_common.ui.dialog.MoreActionDialog
+import com.baihe.lib_common.ui.widget.AxisItemDecoration
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.ext.ViewExt.gone
@@ -17,6 +20,7 @@ import com.baihe.lib_framework.utils.ResUtils
 import com.baihe.lib_opportunity.OpportunityViewModel
 import com.baihe.lib_opportunity.databinding.OppoActivityOpportunityDetailBinding
 import com.dylanc.loadingstateview.ViewType
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 
 class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBinding,OpportunityViewModel>() {
     private val oppoId by lazy {
@@ -139,10 +143,23 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
         setToolbar {
             title = "机会详情"
         }
+        mBinding.rvFollow.apply {
+            layoutManager = LinearLayoutManager(this@OpportunityDetailActivity)
+            adapter = followAdapter
+            addItemDecoration(AxisItemDecoration(this@OpportunityDetailActivity))
+        }
+        mBinding.srlRoot.setEnableLoadMore(false)
+
     }
 
     override fun initListener() {
         super.initListener()
+        mBinding.srlRoot.setOnRefreshListener(OnRefreshListener {
+            mViewModel.getOppoDetail(oppoId)
+        })
+        followAdapter.onFollowItemClickListener = {
+            FollowDetailActivity.start(this,it)
+        }
     }
 
     override fun initData() {
@@ -157,18 +174,26 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
             }
             2->{
                 // TODO: 下发订单
+                ActionActivity.start(this,2,oppoId)
             }
             3->{
                 // TODO: 编辑机会
+                AddOrUpdateOpportunityActivity.start(this,oppoId)
             }
             4->{
                 // TODO: 转移机会
-
+                ActionActivity.start(this,1,oppoId)
             }
             5->{
                 // TODO: 归档机会
 
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK)
+            mViewModel.getOppoDetail(oppoId)
     }
 }

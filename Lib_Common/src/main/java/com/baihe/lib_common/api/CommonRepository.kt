@@ -29,6 +29,14 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
         }
     }
 
+    suspend fun getCompanyUser():List<RecordUserEntity>?{
+        return requestResponse {
+            EasyHttp.get(lifecycleOwner)
+                .api(CommonApi(UrlConstant.SEARCH_USER,null))
+                .execute(object : ResponseClass<BaseResponse<List<RecordUserEntity>>>() {})
+        }
+    }
+
     suspend fun getUserChannelList():List<ChannelEntity>?{
         return requestResponse {
             EasyHttp.get(lifecycleOwner)

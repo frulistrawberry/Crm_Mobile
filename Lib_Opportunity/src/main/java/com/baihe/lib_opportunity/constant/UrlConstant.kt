@@ -2,7 +2,7 @@ package com.baihe.lib_opportunity.constant
 
 object UrlConstant {
     const val OPPORTUNITY_LIST = "/owner/requirement/opportunityList"
-    const val OPPORTUNITY_DETAIL = "/owner/requirement/reqDetail"
+    const val OPPORTUNITY_DETAIL = "/owner/customer/reqDetail"
     const val ADD_OPPORTUNITY = "/owner/requirement/createNewReq"
     const val UPDATE_OPPORTUNITY = "/owner/requirement/updateNewReq"
     const val DELETE_OPPORTUNITY = "/owner/requirement/deleteNewReq"

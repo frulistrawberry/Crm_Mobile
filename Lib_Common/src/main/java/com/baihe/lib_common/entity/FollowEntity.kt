@@ -1,5 +1,6 @@
 package com.baihe.lib_common.entity
 
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 
@@ -20,6 +21,12 @@ data class FollowEntity(
     val timeText:String,
     val title:String,
     val time:String,
+    val contact_way_txt:String,
+    val phase_txt:String,
+    val reserve_txt:String,
+    val reserve_time:String,
+    val comment:String,
+    val attachment:String?,
     @SerializedName("row")
     val content:List<KeyValueEntity>?
 
@@ -49,6 +56,60 @@ data class FollowEntity(
                     }
                 }
 
+            })
+        }
+        return showArray
+
+    }
+
+    fun followDetail():List<KeyValueEntity>{
+        val showArray = mutableListOf<KeyValueEntity>()
+        showArray.apply {
+            add(KeyValueEntity().apply {
+                key = "跟进方式"
+                `val` = contact_way_txt
+            })
+            add(KeyValueEntity().apply {
+                key = "跟进结果"
+                `val` = phase_txt
+            })
+            add(KeyValueEntity().apply {
+                key = "预约进店"
+                `val` = reserve_txt
+            })
+            add(KeyValueEntity().apply {
+                key = "预约时间"
+                `val` = reserve_time
+            })
+            add(KeyValueEntity().apply {
+                key = "下次回访时间"
+                `val` = nextContactTime
+            })
+            add(KeyValueEntity().apply {
+                key = "沟通内容"
+                `val` = comment
+            })
+            add(KeyValueEntity().apply {
+                key = "附件"
+                `val` = ""
+                event = KeyValEventEntity().apply {
+                    action = "attach"
+                    attach = mutableListOf()
+                    val urls = attachment?.split(",")?: mutableListOf()
+                    if (urls.isEmpty() && !attachment.isNullOrEmpty()){
+                        attach.add(attachment)
+                    }else{
+                        attach.addAll(urls)
+                    }
+                }
+            })
+            add(KeyValueEntity().apply {
+                key = "跟进人"
+                `val` = createByTxt
+            })
+            add(KeyValueEntity().apply {
+                key = "跟进时间"
+                `val` = createTime
             })
         }
         return showArray

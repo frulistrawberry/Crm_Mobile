@@ -49,6 +49,16 @@ class CommonViewModel:BaseViewModel() {
         }
     }
 
+    fun getCompanyUser(){
+        launchUI({
+                _,_ -> loadingDialogLiveData.value = false
+        }){
+            val result = repository.getCompanyUser()
+            recordUserListLiveData.value = result
+            loadingDialogLiveData.value = false
+        }
+    }
+
     fun call(customerId:String){
         launchUI({
             _,_ -> loadingDialogLiveData.value = false

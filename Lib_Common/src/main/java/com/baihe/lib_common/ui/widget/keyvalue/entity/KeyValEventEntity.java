@@ -22,11 +22,17 @@ public class KeyValEventEntity implements Serializable {
      */
     private String icon;
 
+    private List<String> attach;
+
     private String format = "yyyy-MM-dd";
 
+    public List<String> getAttach() {
+        return attach;
+    }
 
-
-
+    public void setAttach(List<String> attach) {
+        this.attach = attach;
+    }
 
     public String getFormat() {
         return format;

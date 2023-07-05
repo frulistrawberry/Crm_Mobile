@@ -98,11 +98,4 @@ data class CustomerDetailEntity(
         return showArray
     }
 
-    fun followShowArray():List<List<KeyValueEntity>>{
-        val  showArray = mutableListOf<List<KeyValueEntity>>()
-        follow?.forEach {
-            showArray.add(it.showArray())
-        }
-        return showArray
-    }
 }

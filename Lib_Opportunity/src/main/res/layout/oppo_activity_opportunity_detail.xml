@@ -33,6 +33,9 @@
                             android:id="@+id/tv_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxWidth="@dimen/dp_160"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             style="@style/font_half_bold_18_4A4C5C"/>
                         <RelativeLayout
                             android:layout_width="0dp"
@@ -233,6 +236,7 @@
         android:paddingBottom="@dimen/dp_16"
         android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_20"
+        android:background="@drawable/common_top_round_white"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/btn_more"

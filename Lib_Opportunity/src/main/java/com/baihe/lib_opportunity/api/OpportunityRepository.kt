@@ -17,12 +17,12 @@ import com.baihe.lib_opportunity.OpportunityListItemEntity
 import com.baihe.lib_opportunity.constant.UrlConstant
 
 class OpportunityRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
-    suspend fun opportunityList(page:Int,isHistorical:String?="0",name:String?,filter:LinkedHashMap<String,Any?>?,pageSize:Int = 10): ListData<OpportunityListItemEntity>? {
+    suspend fun opportunityList(page:Int,reqPhase:String?="0",name:String?,filter:LinkedHashMap<String,Any?>?,pageSize:Int = 10): ListData<OpportunityListItemEntity>? {
         return requestResponse {
             val params = JsonParam.newInstance()
                 .putParamValue("page",page)
                 .putParamValue("name",name)
-                .putParamValue("isHistorical",isHistorical)
+                .putParamValue("reqPhase",reqPhase)
                 .putParamValue("pageSize",pageSize)
                 .putParamValue(filter)
             EasyHttp.get(lifecycleOwner)
@@ -83,25 +83,20 @@ class OpportunityRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle
         }
     }
 
-    suspend fun transferOpportunity(oppoId:String,ownerId:String,customerId:String):Any?{
+    suspend fun transferOpportunity(params:LinkedHashMap<String,Any?>):Any?{
         return requestResponse {
             val jsonParam = JsonParam.newInstance()
-                .putParamValue("reqId",oppoId)
-                .putParamValue("ownerId",ownerId)
-                .putParamValue("customerId",customerId)
+                .putParamValue(params)
             EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.TRANSFER_OPPORTUNITY,jsonParam.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Any>>() {})
         }
     }
 
-    suspend fun dispatchOrder(oppoId:String,ownerId:String, customerId:String,arrivalStatus:String):Any?{
+    suspend fun dispatchOrder(params:LinkedHashMap<String,Any?>):Any?{
         return requestResponse {
             val jsonParam = JsonParam.newInstance()
-                .putParamValue("reqId",oppoId)
-                .putParamValue("ownerId",ownerId)
-                .putParamValue("customerId",customerId)
-                .putParamValue("arrival_status",arrivalStatus)
+                .putParamValue(params)
             EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.DISPATCH_ORDER,jsonParam.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Any>>() {})

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/kv_edit_key_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4A4C5C"
+            android:textSize="15sp"
+            app:font_textStyle="LIGHT" />
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_required_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="*"
+            android:textColor="#FF1E5A"
+            android:textSize="12sp"
+            app:font_textStyle="HALF_BOLD" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <LinearLayout
+            android:id="@+id/kv_edit_value_start_time_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/time_label"
+                android:gravity="center"
+                android:text="始"
+                android:textColor="#667BFF"
+                android:textSize="12sp"
+                app:font_textStyle="LIGHT" />
+
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/kv_edit_value_start_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1.0"
+                android:text="请选择起始时间"
+                android:textColor="#C5C5CE"
+                android:textSize="16sp"
+                app:font_textStyle="LIGHT" />
+
+            <ImageView
+                android:id="@+id/kv_edit_value_start_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:src="@mipmap/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="10dp"
+            android:background="#d7dffa" />
+
+        <LinearLayout
+            android:id="@+id/kv_edit_value_end_time_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/time_label"
+                android:gravity="center"
+                android:text="末"
+                android:textColor="#667BFF"
+                android:textSize="12sp"
+                app:font_textStyle="LIGHT" />
+
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/kv_edit_value_end_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1.0"
+                android:text="请选择起始时间"
+                android:textColor="#C5C5CE"
+                android:textSize="16sp"
+                app:font_textStyle="LIGHT" />
+
+            <ImageView
+                android:id="@+id/kv_edit_value_end_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:src="@mipmap/ic_arrow_right" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

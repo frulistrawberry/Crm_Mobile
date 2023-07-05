@@ -90,4 +90,39 @@ class OpportunityViewModel: BaseViewModel() {
         }
     }
 
+    fun dispatchOrder(params:LinkedHashMap<String,Any?>){
+        loadingDialogLiveData.value = true
+        launchUI({
+                _,_-> loadingDialogLiveData.value = false
+        }) {
+
+            opportunityRepository.dispatchOrder(params)
+
+            oppoAddOrUpdateLiveData.value = true
+        }
+    }
+    fun transferOppo(params:LinkedHashMap<String,Any?>){
+        loadingDialogLiveData.value = true
+        launchUI({
+                _,_-> loadingDialogLiveData.value = false
+        }) {
+
+            opportunityRepository.transferOpportunity(params)
+
+            oppoAddOrUpdateLiveData.value = true
+        }
+    }
+
+    fun deleteOppo(params:String){
+        loadingDialogLiveData.value = true
+        launchUI({
+                _,_-> loadingDialogLiveData.value = false
+        }) {
+
+            opportunityRepository.deleteOpportunity(params)
+
+            oppoAddOrUpdateLiveData.value = true
+        }
+    }
+
 }

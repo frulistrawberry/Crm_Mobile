@@ -308,13 +308,13 @@ data class OpportunityDetailEntity(
         if ((phase == "230" || phase == "240")&&(order?.orderStatus.isNullOrEmpty()||order?.orderStatus == "0")){
             buttons.add(ButtonTypeEntity().apply {
                 name = "下发订单"
-                type = 1
+                type = 2
             })
         }
 
         buttons.add(ButtonTypeEntity().apply {
             name = "写跟进"
-            type = 2
+            type = 1
         })
         return buttons
     }

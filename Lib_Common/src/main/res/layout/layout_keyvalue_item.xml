@@ -63,6 +63,11 @@
                 android:src="@mipmap/ic_arrow_right" />
 
         </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_attach"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 </com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

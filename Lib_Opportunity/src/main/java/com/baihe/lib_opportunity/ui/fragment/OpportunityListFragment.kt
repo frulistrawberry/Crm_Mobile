@@ -17,8 +17,8 @@ import com.dylanc.loadingstateview.ViewType
 
 class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityViewModel>() {
 
-    private val isHistorical by lazy {
-        arguments?.getString("isHistorical","0")
+    private val reqPhase by lazy {
+        arguments?.getString("reqPhase","0")
     }
     private val adapter by lazy {
         OpportunityListAdapter().apply {
@@ -46,10 +46,10 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
 
     companion object {
         @JvmStatic
-        fun newFragment(isHistorical:String): OpportunityListFragment {
+        fun newFragment(reqPhase:String): OpportunityListFragment {
             return OpportunityListFragment().apply {
                 val arguments = Bundle()
-                arguments.putString("isHistorical",isHistorical)
+                arguments.putString("reqPhase",reqPhase)
                 setArguments(arguments)
             }
         }
@@ -118,11 +118,11 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
         super.initListener()
         mBinding?.srlRoot!!.setOnRefreshListener{
             page = 1
-            mViewModel.getOppoList(page,isHistorical!!)
+            mViewModel.getOppoList(page,reqPhase!!)
         }
         mBinding?.srlRoot!!.setOnLoadMoreListener {
             page++
-            mViewModel.getOppoList(page,isHistorical!!)
+            mViewModel.getOppoList(page,reqPhase!!)
         }
         adapter.onItemClickListener = {_,position->
             val item = adapter.getData()[position]
@@ -132,6 +132,6 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
 
     override fun initData() {
         super.initData()
-        mViewModel.getOppoList(page,isHistorical!!)
+        mViewModel.getOppoList(page,reqPhase!!)
     }
 }

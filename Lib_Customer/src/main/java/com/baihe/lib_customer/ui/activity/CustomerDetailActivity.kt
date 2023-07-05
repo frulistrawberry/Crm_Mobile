@@ -115,6 +115,7 @@ class CustomerDetailActivity:
             val item = reqAdapter.getData()[position]
         }
 
+
     }
 
     override fun initData() {

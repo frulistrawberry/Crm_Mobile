@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_root"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp">
@@ -38,6 +39,7 @@
         android:paddingBottom="@dimen/dp_16"
         android:paddingStart="@dimen/dp_20"
         android:paddingEnd="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="@drawable/common_top_round_white">
         <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/btn_commit"

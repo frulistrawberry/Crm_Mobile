@@ -15,8 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.baihe.lib_common.R;
+import com.baihe.lib_common.ui.widget.keyvalue.adapter.AttachImageAdapter;
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity;
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity;
 import com.baihe.lib_common.ui.widget.font.FontStyle;
@@ -206,10 +209,11 @@ public class KeyValueLayout extends LinearLayout {
         TextView kv_key_tv = view.findViewById(R.id.kv_key_tv);
         TextView kv_value_tv = view.findViewById(R.id.kv_value_tv);
         if (kv_key_tv != null) {
-            kv_key_tv.setText(keyValueEntity.getKey() + (keyColon ? "：" : ""));
+            String key = !TextUtils.isEmpty(keyValueEntity.getKey()) ? keyValueEntity.getKey() : !TextUtils.isEmpty(keyValueEntity.getKey2())?keyValueEntity.getKey2():"";
+            kv_key_tv.setText(key + (keyColon ? "：" : ""));
         }
         if (kv_value_tv != null) {
-            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() : "未填写";
+            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() : !TextUtils.isEmpty(keyValueEntity.getVal2())?keyValueEntity.getVal2():"";
             kv_value_tv.setText(value);
         }
         if (keyValueEntity.getEvent() != null) {
@@ -224,15 +228,18 @@ public class KeyValueLayout extends LinearLayout {
     private void setEvent(View view, KeyValueEntity keyValueEntity){
         KeyValEventEntity keyValEventEntity = keyValueEntity.getEvent();
         LinearLayout kv_value_right_ll = view.findViewById(R.id.kv_value_right_ll);
+        RelativeLayout kv_value_rl = view.findViewById(R.id.kv_value_rl);
+        TextView kv_value_tv = view.findViewById(R.id.kv_value_tv);
+        RecyclerView kv_value_attach_rv = view.findViewById(R.id.rv_attach);
         ImageView kv_value_right_icon_iv = view.findViewById(R.id.kv_value_right_icon_iv);
         TextView kv_value_left_name_tv = view.findViewById(R.id.kv_value_left_name_tv);
         kv_value_left_name_tv.setVisibility(View.GONE);
-        if (!TextUtils.isEmpty(keyValEventEntity.getName()) || !TextUtils.isEmpty(keyValEventEntity.getIcon())) {
+        if (!TextUtils.isEmpty(keyValEventEntity.getName()) || !TextUtils.isEmpty(keyValEventEntity.getIcon())||keyValEventEntity.getAttach()!=null) {
             kv_value_right_ll.setVisibility(View.VISIBLE);
         } else {
             kv_value_right_ll.setVisibility(View.GONE);
         }
-
+        kv_value_attach_rv.setVisibility(GONE);
         if (!TextUtils.isEmpty(keyValEventEntity.getName())) {
             kv_value_right_icon_iv.setVisibility(View.VISIBLE);
             kv_value_left_name_tv.setVisibility(View.VISIBLE);
@@ -245,8 +252,18 @@ public class KeyValueLayout extends LinearLayout {
             if (drawableId == 0) { //未找到资源隐藏
                 kv_value_right_icon_iv.setVisibility(View.GONE);
             } else {
+                LinearLayout.LayoutParams valueLayoutParams = (LayoutParams) kv_value_rl.getLayoutParams();
+                valueLayoutParams.gravity = Gravity.CENTER_VERTICAL;
                 kv_value_right_icon_iv.setImageResource(drawableId);
             }
+        } else if (keyValEventEntity.getAttach() != null) {
+            kv_value_tv.setText("");
+            kv_value_right_icon_iv.setVisibility(GONE);
+            kv_value_attach_rv.setVisibility(VISIBLE);
+            kv_value_attach_rv.setLayoutManager(new GridLayoutManager(context,2));
+            AttachImageAdapter adapter = new AttachImageAdapter();
+            kv_value_attach_rv.setAdapter(adapter);
+            adapter.setData(keyValEventEntity.getAttach());
         }
 
         setAction(view, kv_value_right_ll, keyValueEntity);

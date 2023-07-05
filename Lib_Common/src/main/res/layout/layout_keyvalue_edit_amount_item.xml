@@ -45,7 +45,7 @@
         android:includeFontPadding="false"
         android:paddingBottom="@dimen/dp_16"
         android:gravity="left|top"
-        android:inputType="textMultiLine"
+        android:inputType="numberDecimal"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
         android:textSize="15sp"
@@ -53,15 +53,5 @@
         android:text=""
         android:textColorHint="#FFC5C5CE"
         tools:ignore="RtlHardcoded" />
-    <com.baihe.lib_common.ui.widget.font.FontTextView
-        android:id="@+id/kv_edit_choose_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FF6C8EFF"
-        android:textSize="12sp"
-        android:text="选择客户"
-        android:visibility="gone"
-        android:layout_marginRight="@dimen/dp_20"
-        app:font_textStyle="NORMAL" />
 
 </com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

@@ -19,6 +19,15 @@ public class KeyValueEntity implements Serializable {
      */
     @SerializedName("value")
     private String val;
+    @SerializedName("val")
+    private String val2;
+
+    @SerializedName("key")
+    private String key2;
+
+    @SerializedName("label")
+    private String key3;
+
 
     private String type;
 
@@ -45,6 +54,8 @@ public class KeyValueEntity implements Serializable {
      */
     @SerializedName("is_channge")
     private String editable;
+
+    private String paramKey;
 
 
     /**
@@ -75,6 +86,38 @@ public class KeyValueEntity implements Serializable {
      * 行为交互
      */
     private KeyValEventEntity event;
+
+    public String getParamKey() {
+        return paramKey;
+    }
+
+    public void setParamKey(String paramKey) {
+        this.paramKey = paramKey;
+    }
+
+    public String getKey3() {
+        return key3;
+    }
+
+    public void setKey3(String key3) {
+        this.key3 = key3;
+    }
+
+    public String getKey2() {
+        return key2;
+    }
+
+    public void setKey2(String key2) {
+        this.key2 = key2;
+    }
+
+    public String getVal2() {
+        return val2;
+    }
+
+    public void setVal2(String val2) {
+        this.val2 = val2;
+    }
 
     public String getChannelId() {
         return channelId;
@@ -188,6 +231,8 @@ public class KeyValueEntity implements Serializable {
         KeyValEventEntity keyValEventEntity = new KeyValEventEntity();
         keyValEventEntity.setAction(type);
         keyValEventEntity.setOptions(option);
+        if (!TextUtils.isEmpty(paramKey))
+            keyValEventEntity.setParamKey(paramKey);
         return keyValEventEntity;
     }
 }

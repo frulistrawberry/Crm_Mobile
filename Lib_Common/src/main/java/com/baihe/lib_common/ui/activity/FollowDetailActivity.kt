@@ -1,5 +1,7 @@
 package com.baihe.lib_common.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.baihe.lib_common.R
 import com.baihe.lib_common.databinding.CommonActivityFollowDetailBinding
@@ -13,6 +15,14 @@ class FollowDetailActivity: BaseMvvmActivity<CommonActivityFollowDetailBinding, 
 
     private val followId: String by lazy {
         intent.getStringExtra("followId")
+    }
+
+    companion object{
+        fun start(context: Context,followId:String){
+            context.startActivity(Intent(context,FollowDetailActivity::class.java).apply {
+                putExtra("followId",followId)
+            })
+        }
     }
 
     override fun initViewModel() {
@@ -35,7 +45,7 @@ class FollowDetailActivity: BaseMvvmActivity<CommonActivityFollowDetailBinding, 
             }
         }
         mViewModel.followDetailLiveData.observe(this){
-            mBinding.kvlFollow.setData(it.content)
+            mBinding.kvlFollow.setData(it.followDetail())
         }
     }
 
