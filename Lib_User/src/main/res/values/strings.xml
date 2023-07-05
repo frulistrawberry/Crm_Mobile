@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="user_app_name">礼合用户模块</string>
+    <string name="user_setting_tip">密码需包含大写字母、小写字母、特殊符号、数字中的任意三项，密码长度为8–15位</string>
+    <string name="user_phone_key">手机号码</string>
+    <string name="user_check_update">检查更新</string>
+    <string name="user_private_rule">隐私政策</string>
+    <string name="user_push_msg">推送通知</string>
+    <string name="user_delete_account">注销账号</string>
+    <string name="user_exit_login">退出登录</string>
+    <string name="user_update_pass">修改密码</string>
+    <string name="user_setting">设置</string>
+    <string name="user_sure_commit">确认</string>
+    <string name="user_old_password">旧密码</string>
+    <string name="user_old_password_hint">请输入旧密码</string>
+    <string name="user_new_password">新密码</string>
+    <string name="user_new_password_hint">请输入新密码</string>
+    <string name="user_confirm_password">确认密码</string>
+    <string name="user_confirm_password_hint">请确认密码</string>
 </resources>

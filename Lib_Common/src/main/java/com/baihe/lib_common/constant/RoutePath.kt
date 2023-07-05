@@ -28,4 +28,20 @@ object RoutePath {
     const val OPPORTUNITY_SERVICE_OPPORTUNITY = "/opportunity/service/opportunity"
 
 
+    /**
+     * 主页模块-消息服务
+     */
+    const val HOME_SERVICE_MESSAGE = "/message/service/message"
+
+
+    /**
+     * 用户模块-修改密码
+     */
+    const val USER_SERVICE_RESET_PASSWORD = "/user/service/reset_password"
+
+    /**
+     * 用户模块-设置
+     */
+    const val USER_SERVICE_SETTING = "/user/service/setting"
+
 }
