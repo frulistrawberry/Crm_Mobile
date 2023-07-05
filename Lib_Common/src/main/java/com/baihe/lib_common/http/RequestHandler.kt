@@ -32,8 +32,11 @@ class RequestHandler :IRequestHandler {
             val body = response.body
                 ?: throw ApiException(ERROR.UNKNOWN)
             val text = body.string()
-
-
+            EasyLog.printKeyValue(httpRequest, "RequestUrl", response.request.url.toString())
+            EasyLog.printKeyValue(httpRequest, "RequestMethod", httpRequest.requestMethod)
+            EasyLog.printLine(httpRequest)
+            EasyLog.printJson(httpRequest,text)
+            EasyLog.printLine(httpRequest)
             val result:Any =
                 try {
                     val responseJSONObject = JsonParser.parseString(text).asJsonObject
@@ -47,11 +50,7 @@ class RequestHandler :IRequestHandler {
                 }catch (e: Exception){
                     throw e
                 }
-            EasyLog.printKeyValue(httpRequest, "RequestUrl", response.request.url.toString())
-            EasyLog.printKeyValue(httpRequest, "RequestMethod", httpRequest.requestMethod)
-            EasyLog.printLine(httpRequest)
-            EasyLog.printJson(httpRequest,text)
-            EasyLog.printLine(httpRequest)
+
             if (result is BaseResponse<*>){
                 if (!result.isSuccess()){
                     throw ApiException(result.code,result.msg)

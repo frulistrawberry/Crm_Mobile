@@ -1,8 +1,8 @@
 package com.baihe.lib_opportunity
 
-import com.baihe.lib_common.entity.ButtonAction
-import com.baihe.lib_common.entity.ReqInfoEntity
-import com.baihe.lib_common.entity.StatusText
+import android.telephony.CellIdentity
+import com.baihe.lib_common.entity.*
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 
@@ -99,9 +99,147 @@ data class OpportunityListItemEntity(
         }
     }
 
+    fun genBottomButtons():List<ButtonTypeEntity>{
+        val buttons = mutableListOf<ButtonTypeEntity>()
+        buttons.add(ButtonTypeEntity().apply {
+            name = "打电话"
+            type = 1
+        })
+        buttons.add(ButtonTypeEntity().apply {
+            if ((reqPhase == "230" || reqPhase == "240")&&(orderStatus.isNullOrEmpty()||orderStatus == "0")){
+                name = "下发订单"
+                type = 2
+            }else{
+                name = "写跟进"
+                type = 3
+            }
+        })
+        return buttons
+    }
+
+}
+
+
+data class OpportunityDetailEntity(
+    val phase:String?,
+    val title:String,
+    val phone: String?,
+    @SerializedName("category_txt")
+    val category:String?,
+    @SerializedName("follow_user_id_txg")
+    val followUser:String?,
+    val name:String?,
+    @SerializedName("city_info")
+    val cityInfo:CityEntity?,
+    @SerializedName("identity_txt")
+    val identity: String?,
+    @SerializedName("owner_id_txt")
+    val owner:String?,
+    val remark:String?,
+    val reserve:ReserveInfoEntity?,
+    val order:OrderInfoEntity?,
+    val follow:List<FollowEntity>?
+){
+    fun toBasicShowArray():List<KeyValueEntity>{
+        val kvList = mutableListOf<KeyValueEntity>()
+        kvList.apply {
+            add(KeyValueEntity().apply {
+                key = "客户姓名"
+                `val` = name
+                event = KeyValEventEntity().apply {
+                    name = "查看客户"
+                    action = "goLink"
+                }
+            })
+            add(KeyValueEntity().apply {
+                key = "联系方式"
+                `val` = this@OpportunityDetailEntity.phone
+                event = KeyValEventEntity().apply {
+                    action = "call"
+                    icon = "ic_call"
+                }
+            })
+            add(KeyValueEntity().apply {
+                key = "业务品类"
+                `val` = category
+            })
+            add(KeyValueEntity().apply {
+                key = "跟进人"
+                `val` = followUser
+            })
+            add(KeyValueEntity().apply {
+                key = "意向区域"
+                `val` = cityInfo?.full
+            })
+            add(KeyValueEntity().apply {
+                key = "客户身份"
+                `val` = identity
+            })
+            add(KeyValueEntity().apply {
+                key = "备注"
+                `val` = remark
+            })
+
+        }
+        return kvList
+    }
+
+    fun toReserveShowArray():List<KeyValueEntity>{
+        val kvList = mutableListOf<KeyValueEntity>()
+        kvList.apply {
+            add(KeyValueEntity().apply {
+                key = "计划到店时间"
+                `val` = reserve?.arrivalTime
+            })
+            add(KeyValueEntity().apply {
+                key = "沟通内容"
+                `val` = reserve?.comment
+            })
+
+        }
+        return kvList
+    }
+
+    fun toOrderShowArray():List<KeyValueEntity>{
+        val kvList = mutableListOf<KeyValueEntity>()
+        kvList.apply {
+            add(KeyValueEntity().apply {
+                key = "订单状态"
+                `val` = when(order?.orderStatus){
+                    "0"->{
+                        ""
+                    }
+                    "1"->{
+                        "待签约"
+                    }
+                    "2"->{
+                        "已签约"
+                    }
+                    "3"->{
+                        "已退单"
+                    }
+                    "4"->{
+                        "已取消"
+                    }
+                    "6"->{
+                        "已完成"
+                    }
+                    else->{
+                        ""
+                    }
+                }
+            })
+            add(KeyValueEntity().apply {
+                key = "跟进人"
+                `val` = order?.name
+            })
+
+        }
+        return kvList
+    }
     fun getOppoLabel():StatusText?{
         val statusText = StatusText()
-        when(reqPhase){
+        when(phase){
             "200"->{
                 statusText.apply {
                     text = "待邀约"
@@ -164,78 +302,110 @@ data class OpportunityListItemEntity(
         return statusText
     }
 
-    fun getOrderLabel():StatusText?{
-        val statusText = StatusText()
-        if (orderStatus!=null && orderStatus.isNotEmpty() && orderStatus!="0"){
-            when(orderStatus){
-                "1" ->{
-                    statusText.apply {
-                        text = "待签约"
-                        textColor = "#FFE08B01"
-                        bgColor = "#33FFB600"
-                        mode = StatusText.Mode.TOP_HALF_FILL
-                    }
-                }
-                "2" ->{
-                    statusText.apply {
-                        text = "已签约"
-                        textColor = "#FF5BA433"
-                        bgColor = "#336CBF09"
-                        mode = StatusText.Mode.TOP_HALF_FILL
-                    }
-                }
-                "3" ->{
-                    statusText.apply {
-                        text = "已退单"
-                        textColor = "#FF898A8D"
-                        bgColor = "#14000000"
-                        mode = StatusText.Mode.TOP_HALF_FILL
-                    }
-                }
-                "4" ->{
-                    statusText.apply {
-                        text = "已取消"
-                        textColor = "#FF898A8D"
-                        bgColor = "#14000000"
-                        mode = StatusText.Mode.TOP_HALF_FILL
-                    }
-                }
-                "6" ->{
-                    statusText.apply {
-                        text = "已完成"
-                        textColor = "#FF6C8EFF"
-                        bgColor = "#FFEDF1FF"
-                        mode = StatusText.Mode.TOP_HALF_FILL
-                    }
-                }
-            }
-        }else if (reqPhase == "230" || reqPhase == "240"){
-            statusText.apply {
-                text = "未下发订单"
-                textColor = "#FFF11E1E"
-                bgColor = "#1FFF2C2C"
-                mode = StatusText.Mode.TOP_HALF_FILL
-            }
-        }else{
-            return null
+
+    fun genBottomButtons():List<ButtonTypeEntity>{
+        val buttons = mutableListOf<ButtonTypeEntity>()
+        if ((phase == "230" || phase == "240")&&(order?.orderStatus.isNullOrEmpty()||order?.orderStatus == "0")){
+            buttons.add(ButtonTypeEntity().apply {
+                name = "下发订单"
+                type = 1
+            })
         }
-        return statusText
+
+        buttons.add(ButtonTypeEntity().apply {
+            name = "写跟进"
+            type = 2
+        })
+        return buttons
     }
 
-    fun getButtonAction():ButtonAction{
-        return if ((reqPhase == "230" || reqPhase == "240")&&(orderStatus.isNullOrEmpty()||orderStatus == "0")){
-            ButtonAction.DISPATCH_ORDER
-        }else{
-            ButtonAction.FOLLOW
+    fun genMoreButtons():List<ButtonTypeEntity>{
+        val buttons = mutableListOf<ButtonTypeEntity>()
+        when(phase){
+            "200"->{
+                buttons.apply {
+                    add(ButtonTypeEntity().apply {
+                        name = "归档机会"
+                        type = 5
+                    })
+                    add(ButtonTypeEntity().apply {
+                        name = "编辑机会"
+                        type = 3
+                    })
+                    add(ButtonTypeEntity().apply {
+                        name = "转移"
+                        type = 4
+                    })
+                }
+            }
+            "220"->{
+                buttons.apply {
+                    add(ButtonTypeEntity().apply {
+                        name = "编辑机会"
+                        type = 3
+                    })
+                    add(ButtonTypeEntity().apply {
+                        name = "转移"
+                        type = 4
+                    })
+                }
+            }
+            "230"->{
+                buttons.apply {
+                    add(ButtonTypeEntity().apply {
+                        name = "编辑机会"
+                        type = 3
+                    })
+                    add(ButtonTypeEntity().apply {
+                        name = "转移"
+                        type = 4
+                    })
+                }
+            }
+            "240"->{
+                buttons.apply {
+                    if (order?.orderStatus.isNullOrEmpty()||order?.orderStatus=="0"){
+                        add(ButtonTypeEntity().apply {
+                            name = "编辑机会"
+                            type = 3
+                        })
+                    }
+                    add(ButtonTypeEntity().apply {
+                        name = "转移"
+                        type = 4
+                    })
+                }
+            }
+            "210"->{
+                buttons.apply {
+                    add(ButtonTypeEntity().apply {
+                        name = "归档机会"
+                        type = 5
+                    })
+                    add(ButtonTypeEntity().apply {
+                        name = "编辑机会"
+                        type = 3
+                    })
+                }
+            }
+            "250"->{
+                buttons.apply {
+                    add(ButtonTypeEntity().apply {
+                        name = "转移"
+                        type = 4
+                    })
+                }
+            }
+            "260"->{
+                buttons.apply {
+                    add(ButtonTypeEntity().apply {
+                        name = "编辑机会"
+                        type = 3
+                    })
+                }
+            }
         }
-    }
-
-    fun getButtonText():String{
-        return if ((reqPhase == "230" || reqPhase == "240")&&(orderStatus.isNullOrEmpty()||orderStatus == "0")){
-            "下发订单"
-        }else{
-            "写跟进"
-        }
+        return buttons
     }
 
 }

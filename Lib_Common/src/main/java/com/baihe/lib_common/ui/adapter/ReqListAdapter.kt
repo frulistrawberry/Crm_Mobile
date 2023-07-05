@@ -8,6 +8,7 @@ import com.baihe.lib_common.R
 import com.baihe.lib_common.databinding.CommonItemCustomerListReqBinding
 import com.baihe.lib_common.entity.ReqInfoEntity
 import com.baihe.lib_common.entity.StatusText.Mode
+import com.baihe.lib_common.utils.FormatUtils
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
 import com.baihe.lib_framework.ext.ViewExt.invisible
@@ -37,7 +38,7 @@ class ReqListAdapter:
 
         }
         holder.binding.tvOwner.text = stringBuilder
-        val statusText = item?.getPhaseLabel()
+        val statusText = FormatUtils.formatOppoLabel(item?.phase)
         if (statusText!=null){
             val labelBg = statusText.bgColor
             if (!labelBg.isNullOrEmpty() && labelBg.startsWith("#")){

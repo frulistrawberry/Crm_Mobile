@@ -230,7 +230,7 @@ class CustomerRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
             val jsonParam = JsonParam.newInstance()
                 .putParamValue(params)
             EasyHttp.post(lifecycleOwner)
-                .api(CommonApi(UrlConstant.ADD_CUSTOMER,jsonParam.getParamValue()))
+                .api(CommonApi(UrlConstant.UPDATE_CUSTOMER,jsonParam.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<CustomerDetailEntity>>() {})
         }
     }

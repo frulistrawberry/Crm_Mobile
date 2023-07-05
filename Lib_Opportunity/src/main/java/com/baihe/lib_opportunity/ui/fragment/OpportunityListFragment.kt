@@ -5,15 +5,13 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.databinding.CommonSrlListBinding
-import com.baihe.lib_common.entity.ButtonAction
-import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
-import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_opportunity.OpportunityViewModel
+import com.baihe.lib_opportunity.ui.activity.OpportunityDetailActivity
 import com.baihe.lib_opportunity.ui.adapter.OpportunityListAdapter
 import com.dylanc.loadingstateview.ViewType
 
@@ -24,16 +22,14 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
     }
     private val adapter by lazy {
         OpportunityListAdapter().apply {
-            onCallListener = {
-                commonViewModel.call(it)
-            }
-            onButtonActionListener = {oppoId, action ->
+            onButtonActionListener = {id, action ->
                 when(action){
-                    ButtonAction.FOLLOW->{
-
+                    1->{
+                        //打电话
+                        commonViewModel.call(id)
                     }
-                    ButtonAction.DISPATCH_ORDER->{
-
+                    2->{
+                        // TODO: 写跟进
                     }
                     else ->{
 
@@ -130,6 +126,7 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
         }
         adapter.onItemClickListener = {_,position->
             val item = adapter.getData()[position]
+            OpportunityDetailActivity.start(requireContext(),item.id.toString())
         }
     }
 

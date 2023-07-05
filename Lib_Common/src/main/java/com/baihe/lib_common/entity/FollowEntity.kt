@@ -4,6 +4,7 @@ import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 
 data class FollowEntity(
+    val id:String,
     @SerializedName("create_time")
     val createTime:String,
     @SerializedName("next_contact_time")
@@ -17,6 +18,10 @@ data class FollowEntity(
     val result:String,
     @SerializedName("time_txt")
     val timeText:String,
+    val title:String,
+    val time:String,
+    @SerializedName("row")
+    val content:List<KeyValueEntity>?
 
 ){
     fun showArray():List<KeyValueEntity>{

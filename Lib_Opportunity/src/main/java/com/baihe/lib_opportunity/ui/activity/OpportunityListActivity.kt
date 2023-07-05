@@ -36,7 +36,7 @@ class OpportunityListActivity: BaseViewBindActivity<CommonTabViewpagerBinding>()
                 keywords = it
             }
             rightIcon(R.mipmap.ic_create_black){
-                // TODO: 新增机会
+                AddOrUpdateOpportunityActivity.start(this@OpportunityListActivity)
             }
 
         }

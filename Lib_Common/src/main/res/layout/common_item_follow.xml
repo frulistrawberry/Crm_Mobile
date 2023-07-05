@@ -3,6 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_follow_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:orientation="vertical">
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/tv_follow_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/font_light_12_4A4C5C"
+            />
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:drawableRight="@mipmap/ic_arrow_right"
+            style="@style/font_half_bold_16_4A4C5C"/>
+    </LinearLayout>
+
     <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
         android:id="@+id/kvl_follow"
         android:layout_width="match_parent"

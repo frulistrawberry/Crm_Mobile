@@ -22,7 +22,7 @@ ext {
             frameworkLibVersion    :'1.0.0.0-beta-9-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-4-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-3-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-beta-18-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-28-SNAPSHOT',
 
 
             //models

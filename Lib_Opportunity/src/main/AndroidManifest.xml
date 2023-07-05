@@ -7,5 +7,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.OpportunityDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddOrUpdateOpportunityActivity" />
     </application>
 </manifest>

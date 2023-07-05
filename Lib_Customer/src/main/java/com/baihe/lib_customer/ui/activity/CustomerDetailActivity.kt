@@ -75,11 +75,11 @@ class CustomerDetailActivity:
             mBinding.tvFlowOppo.text = it.reqCount.toString()
             mBinding.tvFlowOrder.text = it.orderCount.toString()
             reqAdapter.setData(it.reqInfo)
-            if(it.followShowArray().isEmpty()){
+            if(it.follow.isNullOrEmpty()){
                 mBinding.llFollow.gone()
             }else{
                 mBinding.llFollow.visible()
-                followAdapter.setData(it.followShowArray())
+                followAdapter.setData(it.follow)
             }
 
 

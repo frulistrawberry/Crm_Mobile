@@ -5,7 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.baihe.lib_common.R
-import com.baihe.lib_common.entity.ButtonAction
+import com.baihe.lib_common.utils.FormatUtils
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
@@ -18,8 +18,7 @@ import com.baihe.lib_opportunity.databinding.OppoItemOpportunityListBinding
 
 class OpportunityListAdapter:
     BaseRecyclerViewAdapter<OpportunityListItemEntity, OppoItemOpportunityListBinding>() {
-    var onCallListener:((customerId:String)->Unit)? = null
-    var onButtonActionListener:((oppoId:String,action:ButtonAction?)->Unit)? =null
+    var onButtonActionListener:((oppoId:String,type:Int)->Unit)? =null
     override fun getViewBinding(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
@@ -34,7 +33,7 @@ class OpportunityListAdapter:
         position: Int
     ) {
         holder.binding.tvTitle.text = item?.title
-        val oppoLabel = item?.getOppoLabel()
+        val oppoLabel = FormatUtils.formatOppoLabel(item?.reqPhase)
         if (oppoLabel != null) {
             holder.binding.tvReqPhase.text = oppoLabel.text
             if (!oppoLabel.bgColor.isNullOrEmpty() && oppoLabel.bgColor.startsWith("#")){
@@ -53,7 +52,7 @@ class OpportunityListAdapter:
         }else{
             holder.binding.tvReqPhase.gone()
         }
-        val orderLabel = item?.getOrderLabel()
+        val orderLabel = FormatUtils.formatOrderLabelWithDispatch(item?.reqPhase, item?.orderStatus)
         if (orderLabel!=null){
             holder.binding.tvOrderStatus.text = orderLabel.text
             if (!orderLabel.bgColor.isNullOrEmpty() && orderLabel.bgColor.startsWith("#")){
@@ -73,13 +72,16 @@ class OpportunityListAdapter:
             holder.binding.tvOrderStatus.gone()
         }
         holder.binding.kvlOpportunity.setData(item?.toShowArray())
-        holder.binding.btnRight.text = item?.getButtonText()
+        val buttons = item?.genBottomButtons()
+        holder.binding.btnRight.text = buttons?.get(0)?.name
+        holder.binding.btnCall.text = buttons?.get(1)?.name
         holder.binding.btnRight.click {
-            onButtonActionListener?.invoke(item?.id.toString(),item?.getButtonAction())
+            onButtonActionListener?.invoke(item?.id.toString(),buttons?.get(0)?.type?:-1)
         }
         holder.binding.btnCall.click {
-            onCallListener?.invoke(item!!.customerId!!)
+            onButtonActionListener?.invoke(item?.customerId.toString(),buttons?.get(1)?.type?:-1)
         }
 
     }
+
 }

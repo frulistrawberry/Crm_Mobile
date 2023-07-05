@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <com.baihe.lib_common.ui.widget.font.FontTextView
@@ -57,6 +58,8 @@
                 android:id="@+id/kv_value_right_icon_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="@dimen/dp_14"
+                android:maxHeight="@dimen/dp_14"
                 android:src="@mipmap/ic_arrow_right" />
 
         </LinearLayout>
