@@ -9,7 +9,6 @@ import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.Data
 import com.baihe.lib_common.http.response.ListData
-import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_customer.CustomerDetailEntity
 import com.baihe.lib_customer.CustomerListItemEntity

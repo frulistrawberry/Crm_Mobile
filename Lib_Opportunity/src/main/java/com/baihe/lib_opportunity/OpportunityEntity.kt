@@ -2,7 +2,6 @@ package com.baihe.lib_opportunity
 
 import android.telephony.CellIdentity
 import com.baihe.lib_common.entity.*
-import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 

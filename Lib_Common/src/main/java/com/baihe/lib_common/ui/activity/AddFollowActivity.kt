@@ -11,7 +11,6 @@ import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ui.widget.keyvalue.KeyValueEditLayout
 import com.baihe.lib_common.ui.widget.keyvalue.KeyValueEditLayout.OnItemActionListener
-import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmActivity

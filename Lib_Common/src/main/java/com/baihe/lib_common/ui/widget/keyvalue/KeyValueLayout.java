@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.baihe.lib_common.R;
 import com.baihe.lib_common.ui.widget.keyvalue.adapter.AttachImageAdapter;
-import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity;
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity;
 import com.baihe.lib_common.ui.widget.font.FontStyle;
 import com.baihe.lib_common.ui.widget.font.FontTextView;
