@@ -28,7 +28,7 @@ afterEvaluate{
                 Arr(MavenPublication) {
                     groupId 'com.wedding.crm.lib'
                     artifactId 'message'
-                    version '1.0.0.0-xkk-3-SNAPSHOT'
+                    version '1.0.0.0-xkk-4-SNAPSHOT'
                     afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                     artifact generateSourcesJar
                     pom.withXml {
