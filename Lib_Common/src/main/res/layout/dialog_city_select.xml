@@ -52,6 +52,11 @@
                 android:paddingBottom="@dimen/dp_4"
                 android:paddingRight="@dimen/dp_16"
                 android:paddingLeft="@dimen/dp_16"
+                android:textColor="#8F4A4C5C"
+                android:text="请选择"
+                android:textSize="12sp"
+                app:font_textStyle="NORMAL"
+                android:background="@drawable/bg_city_select_label_gray"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
             <com.baihe.lib_common.ui.widget.font.FontTextView
@@ -62,6 +67,11 @@
                 android:paddingBottom="@dimen/dp_4"
                 android:paddingRight="@dimen/dp_16"
                 android:paddingLeft="@dimen/dp_16"
+                android:textColor="#8F4A4C5C"
+                android:text="请选择"
+                android:visibility="gone"
+                android:textSize="12sp"
+                app:font_textStyle="NORMAL"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
 

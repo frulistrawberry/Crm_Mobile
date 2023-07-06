@@ -11,5 +11,6 @@
         <activity android:name=".ui.activity.AddOrUpdateCustomerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.activity.SelectCustomerActivity" />
     </application>
 </manifest>

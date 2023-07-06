@@ -7,8 +7,10 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.R
+import com.baihe.lib_common.ui.activity.AddFollowActivity
 import com.baihe.lib_common.ui.activity.FollowDetailActivity
 import com.baihe.lib_common.ui.adapter.FollowListAdapter
+import com.baihe.lib_common.ui.dialog.AlertDialog
 import com.baihe.lib_common.ui.dialog.MoreActionDialog
 import com.baihe.lib_common.ui.widget.AxisItemDecoration
 import com.baihe.lib_framework.base.BaseMvvmActivity
@@ -27,9 +29,13 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
         intent.getStringExtra("oppoId")
     }
 
+
     private val followAdapter by lazy {
         FollowListAdapter()
     }
+
+     var orderStatus:String?=null
+     var customerId:String?=null
 
     companion object{
         fun start(context: Context, oppoId:String){
@@ -65,6 +71,8 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
             }
         }
         mViewModel.oppoDetailLiveData.observe(this){
+            orderStatus = it.order?.orderStatus?:"0"
+            customerId = it.customer_id?:""
             mBinding.tvTitle.text = it.title
             val oppoLabel = it?.getOppoLabel()
             if (oppoLabel != null) {
@@ -133,9 +141,17 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
                     }
                     .create().show()
             }
+            mBinding.btnReqMore.click { view->
+                FollowDetailActivity.start(this,it?.reserve?.id?:"")
+            }
 
 
 
+        }
+        mViewModel.oppoAddOrUpdateLiveData.observe(this){
+            if (it){
+                mViewModel.getOppoDetail(oppoId)
+            }
         }
     }
 
@@ -160,6 +176,9 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
         followAdapter.onFollowItemClickListener = {
             FollowDetailActivity.start(this,it)
         }
+        mBinding.btnSubDetail.click {
+            OppoSubDetailActivity.start(this,oppoId)
+        }
     }
 
     override fun initData() {
@@ -171,22 +190,28 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
         when(type){
             1->{
                 // TODO: 写跟进
+
+                AddFollowActivity.startOppoFollow(this,oppoId,customerId!!,orderStatus?:"0")
             }
             2->{
                 // TODO: 下发订单
-                ActionActivity.start(this,2,oppoId)
+                ActionActivity.start(this,2,oppoId,customerId!!)
             }
             3->{
                 // TODO: 编辑机会
-                AddOrUpdateOpportunityActivity.start(this,oppoId)
+                AddOrUpdateOpportunityActivity.start(this,oppoId,customerId)
             }
             4->{
                 // TODO: 转移机会
-                ActionActivity.start(this,1,oppoId)
+                ActionActivity.start(this,1,oppoId,customerId!!)
             }
             5->{
                 // TODO: 归档机会
-
+                AlertDialog.Builder(this)
+                    .setContent("是否确认归档当前销售机会？")
+                    .setOnConfirmListener {
+                        mViewModel.deleteOppo(oppoId)
+                    }.create().show()
             }
         }
     }

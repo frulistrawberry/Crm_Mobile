@@ -14,7 +14,7 @@ import com.baihe.lib_framework.ext.ViewExt.click
 
 class CustomerListAdapter(val context: Context):
     BaseRecyclerViewAdapter<CustomerListItemEntity, CustomerItemCustomerListBinding>() {
-    var onCallListener:((customerId:String)->Unit)? = null
+    var onCallListener:((customerId:String,type:Int)->Unit)? = null
 
     @SuppressLint("SetTextI18n")
     override fun onBindDefViewHolder(
@@ -44,7 +44,10 @@ class CustomerListAdapter(val context: Context):
 
         }
         holder.binding.btnCall.click {
-            onCallListener?.invoke(item?.id.toString())
+            onCallListener?.invoke(item?.id.toString(),1)
+        }
+        holder.binding.btnCreateOpportunity.click {
+            onCallListener?.invoke(item?.id.toString(),2)
         }
     }
 

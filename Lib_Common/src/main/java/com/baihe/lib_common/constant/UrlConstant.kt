@@ -6,4 +6,5 @@ object UrlConstant {
     const val ALL_DIA_OUT = "/owner/callcenter/allDiaout"
     const val FOLLOW_DETAIL = "/owner/customer/followDetail"
     const val SEARCH_USER = "/owner/user/searchUser"
+    const val FOLLOW_LOG = "/owner/customer/followLog"
 }

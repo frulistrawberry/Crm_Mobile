@@ -8,10 +8,10 @@
         android:id="@+id/kv_edit_key_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="@dimen/dp_20"
         android:gravity="center_vertical"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingTop="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16">
 
         <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/kv_edit_key_tv"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textColor="#4A4C5C"
             android:textSize="15sp"
-            app:font_textStyle="LIGHT" />
+            app:font_textStyle="NORMAL" />
 
         <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/kv_edit_key_required_tv"
@@ -68,7 +68,7 @@
                 android:layout_weight="1.0"
                 android:text="请选择起始时间"
                 android:textColor="#C5C5CE"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:font_textStyle="LIGHT" />
 
             <ImageView
@@ -111,7 +111,7 @@
                 android:layout_weight="1.0"
                 android:text="请选择起始时间"
                 android:textColor="#C5C5CE"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:font_textStyle="LIGHT" />
 
             <ImageView

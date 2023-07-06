@@ -15,6 +15,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.FollowDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddFollowActivity" />
     </application>
 
 </manifest>

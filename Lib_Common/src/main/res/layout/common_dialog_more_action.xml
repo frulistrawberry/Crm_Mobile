@@ -15,16 +15,14 @@
         android:paddingBottom="@dimen/dp_14"
         android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_30"
         android:background="@drawable/bg_dialog_more_actions"
         android:layout_marginStart="@dimen/dp_15"
         android:orientation="vertical">
-        <com.baihe.lib_framework.widget.MaxRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:maxHeight="@dimen/dp_400"
-
             android:layout_weight="1"/>
     </LinearLayout>
 

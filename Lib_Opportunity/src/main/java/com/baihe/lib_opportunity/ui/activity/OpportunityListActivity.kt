@@ -11,6 +11,7 @@ import com.baihe.lib_common.ui.adapter.ViewPager2Adapter
 import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.showSearch
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.base.BaseViewBindActivity
+import com.baihe.lib_framework.ext.AnyExt.saveAs
 import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_opportunity.OpportunityViewModel
 import com.baihe.lib_opportunity.ui.fragment.OpportunityListFragment
@@ -34,6 +35,8 @@ class OpportunityListActivity: BaseViewBindActivity<CommonTabViewpagerBinding>()
         setToolbar {
             showSearch(false) {
                 keywords = it
+                val fragment = adapter.getFragments()[mBinding.viewPager.currentItem]
+                (fragment as OpportunityListFragment).search(keywords)
             }
             rightIcon(R.mipmap.ic_create_black){
                 AddOrUpdateOpportunityActivity.start(this@OpportunityListActivity)

@@ -22,17 +22,17 @@ ext {
             frameworkLibVersion    :'1.0.0.0-beta-9-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-4-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-3-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-beta-31-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-33-SNAPSHOT',
 
 
             //models
             userLibVersion         :'1.0.0.0-beta-6-SNAPSHOT',
-            homeLibVersion         :'1.0.0.0-beta-9-SNAPSHOT',
+            homeLibVersion         :'1.0.0.0-beta-10-SNAPSHOT',
             loginLibVersion        :'1.0.0.0-beta-5-SNAPSHOT',
-            customerLibVersion     :'1.0.0.0-beta-4-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-beta-10-SNAPSHOT',
             messageLibVersion      :'1.0.0.0-beta-2-SNAPSHOT',
             orderLibVersion        :'1.0.0.0-beta-2-SNAPSHOT',
-            opportunityLibVersion  :'1.0.0.0-beta-2-SNAPSHOT',
+            opportunityLibVersion  :'1.0.0.0-beta-6-SNAPSHOT',
             contractLibVersion     :'1.0.0.0-beta-2-SNAPSHOT',
 
 

@@ -11,6 +11,8 @@ public class KeyValEventEntity implements Serializable {
 
     private String paramKey;
 
+    private String subParamKey;
+
     private List<KeyValueEntity> options;
 
     /**
@@ -24,7 +26,6 @@ public class KeyValEventEntity implements Serializable {
 
     private List<String> attach;
 
-    private String format = "yyyy-MM-dd";
 
     public List<String> getAttach() {
         return attach;
@@ -32,14 +33,6 @@ public class KeyValEventEntity implements Serializable {
 
     public void setAttach(List<String> attach) {
         this.attach = attach;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
     }
 
     public String getParamKey() {
@@ -81,5 +74,13 @@ public class KeyValEventEntity implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getSubParamKey() {
+        return subParamKey;
+    }
+
+    public void setSubParamKey(String subParamKey) {
+        this.subParamKey = subParamKey;
     }
 }

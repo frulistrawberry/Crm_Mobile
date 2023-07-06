@@ -12,21 +12,13 @@ public class KeyValueEntity implements Serializable {
     /**
      * 标题
      */
-    @SerializedName("name")
-    private String key;
+    private String name;
     /**
-     * 内容（用于显示）
+     *用于参数提交
      */
-    @SerializedName("value")
-    private String val;
-    @SerializedName("val")
-    private String val2;
+    private String value;
 
-    @SerializedName("key")
-    private String key2;
-
-    @SerializedName("label")
-    private String key3;
+    private String label;
 
 
     private String type;
@@ -34,29 +26,54 @@ public class KeyValueEntity implements Serializable {
     private List<KeyValueEntity> option;
 
     /**
-     * 用于参数提交
+     * 内容（用于显示）
      */
-    @SerializedName("defaultValue")
-    private String defaultVal;
+    private String defaultValue;
     /**
      * 是否必填
      */
-    @SerializedName("is_true")
-    private String optional;
+    private String is_true;
     /**
      * 是否显示
      */
-    @SerializedName("is_open")
-    private String showStatus;
+    private String is_open;
 
     /**
      * 是否可编辑
      */
-    @SerializedName("is_channge")
-    private String editable;
+    private String is_channge;
 
     private String paramKey;
 
+    private String subParamKey;
+
+    private String subValue;
+
+    private String subDefaultValue;
+
+    public String getSubParamKey() {
+        return subParamKey;
+    }
+
+    public void setSubParamKey(String subParamKey) {
+        this.subParamKey = subParamKey;
+    }
+
+    public String getSubValue() {
+        return subValue;
+    }
+
+    public void setSubValue(String subValue) {
+        this.subValue = subValue;
+    }
+
+    public String getSubDefaultValue() {
+        return subDefaultValue;
+    }
+
+    public void setSubDefaultValue(String subDefaultValue) {
+        this.subDefaultValue = subDefaultValue;
+    }
 
     /**
      * 本地标记手机号
@@ -82,10 +99,154 @@ public class KeyValueEntity implements Serializable {
      */
     private String rangeMax;
 
+    //---------------------------------KeyValueLayout-------------------//
+
+    private String key;
+
+    private String val;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getVal() {
+        return val;
+    }
+
+    public void setVal(String val) {
+        this.val = val;
+    }
+
     /**
-     * 行为交互
+     * 点击事件
      */
-    private KeyValEventEntity event;
+    private String action;
+    /**
+     * 文字按钮（用于KeyValueLayout）
+     */
+    private String text;
+    /**
+     * 图标按钮（用于KeyValueLayout）
+     */
+    private String icon;
+
+    /**
+     * 附件
+     */
+    private List<String> attach;
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public List<String> getAttach() {
+        return attach;
+    }
+
+    public void setAttach(List<String> attach) {
+        this.attach = attach;
+    }
+
+    //---------------------------------KeyValueLayout-------------------//
+
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getIs_true() {
+        return is_true;
+    }
+
+    public void setIs_true(String is_true) {
+        this.is_true = is_true;
+    }
+
+    public String getIs_open() {
+        return is_open;
+    }
+
+    public void setIs_open(String is_open) {
+        this.is_open = is_open;
+    }
+
+    public String getIs_channge() {
+        return is_channge;
+    }
+
+    public void setIs_channge(String is_channge) {
+        this.is_channge = is_channge;
+    }
+
+    public List<KeyValueEntity> getOption() {
+        return option;
+    }
+
+    public void setOption(List<KeyValueEntity> option) {
+        this.option = option;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
 
     public String getParamKey() {
         return paramKey;
@@ -95,30 +256,6 @@ public class KeyValueEntity implements Serializable {
         this.paramKey = paramKey;
     }
 
-    public String getKey3() {
-        return key3;
-    }
-
-    public void setKey3(String key3) {
-        this.key3 = key3;
-    }
-
-    public String getKey2() {
-        return key2;
-    }
-
-    public void setKey2(String key2) {
-        this.key2 = key2;
-    }
-
-    public String getVal2() {
-        return val2;
-    }
-
-    public void setVal2(String val2) {
-        this.val2 = val2;
-    }
-
     public String getChannelId() {
         return channelId;
     }
@@ -126,16 +263,6 @@ public class KeyValueEntity implements Serializable {
     public void setChannelId(String channelId) {
         this.channelId = channelId;
     }
-
-    public String getEditable() {
-        return editable;
-    }
-
-    public void setEditable(String editable) {
-        this.editable = editable;
-    }
-
-
     public String getPhone() {
         return phone;
     }
@@ -168,71 +295,7 @@ public class KeyValueEntity implements Serializable {
         this.rangeMax = rangeMax;
     }
 
-    public boolean isReadOnly() {
-        return !"2".equals(editable);
-    }
 
 
 
-    public String getOptional() {
-        return optional;
-    }
-
-    public void setOptional(String optional) {
-        this.optional = optional;
-    }
-
-    public String getShowStatus() {
-        return showStatus;
-    }
-
-    public void setShowStatus(String showStatus) {
-        this.showStatus = showStatus;
-    }
-
-    public String getDefaultVal() {
-        return defaultVal;
-    }
-
-    public void setDefaultVal(String defaultVal) {
-        this.defaultVal = defaultVal;
-    }
-
-    public KeyValEventEntity getEvent() {
-        if (event == null) {
-            event = convertToKeyValEvent();
-        }
-        return event;
-    }
-
-    public void setEvent(KeyValEventEntity event) {
-        this.event = event;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getVal() {
-        return val;
-    }
-
-    public void setVal(String val) {
-        this.val = val;
-    }
-
-    private KeyValEventEntity convertToKeyValEvent(){
-        if (TextUtils.isEmpty(type))
-            return null;
-        KeyValEventEntity keyValEventEntity = new KeyValEventEntity();
-        keyValEventEntity.setAction(type);
-        keyValEventEntity.setOptions(option);
-        if (!TextUtils.isEmpty(paramKey))
-            keyValEventEntity.setParamKey(paramKey);
-        return keyValEventEntity;
-    }
 }

@@ -18,7 +18,7 @@ import com.baihe.lib_opportunity.databinding.OppoItemOpportunityListBinding
 
 class OpportunityListAdapter:
     BaseRecyclerViewAdapter<OpportunityListItemEntity, OppoItemOpportunityListBinding>() {
-    var onButtonActionListener:((oppoId:String,type:Int)->Unit)? =null
+    var onButtonActionListener:((oppoId:String,customerId:String,orderStatus:String?,type:Int)->Unit)? =null
     override fun getViewBinding(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
@@ -73,13 +73,13 @@ class OpportunityListAdapter:
         }
         holder.binding.kvlOpportunity.setData(item?.toShowArray())
         val buttons = item?.genBottomButtons()
-        holder.binding.btnRight.text = buttons?.get(0)?.name
-        holder.binding.btnCall.text = buttons?.get(1)?.name
+        holder.binding.btnCall.text = buttons?.get(0)?.name
+        holder.binding.btnRight.text = buttons?.get(1)?.name
         holder.binding.btnRight.click {
-            onButtonActionListener?.invoke(item?.id.toString(),buttons?.get(0)?.type?:-1)
+            onButtonActionListener?.invoke(item?.id.toString(),item?.customerId?:"",item?.orderStatus,buttons?.get(1)?.type?:-1)
         }
         holder.binding.btnCall.click {
-            onButtonActionListener?.invoke(item?.customerId.toString(),buttons?.get(1)?.type?:-1)
+            onButtonActionListener?.invoke(item?.customerId.toString(),item?.customerId?:"",item?.orderStatus,buttons?.get(0)?.type?:-1)
         }
 
     }

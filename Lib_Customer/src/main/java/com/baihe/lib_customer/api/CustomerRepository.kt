@@ -45,75 +45,65 @@ class CustomerRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
             if (customerId.isNullOrEmpty()){
                 kvList.apply {
                     add(KeyValueEntity().apply {
-                        key = "来源渠道"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        event = KeyValEventEntity().apply {
-                            action = "channe"
-                            paramKey = "channel"
-                        }
+                        name = "来源渠道"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "channe"
+                        paramKey = "channel"
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "客户姓名"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        event = KeyValEventEntity().apply {
-                            action = "input"
-                            paramKey = "name"
-                        }
+                        name = "客户姓名"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "input"
+                        paramKey = "name"
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "联系方式"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        event = KeyValEventEntity().apply {
-                            action = "contact"
-                            paramKey = "phone,wechat"
-                        }
+                        name = "联系方式"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "contact"
+                        paramKey = "phone,wechat"
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "首次提供人"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        event = KeyValEventEntity().apply {
-                            action = "recordUser"
-                            paramKey = "record_user_id"
-                        }
+                        name = "首次提供人"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "recordUser"
+                        paramKey = "record_user_id"
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "客户身份"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        event = KeyValEventEntity().apply {
-                            action = "select"
-                            paramKey = "identity"
-                            options = mutableListOf<KeyValueEntity?>().apply {
-                                add(KeyValueEntity().apply {
-                                    key = "新娘"
-                                    `val` = "1"
-                                })
-                                add(KeyValueEntity().apply {
-                                    key = "新郎"
-                                    `val` = "2"
-                                })
-                                add(KeyValueEntity().apply {
-                                    key = "新人亲属"
-                                    `val` = "5"
-                                })
-                                add(KeyValueEntity().apply {
-                                    key = "其他"
-                                    `val` = "7"
-                                })
-                            }
+                        name = "客户身份"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "select"
+                        paramKey = "identity"
+                        option = mutableListOf<KeyValueEntity?>().apply {
+                            add(KeyValueEntity().apply {
+                                name = "新娘"
+                                value = "1"
+                            })
+                            add(KeyValueEntity().apply {
+                                name = "新郎"
+                                value = "2"
+                            })
+                            add(KeyValueEntity().apply {
+                                name = "新人亲属"
+                                value = "5"
+                            })
+                            add(KeyValueEntity().apply {
+                                name = "其他"
+                                value = "7"
+                            })
                         }
 
                     })
@@ -122,87 +112,75 @@ class CustomerRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
                 val customerInfo = customerDetail(customerId)
                 kvList.apply {
                     add(KeyValueEntity().apply {
-                        key = "来源渠道"
-                        `val` = customerInfo?.sourceChannel
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        defaultVal = customerInfo?.sourceChannelId
-                        event = KeyValEventEntity().apply {
-                            action = "channe"
-                            paramKey = "channel"
-                        }
+                        name = "来源渠道"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "channe"
+                        paramKey = "channel"
+                        value= customerInfo?.sourceChannelId
+                        defaultValue = customerInfo?.sourceChannel
+                    })
+                    add(KeyValueEntity().apply {
+                        name = "客户姓名"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "input"
+                        paramKey = "name"
+                        value= customerInfo?.name
+                        defaultValue = customerInfo?.name
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "客户姓名"
-                        optional = "1"
-                        `val` = customerInfo?.name
-                        defaultVal = customerInfo?.name
-                        showStatus = "1"
-                        editable = "2"
-                        event = KeyValEventEntity().apply {
-                            action = "input"
-                            paramKey = "name"
-                        }
+                        name = "联系方式"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "contact"
+                        paramKey = "phone,wechat"
+                        value = "${customerInfo?.phone},${customerInfo?.wechat}"
+                        defaultValue = "${customerInfo?.phone},${customerInfo?.wechat}"
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "联系方式"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        `val` = "${customerInfo?.phone},${customerInfo?.wechat}"
-                        defaultVal = "${customerInfo?.phone},${customerInfo?.wechat}"
-                        event = KeyValEventEntity().apply {
-                            action = "contact"
-                            paramKey = "phone,wechat"
-                        }
+                        name = "首次提供人"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "recordUser"
+                        paramKey = "record_user_id"
+                        value= customerInfo?.recordUserId
+                        defaultValue = customerInfo?.recordUser
 
                     })
                     add(KeyValueEntity().apply {
-                        key = "首次提供人"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        `val` = customerInfo?.recordUser
-                        defaultVal = customerInfo?.recordUserId
-                        event = KeyValEventEntity().apply {
-                            action = "recordUser"
-                            paramKey = "record_user_id"
+                        name = "客户身份"
+                        is_true = "1"
+                        is_open = "1"
+                        is_channge = "2"
+                        type = "select"
+                        paramKey = "identity"
+                        option = mutableListOf<KeyValueEntity?>().apply {
+                            add(KeyValueEntity().apply {
+                                name = "新娘"
+                                value = "1"
+                            })
+                            add(KeyValueEntity().apply {
+                                name = "新郎"
+                                value = "2"
+                            })
+                            add(KeyValueEntity().apply {
+                                name = "新人亲属"
+                                value = "5"
+                            })
+                            add(KeyValueEntity().apply {
+                                name = "其他"
+                                value = "7"
+                            })
                         }
-
-                    })
-                    add(KeyValueEntity().apply {
-                        key = "客户身份"
-                        optional = "1"
-                        showStatus = "1"
-                        editable = "2"
-                        `val` = customerInfo?.identity
-                        defaultVal = customerInfo?.identityId
-                        event = KeyValEventEntity().apply {
-                            action = "select"
-                            paramKey = "identity"
-                            options = mutableListOf<KeyValueEntity?>().apply {
-                                add(KeyValueEntity().apply {
-                                    key = "新娘"
-                                    `val` = "1"
-                                })
-                                add(KeyValueEntity().apply {
-                                    key = "新郎"
-                                    `val` = "2"
-                                })
-                                add(KeyValueEntity().apply {
-                                    key = "新人亲属"
-                                    `val` = "5"
-                                })
-                                add(KeyValueEntity().apply {
-                                    key = "其他"
-                                    `val` = "7"
-                                })
-                            }
-                        }
-
+                        value= customerInfo?.identityId
+                        defaultValue = customerInfo?.identity
                     })
                 }
             }

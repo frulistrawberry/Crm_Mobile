@@ -72,7 +72,7 @@ class AddOrUpdateCustomerActivity :BaseMvvmActivity<CustomerActivityAddOrUpdateC
 
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {
-            title = "添加客户"
+            title = "新增客户"
             navIcon = R.mipmap.navigation_icon
         }
     }

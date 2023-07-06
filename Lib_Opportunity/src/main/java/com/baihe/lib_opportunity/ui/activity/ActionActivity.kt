@@ -4,11 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
-import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.base.BaseMvvmActivity
+import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.toast.TipsToast
 import com.baihe.lib_opportunity.OpportunityViewModel
@@ -21,14 +22,27 @@ class ActionActivity: BaseMvvmActivity<OppoCommonActionActivityBinding, Opportun
     val reqId by lazy {
         intent.getStringExtra("reqId")
     }
+    val customerId by lazy {
+        intent.getStringExtra("customerId")
+    }
     companion object{
-        fun start(context: Context,type:Int,reqId:String){
+        fun start(context: Context,type:Int,reqId:String,customerId:String){
             if (context is Activity){
                 context.startActivityForResult(Intent(context,ActionActivity::class.java).apply {
                     putExtra("TYPE",type)
                     putExtra("reqId",reqId)
+                    putExtra("customerId",customerId)
                 },1001)
             }
+
+        }
+        fun start(fragment: Fragment, type:Int, reqId:String,customerId: String){
+            fragment.startActivityForResult(Intent(fragment.requireContext(),ActionActivity::class.java).apply {
+                    putExtra("TYPE",type)
+                    putExtra("reqId",reqId)
+                    putExtra("customerId",customerId)
+                },1001)
+
 
         }
     }
@@ -61,64 +75,56 @@ class ActionActivity: BaseMvvmActivity<OppoCommonActionActivityBinding, Opportun
         if (type == 1){
             kvList.apply {
                 add(KeyValueEntity().apply {
-                    key = "转移给"
-                    optional = "2"
-                    showStatus = "1"
-                    editable = "2"
-                    event = KeyValEventEntity().apply {
-                        action = "companyUser"
-                        paramKey = "ownerId"
-                    }
+                    name = "转移给"
+                    is_true = "2"
+                    is_open = "1"
+                    is_channge = "2"
+                    type = "companyUser"
+                    paramKey = "ownerId"
 
                 })
                 add(KeyValueEntity().apply {
-                    key = "备注"
-                    optional = "2"
-                    showStatus = "1"
-                    editable = "2"
-                    event = KeyValEventEntity().apply {
-                        action = "input"
-                        paramKey = "comment"
-                    }
+                    name = "备注"
+                    is_true = "2"
+                    is_open = "1"
+                    is_channge = "2"
+                    type = "input"
+                    paramKey = "comment"
 
                 })
             }
         }else{
             kvList.apply {
                 add(KeyValueEntity().apply {
-                    key = "客户是否到店"
-                    optional = "2"
-                    showStatus = "1"
-                    editable = "2"
-                    event = KeyValEventEntity().apply {
-                        action = "collection"
-                        paramKey = "arrival_status"
-                        options = mutableListOf<KeyValueEntity?>().apply {
-                            add(KeyValueEntity().apply {
-                                key = "单人到店"
-                                `val` = "1"
-                            })
-                            add(KeyValueEntity().apply {
-                                key = "双人到店"
-                                `val` = "2"
-                            })
-                            add(KeyValueEntity().apply {
-                                key = "未到店"
-                                `val` = "3"
-                            })
-                        }
+                    name = "客户是否到店"
+                    is_true = "2"
+                    is_open = "1"
+                    is_channge = "2"
+                    type = "collection"
+                    paramKey = "arrival_status"
+                    option = mutableListOf<KeyValueEntity?>().apply {
+                        add(KeyValueEntity().apply {
+                            name = "单人到店"
+                            value = "1"
+                        })
+                        add(KeyValueEntity().apply {
+                            name = "双人到店"
+                            value = "2"
+                        })
+                        add(KeyValueEntity().apply {
+                            name = "未到店"
+                            value = "3"
+                        })
                     }
 
                 })
                 add(KeyValueEntity().apply {
-                    key = "下发订单给"
-                    optional = "2"
-                    showStatus = "1"
-                    editable = "2"
-                    event = KeyValEventEntity().apply {
-                        action = "companyUser"
-                        paramKey = "ownerId"
-                    }
+                    name = "下发订单给"
+                    is_true = "2"
+                    is_open = "1"
+                    is_channge = "2"
+                    type = "companyUser"
+                    paramKey = "ownerId"
 
                 })
             }
@@ -131,6 +137,7 @@ class ActionActivity: BaseMvvmActivity<OppoCommonActionActivityBinding, Opportun
         mBinding.btnCommit.click {
             val params = mBinding.kvlRoot.commit()
             params?.put("reqId",reqId)
+            params?.put("customerId",customerId)
             if (type == 1){
                 if (params?.get("ownerId") == null){
                     TipsToast.showTips("请选择人员")

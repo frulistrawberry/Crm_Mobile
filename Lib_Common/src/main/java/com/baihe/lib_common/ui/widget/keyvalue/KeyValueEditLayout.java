@@ -17,11 +17,13 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.baihe.lib_common.R;
+import com.baihe.lib_common.provider.CustomerServiceProvider;
 import com.baihe.lib_common.ui.dialog.BottomSelectChannelDialog;
 import com.baihe.lib_common.ui.dialog.BottomSelectCompanyUserDialog;
 import com.baihe.lib_common.ui.dialog.BottomSelectDialog;
 import com.baihe.lib_common.ui.dialog.BottomSelectRecordUserDialog;
 import com.baihe.lib_common.ui.dialog.DateDialogUtils;
+import com.baihe.lib_common.ui.dialog.SelectCityDialog;
 import com.baihe.lib_common.ui.dialog.adapter.SelectDataAdapter;
 import com.baihe.lib_common.ui.widget.FlowLayout;
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity;
@@ -41,6 +43,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 
+
 public class KeyValueEditLayout extends LinearLayout {
     private static final String KV_CHILD_TAG = "KV_CHILD_TAG";
     private static final String SEPARATOR = ",";
@@ -51,6 +54,7 @@ public class KeyValueEditLayout extends LinearLayout {
     private static final int ITEM_VIEW_TYPE_AMOUNT = 5;
     private static final int ITEM_VIEW_TYPE_FLOWBUTTON = 6;
     private static final int ITEM_VIEW_TYPE_SELECT_CUSTOMER = 7;
+    private static final int ITEM_VIEW_TYPE_FOLLOW_RESULT = 8;
     private List<KeyValueEntity> kvList;
 
     private OnItemActionListener listener;
@@ -72,6 +76,7 @@ public class KeyValueEditLayout extends LinearLayout {
         COMPANY_USER("companyUser"),
         CITY("city"),
         CUSTOMER_SELECT("customerSelect"),
+        FOLLOW_RESULT("followResult"),
         CHANNEL("channe");
 
 
@@ -173,15 +178,15 @@ public class KeyValueEditLayout extends LinearLayout {
     }
 
     /**
-     * 通过key找对象
+     * 通过name找对象
      *
-     * @param key
+     * @param name
      * @return
      */
-    public KeyValueEntity findEntityByKey(String key) {
-        if (kvList != null && key != null) {
+    public KeyValueEntity findEntityByName(String name) {
+        if (kvList != null && name != null) {
             for (KeyValueEntity keyValueEntity : kvList) {
-                if (key.equals(keyValueEntity.getKey())) {
+                if (name.equals(keyValueEntity.getName())) {
                     return keyValueEntity;
                 }
             }
@@ -198,7 +203,7 @@ public class KeyValueEditLayout extends LinearLayout {
     public KeyValueEntity findEntityByParamKey(String paramKey) {
         if (kvList != null && paramKey != null) {
             for (KeyValueEntity keyValueEntity : kvList) {
-                if (keyValueEntity.getEvent() != null && paramKey.equals(keyValueEntity.getEvent().getParamKey())) {
+                if (paramKey.equals(keyValueEntity.getParamKey())) {
                     return keyValueEntity;
                 }
             }
@@ -222,6 +227,7 @@ public class KeyValueEditLayout extends LinearLayout {
      * @param kvList
      * @return
      */
+    @SuppressLint("SimpleDateFormat")
     @Nullable
     private LinkedHashMap<String, Object> getCommitMap(List<KeyValueEntity> kvList) {
         LinkedHashMap<String, Object> data = new LinkedHashMap<>();
@@ -230,21 +236,20 @@ public class KeyValueEditLayout extends LinearLayout {
         }
         for (KeyValueEntity keyValueEntity : kvList) {
             //可提交的数据
-            if ("1".equals(keyValueEntity.getShowStatus())) {
-                String value = keyValueEntity.getDefaultVal();
+            if ("1".equals(keyValueEntity.getIs_open())) {
+                String value = keyValueEntity.getValue();
                 ItemAction itemAction = getItemAction(keyValueEntity);
                  if (itemAction == ItemAction.DATE_TIME_RANGE) {
                     //范围时间取标记值
                     String startTime = keyValueEntity.getRangeMin();
                     String endTime = keyValueEntity.getRangeMax();
-                    String timeFormat = getTimeFormat(keyValueEntity.getEvent().getFormat());
 
-                    SimpleDateFormat format = new SimpleDateFormat(timeFormat);
-                    if (TextUtils.isEmpty(startTime) && "1".equals(keyValueEntity.getOptional())) {
+                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    if (TextUtils.isEmpty(startTime) && "1".equals(keyValueEntity.getIs_true())) {
                         TipsToast.INSTANCE.showTips(getAlertPrefix(keyValueEntity) + "起始时间");
                         return null;
                     }
-                    if (TextUtils.isEmpty(endTime) && "1".equals(keyValueEntity.getOptional())) {
+                    if (TextUtils.isEmpty(endTime) && "1".equals(keyValueEntity.getIs_true())) {
                         TipsToast.INSTANCE.showTips(getAlertPrefix(keyValueEntity) + "结束时间");
                         return null;
                     }
@@ -267,44 +272,33 @@ public class KeyValueEditLayout extends LinearLayout {
                      String phone = keyValueEntity.getPhone();
                      String wechat = keyValueEntity.getWechat();
 
-                     if (TextUtils.isEmpty(wechat)&&TextUtils.isEmpty(phone) && "1".equals(keyValueEntity.getOptional())) {
+                     if (TextUtils.isEmpty(wechat)&&TextUtils.isEmpty(phone) && "1".equals(keyValueEntity.getIs_true())) {
                          TipsToast.INSTANCE.showTips("联系方式至少填一项");
                          return null;
                      }
-                     String[] paramsKeys = keyValueEntity.getEvent().getParamKey().split(SEPARATOR);
                      if (!TextUtils.isEmpty(keyValueEntity.getPhone())) {
-                         data.put(paramsKeys[0], keyValueEntity.getPhone());
+                         data.put("phone", keyValueEntity.getPhone());
                      }
                      if (!TextUtils.isEmpty(keyValueEntity.getWechat())) {
-                         data.put(paramsKeys[1], keyValueEntity.getWechat());
+                         data.put("wechat", keyValueEntity.getWechat());
                      }
                  }
                  else {
-                    if (TextUtils.isEmpty(value) && "1".equals(keyValueEntity.getOptional()) && itemAction != ItemAction.READ_ONLY) {
+                    if (TextUtils.isEmpty(value) && "1".equals(keyValueEntity.getIs_true()) && itemAction != ItemAction.READ_ONLY) {
                         String prefix = TextUtils.isEmpty(getAlertPrefix(keyValueEntity)) ? "请输入" : getAlertPrefix(keyValueEntity);
-                        TipsToast.INSTANCE.showTips(prefix + keyValueEntity.getKey());
+                        TipsToast.INSTANCE.showTips(prefix + keyValueEntity.getName());
                         return null;
                     }
                     if (!TextUtils.isEmpty(value)) {
-                        data.put(keyValueEntity.getEvent().getParamKey(), value);
+                        data.put(keyValueEntity.getParamKey(), value);
+                    }
+                    if (!TextUtils.isEmpty(keyValueEntity.getSubParamKey())&& !TextUtils.isEmpty(keyValueEntity.getSubValue())){
+                        data.put(keyValueEntity.getSubParamKey(), keyValueEntity.getSubValue());
                     }
                 }
             }
         }
         return data;
-    }
-
-    /**
-     * 获取时间格式
-     *
-     * @param format
-     * @return
-     */
-    public static String getTimeFormat(String format) {
-        if (format == null) {
-            return "yyyy-MM-dd";
-        }
-        return format;
     }
 
 
@@ -409,25 +403,22 @@ public class KeyValueEditLayout extends LinearLayout {
                 setItemValueForRangeTime(itemView, keyValueEntity);
             } else if (viewType == ITEM_VIEW_TYPE_FLOWBUTTON) {
                 setItemValueForFlowButtons(itemView, keyValueEntity);
-            } else {
+            } else if (viewType == ITEM_VIEW_TYPE_FOLLOW_RESULT) {
+                setItemValueForFollowResult(itemView, keyValueEntity);
+            }
+            else {
                 setItemValueForNormal(itemView, keyValueEntity);
             }
             setItemEvent(keyValueEntity);
         }
     }
 
-    /**
-     * buttons赋值
-     *
-     * @param itemView
-     * @param keyValueEntity
-     */
     private void setItemValueForFlowButtons(View itemView, final KeyValueEntity keyValueEntity) {
         TextView kv_edit_key_tv = itemView.findViewById(R.id.kv_edit_key_tv);
         TextView kv_edit_key_required_tv = itemView.findViewById(R.id.kv_edit_key_required_tv);
         FlowLayout kv_edit_key_buttons_fl = itemView.findViewById(R.id.kv_edit_key_buttons_fl);
 
-        kv_edit_key_tv.setText(keyValueEntity.getKey());
+        kv_edit_key_tv.setText(keyValueEntity.getName());
         //是否必填
         if (isItemRequired(keyValueEntity)) {
             kv_edit_key_required_tv.setVisibility(View.VISIBLE);
@@ -439,20 +430,20 @@ public class KeyValueEditLayout extends LinearLayout {
         final List<String> values = new ArrayList<>();
         if (ItemAction.COLLECTION_MULTIPLE == action) {
             kv_edit_key_buttons_fl.setLabelSelect(FlowLayout.LabelSelect.MULTI);
-            if (!TextUtils.isEmpty(keyValueEntity.getDefaultVal())) {
-                if (keyValueEntity.getDefaultVal().contains(SEPARATOR)) {
-                    String[] valuesArray = keyValueEntity.getDefaultVal().split(SEPARATOR);
+            if (!TextUtils.isEmpty(keyValueEntity.getValue())) {
+                if (keyValueEntity.getValue().contains(SEPARATOR)) {
+                    String[] valuesArray = keyValueEntity.getValue().split(SEPARATOR);
                     if (valuesArray.length > 0) {
                         values.addAll(Arrays.asList(valuesArray));
                     }
                 } else {
-                    values.add(keyValueEntity.getDefaultVal());
+                    values.add(keyValueEntity.getValue());
                 }
             }
         } else {
             kv_edit_key_buttons_fl.setLabelSelect(FlowLayout.LabelSelect.SINGLE);
-            if (!TextUtils.isEmpty(keyValueEntity.getDefaultVal())) {
-                values.add(keyValueEntity.getDefaultVal());
+            if (!TextUtils.isEmpty(keyValueEntity.getValue())) {
+                values.add(keyValueEntity.getValue());
             }
         }
         kv_edit_key_buttons_fl.setLabelAdapter(new FlowLayout.FlowLabelAdapter() {
@@ -460,17 +451,88 @@ public class KeyValueEditLayout extends LinearLayout {
             public int getSize() {
 
 
-                return keyValueEntity.getEvent().getOptions().size();
+                return keyValueEntity.getOption().size();
             }
 
             @Override
             public String getLabelText(int position) {
-                return keyValueEntity.getEvent().getOptions().get(position).getKey();
+                return keyValueEntity.getOption().get(position).getName();
             }
 
             @Override
             public boolean isSelect(int position) {
-                String defValue = keyValueEntity.getEvent().getOptions().get(position).getVal();
+                String defValue = keyValueEntity.getOption().get(position).getValue();
+                if (values.contains(defValue)) {
+                    return true;
+                }
+                return false;
+            }
+
+        });
+    }
+
+    /**
+     * buttons赋值
+     *
+     * @param itemView
+     * @param keyValueEntity
+     */
+    private void setItemValueForFollowResult(View itemView, final KeyValueEntity keyValueEntity) {
+        FlowLayout kv_edit_key_buttons_fl = itemView.findViewById(R.id.kv_edit_key_result_fl);
+        TextView kv_edit_value_text_et = itemView.findViewById(R.id.kv_edit_value_text_et);
+        try {
+            Field field = TextView.class.getDeclaredField("mListeners");
+            field.setAccessible(true);
+            List<TextWatcher> listeners = (List<TextWatcher>) field.get(kv_edit_value_text_et);
+            if (listeners != null) {
+                for (TextWatcher listener : listeners) {
+                    kv_edit_value_text_et.removeTextChangedListener(listener);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        final List<String> values = new ArrayList<>();
+        if (!TextUtils.isEmpty(keyValueEntity.getValue())) {
+            values.add(keyValueEntity.getValue());
+        }
+        kv_edit_value_text_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String value = s.toString().trim();
+                keyValueEntity.setSubValue(value);
+                if (listener != null) {
+                    listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
+                }
+            }
+        });
+        kv_edit_key_buttons_fl.setLabelSelect(FlowLayout.LabelSelect.SINGLE);
+        kv_edit_key_buttons_fl.setLabelAdapter(new FlowLayout.FlowLabelAdapter() {
+            @Override
+            public int getSize() {
+
+
+                return keyValueEntity.getOption().size();
+            }
+
+            @Override
+            public String getLabelText(int position) {
+                return keyValueEntity.getOption().get(position).getName();
+            }
+
+            @Override
+            public boolean isSelect(int position) {
+                String defValue = keyValueEntity.getOption().get(position).getValue();
                 if (values.contains(defValue)) {
                     return true;
                 }
@@ -489,7 +551,8 @@ public class KeyValueEditLayout extends LinearLayout {
         TextView kv_edit_key_tv = itemView.findViewById(R.id.kv_edit_key_tv);
         TextView kv_edit_key_required_tv = itemView.findViewById(R.id.kv_edit_key_required_tv);
         final EditText kv_edit_value_text_et = itemView.findViewById(R.id.kv_edit_value_text_et);
-        kv_edit_key_tv.setText(keyValueEntity.getKey());
+        final TextView kv_edit_choose_tv = itemView.findViewById(R.id.kv_edit_choose_tv);
+        kv_edit_key_tv.setText(keyValueEntity.getName());
         //清除EditText绑定
         try {
             Field field = TextView.class.getDeclaredField("mListeners");
@@ -503,8 +566,8 @@ public class KeyValueEditLayout extends LinearLayout {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String value = keyValueEntity.getVal();
-        kv_edit_value_text_et.setHint(getAlertPrefix(keyValueEntity) + keyValueEntity.getKey());
+        String value = keyValueEntity.getDefaultValue();
+        kv_edit_value_text_et.setHint(getAlertPrefix(keyValueEntity) + keyValueEntity.getName());
         if (isItemOption(keyValueEntity)){
             kv_edit_value_text_et.setFocusable(true);
             kv_edit_value_text_et.setCursorVisible(true);
@@ -547,13 +610,16 @@ public class KeyValueEditLayout extends LinearLayout {
             @Override
             public void afterTextChanged(Editable s) {
                 String value = s.toString().trim();
-                keyValueEntity.setDefaultVal(value);
-                keyValueEntity.setVal(value);
+                keyValueEntity.setDefaultValue(value);
+                keyValueEntity.setValue(value);
                 if (listener != null) {
                     listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
                 }
             }
         });
+        if (getItemAction(keyValueEntity) == ItemAction.CUSTOMER_SELECT){
+            kv_edit_choose_tv.setVisibility(VISIBLE);
+        }
     }
 
     /**
@@ -596,7 +662,7 @@ public class KeyValueEditLayout extends LinearLayout {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        kv_edit_key_tv.setText(keyValueEntity.getKey());
+        kv_edit_key_tv.setText(keyValueEntity.getName());
         kv_edit_value_phone_et.setHintTextColor(Color.parseColor("#C5C5CE"));
         kv_edit_value_wechat_et.setHintTextColor(Color.parseColor("#C5C5CE"));
         //是否必填
@@ -605,7 +671,7 @@ public class KeyValueEditLayout extends LinearLayout {
         } else {
             kv_edit_key_required_tv.setVisibility(View.INVISIBLE);
         }
-        String value = keyValueEntity.getDefaultVal();
+        String value = keyValueEntity.getDefaultValue();
         String phone = "";
         String wechat = "";
 
@@ -671,8 +737,8 @@ public class KeyValueEditLayout extends LinearLayout {
             public void afterTextChanged(Editable s) {
                 String phone = s.toString().trim();
                 keyValueEntity.setPhone(phone);
-                keyValueEntity.setDefaultVal(phone + SEPARATOR + keyValueEntity.getWechat());
-                keyValueEntity.setVal(keyValueEntity.getDefaultVal());
+                keyValueEntity.setValue(phone + SEPARATOR + keyValueEntity.getWechat());
+                keyValueEntity.setDefaultValue(keyValueEntity.getValue());
                 if (listener != null) {
                     listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
                 }
@@ -694,8 +760,8 @@ public class KeyValueEditLayout extends LinearLayout {
                 String wechat = s.toString().trim();
                 //更新本地标记的maxRange
                 keyValueEntity.setWechat(wechat);
-                keyValueEntity.setDefaultVal(keyValueEntity.getPhone() + SEPARATOR + wechat);
-                keyValueEntity.setVal(keyValueEntity.getDefaultVal());
+                keyValueEntity.setValue(keyValueEntity.getPhone() + SEPARATOR + wechat);
+                keyValueEntity.setDefaultValue(keyValueEntity.getValue());
                 if (listener != null) {
                     listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
                 }
@@ -718,7 +784,7 @@ public class KeyValueEditLayout extends LinearLayout {
         ImageView kv_edit_value_start_time_arrow = itemView.findViewById(R.id.kv_edit_value_start_time_arrow);
         ImageView kv_edit_value_end_time_arrow = itemView.findViewById(R.id.kv_edit_value_end_time_arrow);
 
-        kv_edit_key_tv.setText(keyValueEntity.getKey());
+        kv_edit_key_tv.setText(keyValueEntity.getName());
         if (isItemOption(keyValueEntity))
             kv_edit_key_tv.setTextColor(Color.parseColor("#FF4A4C5C"));
         else
@@ -730,7 +796,7 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_key_required_tv.setVisibility(View.INVISIBLE);
         }
         //赋值
-        String timeRange = keyValueEntity.getDefaultVal();
+        String timeRange = keyValueEntity.getDefaultValue();
         String startTime = "";
         String endTime = "";
         if (!TextUtils.isEmpty(timeRange) && timeRange.contains(SEPARATOR) && timeRange.split(SEPARATOR).length > 0 && timeRange.split(SEPARATOR).length <= 2) {
@@ -743,13 +809,17 @@ public class KeyValueEditLayout extends LinearLayout {
             }
         }
         if (!TextUtils.isEmpty(startTime)) {
+            kv_edit_value_start_time_tv.setTextColor(Color.parseColor("#8B8B99"));
             kv_edit_value_start_time_tv.setText(startTime);
         } else {
+            kv_edit_value_start_time_tv.setTextColor(Color.parseColor("#C5C5CE"));
             kv_edit_value_start_time_tv.setText(getAlertPrefix(keyValueEntity) + "起始时间");
         }
         if (!TextUtils.isEmpty(endTime)) {
+            kv_edit_value_end_time_tv.setTextColor(Color.parseColor("#8B8B99"));
             kv_edit_value_end_time_tv.setText(endTime);
         } else {
+            kv_edit_value_end_time_tv.setTextColor(Color.parseColor("#C5C5CE"));
             kv_edit_value_end_time_tv.setText(getAlertPrefix(keyValueEntity) + "结束时间");
         }
 
@@ -784,7 +854,7 @@ public class KeyValueEditLayout extends LinearLayout {
         TextView kv_edit_key_required_tv = itemView.findViewById(R.id.kv_edit_key_required_tv);
         TextView kv_edit_value_tv = itemView.findViewById(R.id.kv_edit_value_tv);
         ImageView kv_edit_value_right_icon_iv = itemView.findViewById(R.id.kv_edit_value_right_icon_iv);
-        kv_edit_key_tv.setText(keyValueEntity.getKey());
+        kv_edit_key_tv.setText(keyValueEntity.getName());
 
         //是否必填
         if (isItemRequired(keyValueEntity)) {
@@ -799,22 +869,32 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_value_right_icon_iv.setVisibility(View.INVISIBLE);
         }
         //是否有填写值，只读颜色不一样
+        if ("channe".equals(keyValueEntity.getParamKey())||"channel".equals(keyValueEntity.getParamKey())){
+            KeyValueEntity recordEntity = findEntityByParamKey("record_user_id");
+            if (recordEntity != null) {
+                recordEntity.setChannelId(keyValueEntity.getValue());
+            }else {
+                recordEntity = findEntityByParamKey("ownerId");
+                if (recordEntity!=null)
+                    recordEntity.setChannelId(keyValueEntity.getValue());
+            }
+        }
         if (!isItemOption(keyValueEntity)) {
             kv_edit_value_tv.setTextColor(Color.parseColor("#C5C5CE"));
             kv_edit_key_tv.setTextColor(Color.parseColor("#C5C5CE"));
-            if (TextUtils.isEmpty(keyValueEntity.getVal())) {
+            if (TextUtils.isEmpty(keyValueEntity.getDefaultValue())) {
                 kv_edit_value_tv.setText("未填写");
             } else {
-                kv_edit_value_tv.setText(keyValueEntity.getVal());
+                kv_edit_value_tv.setText(keyValueEntity.getDefaultValue());
             }
         } else {
             kv_edit_key_tv.setTextColor(Color.parseColor("#4A4C5C"));
-            if (TextUtils.isEmpty(keyValueEntity.getVal())) {
+            if (TextUtils.isEmpty(keyValueEntity.getDefaultValue())) {
                 kv_edit_value_tv.setTextColor(Color.parseColor("#C5C5CE"));
-                kv_edit_value_tv.setText(getAlertPrefix(keyValueEntity) + keyValueEntity.getKey());
+                kv_edit_value_tv.setText(getAlertPrefix(keyValueEntity) + keyValueEntity.getName());
             } else {
                 kv_edit_value_tv.setTextColor(Color.parseColor("#8B8B99"));
-                kv_edit_value_tv.setText(keyValueEntity.getVal());
+                kv_edit_value_tv.setText(keyValueEntity.getDefaultValue());
             }
         }
     }
@@ -841,8 +921,62 @@ public class KeyValueEditLayout extends LinearLayout {
         } else if (ItemAction.COLLECTION == itemAction) {  //单选
             collectionAction(keyValueEntity);
         }else if (ItemAction.DATE_TIME == itemAction){
-
+            timeAction(keyValueEntity);
+        }else if (ItemAction.FOLLOW_RESULT == itemAction) {
+            followResultAction(keyValueEntity);
+        }else if (ItemAction.CUSTOMER_SELECT == itemAction) {
+            customerSelectAction(keyValueEntity);
+        }else if (ItemAction.CITY == itemAction) {
+            citySelect(keyValueEntity);
         }
+    }
+
+    private void citySelect(KeyValueEntity keyValueEntity) {
+        final View itemView = findItemView(keyValueEntity);
+        if (itemView == null) {
+            return;
+        }
+        final LinearLayout kv_edit_value_ll = itemView.findViewById(R.id.kv_edit_value_ll);
+        if (kv_edit_value_ll == null) {
+            return;
+        }
+        if (!isItemOption(keyValueEntity)) {
+            return;
+        }
+        kv_edit_value_ll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SelectCityDialog
+                        .Builder(getContext())
+                        .setOnConfirmListener(cityEntity -> {
+                            keyValueEntity.setValue(cityEntity.getCode());
+                            keyValueEntity.setDefaultValue(cityEntity.getName());
+                            refreshItem(keyValueEntity);
+                            return null;
+                        })
+                        .create().show();
+            }
+        });
+    }
+
+    private void customerSelectAction(final KeyValueEntity keyValueEntity) {
+        View itemView = findItemView(keyValueEntity);
+        if (itemView == null) {
+            return;
+        }
+        TextView kv_edit_value_ll = itemView.findViewById(R.id.kv_edit_choose_tv);
+        if (kv_edit_value_ll == null) {
+            return;
+        }
+        if (TextUtils.isEmpty(keyValueEntity.getType())) {
+            return;
+        }
+        kv_edit_value_ll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomerServiceProvider.chooseCustomer(getContext());
+            }
+        });
     }
 
     private void timeAction(final KeyValueEntity keyValueEntity) {
@@ -854,43 +988,33 @@ public class KeyValueEditLayout extends LinearLayout {
         if (kv_edit_value_ll == null) {
             return;
         }
-        if (keyValueEntity.getEvent() == null) {
+        if (TextUtils.isEmpty(keyValueEntity.getType())) {
             return;
         }
 
         //时间处理
-        String timeFormat = getTimeFormat(keyValueEntity.getEvent().getFormat());
-        final SimpleDateFormat format = new SimpleDateFormat(timeFormat);
+        @SuppressLint("SimpleDateFormat")
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         kv_edit_value_ll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar selectCalendar = Calendar.getInstance();
-                if (!TextUtils.isEmpty(keyValueEntity.getDefaultVal())) {
+                if (!TextUtils.isEmpty(keyValueEntity.getDefaultValue())) {
                     try {
-                        Date date = format.parse(keyValueEntity.getDefaultVal());
+                        Date date = format.parse(keyValueEntity.getDefaultValue());
                         selectCalendar.setTime(date);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-                Calendar rangeStartCalendar = Calendar.getInstance();
-                Calendar rangeEndCalendar = Calendar.getInstance();
-                //当前时间更大
-                if (rangeStartCalendar.compareTo(selectCalendar) == 1) {
-                    //范围起始时间为选中时间
-                    rangeStartCalendar.setTime(selectCalendar.getTime());
-                } else if (rangeStartCalendar.compareTo(selectCalendar) == -1) { //选中时间更大
-                    //范围结束时间为选中时间延续5年
-                    rangeEndCalendar.setTime(selectCalendar.getTime());
-                }
-                //结束时间延续5年
 
 
-                DateDialogUtils.INSTANCE.createDatePickerView(getContext(), "请选择"+keyValueEntity.getKey(),(date, v1) -> {
+
+                DateDialogUtils.INSTANCE.createDateTimePickerView(getContext(), "请选择"+keyValueEntity.getName(),(date, v1) -> {
                     String selectTime = format.format(date);
                     //更新item
-                    keyValueEntity.setDefaultVal(selectTime);
-                    keyValueEntity.setVal(selectTime);
+                    keyValueEntity.setDefaultValue(selectTime);
+                    keyValueEntity.setValue(selectTime);
                     refreshItem(keyValueEntity);
                     if (listener != null) {
                         listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
@@ -900,11 +1024,6 @@ public class KeyValueEditLayout extends LinearLayout {
         });
     }
 
-    /**
-     * 按钮单选操作
-     *
-     * @param keyValueEntity
-     */
     private void collectionAction(final KeyValueEntity keyValueEntity) {
         View itemView = findItemView(keyValueEntity);
         if (itemView == null) {
@@ -914,18 +1033,54 @@ public class KeyValueEditLayout extends LinearLayout {
         if (kv_edit_key_buttons_fl == null) {
             return;
         }
-        if (keyValueEntity.getEvent() == null || keyValueEntity.getEvent().getOptions() == null) {
+        if (TextUtils.isEmpty(keyValueEntity.getType()) || keyValueEntity.getOption() == null) {
             return;
         }
         kv_edit_key_buttons_fl.setOnLabelClickListener(new FlowLayout.OnLabelClickListener() {
             @Override
             public void onLabelClick(String text, int index) {
                 List<Integer> values = kv_edit_key_buttons_fl.getSelectLabelsIndex();
-                if (values.size() > 0 && values.get(0) < keyValueEntity.getEvent().getOptions().size()) {
-                    final KeyValueEntity option = keyValueEntity.getEvent().getOptions().get(values.get(0));
-                    keyValueEntity.setDefaultVal(option.getVal());
+                if (values.size() > 0 && values.get(0) < keyValueEntity.getOption().size()) {
+                    final KeyValueEntity option = keyValueEntity.getOption().get(values.get(0));
+                    keyValueEntity.setValue(option.getValue());
                 } else {
-                    keyValueEntity.setDefaultVal("");
+                    keyValueEntity.setValue("");
+                }
+                //更新item
+                refreshItem(keyValueEntity);
+                if (listener != null) {
+                    listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
+                }
+            }
+        });
+    }
+
+    /**
+     * 按钮单选操作
+     *
+     * @param keyValueEntity
+     */
+    private void followResultAction(final KeyValueEntity keyValueEntity) {
+        View itemView = findItemView(keyValueEntity);
+        if (itemView == null) {
+            return;
+        }
+        final FlowLayout kv_edit_key_buttons_fl = itemView.findViewById(R.id.kv_edit_key_result_fl);
+        if (kv_edit_key_buttons_fl == null) {
+            return;
+        }
+        if (TextUtils.isEmpty(keyValueEntity.getType()) || keyValueEntity.getOption() == null) {
+            return;
+        }
+        kv_edit_key_buttons_fl.setOnLabelClickListener(new FlowLayout.OnLabelClickListener() {
+            @Override
+            public void onLabelClick(String text, int index) {
+                List<Integer> values = kv_edit_key_buttons_fl.getSelectLabelsIndex();
+                if (values.size() > 0 && values.get(0) < keyValueEntity.getOption().size()) {
+                    final KeyValueEntity option = keyValueEntity.getOption().get(values.get(0));
+                    keyValueEntity.setValue(option.getValue());
+                } else {
+                    keyValueEntity.setValue("");
                 }
                 //更新item
                 refreshItem(keyValueEntity);
@@ -950,7 +1105,7 @@ public class KeyValueEditLayout extends LinearLayout {
         if (kv_edit_key_buttons_fl == null) {
             return;
         }
-        if (keyValueEntity.getEvent() == null || keyValueEntity.getEvent().getOptions() == null) {
+        if (TextUtils.isEmpty(keyValueEntity.getType()) || keyValueEntity.getOption() == null) {
             return;
         }
         kv_edit_key_buttons_fl.setOnLabelClickListener(new FlowLayout.OnLabelClickListener() {
@@ -961,18 +1116,18 @@ public class KeyValueEditLayout extends LinearLayout {
                     StringBuffer buffer = new StringBuffer();
                     for (int i = 0; i < values.size(); i++) {
                         int pos = values.get(i);
-                        if (pos < keyValueEntity.getEvent().getOptions().size()) {
-                            final KeyValueEntity option = keyValueEntity.getEvent().getOptions().get(pos);
+                        if (pos < keyValueEntity.getOption().size()) {
+                            final KeyValueEntity option = keyValueEntity.getOption().get(pos);
                             if (i == values.size() - 1) {
-                                buffer.append(option.getVal());
+                                buffer.append(option.getValue());
                             } else {
-                                buffer.append(option.getVal() + SEPARATOR);
+                                buffer.append(option.getValue() + SEPARATOR);
                             }
                         }
                     }
-                    keyValueEntity.setDefaultVal(buffer.toString());
+                    keyValueEntity.setValue(buffer.toString());
                 } else {
-                    keyValueEntity.setDefaultVal("");
+                    keyValueEntity.setValue("");
                 }
                 //更新item
                 refreshItem(keyValueEntity);
@@ -998,11 +1153,10 @@ public class KeyValueEditLayout extends LinearLayout {
         if (kv_edit_value_start_time_tv == null || kv_edit_value_end_time_tv == null) {
             return;
         }
-        if (keyValueEntity.getEvent() == null) {
+        if (TextUtils.isEmpty(keyValueEntity.getType())) {
             return;
         }
-        String timeFormat = getTimeFormat(keyValueEntity.getEvent().getFormat());
-        final SimpleDateFormat format = new SimpleDateFormat(timeFormat);
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         kv_edit_value_start_time_tv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1013,18 +1167,6 @@ public class KeyValueEditLayout extends LinearLayout {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Calendar rangeStartCalendar = Calendar.getInstance();
-                Calendar rangeEndCalendar = Calendar.getInstance();
-                //当前时间更大
-                if (rangeStartCalendar.compareTo(startCalendar) == 1) {
-                    //范围起始时间为选中时间
-                    rangeStartCalendar.setTime(startCalendar.getTime());
-                } else if (rangeStartCalendar.compareTo(startCalendar) == -1) { //起始时间更大
-                    //范围结束时间为选中时间延续5年
-                    rangeEndCalendar.setTime(startCalendar.getTime());
-                }
-                //结束时间延续5年
-                rangeEndCalendar.set(Calendar.YEAR, rangeEndCalendar.get(Calendar.YEAR) + 5);
 
                 DateDialogUtils.INSTANCE.createDatePickerView(getContext(), "请选择开始日期",new OnTimeSelectListener() {
                     @Override
@@ -1033,8 +1175,8 @@ public class KeyValueEditLayout extends LinearLayout {
                         keyValueEntity.setRangeMin(selectTime);
                         //更新item
                         String timeRange = selectTime + SEPARATOR + keyValueEntity.getRangeMax();
-                        keyValueEntity.setDefaultVal(timeRange);
-                        keyValueEntity.setVal(timeRange);
+                        keyValueEntity.setDefaultValue(timeRange);
+                        keyValueEntity.setValue(timeRange);
                         refreshItem(keyValueEntity);
                         if (listener != null) {
                             listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
@@ -1053,19 +1195,6 @@ public class KeyValueEditLayout extends LinearLayout {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Calendar rangeStartCalendar = Calendar.getInstance();
-                Calendar rangeEndCalendar = Calendar.getInstance();
-                //当前时间更大
-                if (rangeStartCalendar.compareTo(endCalendar) == 1) {
-                    //范围起始时间为选中时间
-                    rangeStartCalendar.setTime(endCalendar.getTime());
-                } else if (rangeStartCalendar.compareTo(endCalendar) == -1) { //起始时间更大
-                    //范围结束时间为选中时间延续5年
-                    rangeEndCalendar.setTime(endCalendar.getTime());
-                }
-                //结束时间延续5年
-                rangeEndCalendar.set(Calendar.YEAR, rangeEndCalendar.get(Calendar.YEAR) + 5);
-
                 DateDialogUtils.INSTANCE.createDatePickerView(getContext(), "请选择结束日期",new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
@@ -1073,8 +1202,8 @@ public class KeyValueEditLayout extends LinearLayout {
                         keyValueEntity.setRangeMax(selectTime);
                         String timeRange = keyValueEntity.getRangeMin() + SEPARATOR + selectTime;
                         //更新item
-                        keyValueEntity.setDefaultVal(timeRange);
-                        keyValueEntity.setVal(timeRange);
+                        keyValueEntity.setDefaultValue(timeRange);
+                        keyValueEntity.setValue(timeRange);
                         refreshItem(keyValueEntity);
                         if (listener != null) {
                             listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
@@ -1104,8 +1233,8 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_value_ll.requestFocus();
             new BottomSelectCompanyUserDialog.Builder(getContext())
                     .setOnConfirmClickListener((dialog, id, name) -> {
-                        keyValueEntity.setDefaultVal(String.valueOf(id));
-                        keyValueEntity.setVal(name);
+                        keyValueEntity.setValue(String.valueOf(id));
+                        keyValueEntity.setDefaultValue(name);
                         refreshItem(keyValueEntity);
                         if (listener != null) {
                             listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
@@ -1134,7 +1263,7 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_value_ll.setFocusable(true);
             kv_edit_value_ll.setFocusableInTouchMode(true);
             kv_edit_value_ll.requestFocus();
-            String defaultVal = keyValueEntity.getDefaultVal();
+            String defaultVal = keyValueEntity.getValue();
             String channelId = keyValueEntity.getChannelId();
             if (TextUtils.isEmpty(channelId)){
                 TipsToast.INSTANCE.showTips("请选择渠道来源");
@@ -1142,8 +1271,8 @@ public class KeyValueEditLayout extends LinearLayout {
             }
             new BottomSelectRecordUserDialog.Builder(getContext(),channelId)
                     .setOnConfirmClickListener((dialog, id, name) -> {
-                        keyValueEntity.setDefaultVal(String.valueOf(id));
-                        keyValueEntity.setVal(name);
+                        keyValueEntity.setValue(String.valueOf(id));
+                        keyValueEntity.setDefaultValue(name);
                         refreshItem(keyValueEntity);
                         if (listener != null) {
                             listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
@@ -1174,11 +1303,11 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_value_ll.setFocusable(true);
             kv_edit_value_ll.setFocusableInTouchMode(true);
             kv_edit_value_ll.requestFocus();
-            String defaultVal = keyValueEntity.getDefaultVal();
+            String defaultVal = keyValueEntity.getValue();
             new BottomSelectChannelDialog.Builder(getContext())
                     .setOnConfirmClickListener((dialog, id, name) -> {
-                        keyValueEntity.setDefaultVal(String.valueOf(id));
-                        keyValueEntity.setVal(name);
+                        keyValueEntity.setValue(String.valueOf(id));
+                        keyValueEntity.setDefaultValue(name);
                         KeyValueEntity recordEntity = findEntityByParamKey("record_user_id");
                         if (recordEntity != null) {
                             recordEntity.setChannelId(String.valueOf(id));
@@ -1225,18 +1354,18 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_value_ll.setFocusable(true);
             kv_edit_value_ll.setFocusableInTouchMode(true);
             kv_edit_value_ll.requestFocus();
-            final List<KeyValueEntity> options = keyValueEntity.getEvent().getOptions();
-            String defaultVal = keyValueEntity.getDefaultVal();
+            final List<KeyValueEntity> options = keyValueEntity.getOption();
+            String defaultVal = keyValueEntity.getValue();
             int initSelectDataPosition = -1;
             for (int i = 0; i < options.size(); i++) {
                 KeyValueEntity option = options.get(i);
-                if (!TextUtils.isEmpty(option.getVal())  && option.getVal().equals(defaultVal)) {
+                if (!TextUtils.isEmpty(option.getValue())  && option.getValue().equals(defaultVal)) {
                     initSelectDataPosition = i;
                 }
             }
             int finalInitSelectDataPosition = initSelectDataPosition;
             new BottomSelectDialog.Builder(getContext())
-                    .setTitle(getAlertPrefix(keyValueEntity) + keyValueEntity.getKey())
+                    .setTitle(getAlertPrefix(keyValueEntity) + keyValueEntity.getName())
                     .setSelectDataAdapter(new SelectDataAdapter() {
                         @Override
                         public int getCount() {
@@ -1245,9 +1374,9 @@ public class KeyValueEditLayout extends LinearLayout {
 
                         @Override
                         public String getText(int dataPostion) {
-                            String key = options.get(dataPostion).getKey();
+                            String key = options.get(dataPostion).getName();
                             if (TextUtils.isEmpty(key))
-                                key = options.get(dataPostion).getKey3();
+                                key = options.get(dataPostion).getLabel();
                             return key;
                         }
 
@@ -1259,8 +1388,8 @@ public class KeyValueEditLayout extends LinearLayout {
                         if (finalInitSelectDataPosition != position) {
                             final KeyValueEntity option = options.get(position);
                             //更新item
-                            keyValueEntity.setDefaultVal(option.getVal());
-                            keyValueEntity.setVal(TextUtils.isEmpty(option.getKey())?option.getKey3():option.getKey());
+                            keyValueEntity.setValue(option.getValue());
+                            keyValueEntity.setDefaultValue(TextUtils.isEmpty(option.getName())?option.getLabel():option.getName());
                             refreshItem(keyValueEntity);
                             if (listener != null) {
                                 listener.onEvent(keyValueEntity, getItemAction(keyValueEntity));
@@ -1272,6 +1401,38 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_value_ll.setFocusableInTouchMode(false);
 
         });
+    }
+
+    private void multiSelectAction(final KeyValueEntity keyValueEntity){
+        final View itemView = findItemView(keyValueEntity);
+        if (itemView == null) {
+            return;
+        }
+        final LinearLayout kv_edit_value_ll = itemView.findViewById(R.id.kv_edit_value_ll);
+        if (kv_edit_value_ll == null) {
+            return;
+        }
+        if (!isItemOption(keyValueEntity)) {
+            return;
+        }
+        kv_edit_value_ll.setOnClickListener(v -> {
+            kv_edit_value_ll.setFocusable(true);
+            kv_edit_value_ll.setFocusableInTouchMode(true);
+            kv_edit_value_ll.requestFocus();
+            final List<KeyValueEntity> options = keyValueEntity.getOption();
+            String defaultVal = keyValueEntity.getValue();
+            int initSelectDataPosition = -1;
+            for (int i = 0; i < options.size(); i++) {
+                KeyValueEntity option = options.get(i);
+                if (!TextUtils.isEmpty(option.getValue())  && option.getValue().equals(defaultVal)) {
+                    initSelectDataPosition = i;
+                }
+            }
+            int finalInitSelectDataPosition = initSelectDataPosition;
+            kv_edit_value_ll.setFocusableInTouchMode(false);
+
+        });
+
     }
 
     /**
@@ -1304,7 +1465,7 @@ public class KeyValueEditLayout extends LinearLayout {
      * @return
      */
     private boolean isItemShow(KeyValueEntity keyValueEntity) {
-        if (keyValueEntity.getShowStatus() == null || "1".equals(keyValueEntity.getShowStatus())) {
+        if (keyValueEntity.getIs_open() == null || "1".equals(keyValueEntity.getIs_open())) {
             return true;
         } else {
             return false;
@@ -1317,7 +1478,7 @@ public class KeyValueEditLayout extends LinearLayout {
      * @return
      */
     private boolean isItemRequired(KeyValueEntity keyValueEntity) {
-        if ("1".equals(keyValueEntity.getOptional())) {
+        if ("1".equals(keyValueEntity.getIs_true())) {
             return true;
         } else {
             return false;
@@ -1330,14 +1491,14 @@ public class KeyValueEditLayout extends LinearLayout {
      * @param keyValueEntity
      */
     private boolean isItemOption(KeyValueEntity keyValueEntity) {
-        if (keyValueEntity.getEvent() == null) {
+        if (TextUtils.isEmpty(keyValueEntity.getType())) {
             return false;
         }
-        String action = keyValueEntity.getEvent().getAction();
+        String action = keyValueEntity.getType();
         if (ItemAction.READ_ONLY.valueOf().equals(action)) {
             return false;
         } else {
-            return !keyValueEntity.isReadOnly();
+            return "2".equals(keyValueEntity.getIs_channge());
         }
 
     }
@@ -1346,7 +1507,7 @@ public class KeyValueEditLayout extends LinearLayout {
 
     public static String getAlertPrefix(KeyValueEntity keyValueEntity) {
         ItemAction itemAction = getItemAction(keyValueEntity);
-        String prefix = "";
+        String prefix = "请选择";
         switch (itemAction) {
             case INPUT:
             case CONTACT:
@@ -1369,7 +1530,7 @@ public class KeyValueEditLayout extends LinearLayout {
      * @return
      */
     public static ItemAction getItemAction(KeyValueEntity keyValueEntity) {
-        String action = keyValueEntity.getEvent().getAction();
+        String action = keyValueEntity.getType();
         if (ItemAction.INPUT.valueOf().equals(action)) {
             return ItemAction.INPUT;
         } else if (ItemAction.CONTACT.valueOf().equals(action)) {
@@ -1394,6 +1555,12 @@ public class KeyValueEditLayout extends LinearLayout {
             return ItemAction.AMOUNT;
         }else if (ItemAction.COMPANY_USER.valueOf().equals(action)) {
             return ItemAction.COMPANY_USER;
+        }else if (ItemAction.FOLLOW_RESULT.valueOf().equals(action)) {
+            return ItemAction.FOLLOW_RESULT;
+        }else if (ItemAction.CUSTOMER_SELECT.valueOf().equals(action)) {
+            return ItemAction.CUSTOMER_SELECT;
+        }else if (ItemAction.CITY.valueOf().equals(action)) {
+            return ItemAction.CITY;
         }
         else {
             return ItemAction.READ_ONLY;
@@ -1432,6 +1599,8 @@ public class KeyValueEditLayout extends LinearLayout {
             childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_edit_amount_item,this,false);
         } else if (viewType == ITEM_VIEW_TYPE_FLOWBUTTON) {
             childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_eidt_flowbutton_item, this, false);
+        }else if (viewType == ITEM_VIEW_TYPE_FOLLOW_RESULT) {
+            childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_eidt_follow_result_item, this, false);
         }
         else {
             childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_edit_select_item, this, false);
@@ -1523,10 +1692,10 @@ public class KeyValueEditLayout extends LinearLayout {
      * @return
      */
     private int getItemViewType(KeyValueEntity keyValueEntity) {
-        if (keyValueEntity.getEvent() == null) {
+        if (TextUtils.isEmpty(keyValueEntity.getType())) {
             return ITEM_VIEW_TYPE_NORMAL;
         }
-        String action = keyValueEntity.getEvent().getAction();
+        String action = keyValueEntity.getType();
         if (ItemAction.INPUT.valueOf().equals(action)) {
             return ITEM_VIEW_TYPE_INPUT;
         } else if (ItemAction.CONTACT.valueOf().equals(action)) {
@@ -1539,6 +1708,8 @@ public class KeyValueEditLayout extends LinearLayout {
             return ITEM_VIEW_TYPE_FLOWBUTTON;
         }else if (ItemAction.CUSTOMER_SELECT.valueOf().equals(action)){
             return ITEM_VIEW_TYPE_SELECT_CUSTOMER;
+        }else if (ItemAction.FOLLOW_RESULT.valueOf().equals(action)){
+            return ITEM_VIEW_TYPE_FOLLOW_RESULT;
         }
         else {
             return ITEM_VIEW_TYPE_NORMAL;

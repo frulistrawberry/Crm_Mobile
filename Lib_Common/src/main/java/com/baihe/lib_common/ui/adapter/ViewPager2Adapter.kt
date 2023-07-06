@@ -25,5 +25,6 @@ class ViewPager2Adapter(
         return this
     }
 
+    fun getFragments() = fragmentList
 
 }

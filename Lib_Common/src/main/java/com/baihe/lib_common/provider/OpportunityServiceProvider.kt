@@ -31,5 +31,5 @@ object OpportunityServiceProvider {
      * 创建机会
      */
     @JvmStatic
-    fun createOrUpdateOpportunity(context: Context,oppoId:String?, customerId:String?=null) = service.createOrUpdateOpportunity(context,oppoId,customerId)
+    fun createOrUpdateOpportunity(context: Context,oppoId:String?=null, customerId:String?=null) = service.createOrUpdateOpportunity(context,oppoId,customerId)
 }

@@ -126,10 +126,10 @@ data class OpportunityDetailEntity(
     val phone: String?,
     @SerializedName("category_txt")
     val category:String?,
-    @SerializedName("follow_user_id_txg")
+    @SerializedName("follow_user_id_txt")
     val followUser:String?,
     val name:String?,
-    @SerializedName("city_info")
+    @SerializedName("live_city_code")
     val cityInfo:CityEntity?,
     @SerializedName("identity_txt")
     val identity: String?,
@@ -138,6 +138,14 @@ data class OpportunityDetailEntity(
     val remark:String?,
     val reserve:ReserveInfoEntity?,
     val order:OrderInfoEntity?,
+    val customer_id:String?,
+    val channel_txt:String?,
+    val sub_category:String?,
+    val user_id_txt:String?,
+    val wedding_date_from:String?,
+    val wedding_date_end:String?,
+    val create_time:String?,
+    val follow_create:String?,
     val follow:List<FollowEntity>?
 ){
     fun toBasicShowArray():List<KeyValueEntity>{
@@ -145,19 +153,16 @@ data class OpportunityDetailEntity(
         kvList.apply {
             add(KeyValueEntity().apply {
                 key = "客户姓名"
-                `val` = name
-                event = KeyValEventEntity().apply {
-                    name = "查看客户"
-                    action = "goLink"
-                }
+                `val` = this@OpportunityDetailEntity.name
+                text = "查看客户"
+                action = "jump"
+
             })
             add(KeyValueEntity().apply {
                 key = "联系方式"
                 `val` = this@OpportunityDetailEntity.phone
-                event = KeyValEventEntity().apply {
-                    action = "call"
-                    icon = "ic_call"
-                }
+                action = "call"
+                icon = "ic_call"
             })
             add(KeyValueEntity().apply {
                 key = "业务品类"
@@ -174,6 +179,74 @@ data class OpportunityDetailEntity(
             add(KeyValueEntity().apply {
                 key = "客户身份"
                 `val` = identity
+            })
+            add(KeyValueEntity().apply {
+                key = "备注"
+                `val` = remark
+            })
+
+        }
+        return kvList
+    }
+
+    fun toAllShowArray():List<KeyValueEntity>{
+        val kvList = mutableListOf<KeyValueEntity>()
+        kvList.apply {
+            add(KeyValueEntity().apply {
+                key = "客户编码"
+                `val` = customer_id
+            })
+            add(KeyValueEntity().apply {
+                key = "渠道"
+                `val` = channel_txt
+            })
+            add(KeyValueEntity().apply {
+                key = "客户姓名"
+                `val` = name
+            })
+            add(KeyValueEntity().apply {
+                key = "联系方式"
+                `val` = this@OpportunityDetailEntity.phone
+            })
+            add(KeyValueEntity().apply {
+                key = "业务品类"
+                `val` = category
+            })
+            add(KeyValueEntity().apply {
+                key = "业务子品类"
+                `val` = sub_category
+            })
+            add(KeyValueEntity().apply {
+                key = "跟进人"
+                `val` = followUser
+            })
+            add(KeyValueEntity().apply {
+                key = "提供人"
+                `val` = owner
+            })
+            add(KeyValueEntity().apply {
+                key = "创建人"
+                `val` = user_id_txt
+            })
+            add(KeyValueEntity().apply {
+                key = "意向区域"
+                `val` = cityInfo?.full
+            })
+            add(KeyValueEntity().apply {
+                key = "客户身份"
+                `val` = identity
+            })
+            add(KeyValueEntity().apply {
+                key = "预计婚期"
+                `val` = "${wedding_date_from}-${wedding_date_end}"
+            })
+            add(KeyValueEntity().apply {
+                key = "机会创建时间"
+                `val` = create_time
+            })
+            add(KeyValueEntity().apply {
+                key = "最新编辑时间"
+                `val` = follow_create
             })
             add(KeyValueEntity().apply {
                 key = "备注"
@@ -364,7 +437,7 @@ data class OpportunityDetailEntity(
             }
             "240"->{
                 buttons.apply {
-                    if (order?.orderStatus.isNullOrEmpty()||order?.orderStatus=="0"){
+                    if (order?.orderStatus!=null||order?.orderStatus.toString()=="0"){
                         add(ButtonTypeEntity().apply {
                             name = "编辑机会"
                             type = 3

@@ -44,6 +44,20 @@ public class KeyValueLayout extends LinearLayout {
     private int valueMaxLine;
     private FontStyle keyFontStyle = FontStyle.LIGHT;
     private FontStyle valueFontStyle = FontStyle.NORMAL;
+    private OnItemActionListener listener;
+
+    /**
+     * action监听
+     */
+    public static abstract class OnItemActionListener {
+        /**
+         * 事件响应
+         *
+         * @param keyValueEntity
+         * @param itemAction
+         */
+        public abstract void onEvent(KeyValueEntity keyValueEntity, KeyValueLayout.ItemAction itemAction);
+    }
 
     public KeyValueLayout(Context context) {
         this(context,null);
@@ -60,7 +74,7 @@ public class KeyValueLayout extends LinearLayout {
 
     public enum ItemAction {
         CALL("call"),
-        GO_LINK("goLink");
+        JUMP("jump");
         String value;
 
         ItemAction(String value) {
@@ -140,6 +154,14 @@ public class KeyValueLayout extends LinearLayout {
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+    /**
+     * 设置Item Action监听
+     *
+     * @param listener
+     */
+    public void setOnItemActionListener(OnItemActionListener listener) {
+        this.listener = listener;
+    }
 
     public void setData(List<KeyValueEntity> kvList){
         if (kvList == null)
@@ -209,14 +231,14 @@ public class KeyValueLayout extends LinearLayout {
         TextView kv_key_tv = view.findViewById(R.id.kv_key_tv);
         TextView kv_value_tv = view.findViewById(R.id.kv_value_tv);
         if (kv_key_tv != null) {
-            String key = !TextUtils.isEmpty(keyValueEntity.getKey()) ? keyValueEntity.getKey() : !TextUtils.isEmpty(keyValueEntity.getKey2())?keyValueEntity.getKey2():"";
+            String key = !TextUtils.isEmpty(keyValueEntity.getKey()) ? keyValueEntity.getKey() : "";
             kv_key_tv.setText(key + (keyColon ? "：" : ""));
         }
         if (kv_value_tv != null) {
-            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() : !TextUtils.isEmpty(keyValueEntity.getVal2())?keyValueEntity.getVal2():"";
+            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() : "";
             kv_value_tv.setText(value);
         }
-        if (keyValueEntity.getEvent() != null) {
+        if (!TextUtils.isEmpty(keyValueEntity.getAction())) {
             setEvent(view, keyValueEntity);
         } else {
             LinearLayout kv_value_right_ll = view.findViewById(R.id.kv_value_right_ll);
@@ -226,7 +248,6 @@ public class KeyValueLayout extends LinearLayout {
 
     @SuppressLint("DiscouragedApi")
     private void setEvent(View view, KeyValueEntity keyValueEntity){
-        KeyValEventEntity keyValEventEntity = keyValueEntity.getEvent();
         LinearLayout kv_value_right_ll = view.findViewById(R.id.kv_value_right_ll);
         RelativeLayout kv_value_rl = view.findViewById(R.id.kv_value_rl);
         TextView kv_value_tv = view.findViewById(R.id.kv_value_tv);
@@ -234,21 +255,21 @@ public class KeyValueLayout extends LinearLayout {
         ImageView kv_value_right_icon_iv = view.findViewById(R.id.kv_value_right_icon_iv);
         TextView kv_value_left_name_tv = view.findViewById(R.id.kv_value_left_name_tv);
         kv_value_left_name_tv.setVisibility(View.GONE);
-        if (!TextUtils.isEmpty(keyValEventEntity.getName()) || !TextUtils.isEmpty(keyValEventEntity.getIcon())||keyValEventEntity.getAttach()!=null) {
+        if (!TextUtils.isEmpty(keyValueEntity.getText()) || !TextUtils.isEmpty(keyValueEntity.getIcon())||keyValueEntity.getAttach()!=null) {
             kv_value_right_ll.setVisibility(View.VISIBLE);
         } else {
             kv_value_right_ll.setVisibility(View.GONE);
         }
         kv_value_attach_rv.setVisibility(GONE);
-        if (!TextUtils.isEmpty(keyValEventEntity.getName())) {
+        if (!TextUtils.isEmpty(keyValueEntity.getText())) {
             kv_value_right_icon_iv.setVisibility(View.VISIBLE);
             kv_value_left_name_tv.setVisibility(View.VISIBLE);
-            kv_value_left_name_tv.setText(keyValEventEntity.getName());
+            kv_value_left_name_tv.setText(keyValueEntity.getText());
             kv_value_right_icon_iv.setImageResource(R.mipmap.ic_arrow_right);
-        } else if (!TextUtils.isEmpty(keyValEventEntity.getIcon())){
+        } else if (!TextUtils.isEmpty(keyValueEntity.getIcon())){
             kv_value_left_name_tv.setVisibility(View.GONE);
             kv_value_right_icon_iv.setVisibility(View.VISIBLE);
-            int drawableId = context.getResources().getIdentifier(keyValEventEntity.getIcon(), "mipmap", context.getPackageName());
+            int drawableId = context.getResources().getIdentifier(keyValueEntity.getIcon(), "mipmap", context.getPackageName());
             if (drawableId == 0) { //未找到资源隐藏
                 kv_value_right_icon_iv.setVisibility(View.GONE);
             } else {
@@ -256,39 +277,36 @@ public class KeyValueLayout extends LinearLayout {
                 valueLayoutParams.gravity = Gravity.CENTER_VERTICAL;
                 kv_value_right_icon_iv.setImageResource(drawableId);
             }
-        } else if (keyValEventEntity.getAttach() != null) {
+        } else if (keyValueEntity.getAttach() != null) {
             kv_value_tv.setText("");
             kv_value_right_icon_iv.setVisibility(GONE);
             kv_value_attach_rv.setVisibility(VISIBLE);
             kv_value_attach_rv.setLayoutManager(new GridLayoutManager(context,2));
             AttachImageAdapter adapter = new AttachImageAdapter();
             kv_value_attach_rv.setAdapter(adapter);
-            adapter.setData(keyValEventEntity.getAttach());
+            adapter.setData(keyValueEntity.getAttach());
         }
 
         setAction(view, kv_value_right_ll, keyValueEntity);
     }
 
     private void setAction(View itemView, LinearLayout rightView, KeyValueEntity keyValueEntity) {
-        String actionName = keyValueEntity.getEvent().getAction();
-        ItemAction itemAction = getItemAction(actionName);
+        String action = keyValueEntity.getAction();
+        ItemAction itemAction = getItemAction(action);
         if (itemAction == null) {
             return;
         }
-        switch (itemAction){
-            case CALL:
-                // TODO: 外呼
-                break;
-            case GO_LINK:
-                // TODO: 跳转
+        if (listener!=null){
+            listener.onEvent(keyValueEntity,itemAction);
         }
+
     }
 
     private ItemAction getItemAction(String actionName) {
         if (ItemAction.CALL.valueOf().equals(actionName)) {
             return ItemAction.CALL;
-        } else if (ItemAction.GO_LINK.valueOf().equals(actionName)) {
-            return ItemAction.GO_LINK;
+        } else if (ItemAction.JUMP.valueOf().equals(actionName)) {
+            return ItemAction.JUMP;
         } else {
             return null;
         }

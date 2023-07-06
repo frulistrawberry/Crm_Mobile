@@ -1,6 +1,5 @@
 package com.baihe.lib_common.entity
 
-import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValEventEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 
@@ -48,7 +47,7 @@ data class FollowEntity(
             })
             add(KeyValueEntity().apply {
                 key = timeText
-                `val` = when(action){
+                `val` = when(this@FollowEntity.action){
                     5,6,7,8,9->{
                         createTime
                     }else ->{
@@ -92,15 +91,12 @@ data class FollowEntity(
             add(KeyValueEntity().apply {
                 key = "附件"
                 `val` = ""
-                event = KeyValEventEntity().apply {
-                    action = "attach"
-                    attach = mutableListOf()
-                    val urls = attachment?.split(",")?: mutableListOf()
-                    if (urls.isEmpty() && !attachment.isNullOrEmpty()){
-                        attach.add(attachment)
-                    }else{
-                        attach.addAll(urls)
-                    }
+                attach = mutableListOf()
+                val urls = attachment?.split(",")?: mutableListOf()
+                if (urls.isEmpty() && !attachment.isNullOrEmpty()){
+                    attach.add(attachment)
+                }else{
+                    attach.addAll(urls)
                 }
             })
             add(KeyValueEntity().apply {

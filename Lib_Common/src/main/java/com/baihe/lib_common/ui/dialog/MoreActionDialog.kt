@@ -38,6 +38,7 @@ class MoreActionDialog {
                 onItemClickListener = {_,position->
                     val item = getData()[position]
                     onButtonsClick?.invoke(item.type)
+                    dismiss()
                 }
             }
         }

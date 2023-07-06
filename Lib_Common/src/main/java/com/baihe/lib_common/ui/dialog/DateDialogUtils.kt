@@ -41,6 +41,35 @@ object DateDialogUtils {
 
         return timePickerView
     }
+
+    fun createDateTimePickerView(context: Context,title:String="请选择时间",onTimeSelectListener: OnTimeSelectListener):TimePickerView{
+        var timePickerView:TimePickerView? = null
+        val builder = TimePickerBuilder(context,onTimeSelectListener).apply {
+            setContentTextSize(18)
+            setOutSideCancelable(true)
+            isCyclic(false)
+            setBgColor(context.color(R.color.COLOR_FFFFFF))
+            setLabel("年","月","日","时","分","秒")
+            setType(booleanArrayOf(true,true,true,true,true,true))
+            isCenterLabel(false)
+            setLayoutRes(R.layout.common_pickerview_time){
+                val titleTv = it.findViewById<TextView>(R.id.tv_title)
+                val cancelBtn = it.findViewById<ImageView>(R.id.btn_cancel)
+                val submitBtn = it.findViewById<TextView>(R.id.btn_submit)
+                titleTv.text = title
+                cancelBtn.click {
+                    timePickerView?.dismiss()
+                }
+                submitBtn.click {
+                    timePickerView?.returnData()
+                    timePickerView?.dismiss()
+                }
+            }
+        }
+        timePickerView = builder.build()
+
+        return timePickerView
+    }
 }
 
 

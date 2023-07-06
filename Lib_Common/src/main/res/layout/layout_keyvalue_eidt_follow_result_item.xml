@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/ll_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_15"
+        android:background="@drawable/common_round_f6f7fc">
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4A4C5C"
+            android:textSize="15sp"
+            android:text="无效原因"
+            app:font_textStyle="NORMAL" />
+        <com.baihe.lib_common.ui.widget.FlowLayout
+            android:id="@+id/kv_edit_key_result_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="@dimen/dp_10"
+            app:label_background="@drawable/common_button_round_gray_stroke"
+            app:label_horizontal_space="5dp"
+            app:label_select_background="@drawable/common_button_round_blue"
+            app:label_select_textColor="#FFFFFF"
+            app:label_textColor="#4A4C5C"
+            app:label_textSize="12sp"
+            app:label_text_maginBottom="7dp"
+            app:label_text_maginLeft="20dp"
+            app:label_text_maginRight="20dp"
+            app:label_text_maginTop="9dp"
+            app:label_vertical_space="10dp"
+            app:label_select_cancel="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4A4C5C"
+                android:textSize="15sp"
+                android:text="无效原因说明"
+                app:font_textStyle="NORMAL" />
+            <EditText
+                android:id="@+id/kv_edit_value_text_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:paddingTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:paddingBottom="@dimen/dp_16"
+                android:gravity="left|top"
+                android:inputType="textMultiLine"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:textSize="15sp"
+                android:hint="请输入无效原因说明"
+                android:textColor="#FF8B8B99"
+                android:text=""
+                android:textColorHint="#FFC5C5CE"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

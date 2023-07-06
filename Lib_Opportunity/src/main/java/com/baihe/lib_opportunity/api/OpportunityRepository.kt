@@ -17,12 +17,13 @@ import com.baihe.lib_opportunity.OpportunityListItemEntity
 import com.baihe.lib_opportunity.constant.UrlConstant
 
 class OpportunityRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
-    suspend fun opportunityList(page:Int,reqPhase:String?="0",name:String?,filter:LinkedHashMap<String,Any?>?,pageSize:Int = 10): ListData<OpportunityListItemEntity>? {
+    suspend fun opportunityList(page:Int,isHistorical:String?="0",name:String?,filter:LinkedHashMap<String,Any?>?,pageSize:Int = 10): ListData<OpportunityListItemEntity>? {
         return requestResponse {
             val params = JsonParam.newInstance()
                 .putParamValue("page",page)
                 .putParamValue("name",name)
-                .putParamValue("reqPhase",reqPhase)
+                .putParamValue("isHistorical",isHistorical)
+                .putParamValue("create_time_order","1")
                 .putParamValue("pageSize",pageSize)
                 .putParamValue(filter)
             EasyHttp.get(lifecycleOwner)
@@ -41,11 +42,12 @@ class OpportunityRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle
         }
     }
 
-    suspend fun getOpportunityTemple(oppoId: String?):TempleEntity?{
+    suspend fun getOpportunityTemple(oppoId: String?,customerId:String?=null):TempleEntity?{
         return requestResponse {
             val jsonParam = JsonParam.newInstance()
             if (!oppoId.isNullOrEmpty())
-                jsonParam.putParamValue("oppoId",oppoId)
+                jsonParam.putParamValue("reqId",oppoId)
+                jsonParam.putParamValue("customerId",customerId)
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.OPPO_TEMPLE,jsonParam.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<TempleEntity>>() {})

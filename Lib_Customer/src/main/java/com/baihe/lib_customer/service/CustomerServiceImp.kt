@@ -1,5 +1,6 @@
 package com.baihe.lib_customer.service
 
+import android.app.Activity
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -8,6 +9,7 @@ import com.baihe.lib_common.service.ICustomerService
 import com.baihe.lib_customer.ui.activity.AddOrUpdateCustomerActivity
 import com.baihe.lib_customer.ui.activity.CustomerDetailActivity
 import com.baihe.lib_customer.ui.activity.CustomerListActivity
+import com.baihe.lib_customer.ui.activity.SelectCustomerActivity
 
 @Route(path = CUSTOMER_SERVICE_CUSTOMER)
 class CustomerServiceImp:ICustomerService {
@@ -22,6 +24,10 @@ class CustomerServiceImp:ICustomerService {
 
     override fun createOrUpdateCustomer(context: Context,customerId:String?) {
         AddOrUpdateCustomerActivity.start(context,customerId)
+    }
+
+    override fun chooseCustomer(context: Context) {
+        SelectCustomerActivity.start(context)
     }
 
 }

@@ -10,6 +10,8 @@ interface ICustomerService :IProvider{
 
     fun createOrUpdateCustomer(context: Context,customerId:String?=null)
 
+    fun chooseCustomer(context: Context)
+
     override fun init(context: Context?) {
 
     }

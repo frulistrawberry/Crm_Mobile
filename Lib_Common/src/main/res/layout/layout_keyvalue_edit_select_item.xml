@@ -56,7 +56,7 @@
             android:lineSpacingExtra="3dp"
             android:textColor="#FF8B8B99"
             android:maxLines="2"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_15"
             app:font_textStyle="NORMAL" />
 
         <ImageView

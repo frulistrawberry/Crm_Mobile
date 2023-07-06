@@ -28,12 +28,12 @@
         android:textSize="15sp"
         app:font_textStyle="NORMAL"/>
 
-    <CheckBox
-        android:id="@+id/bottom_select_item_checked_cb"
+    <ImageView
+        android:id="@+id/bottom_select_item_checked_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
-        android:button="@drawable/selector_check_box"
+        android:src="@mipmap/ic_check"
         android:clickable="false"
         android:focusable="false" />
 </LinearLayout>

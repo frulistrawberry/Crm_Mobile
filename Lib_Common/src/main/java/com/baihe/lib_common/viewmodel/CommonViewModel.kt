@@ -3,6 +3,7 @@ package com.baihe.lib_common.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.baihe.lib_common.api.CommonRepository
 import com.baihe.lib_common.entity.ChannelEntity
+import com.baihe.lib_common.entity.CityEntity
 import com.baihe.lib_common.entity.FollowEntity
 import com.baihe.lib_common.entity.RecordUserEntity
 import com.baihe.lib_framework.toast.TipsToast
@@ -24,6 +25,14 @@ class CommonViewModel:BaseViewModel() {
     }
     val followDetailLiveData:MutableLiveData<FollowEntity> by lazy{
         MutableLiveData<FollowEntity>()
+    }
+
+    val cityListLiveData:MutableLiveData<List<CityEntity>> by lazy {
+        MutableLiveData<List<CityEntity>>()
+    }
+
+    val stateLiveData:MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
     }
     private val repository :CommonRepository by lazy {
         CommonRepository(this)
@@ -81,6 +90,29 @@ class CommonViewModel:BaseViewModel() {
                 followDetailLiveData.value = data
                 loadingStateLiveData.value = ViewType.CONTENT
             }
+        }
+    }
+    fun addReqFollow(params:LinkedHashMap<String,Any?>){
+        loadingDialogLiveData.value = true
+        launchUI({
+                _,_-> loadingDialogLiveData.value = false
+        }) {
+
+            repository.addReqFollow(params)
+
+            stateLiveData.value = true
+            loadingDialogLiveData.value = false
+        }
+    }
+
+    fun getCityList(){
+        loadingDialogLiveData.value = true
+        launchUI({
+            _,_-> loadingDialogLiveData.value = false
+        }){
+            val cityList = repository.getCityList()
+            cityListLiveData.value = cityList
+            loadingDialogLiveData.value = false
         }
     }
 }

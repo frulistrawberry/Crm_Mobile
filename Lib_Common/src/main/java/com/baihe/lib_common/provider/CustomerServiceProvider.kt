@@ -32,4 +32,7 @@ object CustomerServiceProvider {
      */
     @JvmStatic
     fun createOrUpdateCustomer(context: Context,customerId:String?=null) = customerService.createOrUpdateCustomer(context,customerId)
+
+    @JvmStatic
+    fun chooseCustomer(context: Context) = customerService.chooseCustomer(context)
 }

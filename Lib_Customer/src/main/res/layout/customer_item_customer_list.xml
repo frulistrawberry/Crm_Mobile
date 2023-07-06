@@ -145,7 +145,7 @@
             android:textSize="14sp"
             android:textColor="#ffffff"
             app:font_textStyle="HALF_BOLD"
-            android:text="创建新机会"/>
+            android:text="创建销售机会"/>
 
     </LinearLayout>
 

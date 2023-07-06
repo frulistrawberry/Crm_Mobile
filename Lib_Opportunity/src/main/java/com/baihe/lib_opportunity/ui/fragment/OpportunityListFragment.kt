@@ -1,5 +1,7 @@
 package com.baihe.lib_opportunity.ui.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -7,10 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.databinding.CommonSrlListBinding
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
+import com.baihe.lib_common.ui.activity.AddFollowActivity
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_opportunity.OpportunityViewModel
+import com.baihe.lib_opportunity.ui.activity.ActionActivity
 import com.baihe.lib_opportunity.ui.activity.OpportunityDetailActivity
 import com.baihe.lib_opportunity.ui.adapter.OpportunityListAdapter
 import com.dylanc.loadingstateview.ViewType
@@ -22,14 +26,19 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
     }
     private val adapter by lazy {
         OpportunityListAdapter().apply {
-            onButtonActionListener = {id, action ->
+            onButtonActionListener = {oppoId,customerId,status, action ->
                 when(action){
                     1->{
                         //打电话
-                        commonViewModel.call(id)
+                        commonViewModel.call(customerId)
                     }
                     2->{
-                        // TODO: 写跟进
+                        //下发订单
+                        ActionActivity.start(this@OpportunityListFragment,2,oppoId,customerId)
+                    }
+                    3->{
+                        // 写跟进
+                        AddFollowActivity.startOppoFollow(this@OpportunityListFragment,oppoId,customerId,status?:"0")
                     }
                     else ->{
 
@@ -53,6 +62,11 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
                 setArguments(arguments)
             }
         }
+    }
+
+    fun search(keywords:String){
+        page = 1
+        mViewModel.getOppoList(page,reqPhase!!,keywords)
     }
 
     override fun initViewModel() {
@@ -132,6 +146,15 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
 
     override fun initData() {
         super.initData()
+
         mViewModel.getOppoList(page,reqPhase!!)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1001){
+            page = 1
+            mViewModel.getOppoList(page,reqPhase!!)
+        }
     }
 }

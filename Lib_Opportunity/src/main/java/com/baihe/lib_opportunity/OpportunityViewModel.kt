@@ -60,12 +60,12 @@ class OpportunityViewModel: BaseViewModel() {
         }
     }
 
-    fun getOppoTemple(oppoId: String?){
+    fun getOppoTemple(oppoId: String?,customerId: String?){
         loadingStateLiveData.value = ViewType.LOADING
         launchUI({
                 _,_-> loadingStateLiveData.value = ViewType.ERROR
         }){
-            val data = opportunityRepository.getOpportunityTemple(oppoId)
+            val data = opportunityRepository.getOpportunityTemple(oppoId,customerId)
             if (data==null)
                 loadingStateLiveData.value = ViewType.EMPTY
             else{
@@ -75,7 +75,7 @@ class OpportunityViewModel: BaseViewModel() {
         }
     }
 
-    fun addOrUpdateOpportunity(params:LinkedHashMap<String,Any?>,oppoId: String?){
+    fun addOrUpdateOpportunity(params:LinkedHashMap<String,Any?>,oppoId: String?,customerId: String?){
         loadingDialogLiveData.value = true
         launchUI({
                 _,_-> loadingDialogLiveData.value = false
@@ -83,7 +83,8 @@ class OpportunityViewModel: BaseViewModel() {
             if (oppoId.isNullOrEmpty())
                 opportunityRepository.addOpportunity(params)
             else{
-                params["customerId"] = oppoId
+                params["reqId"] = oppoId
+                params["customerId"] = customerId
                 opportunityRepository.updateOpportunity(params)
             }
             oppoAddOrUpdateLiveData.value = true

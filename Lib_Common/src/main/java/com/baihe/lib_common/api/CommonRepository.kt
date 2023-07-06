@@ -4,16 +4,22 @@ import androidx.lifecycle.LifecycleOwner
 import com.baihe.http.EasyHttp
 import com.baihe.http.model.ResponseClass
 import com.baihe.lib_common.constant.UrlConstant
-import com.baihe.lib_common.entity.ChannelEntity
-import com.baihe.lib_common.entity.FollowEntity
-import com.baihe.lib_common.entity.RecordUserDataEntity
-import com.baihe.lib_common.entity.RecordUserEntity
+import com.baihe.lib_common.entity.*
 import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
+import com.baihe.lib_common.http.exception.ApiException
+import com.baihe.lib_common.http.exception.ExceptionHandler
 import com.baihe.lib_common.http.response.BaseResponse
+import com.baihe.lib_common.http.response.Data
 import com.baihe.lib_common.http.response.ListData
 import com.baihe.lib_common.provider.UserServiceProvider
+import com.baihe.lib_framework.helper.AppHelper
+import com.baihe.lib_framework.log.LogUtil
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import java.nio.charset.Charset
 
 class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
 
@@ -66,6 +72,34 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.FOLLOW_DETAIL,params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<FollowEntity>>() {})
+        }
+    }
+
+    suspend fun addReqFollow(params:LinkedHashMap<String,Any?>):Any?{
+        return requestResponse {
+            val jsonParam = JsonParam.newInstance()
+                .putParamValue(params)
+            EasyHttp.post(lifecycleOwner)
+                .api(CommonApi(UrlConstant.FOLLOW_LOG,jsonParam.getParamValue()))
+                .execute(object : ResponseClass<BaseResponse<Any>>() {})
+        }
+    }
+
+    suspend fun getCityList():List<CityEntity>?{
+        return requestResponse {
+            var result:List<CityEntity>?
+            try {
+                val inputStream = AppHelper.getApplication().resources.assets.open("area.json")
+                val byteArray = ByteArray(inputStream.available())
+                inputStream.read(byteArray)
+                val json = String(byteArray, Charset.forName("UTF-8"))
+                result = Gson().fromJson(json,object :TypeToken<List<CityEntity>>(){}.type)
+            }catch (e:Exception){
+                throw ExceptionHandler.handleException(e)
+            }
+            val data  = Data(result,0,"3.5.0")
+            BaseResponse(200,"请求成功",data)
+
         }
     }
 
