@@ -27,7 +27,13 @@ class MessageListAdapter : BaseRecyclerViewAdapter<MessageEntity, MessageItemLay
         item: MessageEntity?,
         position: Int
     ) {
+        holder.binding.tvTitle.text = item?.title
+        holder.binding.tvContent.text = item?.text
+        holder.binding.tvCheck.text = item?.btn
+        holder.binding.tvTime.text = item?.createTime
+        holder.itemView.setOnClickListener {
 
+        }
     }
 
 }

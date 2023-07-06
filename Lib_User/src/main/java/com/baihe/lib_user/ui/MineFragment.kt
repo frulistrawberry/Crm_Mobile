@@ -3,6 +3,7 @@ package com.baihe.lib_user.ui
 import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
+import com.baihe.imageloader.ImageLoaderUtils
 import com.baihe.lib_common.constant.RoutePath
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_user.ui.widgets.MineItemLayout
@@ -38,6 +39,8 @@ class MineFragment : BaseMvvmFragment<UserFragmentMineBinding, UserViewModel>() 
         mBinding?.tvCompany?.text = userServiceImp.getCompanyName()
         mBinding?.tvName?.text = userServiceImp.getUserInfo()?.name
         mBinding?.tvBoss?.text = userServiceImp.getUserInfo()?.company_tag
+        ImageLoaderUtils.getInstance()
+            .loadImage(activity, mBinding?.ivHeader, userServiceImp.getUserInfo()?.avatar)
         for (i in titleItems.indices) {
             activity?.let {
                 val mineItemLayout = MineItemLayout(it)

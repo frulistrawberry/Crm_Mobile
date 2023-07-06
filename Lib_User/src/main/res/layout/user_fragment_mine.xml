@@ -46,13 +46,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="喜铺销售经理" />
+                    />
 
                 <ImageView
                     android:id="@+id/iv_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_6"
+                    android:src="@mipmap/ic_arrow_down_white"
                     />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -74,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="数谁谁"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -87,7 +87,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="什么公司"
             android:textColor="@color/white"
             android:textSize="14sp" />
 

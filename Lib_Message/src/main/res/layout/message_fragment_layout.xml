@@ -16,7 +16,6 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未读（10）"
             android:textColor="#212327"
             android:textSize="18sp"
             android:textStyle="bold"

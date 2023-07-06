@@ -73,7 +73,7 @@ afterEvaluate{
             Arr(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'common'
-                version '1.0.0.0-beta-32-SNAPSHOT'
+                version '1.0.0.0-xkk-11-SNAPSHOT'
                 afterEvaluate { artifact(tasks.getByName("bundleDebugAar")) }
                 artifact generateSourcesJar
                 pom.withXml {
