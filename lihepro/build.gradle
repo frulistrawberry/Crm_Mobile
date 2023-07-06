@@ -114,6 +114,7 @@ dependencies{
     implementation project(path:':Lib_User')
     implementation project(path:':Lib_Home')
     implementation project(path:':Lib_Customer')
+    implementation project(path:':Lib_Message')
 //    implementation rootProject.depsLibs.loginLib
 //    implementation rootProject.depsLibs.userLib
 //    implementation rootProject.depsLibs.homeLib

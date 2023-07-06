@@ -2,20 +2,10 @@ package com.baihe.lib_message.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.baihe.lib_common.entity.MessageEntity
-import com.baihe.lib_common.ui.adapter.FollowListAdapter
-import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.showSearch
 import com.baihe.lib_framework.base.BaseMvvmFragment
-import com.baihe.lib_framework.ext.ResourcesExt.color
-import com.baihe.lib_framework.ext.ViewExt.gone
-import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.log.LogUtil
-import com.baihe.lib_framework.widget.state.ktx.NavBtnType
 import com.baihe.lib_message.MessageFragmentViewModel
-import com.baihe.lib_message.R
 import com.baihe.lib_message.databinding.MessageFragmentLayoutBinding
 import com.baihe.lib_message.ui.adapter.MessageListAdapter
 import com.dylanc.loadingstateview.ViewType
@@ -25,9 +15,10 @@ import com.dylanc.loadingstateview.ViewType
  * @author xukankan
  * @date 2023/7/5 10:47
  * @email：xukankan@jiayuan.com
- * @description：
+ * @description：消息页面
  */
 class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFragmentViewModel>() {
+
     private val messageAdapter by lazy {
         MessageListAdapter()
     }
@@ -37,7 +28,7 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         mBinding?.rvList?.layoutManager = LinearLayoutManager(activity)
         mBinding?.rvList?.adapter = messageAdapter
         mBinding?.tvRightText?.setOnClickListener {
-
+            mViewModel.setMessageRead(0, null)
         }
     }
 
@@ -58,26 +49,49 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
                     mBinding?.smartRefreshLayout!!.finishRefresh()
                 }
                 ViewType.ERROR -> {
-                    showContentView()
-                    val ist :ArrayList<MessageEntity>  = ArrayList(2)
-                    ist.add(MessageEntity("","","true",false,""))
-                    ist.add(MessageEntity("","","true",false,""))
-                    messageAdapter.setData(ist)
+                    showErrorView()
                     mBinding?.smartRefreshLayout!!.finishRefresh()
                 }
                 else -> LogUtil.d(it.name)
             }
         }
 
-        mViewModel.messagesEntity.observe(this) {
-            messageAdapter.setData(it)
+        mViewModel.messagesInfoEntity.observe(this) {
+            mBinding?.tvTitle?.text = "未读（${it.total}）"
+            if (mViewModel.page > 1) {
+                mBinding?.smartRefreshLayout!!.finishLoadMore()
+                messageAdapter.addAll(it.rows)
+            } else {
+                mBinding?.smartRefreshLayout!!.finishRefresh()
+                messageAdapter.setData(it.rows)
+            }
+        }
+
+        mViewModel.setReadResultData.observe(this) {
+            mViewModel.getMessages(1)
+        }
+    }
+
+
+    override fun initListener() {
+        super.initListener()
+        mBinding?.smartRefreshLayout?.setOnRefreshListener {
+            mViewModel.getMessages(1)
+        }
+        mBinding?.smartRefreshLayout?.setOnLoadMoreListener {
+            mViewModel.getMessages(2)
+        }
+        messageAdapter.onItemClickListener = { _, position ->
+            val item = messageAdapter.getData()[position]
+            mViewModel.setMessageRead(1, item.noticeId)
+            // todo 前往消息详情页面
         }
     }
 
 
     override fun initData() {
         super.initData()
-        mViewModel.getMessages()
+        mViewModel.getMessages(0)
     }
 
 }

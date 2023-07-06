@@ -4,5 +4,11 @@ object UrlConstant {
     /**
      * 消息列表接口
      */
-    const val MESSAGE = "/outer/setting/login"
+    const val MESSAGE = "/owner/notice/getList"
+
+
+    /**
+     * 消息设置已读接口
+     */
+    const val SET_MESSAGE_READ = "owner/notice/editReadNotice"
 }

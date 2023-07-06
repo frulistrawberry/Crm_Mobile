@@ -44,4 +44,9 @@ object RoutePath {
      */
     const val USER_SERVICE_SETTING = "/user/service/setting"
 
+    /**
+     * 用户模块-个人资料
+     */
+    const val USER_SERVICE_INFO = "/user/service/info"
+
 }

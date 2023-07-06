@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
+import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.service.ILoginService
 import com.baihe.lib_framework.base.BaseMvvmActivity
@@ -29,13 +30,22 @@ class UpdatePasswordActivity :
 
     override fun initViewModel() {
         super.initViewModel()
+        mViewModel.loadingDialogLiveData.observe(this) {
+            if (it)
+                showLoadingDialog()
+            else
+                dismissLoadingDialog()
+        }
         mViewModel.resetPasLiveData.observe(this) {
-            //设置密码成功-清除用户信息-跳转至登录页面
-            val loginService: ILoginService =
-                ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
-                    .navigation() as ILoginService
-            loginService.logout(this, this)
-            finish()
+            dismissLoadingDialog()
+            if (it) {
+                //设置密码成功-清除用户信息-跳转至登录页面
+                val loginService: ILoginService =
+                    ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
+                        .navigation() as ILoginService
+                loginService.logout(this, this)
+                finish()
+            }
         }
     }
 
@@ -60,6 +70,10 @@ class UpdatePasswordActivity :
         }
         if (confirmPas.isEmpty()) {
             TipsToast.showTips("确认密码不能为空")
+            return
+        }
+        if (newPas != confirmPas) {
+            TipsToast.showTips("新密码和确认密码不一致，请重新输入！")
             return
         }
         showLoadingDialog()
