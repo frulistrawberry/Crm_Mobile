@@ -53,7 +53,7 @@ class UserRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
     suspend fun setPushStatus(pushSwitch: Int): Int? {
         return requestResponse {
             val params = JsonParam.newInstance()
-                .putParamValue("pushSwitch", pushSwitch)
+                .putParamValue("status", pushSwitch)
             EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.SET_PUSH, params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Int>>() {})

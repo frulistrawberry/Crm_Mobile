@@ -64,7 +64,11 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         }
         //设置推送通知开关
         mViewModel.pushSwitchLiveData.observe(this) {
-            mBinding.pushValueSc.isChecked = it
+            if (it == 0) {
+                showToast("推送通知已关闭")
+            } else if (it == 1) {
+                showToast("推送通知已开启")
+            }
         }
         //注销账号
         mViewModel.deleteAccountLiveData.observe(this) {
@@ -129,8 +133,7 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
                     //点击确认->跳转到外部浏览器下载地址
                     JumpOutSideAppUtil.jump(this@SettingActivity, url)
                 }
-            }).setText(R.id.tv_content, msg)
-            .setText(R.id.tv_cancel, "取消")
+            }).setText(R.id.tv_content, msg).setText(R.id.tv_cancel, "取消")
             .setText(R.id.tv_confirm, "确认").create().show()
     }
 }
