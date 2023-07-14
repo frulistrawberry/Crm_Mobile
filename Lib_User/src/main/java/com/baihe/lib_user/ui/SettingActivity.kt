@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 
 @Route(path = RoutePath.USER_SERVICE_SETTING)
 class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewModel>() {
-
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {
             title = getString(R.string.user_setting)
@@ -65,9 +64,11 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         //设置推送通知开关
         mViewModel.pushSwitchLiveData.observe(this) {
             if (it == 0) {
-                showToast("推送通知已关闭")
-            } else if (it == 1) {
-                showToast("推送通知已开启")
+                if (mBinding.pushValueSc.isChecked) {
+                    showToast("推送通知已开启")
+                } else {
+                    showToast("推送通知已关闭")
+                }
             }
         }
         //注销账号
