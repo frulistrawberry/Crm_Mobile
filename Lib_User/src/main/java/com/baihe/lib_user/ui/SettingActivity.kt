@@ -23,6 +23,7 @@ import com.baihe.lib_user.databinding.UserActivitySettingBinding
 import com.baihe.lib_user.dialog.BaseUserTipDialog
 import com.baihe.lib_user.service.UserServiceImp
 import com.baihe.lib_user.utils.JumpOutSideAppUtil
+import com.baihe.lib_user.utils.UserRegexUtil
 import kotlinx.coroutines.launch
 
 @Route(path = RoutePath.USER_SERVICE_SETTING)
@@ -45,11 +46,19 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         }
         //更新版本处理
         mViewModel.versionLiveData.observe(this) {
-            if (it != null && it.msgContent.isNotEmpty()) {
-                if (it.url.isNotEmpty()) {
-                    showUpdateConfirmDialog(it.msgContent, it.url)
-                } else {
-                    showToast(it.msgContent)
+            if (it != null && it.version.isNotEmpty()) {
+                try {
+                    val versionCode =
+                        UserRegexUtil.versionEncrypt(AppManager.getAppVersionName(this))
+                    val versionServer = UserRegexUtil.versionEncrypt(it.version)
+                    if (versionCode != null && versionServer != null && versionCode < versionServer) {
+                        if (it.msgContent.isNotEmpty() && it.url.isNotEmpty()) {
+                            showUpdateConfirmDialog(it.msgContent, it.url)
+                        }
+                    } else {
+                        showToast("当前已是最新版本")
+                    }
+                } catch (_: Exception) {
                 }
             }
         }

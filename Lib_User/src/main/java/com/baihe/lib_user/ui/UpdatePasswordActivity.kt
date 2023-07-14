@@ -14,7 +14,7 @@ import com.baihe.lib_framework.toast.TipsToast
 import com.baihe.lib_user.R
 import com.baihe.lib_user.UserViewModel
 import com.baihe.lib_user.databinding.UserActivityResetPasswordBinding
-import com.baihe.lib_user.utils.PhoneRegexUtil
+import com.baihe.lib_user.utils.UserRegexUtil
 
 @Route(path = RoutePath.USER_SERVICE_RESET_PASSWORD)
 class UpdatePasswordActivity :
@@ -26,7 +26,7 @@ class UpdatePasswordActivity :
             navIcon = R.mipmap.navigation_icon
         }
         UserServiceProvider.getPhoneNum()?.let {
-            mBinding.phoneValueTv.text = PhoneRegexUtil.mobileEncrypt(it)
+            mBinding.phoneValueTv.text = UserRegexUtil.mobileEncrypt(it)
         }
     }
 
