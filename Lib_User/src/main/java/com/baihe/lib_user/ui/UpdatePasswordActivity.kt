@@ -72,16 +72,8 @@ class UpdatePasswordActivity :
             TipsToast.showTips("新密码不能为空~")
             return
         }
-        if (newPas.length < 8) {
-            showToast("新密码长度为8–15位，请重新输入~")
-            return
-        }
         if (confirmPas.isEmpty()) {
             TipsToast.showTips("确认密码不能为空~")
-            return
-        }
-        if (confirmPas.length < 8) {
-            showToast("确认密码长度为8–15位，请重新输入~")
             return
         }
         if (newPas != confirmPas) {
