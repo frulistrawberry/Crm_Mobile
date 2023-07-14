@@ -13,7 +13,7 @@ class MainActivity : BaseViewBindActivity<ActivityMainBinding>() {
 
 
     override fun initView(savedInstanceState: Bundle?) {
-       supportFragmentManager.beginTransaction().replace(R.id.container, MessageServiceProvider.getMessageFragment()).commit()
+       supportFragmentManager.beginTransaction().replace(R.id.container, HomeServiceProvider.getHomeFragment()).commit()
     }
 
 
