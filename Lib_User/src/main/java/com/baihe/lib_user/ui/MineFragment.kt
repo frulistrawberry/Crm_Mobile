@@ -2,10 +2,17 @@ package com.baihe.lib_user.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.marginTop
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.imageloader.ImageLoaderUtils
 import com.baihe.lib_common.constant.RoutePath
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseMvvmFragment
+import com.baihe.lib_framework.ext.ResourcesExt.dimenPx
+import com.baihe.lib_framework.ext.ResourcesExt.dp2px
+import com.baihe.lib_framework.ext.ViewExt.margin
+import com.baihe.lib_framework.helper.AppHelper
+import com.baihe.lib_framework.utils.StatusBarSettingHelper
 import com.baihe.lib_user.ui.widgets.MineItemLayout
 import com.baihe.lib_user.R
 import com.baihe.lib_user.UserViewModel
@@ -20,6 +27,15 @@ import com.bumptech.glide.Glide
  * @description：
  */
 class MineFragment : BaseMvvmFragment<UserFragmentMineBinding, UserViewModel>() {
+
+    private val bossSeaDialog by lazy {
+        UserServiceProvider.getBossSeaDialog(requireContext()) { _, _ ->
+            mBinding?.tvCompany?.text = userServiceImp.getCompanyName()
+            mBinding?.tvName?.text = userServiceImp.getUserInfo()?.name
+            mBinding?.tvBoss?.text = userServiceImp.getCompanyName()
+        }
+    }
+
     private val userServiceImp = UserServiceImp()
     private val titleItems = arrayListOf("个人资料", "修改密码", "设置")
     private val titleIconItems = arrayListOf(
@@ -36,9 +52,17 @@ class MineFragment : BaseMvvmFragment<UserFragmentMineBinding, UserViewModel>() 
 
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
+        mBinding?.cardBossSea?.margin(
+            0, StatusBarSettingHelper.getStatusBarHeight(
+                AppHelper.getApplication()
+            ) + dp2px(9f), 0, 0
+        )
         mBinding?.tvCompany?.text = userServiceImp.getCompanyName()
         mBinding?.tvName?.text = userServiceImp.getUserInfo()?.name
-        mBinding?.tvBoss?.text = userServiceImp.getUserInfo()?.company_tag
+        mBinding?.tvBoss?.text = userServiceImp.getCompanyName()
+        mBinding?.cardBossSea?.setOnClickListener {
+            bossSeaDialog.show()
+        }
         ImageLoaderUtils.getInstance()
             .loadImage(activity, mBinding?.ivHeader, userServiceImp.getUserInfo()?.avatar)
         for (i in titleItems.indices) {

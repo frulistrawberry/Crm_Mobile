@@ -28,7 +28,10 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         mBinding?.rvList?.layoutManager = LinearLayoutManager(activity)
         mBinding?.rvList?.adapter = messageAdapter
         mBinding?.tvRightText?.setOnClickListener {
-            mViewModel.setMessageRead(0, null)
+            if (messageAdapter.getData().size != 0) {
+                mViewModel.setMessageRead(0, null)
+                messageAdapter.getData().size
+            }
         }
     }
 
@@ -68,7 +71,7 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         }
 
         mViewModel.setReadResultData.observe(this) {
-            mViewModel.getMessages(1)
+            mBinding?.smartRefreshLayout!!.autoRefresh()
         }
     }
 
