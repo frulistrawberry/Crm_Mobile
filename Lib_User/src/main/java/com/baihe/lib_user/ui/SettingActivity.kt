@@ -1,9 +1,7 @@
 package com.baihe.lib_user.ui
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.test.core.app.ActivityScenario.launch
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
@@ -19,7 +17,6 @@ import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_framework.manager.AppManager
-import com.baihe.lib_framework.utils.DeviceInfoUtils
 import com.baihe.lib_user.R
 import com.baihe.lib_user.UserViewModel
 import com.baihe.lib_user.databinding.UserActivitySettingBinding
@@ -112,6 +109,7 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
                 ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
                     .navigation() as ILoginService
             loginService.logout(this, this)
+            finish()
         }
     }
 
