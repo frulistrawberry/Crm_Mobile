@@ -1,5 +1,6 @@
 package com.baihe.lib_user.api
 
+import android.text.TextUtils
 import androidx.lifecycle.LifecycleOwner
 import com.baihe.http.EasyHttp
 import com.baihe.http.model.ResponseClass
@@ -7,6 +8,7 @@ import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_user.BossSeaEntity
 import com.baihe.lib_user.VersionEntity
 import com.baihe.lib_user.constant.UrlConstant
@@ -20,13 +22,19 @@ class UserRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
         }
     }
 
-    suspend fun submitPassword(oldPas: String, newPas: String, confirmPas: String): Int? {
+    suspend fun submitPassword(
+        userId: String?,
+        oldPas: String,
+        newPas: String,
+        confirmPas: String
+    ): Int? {
         return requestResponse {
             val params = JsonParam.newInstance()
+                .putParamValue("userId", userId)
                 .putParamValue("oldPassWord", oldPas)
                 .putParamValue("newPassWord", newPas)
                 .putParamValue("repeatPassWord", confirmPas)
-            EasyHttp.get(lifecycleOwner)
+            EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.SUBMIT_PASSWORD, params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Int>>() {})
         }
@@ -35,8 +43,8 @@ class UserRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
     suspend fun checkAppVersion(currentVersion: String): VersionEntity? {
         return requestResponse {
             val params = JsonParam.newInstance()
-                .putParamValue("currentVersion", currentVersion)
-            EasyHttp.get(lifecycleOwner)
+                .putParamValue("channel", currentVersion)
+            EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.CHECK_VERSION, params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<VersionEntity>>() {})
         }
@@ -46,7 +54,7 @@ class UserRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
         return requestResponse {
             val params = JsonParam.newInstance()
                 .putParamValue("pushSwitch", pushSwitch)
-            EasyHttp.get(lifecycleOwner)
+            EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.SET_PUSH, params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Int>>() {})
         }
@@ -54,8 +62,14 @@ class UserRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycle
 
     suspend fun deleteAccount(): Int? {
         return requestResponse {
-            EasyHttp.get(lifecycleOwner)
-                .api(CommonApi(UrlConstant.DELETE_ACCOUNT, null))
+            val account = UserServiceProvider.getPhoneNum()
+            var params: JsonParam? = null
+            if (account?.isNotEmpty() == true) {
+                params = JsonParam.newInstance()
+                    .putParamValue("account", account)
+            }
+            EasyHttp.post(lifecycleOwner)
+                .api(CommonApi(UrlConstant.DELETE_ACCOUNT, params?.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Int>>() {})
         }
     }

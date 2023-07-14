@@ -19,6 +19,7 @@ import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_framework.manager.AppManager
+import com.baihe.lib_framework.utils.DeviceInfoUtils
 import com.baihe.lib_user.R
 import com.baihe.lib_user.UserViewModel
 import com.baihe.lib_user.databinding.UserActivitySettingBinding
@@ -47,8 +48,12 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         }
         //更新版本处理
         mViewModel.versionLiveData.observe(this) {
-            if (it != null && it.androidURL.isNotEmpty()) {
-                showUpdateConfirmDialog(it.androidURL)
+            if (it != null && it.msgContent.isNotEmpty()) {
+                if (it.url.isNotEmpty()) {
+                    showUpdateConfirmDialog(it.msgContent, it.url)
+                } else {
+                    showToast(it.msgContent)
+                }
             }
         }
         //设置推送通知开关
@@ -81,7 +86,7 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         super.initListener()
         mBinding.updateValueTv.click {
             //检查更新
-            mViewModel.checkVersion(AppManager.getAppVersionName(this))
+            mViewModel.checkVersion("android")
         }
         mBinding.ruleValueTv.click {
             //跳转隐私政策
@@ -110,14 +115,14 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         }
     }
 
-    private fun showUpdateConfirmDialog(url: String) {
+    private fun showUpdateConfirmDialog(msg: String, url: String) {
         BaseUserTipDialog.Builder(this)
             .addOnConfirmClick(object : BaseUserTipDialog.OnConfirmClick {
                 override fun onClick() {
                     //点击确认->跳转到外部浏览器下载地址
                     JumpOutSideAppUtil.jump(this@SettingActivity, url)
                 }
-            }).setText(R.id.tv_content, "检查到新内容，是否更新？")
+            }).setText(R.id.tv_content, msg)
             .setText(R.id.tv_cancel, "取消")
             .setText(R.id.tv_confirm, "确认").create().show()
     }

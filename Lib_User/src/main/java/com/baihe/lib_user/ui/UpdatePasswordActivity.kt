@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.service.ILoginService
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
@@ -24,7 +25,7 @@ class UpdatePasswordActivity :
             title = getString(R.string.user_update_pass)
             navIcon = R.mipmap.navigation_icon
         }
-        val phoneNum = UserServiceImp().getPhoneNum()
+        val phoneNum = UserServiceProvider.getPhoneNum()
         mBinding.phoneValueTv.text = phoneNum
     }
 
@@ -60,6 +61,7 @@ class UpdatePasswordActivity :
         val oldPas = mBinding.etOlderPas.text.toString().trim()
         val newPas = mBinding.etNewPas.text.toString().trim()
         val confirmPas = mBinding.etConfirmPas.text.toString().trim()
+        val userId = UserServiceProvider.getUserId()
         if (oldPas.isEmpty()) {
             TipsToast.showTips("旧密码不能为空")
             return
@@ -77,6 +79,6 @@ class UpdatePasswordActivity :
             return
         }
         showLoadingDialog()
-        mViewModel.resetPassword(oldPas, newPas, confirmPas)
+        mViewModel.resetPassword(userId, oldPas, newPas, confirmPas)
     }
 }

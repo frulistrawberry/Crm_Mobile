@@ -44,13 +44,13 @@ class UserViewModel : BaseViewModel() {
     /**
      * 修改密码
      */
-    fun resetPassword(oldPas: String, newPas: String, confirmPas: String) {
+    fun resetPassword(userId: String?, oldPas: String, newPas: String, confirmPas: String) {
         loadingDialogLiveData.value = true
         launchUI(errorBlock = { _, _ ->
             loadingDialogLiveData.value = false
             resetPasLiveData.value = false
         }) {
-            val result = userRepository.submitPassword(oldPas, newPas, confirmPas)
+            val result = userRepository.submitPassword(userId, oldPas, newPas, confirmPas)
             resetPasLiveData.postValue(result == 1)
             loadingDialogLiveData.value = false
         }
