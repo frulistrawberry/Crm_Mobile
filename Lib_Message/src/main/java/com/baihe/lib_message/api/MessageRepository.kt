@@ -10,6 +10,7 @@ import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.ListData
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_message.constant.UrlConstant
 
 class MessageRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycleOwner) {
@@ -21,10 +22,13 @@ class MessageRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecy
      */
     public suspend fun getMessages(page: Int): MessageInfoEntity? {
         return requestResponse {
+            val userId = UserServiceProvider.getUserId()
             val params = JsonParam.newInstance()
+                .putParamValue("push_id", userId)
                 .putParamValue("page", page)
                 .putParamValue("pageSize", 10)
-            EasyHttp.get(lifecycleOwner)
+                .putParamValue("unread", 3)
+            EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.MESSAGE, params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<MessageInfoEntity>>() {})
         }
