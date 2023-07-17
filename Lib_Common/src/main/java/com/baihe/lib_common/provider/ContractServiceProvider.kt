@@ -11,7 +11,7 @@ import com.baihe.lib_common.service.ICustomerService
 
 object ContractServiceProvider {
     @Autowired(name = CONTRACT_SERVICE_CONTRACT)
-    lateinit var customerService:IContractService
+    lateinit var service:IContractService
 
     init {
         ARouter.getInstance().inject(this)
@@ -22,13 +22,13 @@ object ContractServiceProvider {
      * 合同列表页
      */
     @JvmStatic
-    fun toCustomerList(context: Context) = customerService.toContractList(context)
+    fun toCustomerList(context: Context) = service.toContractList(context)
 
     /**
      * 合同详情页
      * @param contractId 合同Id
      */
     @JvmStatic
-    fun toCustomerDetail(context: Context,contractId:String) = customerService.toContractDetail(context,contractId)
+    fun toCustomerDetail(context: Context,contractId:String) = service.toContractDetail(context,contractId)
 
 }

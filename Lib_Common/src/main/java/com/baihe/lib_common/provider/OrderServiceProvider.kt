@@ -15,9 +15,16 @@ object OrderServiceProvider {
         ARouter.getInstance().inject(this)
     }
 
+    /**
+     * 订单列表
+     */
     @JvmStatic
     fun toOrderList(context: Context) = service.toOrderList(context)
 
+    /**
+     * 订单详情
+     * @param orderId 订单id
+     */
     @JvmStatic
-    fun toOrderList(context: Context,orderId:String) = service.toOrderDetail(context,orderId)
+    fun toOrderDetail(context: Context,orderId:String) = service.toOrderDetail(context,orderId)
 }
