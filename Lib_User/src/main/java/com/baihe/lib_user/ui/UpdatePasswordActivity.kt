@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.service.ILoginService
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
@@ -13,7 +14,7 @@ import com.baihe.lib_framework.toast.TipsToast
 import com.baihe.lib_user.R
 import com.baihe.lib_user.UserViewModel
 import com.baihe.lib_user.databinding.UserActivityResetPasswordBinding
-import com.baihe.lib_user.service.UserServiceImp
+import com.baihe.lib_user.utils.UserRegexUtil
 
 @Route(path = RoutePath.USER_SERVICE_RESET_PASSWORD)
 class UpdatePasswordActivity :
@@ -24,8 +25,9 @@ class UpdatePasswordActivity :
             title = getString(R.string.user_update_pass)
             navIcon = R.mipmap.navigation_icon
         }
-        val phoneNum = UserServiceImp().getPhoneNum()
-        mBinding.phoneValueTv.text = phoneNum
+        UserServiceProvider.getPhoneNum()?.let {
+            mBinding.phoneValueTv.text = UserRegexUtil.mobileEncrypt(it)
+        }
     }
 
     override fun initViewModel() {
@@ -39,6 +41,7 @@ class UpdatePasswordActivity :
         mViewModel.resetPasLiveData.observe(this) {
             dismissLoadingDialog()
             if (it) {
+                showToast("密码修改成功，请重新登录")
                 //设置密码成功-清除用户信息-跳转至登录页面
                 val loginService: ILoginService =
                     ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
@@ -60,23 +63,24 @@ class UpdatePasswordActivity :
         val oldPas = mBinding.etOlderPas.text.toString().trim()
         val newPas = mBinding.etNewPas.text.toString().trim()
         val confirmPas = mBinding.etConfirmPas.text.toString().trim()
+        val userId = UserServiceProvider.getUserId()
         if (oldPas.isEmpty()) {
-            TipsToast.showTips("旧密码不能为空")
+            TipsToast.showTips("旧密码不能为空~")
             return
         }
         if (newPas.isEmpty()) {
-            TipsToast.showTips("新密码不能为空")
+            TipsToast.showTips("新密码不能为空~")
             return
         }
         if (confirmPas.isEmpty()) {
-            TipsToast.showTips("确认密码不能为空")
+            TipsToast.showTips("确认密码不能为空~")
             return
         }
         if (newPas != confirmPas) {
-            TipsToast.showTips("新密码和确认密码不一致，请重新输入！")
+            TipsToast.showTips("新密码和确认密码不一致，请重新输入~")
             return
         }
         showLoadingDialog()
-        mViewModel.resetPassword(oldPas, newPas, confirmPas)
+        mViewModel.resetPassword(userId, oldPas, newPas, confirmPas)
     }
 }

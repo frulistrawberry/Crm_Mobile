@@ -1,6 +1,7 @@
 package com.baihe.lib_common.service
 
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.baihe.lib_common.entity.UserEntity
 import com.baihe.lib_framework.base.BaseDialog
@@ -57,5 +58,8 @@ interface IUserService :IProvider{
      */
     fun readPolicy(context: Context)
 
+    fun toMine(context:Context)
+
+    fun getMineFragment(): Fragment
 
 }

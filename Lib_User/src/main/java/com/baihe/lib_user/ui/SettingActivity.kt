@@ -1,9 +1,7 @@
 package com.baihe.lib_user.ui
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.test.core.app.ActivityScenario.launch
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
@@ -25,11 +23,11 @@ import com.baihe.lib_user.databinding.UserActivitySettingBinding
 import com.baihe.lib_user.dialog.BaseUserTipDialog
 import com.baihe.lib_user.service.UserServiceImp
 import com.baihe.lib_user.utils.JumpOutSideAppUtil
+import com.baihe.lib_user.utils.UserRegexUtil
 import kotlinx.coroutines.launch
 
 @Route(path = RoutePath.USER_SERVICE_SETTING)
 class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewModel>() {
-
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {
             title = getString(R.string.user_setting)
@@ -47,13 +45,31 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         }
         //更新版本处理
         mViewModel.versionLiveData.observe(this) {
-            if (it != null && it.androidURL.isNotEmpty()) {
-                showUpdateConfirmDialog(it.androidURL)
+            if (it != null && it.version.isNotEmpty()) {
+                try {
+                    val versionCode =
+                        UserRegexUtil.versionEncrypt(AppManager.getAppVersionName(this))
+                    val versionServer = UserRegexUtil.versionEncrypt(it.version)
+                    if (versionCode != null && versionServer != null && versionCode < versionServer) {
+                        if (it.msgContent.isNotEmpty() && it.url.isNotEmpty()) {
+                            showUpdateConfirmDialog(it.msgContent, it.url)
+                        }
+                    } else {
+                        showToast("当前已是最新版本")
+                    }
+                } catch (_: Exception) {
+                }
             }
         }
         //设置推送通知开关
         mViewModel.pushSwitchLiveData.observe(this) {
-            mBinding.pushValueSc.isChecked = it
+            if (it == 0) {
+                if (mBinding.pushValueSc.isChecked) {
+                    showToast("推送通知已开启")
+                } else {
+                    showToast("推送通知已关闭")
+                }
+            }
         }
         //注销账号
         mViewModel.deleteAccountLiveData.observe(this) {
@@ -81,7 +97,7 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         super.initListener()
         mBinding.updateValueTv.click {
             //检查更新
-            mViewModel.checkVersion(AppManager.getAppVersionName(this))
+            mViewModel.checkVersion("android")
         }
         mBinding.ruleValueTv.click {
             //跳转隐私政策
@@ -107,18 +123,18 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
                 ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
                     .navigation() as ILoginService
             loginService.logout(this, this)
+            finish()
         }
     }
 
-    private fun showUpdateConfirmDialog(url: String) {
+    private fun showUpdateConfirmDialog(msg: String, url: String) {
         BaseUserTipDialog.Builder(this)
             .addOnConfirmClick(object : BaseUserTipDialog.OnConfirmClick {
                 override fun onClick() {
                     //点击确认->跳转到外部浏览器下载地址
                     JumpOutSideAppUtil.jump(this@SettingActivity, url)
                 }
-            }).setText(R.id.tv_content, "检查到新内容，是否更新？")
-            .setText(R.id.tv_cancel, "取消")
+            }).setText(R.id.tv_content, msg).setText(R.id.tv_cancel, "取消")
             .setText(R.id.tv_confirm, "确认").create().show()
     }
 }

@@ -14,7 +14,7 @@ import com.dylanc.loadingstateview.ViewType
  * @description：
  */
 class MessageFragmentViewModel : BaseViewModel() {
-     var page = 1;
+    var page = 1;
 
     val messagesInfoEntity: MutableLiveData<MessageInfoEntity> by lazy {
         MutableLiveData<MessageInfoEntity>()
@@ -29,7 +29,7 @@ class MessageFragmentViewModel : BaseViewModel() {
     }
 
     val setReadResultData: MutableLiveData<Int> by lazy {
-        MutableLiveData<Int>()
+        MutableLiveData<Int>(0)
     }
 
     /**
@@ -46,7 +46,7 @@ class MessageFragmentViewModel : BaseViewModel() {
                     loadingStateLiveData.value = ViewType.ERROR
                 }) {
                     val messageListData = messageRepository.getMessages(page)
-                    if (messageListData == null) {
+                    if (messageListData == null || messageListData.rows.isEmpty()) {
                         loadingStateLiveData.value = ViewType.EMPTY
                     } else {
                         messagesInfoEntity.value = messageListData
@@ -55,7 +55,7 @@ class MessageFragmentViewModel : BaseViewModel() {
                 }
             }
             1 -> {
-                page=1
+                page = 1
                 launchUI({ _, _ -> }) {
                     val messageListData = messageRepository.getMessages(page)
                     if (messageListData != null) {

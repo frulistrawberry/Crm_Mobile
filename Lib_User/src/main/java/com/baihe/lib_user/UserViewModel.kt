@@ -22,8 +22,8 @@ class UserViewModel : BaseViewModel() {
         MutableLiveData<VersionEntity>()
     }
 
-    val pushSwitchLiveData: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
+    val pushSwitchLiveData: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
     }
     val deleteAccountLiveData: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
@@ -44,13 +44,13 @@ class UserViewModel : BaseViewModel() {
     /**
      * 修改密码
      */
-    fun resetPassword(oldPas: String, newPas: String, confirmPas: String) {
+    fun resetPassword(userId: String?, oldPas: String, newPas: String, confirmPas: String) {
         loadingDialogLiveData.value = true
         launchUI(errorBlock = { _, _ ->
             loadingDialogLiveData.value = false
             resetPasLiveData.value = false
         }) {
-            val result = userRepository.submitPassword(oldPas, newPas, confirmPas)
+            val result = userRepository.submitPassword(userId, oldPas, newPas, confirmPas)
             resetPasLiveData.postValue(result == 1)
             loadingDialogLiveData.value = false
         }
@@ -82,10 +82,10 @@ class UserViewModel : BaseViewModel() {
         loadingDialogLiveData.value = true
         launchUI(errorBlock = { _, _ ->
             loadingDialogLiveData.value = false
-            pushSwitchLiveData.value = false
+            pushSwitchLiveData.value = -1
         }) {
             val result = userRepository.setPushStatus(pushSwitch)
-            pushSwitchLiveData.postValue(result == 1)
+            pushSwitchLiveData.value = result
             loadingDialogLiveData.value = false
         }
     }
