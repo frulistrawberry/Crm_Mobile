@@ -100,7 +100,9 @@ class UserViewModel : BaseViewModel() {
             deleteAccountLiveData.value = false
         }) {
             val result = userRepository.deleteAccount()
-            deleteAccountLiveData.postValue(result == 1)
+            if (!result.isNullOrEmpty() && result[0].toInt() == 2002) {
+                deleteAccountLiveData.postValue(true)
+            }
             loadingDialogLiveData.value = false
         }
     }

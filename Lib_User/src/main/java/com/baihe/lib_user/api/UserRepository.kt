@@ -60,7 +60,7 @@ class UserRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecycleO
         }
     }
 
-    suspend fun deleteAccount(): Int? {
+    suspend fun deleteAccount(): List<String>? {
         return requestResponse {
             val account = UserServiceProvider.getPhoneNum()
             var params: JsonParam? = null
@@ -70,7 +70,7 @@ class UserRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecycleO
             }
             EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.DELETE_ACCOUNT, params?.getParamValue()))
-                .execute(object : ResponseClass<BaseResponse<Int>>() {})
+                .execute(object : ResponseClass<BaseResponse<List<String>>>() {})
         }
     }
 }

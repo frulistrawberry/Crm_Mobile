@@ -1,11 +1,18 @@
 package com.baihe.lib_message.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.baihe.lib_common.provider.CustomerServiceProvider
+import com.baihe.lib_common.provider.OpportunityServiceProvider
+import com.baihe.lib_common.provider.OrderServiceProvider
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.log.LogUtil
+import com.baihe.lib_framework.widget.state.ktx.NavBtnType
 import com.baihe.lib_message.MessageFragmentViewModel
+import com.baihe.lib_message.R
 import com.baihe.lib_message.databinding.MessageFragmentLayoutBinding
 import com.baihe.lib_message.ui.adapter.MessageListAdapter
 import com.dylanc.loadingstateview.ViewType
@@ -25,14 +32,18 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
 
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
-        mBinding?.rvList?.layoutManager = LinearLayoutManager(activity)
-        mBinding?.rvList?.adapter = messageAdapter
-        mBinding?.tvRightText?.setOnClickListener {
-            if (messageAdapter.getData().size != 0) {
-                mViewModel.setMessageRead(0, null)
-                messageAdapter.getData().size
+        setToolbar("未读数", NavBtnType.NONE) {
+            rightText("全部标记已读") {
+                if (messageAdapter.getData().size != 0) {
+                    mViewModel.setMessageRead(1, null)
+                    messageAdapter.getData().size
+                }
             }
         }
+        mBinding?.rvList?.layoutManager = LinearLayoutManager(activity)
+        mBinding?.rvList?.adapter = messageAdapter
+        view.findViewById<TextView>(R.id.tv_right).setTextColor(Color.parseColor("#687FFF"))
+        view.findViewById<TextView>(R.id.tv_right).textSize = 13f
     }
 
     override fun initViewModel() {
@@ -60,7 +71,9 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         }
 
         mViewModel.messagesInfoEntity.observe(this) {
-            mBinding?.tvTitle?.text = "未读（${it.total}）"
+            updateToolbar {
+                title = "未读(${it.total})"
+            }
             if (mViewModel.page > 1) {
                 mBinding?.smartRefreshLayout!!.finishLoadMore()
                 messageAdapter.addAll(it.rows)
@@ -86,8 +99,36 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         }
         messageAdapter.onItemClickListener = { _, position ->
             val item = messageAdapter.getData()[position]
-            mViewModel.setMessageRead(1, item.noticeId)
-            // todo 前往消息详情页面
+            if (item.unRead) {
+                mViewModel.setMessageRead(0, item.msgId)
+            }
+            //  前往消息详情页面 type  2 机会 3 订单 4 合同 5 客户
+            when (item.type) {
+                2 -> {
+                    activity?.let {
+                        OpportunityServiceProvider.toOpportunityDetail(
+                            it,
+                            item.dataId
+                        )
+                    }
+                }
+                3 -> {
+                    // 订单
+                    activity?.let {
+                        OrderServiceProvider.toOrderDetail(
+                            it,
+                            item.dataId
+                        )
+                    }
+                }
+                4 -> {
+                    // 合同
+                    activity?.let { CustomerServiceProvider.toCustomerDetail(it, item.dataId) }
+                }
+                5 -> {
+                    activity?.let { CustomerServiceProvider.toCustomerDetail(it, item.dataId) }
+                }
+            }
         }
     }
 

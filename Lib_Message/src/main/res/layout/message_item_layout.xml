@@ -73,6 +73,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_check" />
 
     <View
+        android:id="@+id/view_read_status"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:background="@drawable/message_red_dot"

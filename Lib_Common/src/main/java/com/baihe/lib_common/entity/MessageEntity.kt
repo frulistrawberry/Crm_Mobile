@@ -11,9 +11,13 @@ import com.google.gson.annotations.SerializedName
 data class MessageEntity(
     val title: String,
     val text: String,
-    @SerializedName("create_time")
+    @SerializedName("time")
     val createTime: String,
-    val status: Int,
+    @SerializedName("unread")
+    val unRead: Boolean,
     val btn: String,
-    val noticeId: String
+    val msgId: String,
+    val type: Int,
+    @SerializedName("data_id")
+    val dataId: String
 )

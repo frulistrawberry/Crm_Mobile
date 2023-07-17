@@ -37,15 +37,16 @@ class MessageRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecyc
 
     /**
      * 设置已读
-     * @param type 0 全部 / 1 特定消息
+     * @param type 1 全部 / 0 特定消息
      * @param noticeId 消息Id
      */
     public suspend fun setMessageRead(type: Int, noticeId: String?): String? {
         return requestResponse {
             val params = JsonParam.newInstance()
-            if (type == 1) {
-                params.putParamValue("noticeId", noticeId)
+            if (type == 0) {
+                params.putParamValue("id", noticeId)
             }
+            params.putParamValue("type", type)
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.SET_MESSAGE_READ, params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<String>>() {})
