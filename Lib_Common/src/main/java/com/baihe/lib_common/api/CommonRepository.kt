@@ -8,6 +8,7 @@ import com.baihe.lib_common.entity.*
 import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
+import com.baihe.lib_common.http.api.UploadApi
 import com.baihe.lib_common.http.exception.ExceptionHandler
 import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.Data
@@ -16,6 +17,9 @@ import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.helper.AppHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
 import java.nio.charset.Charset
 
 class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
@@ -111,6 +115,14 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
 
         }
     }
+
+//    suspend fun uploadFile(filePathList:List<String>):Any{
+//        return requestResponse {
+//            val result = mutableListOf<String>()
+//            filePathList.asFlow().onEach {
+//
+//            }}
+//    }
 
 
 
