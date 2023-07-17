@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.ui.dialog.DateDialogUtils
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
-import com.baihe.lib_common.provider.CustomerServiceProvider
-import com.baihe.lib_common.provider.OpportunityServiceProvider
-import com.baihe.lib_common.provider.UserServiceProvider
+import com.baihe.lib_common.provider.*
 import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.ext.TimeExt.formattedDate
@@ -221,10 +219,10 @@ class HomeFragment: BaseMvvmFragment<HomeFragmentHomeBinding, HomeViewModel>() {
             CustomerServiceProvider.toCustomerList(requireContext())
         }
         decorDelegate.mBinding.btnOrder.click {
-
+            OrderServiceProvider.toOrderList(requireContext())
         }
         decorDelegate.mBinding.btnContract.click {
-
+            ContractServiceProvider.toCustomerList(requireContext())
         }
         decorDelegate.mBinding.btnBossSea.click {
             bossSeaDialog.show()

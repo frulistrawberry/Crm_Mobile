@@ -71,7 +71,12 @@
         <item name="font_textStyle">NORMAL</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#A8A9B1</item>
-    </style>
+    </style><style name="font_normal_12_8B8B99">
+    <item name="font_textStyle">NORMAL</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:textColor">#8B8B99</item>
+</style>
+
     <style name="font_normal_12_4A4C5C">
         <item name="font_textStyle">NORMAL</item>
         <item name="android:textSize">12sp</item>
@@ -106,6 +111,12 @@
         <item name="font_textStyle">NORMAL</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#FFA8A9B1</item>
+    </style>
+
+    <style name="font_normal_15_8B8B99">
+        <item name="font_textStyle">NORMAL</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#8B8B99</item>
     </style>
     <style name="font_normal_12_FFF11E1E">
         <item name="font_textStyle">NORMAL</item>

@@ -76,7 +76,7 @@
                     android:textSize="@dimen/sp_14"
                     android:imeOptions="actionSearch"
                     android:textColorHint="#FFC5C5CE"
-                    android:hint="请输入机会名称/手机号/客户姓名"
+                    android:hint="请输入搜索内容"
                     android:background="@null"/>
             </LinearLayout>
 
@@ -88,14 +88,14 @@
             android:layout_marginTop="@dimen/dp_16"
             android:orientation="horizontal">
             <com.baihe.lib_framework.widget.MaxRecyclerView
-                android:id="@+id/bottom_channel_first_level_rv"
+                android:id="@+id/bottom_channel_left_rv"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 app:maxHeight="@dimen/dp_190"
                 android:minHeight="@dimen/dp_190"
                 android:layout_height="wrap_content" />
             <com.baihe.lib_framework.widget.MaxRecyclerView
-                android:id="@+id/bottom_channel_second_level_rv"
+                android:id="@+id/bottom_channel_right_rv"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 app:maxHeight="@dimen/dp_190"

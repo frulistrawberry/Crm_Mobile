@@ -25,7 +25,7 @@ class CustomerListActivity: BaseMvvmActivity<CommonSrlListBinding, CustomerViewM
         ViewModelProvider(this).get(CommonViewModel::class.java)
     }
     private  val adapter by lazy {
-        CustomerListAdapter(this).apply {
+        CustomerListAdapter().apply {
             onCallListener = {id,type->
                 if (type == 1)
                     commonViewModel.call(id)

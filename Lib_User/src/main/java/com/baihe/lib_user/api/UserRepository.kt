@@ -13,7 +13,7 @@ import com.baihe.lib_user.BossSeaEntity
 import com.baihe.lib_user.VersionEntity
 import com.baihe.lib_user.constant.UrlConstant
 
-class UserRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycleOwner) {
+class UserRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecycleOwner) {
     suspend fun getBossSea(): List<BossSeaEntity>? {
         return requestResponse {
             EasyHttp.get(lifecycleOwner)

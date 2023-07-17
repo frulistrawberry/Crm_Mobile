@@ -61,44 +61,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                app:cardBackgroundColor="#FFF5F5F9"
+                app:cardCornerRadius="@dimen/dp_20"
+                app:cardMaxElevation="0dp"
+                app:cardElevation="0dp"
+                app:contentPaddingBottom="@dimen/dp_6"
                 app:contentPaddingLeft="@dimen/dp_16"
                 app:contentPaddingRight="@dimen/dp_16"
-                app:contentPaddingTop="@dimen/dp_6"
-                app:contentPaddingBottom="@dimen/dp_6"
-                app:cardCornerRadius="@dimen/dp_20"
-                app:cardBackgroundColor="#FFF5F5F9"
-                app:cardMaxElevation="0dp">
+                app:contentPaddingTop="@dimen/dp_6">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
                     android:focusable="true"
-                    android:focusableInTouchMode="true">
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_search"/>
+                        android:src="@mipmap/ic_search" />
+
                     <com.baihe.lib_common.ui.widget.font.FontEditText
                         android:id="@+id/et_search2"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        app:font_textStyle="LIGHT"
-                        android:singleLine="true"
                         android:layout_marginStart="@dimen/dp_12"
-                        android:textColor="@color/COLOR_4A4C5C"
-                        android:textSize="@dimen/sp_14"
-                        android:imeOptions="actionSearch"
-                        android:textColorHint="#FFC5C5CE"
+                        android:layout_weight="1"
+                        android:background="#00000000"
                         android:hint="请输入机会名称/手机号/客户姓名"
-                        android:background="#00000000"/>
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:textColor="@color/COLOR_4A4C5C"
+                        android:textColorHint="#FFC5C5CE"
+                        android:textSize="@dimen/sp_14"
+                        app:font_textStyle="LIGHT" />
+
                     <ImageView
                         android:id="@+id/btn_cancel2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:src="@mipmap/ic_del"/>
+                        android:src="@mipmap/ic_del"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

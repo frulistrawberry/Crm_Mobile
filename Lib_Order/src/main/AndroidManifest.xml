@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baihe.lib_order">
 
+    <application>
+        <activity android:name=".ui.activity.AddOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.OrderListActivity" />
+        <activity android:name=".ui.activity.ReserveDetailActivity" />
+        <activity android:name=".ui.activity.OrderSubDetailActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity" />
+        <activity android:name=".ui.activity.AddFollowActivity" />
+        <activity android:name=".ui.activity.ConfirmIndoorActivity" />
+        <activity android:name=".ui.activity.PeopleDetailActivity" />
+        <activity android:name=".ui.activity.AddPeopleActivity" />
+        <activity android:name=".ui.activity.OrderTransferActivity" />
+        <activity android:name=".ui.activity.OrderChargebackActivity" />
+        <activity android:name=".ui.activity.SignActivity" />
+    </application>
 </manifest>

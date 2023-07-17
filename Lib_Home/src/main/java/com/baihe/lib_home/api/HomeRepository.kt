@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 
-class HomeRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycleOwner) {
+class HomeRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecycleOwner) {
     suspend fun getWaitingList(page:Int,type:String = "1",pageSize:Int = 10):List<WaitingEntity>?{
         return requestResponse {
             val params = JsonParam.newInstance()

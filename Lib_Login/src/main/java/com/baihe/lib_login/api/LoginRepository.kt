@@ -10,7 +10,7 @@ import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_login.constant.UrlConstant
 
-class LoginRepository(lifecycleOwner: LifecycleOwner?):BaseRepository(lifecycleOwner) {
+class LoginRepository(lifecycleOwner: LifecycleOwner):BaseRepository(lifecycleOwner) {
 
     /**
      * 登录

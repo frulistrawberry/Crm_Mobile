@@ -84,19 +84,20 @@ public class KeyValueLayout extends LinearLayout {
             return value;
         }
     }
-
+    @SuppressLint("Recycle")
     private void init(Context context, AttributeSet attrs, int defStyleAttr){
         this.context = context;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KeyValueLayout, defStyleAttr, 0);
-        kvSpace = typedArray.getDimensionPixelOffset(R.styleable.KeyValueLayout_kv_kv_space, DpToPx.dpToPx( 4));
-        itemSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_item_space, DpToPx.dpToPx(16));
-        keyTextSize = DpToPx.pxToSp(typedArray.getDimension(R.styleable.KeyValueLayout_kv_key_textSize, DpToPx.spToPx( 14)));
+        kvSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_kv_space, DpToPx.dpToPx( 4));
+        itemSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_item_space, DpToPx.dpToPx(12));
+        keyTextSize = DpToPx.pxToSp( typedArray.getDimension(R.styleable.KeyValueLayout_kv_key_textSize, DpToPx.spToPx( 14)));
         keyTextColor = typedArray.getColor(R.styleable.KeyValueLayout_kv_key_textColor, Color.parseColor("#4A4C5C"));
-        keyEqualWidth = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_equal_width, true);
         keyColon = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_colon, true);
-        valueTextSize =  DpToPx.pxToSp( typedArray.getDimension(R.styleable.KeyValueLayout_kv_value_textSize, DpToPx.spToPx( 14)));
+        keyEqualWidth = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_equal_width, true);
+        valueTextSize = DpToPx.pxToSp( typedArray.getDimension(R.styleable.KeyValueLayout_kv_value_textSize, DpToPx.spToPx( 14)));
         valueTextColor = typedArray.getColor(R.styleable.KeyValueLayout_kv_value_textColor, Color.parseColor("#4A4C5C"));
         valueMaxLine = typedArray.getInteger(R.styleable.KeyValueLayout_kv_value_maxLine, 0);
+
         int keyFontStyleValue = typedArray.getInt(R.styleable.KeyValueLayout_kv_key_textStyle, FontStyle.LIGHT.valueOf());
         switch (keyFontStyleValue) {
             case FontTextView.LIGHT_VALUE:
@@ -127,8 +128,6 @@ public class KeyValueLayout extends LinearLayout {
                 valueFontStyle = FontStyle.BOLD;
                 break;
         }
-
-        typedArray.recycle();
         setOrientation(VERTICAL);
     }
 
@@ -229,14 +228,26 @@ public class KeyValueLayout extends LinearLayout {
     private void setValue(View view, KeyValueEntity keyValueEntity){
         TextView kv_key_tv = view.findViewById(R.id.kv_key_tv);
         TextView kv_value_tv = view.findViewById(R.id.kv_value_tv);
+        RecyclerView kv_value_attach_rv = view.findViewById(R.id.rv_attach);
+        ImageView kv_value_right_icon_iv = view.findViewById(R.id.kv_value_right_icon_iv);
         if (kv_key_tv != null) {
-            String key = !TextUtils.isEmpty(keyValueEntity.getKey()) ? keyValueEntity.getKey() : "";
+            String key = !TextUtils.isEmpty(keyValueEntity.getKey()) ? keyValueEntity.getKey() : !TextUtils.isEmpty(keyValueEntity.getName())? keyValueEntity.getName():"";
             kv_key_tv.setText(key + (keyColon ? "：" : ""));
         }
         if (kv_value_tv != null) {
-            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() : "";
+            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() :!TextUtils.isEmpty(keyValueEntity.getDefaultValue())? keyValueEntity.getDefaultValue(): "未填写";
             kv_value_tv.setText(value);
+            if (keyValueEntity.getAttach() != null) {
+                kv_value_tv.setText("");
+                kv_value_right_icon_iv.setVisibility(GONE);
+                kv_value_attach_rv.setVisibility(VISIBLE);
+                kv_value_attach_rv.setLayoutManager(new GridLayoutManager(context,2));
+                AttachImageAdapter adapter = new AttachImageAdapter();
+                kv_value_attach_rv.setAdapter(adapter);
+                adapter.setData(keyValueEntity.getAttach());
+            }
         }
+
         if (!TextUtils.isEmpty(keyValueEntity.getAction())) {
             setEvent(view, keyValueEntity);
         } else {
@@ -249,7 +260,7 @@ public class KeyValueLayout extends LinearLayout {
     private void setEvent(View view, KeyValueEntity keyValueEntity){
         LinearLayout kv_value_right_ll = view.findViewById(R.id.kv_value_right_ll);
         RelativeLayout kv_value_rl = view.findViewById(R.id.kv_value_rl);
-        TextView kv_value_tv = view.findViewById(R.id.kv_value_tv);
+        TextView kv_key_tv = view.findViewById(R.id.kv_key_tv);
         RecyclerView kv_value_attach_rv = view.findViewById(R.id.rv_attach);
         ImageView kv_value_right_icon_iv = view.findViewById(R.id.kv_value_right_icon_iv);
         TextView kv_value_left_name_tv = view.findViewById(R.id.kv_value_left_name_tv);
@@ -274,16 +285,10 @@ public class KeyValueLayout extends LinearLayout {
             } else {
                 LinearLayout.LayoutParams valueLayoutParams = (LayoutParams) kv_value_rl.getLayoutParams();
                 valueLayoutParams.gravity = Gravity.CENTER_VERTICAL;
+                LinearLayout.LayoutParams keyLayoutParams = (LayoutParams) kv_key_tv.getLayoutParams();
+                keyLayoutParams.gravity = Gravity.CENTER_VERTICAL;
                 kv_value_right_icon_iv.setImageResource(drawableId);
             }
-        } else if (keyValueEntity.getAttach() != null) {
-            kv_value_tv.setText("");
-            kv_value_right_icon_iv.setVisibility(GONE);
-            kv_value_attach_rv.setVisibility(VISIBLE);
-            kv_value_attach_rv.setLayoutManager(new GridLayoutManager(context,2));
-            AttachImageAdapter adapter = new AttachImageAdapter();
-            kv_value_attach_rv.setAdapter(adapter);
-            adapter.setData(keyValueEntity.getAttach());
         }
 
         setAction(view, kv_value_right_ll, keyValueEntity);
@@ -291,13 +296,19 @@ public class KeyValueLayout extends LinearLayout {
 
     private void setAction(View itemView, LinearLayout rightView, KeyValueEntity keyValueEntity) {
         String action = keyValueEntity.getAction();
-        ItemAction itemAction = getItemAction(action);
-        if (itemAction == null) {
-            return;
-        }
-        if (listener!=null){
-            listener.onEvent(keyValueEntity,itemAction);
-        }
+        rightView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ItemAction itemAction = getItemAction(action);
+                if (itemAction == null) {
+                    return;
+                }
+                if (listener!=null){
+                    listener.onEvent(keyValueEntity,itemAction);
+                }
+            }
+        });
+
 
     }
 

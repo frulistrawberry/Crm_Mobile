@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.baihe.lib_common.constant.KeyConstant.KEY_OPPO_PHASE
 import com.baihe.lib_common.databinding.CommonSrlListBinding
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
@@ -14,7 +15,7 @@ import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.log.LogUtil
 import com.baihe.lib_opportunity.OpportunityViewModel
-import com.baihe.lib_opportunity.ui.activity.ActionActivity
+import com.baihe.lib_opportunity.ui.activity.DispatchOrderActivity
 import com.baihe.lib_opportunity.ui.activity.OpportunityDetailActivity
 import com.baihe.lib_opportunity.ui.adapter.OpportunityListAdapter
 import com.dylanc.loadingstateview.ViewType
@@ -22,7 +23,7 @@ import com.dylanc.loadingstateview.ViewType
 class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityViewModel>() {
 
     private val reqPhase by lazy {
-        arguments?.getString("reqPhase","0")
+        arguments?.getString(KEY_OPPO_PHASE,"0")
     }
     private val adapter by lazy {
         OpportunityListAdapter().apply {
@@ -34,7 +35,7 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
                     }
                     2->{
                         //下发订单
-                        ActionActivity.start(this@OpportunityListFragment,2,oppoId,customerId)
+                        DispatchOrderActivity.start(this@OpportunityListFragment,oppoId,customerId)
                     }
                     3->{
                         // 写跟进
@@ -58,16 +59,18 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
         fun newFragment(reqPhase:String): OpportunityListFragment {
             return OpportunityListFragment().apply {
                 val arguments = Bundle()
-                arguments.putString("reqPhase",reqPhase)
+                arguments.putString(KEY_OPPO_PHASE,reqPhase)
                 setArguments(arguments)
             }
         }
     }
 
-    fun search(keywords:String){
+    fun refresh(keywords:String = "",params:LinkedHashMap<String,Any?>?=null,order:Int = -1){
         page = 1
         mViewModel.getOppoList(page,reqPhase!!,keywords)
     }
+
+
 
     override fun initViewModel() {
         super.initViewModel()
@@ -146,7 +149,6 @@ class OpportunityListFragment:BaseMvvmFragment<CommonSrlListBinding,OpportunityV
 
     override fun initData() {
         super.initData()
-
         mViewModel.getOppoList(page,reqPhase!!)
     }
 

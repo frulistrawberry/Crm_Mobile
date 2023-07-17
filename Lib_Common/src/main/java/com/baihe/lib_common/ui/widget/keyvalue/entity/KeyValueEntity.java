@@ -17,10 +17,11 @@ public class KeyValueEntity implements Serializable {
      *用于参数提交
      */
     private String value;
-
     private String label;
 
+    private String pid;
 
+    private List<KeyValueEntity> children;
     private String type;
 
     private List<KeyValueEntity> option;
@@ -99,6 +100,8 @@ public class KeyValueEntity implements Serializable {
      */
     private String rangeMax;
 
+    private String order_id;
+
     //---------------------------------KeyValueLayout-------------------//
 
     private String key;
@@ -174,7 +177,13 @@ public class KeyValueEntity implements Serializable {
     //---------------------------------KeyValueLayout-------------------//
 
 
+    public String getOrder_id() {
+        return order_id;
+    }
 
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
+    }
 
     public String getName() {
         return name;
@@ -238,6 +247,22 @@ public class KeyValueEntity implements Serializable {
 
     public void setOption(List<KeyValueEntity> option) {
         this.option = option;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public List<KeyValueEntity> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<KeyValueEntity> children) {
+        this.children = children;
     }
 
     public String getDefaultValue() {

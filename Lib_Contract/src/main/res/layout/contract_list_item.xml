@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_8"
+    android:layout_marginStart="@dimen/dp_20"
+    android:layout_marginEnd="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_20"
+    android:paddingStart="@dimen/dp_10"
+    android:paddingEnd="@dimen/dp_10"
+    android:background="@drawable/common_round_white"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/tv_num"
+            style="@style/font_normal_12_8B8B99"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_arrow_right"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/tv_title"
+            style="@style/font_half_bold_16_4A4C5C"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:font_textStyle="HALF_BOLD"
+            android:textSize="12sp"
+            android:text="￥"
+            android:textColor="#FFFF1E5A"/>
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:font_textStyle="HALF_BOLD"
+            android:textSize="16sp"
+            android:text=""
+            android:textColor="#FFFF1E5A" />
+
+
+
+
+    </LinearLayout>
+    <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
+        android:id="@+id/kvl_contract"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

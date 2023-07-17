@@ -2,10 +2,8 @@ package com.baihe.lib_common.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.baihe.lib_common.api.CommonRepository
-import com.baihe.lib_common.entity.ChannelEntity
-import com.baihe.lib_common.entity.CityEntity
-import com.baihe.lib_common.entity.FollowEntity
-import com.baihe.lib_common.entity.RecordUserEntity
+import com.baihe.lib_common.entity.*
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.toast.TipsToast
 import com.dylanc.loadingstateview.ViewType
 
@@ -17,8 +15,8 @@ class CommonViewModel:BaseViewModel() {
     val loadingStateLiveData: MutableLiveData<ViewType> by lazy {
         MutableLiveData<ViewType>()
     }
-    val channelListLiveData: MutableLiveData<List<ChannelEntity>> by lazy {
-        MutableLiveData<List<ChannelEntity>>()
+    val channelListLiveData: MutableLiveData<List<KeyValueEntity>> by lazy {
+        MutableLiveData<List<KeyValueEntity>>()
     }
     val recordUserListLiveData:MutableLiveData<List<RecordUserEntity>> by lazy {
         MutableLiveData<List<RecordUserEntity>>()
@@ -34,8 +32,26 @@ class CommonViewModel:BaseViewModel() {
     val stateLiveData:MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
+    val photoLiveData:MutableLiveData<List<LocalPhotoEntity>> by lazy {
+        MutableLiveData<List<LocalPhotoEntity>>()
+    }
     private val repository :CommonRepository by lazy {
         CommonRepository(this)
+    }
+
+    fun getPhotoList(){
+        loadingStateLiveData.value = ViewType.LOADING
+        launchUI({
+                _,_-> loadingStateLiveData.value = ViewType.ERROR
+        }){
+            val data = repository.getPhotoList()
+            if (data==null){
+                loadingStateLiveData.value = ViewType.EMPTY
+            }else{
+                photoLiveData.value = data
+                loadingStateLiveData.value = ViewType.CONTENT
+            }
+        }
     }
 
     fun getChannelList(){

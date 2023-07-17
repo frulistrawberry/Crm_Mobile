@@ -20,14 +20,18 @@ class AlertDialog {
         init {
             setContentView(mBinding.root)
             setAnimStyle(BaseDialog.AnimStyle.DEFAULT)
-            mBinding.btnCancel.click {
+            mBinding.button1.click {
                 dismiss()
             }
-            mBinding.btnConfirm.click {
+            mBinding.button2.click {
                 if (onConfirmListener != null) {
                     onConfirmListener!!.invoke(dialog)
                     dismiss()
                 }
+            }
+
+            mBinding.btnClose.click {
+                dismiss()
             }
         }
 

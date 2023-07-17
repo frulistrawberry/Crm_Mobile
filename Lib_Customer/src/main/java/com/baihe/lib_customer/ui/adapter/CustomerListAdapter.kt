@@ -1,7 +1,6 @@
 package com.baihe.lib_customer.ui.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +11,7 @@ import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
 import com.baihe.lib_framework.ext.ViewExt.click
 
-class CustomerListAdapter(val context: Context):
+class CustomerListAdapter :
     BaseRecyclerViewAdapter<CustomerListItemEntity, CustomerItemCustomerListBinding>() {
     var onCallListener:((customerId:String,type:Int)->Unit)? = null
 
@@ -29,7 +28,7 @@ class CustomerListAdapter(val context: Context):
         holder.binding.rvReq.apply {
             layoutManager = LinearLayoutManager(context)
             isNestedScrollingEnabled = false
-            adapter = ReqListAdapter().apply {
+            adapter = ReqListAdapter(context).apply {
                 if (!item?.reqInfo.isNullOrEmpty()){
                     if (item!!.reqInfo!!.size>2){
                         setData(item.reqInfo!!.subList(0,2))

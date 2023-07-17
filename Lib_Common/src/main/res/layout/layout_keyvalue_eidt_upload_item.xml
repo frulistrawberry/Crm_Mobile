@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/kv_edit_key_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16">
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4A4C5C"
+            android:textSize="15sp"
+            app:font_textStyle="NORMAL" />
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_required_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_2"
+            android:text="*"
+            android:textColor="#FF1E5A"
+            android:textSize="12sp"
+            app:font_textStyle="HALF_BOLD" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_20"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="2" />
+
+</com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

@@ -27,8 +27,8 @@ class LoginServiceImp:ILoginService {
 
     override fun logout(
         context: Context,
-        lifecycleOwner: LifecycleOwner?) {
-        val scope = lifecycleOwner?.lifecycleScope ?: GlobalScope
+        lifecycleOwner: LifecycleOwner) {
+        val scope = lifecycleOwner.lifecycleScope ?: GlobalScope
         val loginRepository = LoginRepository(lifecycleOwner)
         scope.launch {
             try {

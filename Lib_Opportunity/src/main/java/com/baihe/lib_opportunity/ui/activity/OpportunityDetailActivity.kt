@@ -5,14 +5,28 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.R
+import com.baihe.lib_common.constant.KeyConstant
+import com.baihe.lib_common.constant.KeyConstant.KEY_OPPO_ID
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_DELETE_OPPO
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_DISPATCH_ORDER
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_EDIT_OPPO
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_FOLLOW
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_TRANSFER_OPPO
+import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
+import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
+import com.baihe.lib_common.provider.CustomerServiceProvider
 import com.baihe.lib_common.ui.activity.AddFollowActivity
 import com.baihe.lib_common.ui.activity.FollowDetailActivity
 import com.baihe.lib_common.ui.adapter.FollowListAdapter
 import com.baihe.lib_common.ui.dialog.AlertDialog
 import com.baihe.lib_common.ui.dialog.MoreActionDialog
 import com.baihe.lib_common.ui.widget.AxisItemDecoration
+import com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
+import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.ext.ViewExt.gone
@@ -26,12 +40,16 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 
 class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBinding,OpportunityViewModel>() {
     private val oppoId by lazy {
-        intent.getStringExtra("oppoId")
+        intent.getStringExtra(KEY_OPPO_ID)
     }
 
 
     private val followAdapter by lazy {
         FollowListAdapter()
+    }
+
+    private val commonViewModel by lazy {
+        ViewModelProvider(this).get(CommonViewModel::class.java)
     }
 
      var orderStatus:String?=null
@@ -41,7 +59,7 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
         fun start(context: Context, oppoId:String){
             val intent = Intent(context,OpportunityDetailActivity::class.java)
             intent.apply {
-                putExtra("oppoId",oppoId)
+                putExtra(KEY_OPPO_ID,oppoId)
             }
             context.startActivity(intent)
         }
@@ -49,6 +67,13 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
 
     override fun initViewModel() {
         super.initViewModel()
+        commonViewModel.loadingDialogLiveData.observe(this){
+            if (it){
+                showLoadingDialog()
+            }else{
+                dismissLoadingDialog()
+            }
+        }
         mViewModel.loadingStateLiveData.observe(this){
             when(it){
                 ViewType.LOADING ->{
@@ -100,8 +125,8 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
             }else{
                 mBinding.llReq.gone()
             }
-            if (it.order != null) {
-                mBinding.kvlOrder.setData(it.toReserveShowArray())
+            if (it.order != null&&!it.order.orderStatus.isNullOrEmpty()) {
+                mBinding.kvlOrder.setData(it.toOrderShowArray())
                 mBinding.llOrder.visible()
             }else{
                 mBinding.llOrder.gone()
@@ -179,6 +204,26 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
         mBinding.btnSubDetail.click {
             OppoSubDetailActivity.start(this,oppoId)
         }
+
+        mBinding.kvlBasic.setOnItemActionListener(object: KeyValueLayout.OnItemActionListener(){
+            override fun onEvent(
+                keyValueEntity: KeyValueEntity?,
+                itemAction: KeyValueLayout.ItemAction?
+            ) {
+                when(itemAction){
+                    KeyValueLayout.ItemAction.CALL->{
+                        commonViewModel.call(customerId!!)
+                    }
+                    KeyValueLayout.ItemAction.JUMP ->{
+                        CustomerServiceProvider.toCustomerDetail(this@OpportunityDetailActivity,customerId!!)
+                    }
+                    else ->{
+
+                    }
+                }
+            }
+
+        })
     }
 
     override fun initData() {
@@ -188,25 +233,24 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
 
     private fun buttonClick(type:Int){
         when(type){
-            1->{
-                // TODO: 写跟进
-
+            ACTION_FOLLOW->{
+                //  写跟进
                 AddFollowActivity.startOppoFollow(this,oppoId,customerId!!,orderStatus?:"0")
             }
-            2->{
-                // TODO: 下发订单
-                ActionActivity.start(this,2,oppoId,customerId!!)
+            ACTION_DISPATCH_ORDER->{
+                //  下发订单
+                DispatchOrderActivity.start(this,oppoId,customerId!!)
             }
-            3->{
-                // TODO: 编辑机会
+            ACTION_EDIT_OPPO->{
+                //  编辑机会
                 AddOrUpdateOpportunityActivity.start(this,oppoId,customerId)
             }
-            4->{
-                // TODO: 转移机会
-                ActionActivity.start(this,1,oppoId,customerId!!)
+            ACTION_TRANSFER_OPPO->{
+                //  转移机会
+                OpportunityTransferActivity.start(this,oppoId,customerId!!)
             }
-            5->{
-                // TODO: 归档机会
+            ACTION_DELETE_OPPO->{
+                //  归档机会
                 AlertDialog.Builder(this)
                     .setContent("是否确认归档当前销售机会？")
                     .setOnConfirmListener {

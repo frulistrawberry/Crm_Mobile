@@ -124,7 +124,7 @@ object StatusBarUtil {
                 }
                 result = true
             } catch (e: Exception) {
-                LogUtil.e(e)
+                result  = false
             }
         }
         return result

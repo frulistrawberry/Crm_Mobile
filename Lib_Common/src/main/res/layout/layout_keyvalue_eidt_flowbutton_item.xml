@@ -54,5 +54,30 @@
         app:label_text_maginTop="9dp"
         app:label_vertical_space="10dp"
         app:label_select_cancel="true"/>
+    <com.baihe.lib_common.ui.widget.FlowLayout
+        android:id="@+id/kv_edit_key_buttons_fl_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16"
+        android:visibility="gone"
+        android:background="@drawable/common_round_f6f7fc"
+        app:label_background="@drawable/common_button_round_gray_stroke"
+        app:label_horizontal_space="5dp"
+        app:label_select_background="@drawable/common_button_round_blue"
+        app:label_select_textColor="#FFFFFF"
+        app:label_textColor="#4A4C5C"
+        app:label_textSize="12sp"
+        app:label_text_maginBottom="7dp"
+        app:label_text_maginLeft="20dp"
+        app:label_text_maginRight="20dp"
+        app:label_text_maginTop="9dp"
+        app:label_vertical_space="10dp"
+        app:label_select_cancel="true"/>
 
 </com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

@@ -25,7 +25,7 @@ interface ILoginService : IProvider {
      */
     fun logout(
     context: Context,
-    lifecycleOwner: LifecycleOwner?
+    lifecycleOwner: LifecycleOwner
     )
 
     override fun init(context: Context?) {

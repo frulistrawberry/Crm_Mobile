@@ -1,122 +1,31 @@
 package com.baihe.lib_opportunity
 
-import android.telephony.CellIdentity
+import com.baihe.lib_common.constant.StatusConstant.OPPO_CUSTOMER_EFFECTIVE
+import com.baihe.lib_common.constant.StatusConstant.OPPO_CUSTOMER_TBD
+import com.baihe.lib_common.constant.StatusConstant.OPPO_DELETED
+import com.baihe.lib_common.constant.StatusConstant.OPPO_ENTERED_STORE
+import com.baihe.lib_common.constant.StatusConstant.OPPO_INVALID_CUSTOMER
+import com.baihe.lib_common.constant.StatusConstant.OPPO_INVITATION_SUCCESSFUL
+import com.baihe.lib_common.constant.StatusConstant.OPPO_TO_BE_INVITED
+import com.baihe.lib_common.constant.StatusConstant.ORDER_CANCELED
+import com.baihe.lib_common.constant.StatusConstant.ORDER_CHARGED
+import com.baihe.lib_common.constant.StatusConstant.ORDER_COMPLETED
+import com.baihe.lib_common.constant.StatusConstant.ORDER_NONE
+import com.baihe.lib_common.constant.StatusConstant.ORDER_SIGNED
+import com.baihe.lib_common.constant.StatusConstant.ORDER_TO_BE_SIGNED
 import com.baihe.lib_common.entity.*
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_DELETE_OPPO
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_DISPATCH_ORDER
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_EDIT_OPPO
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_FOLLOW
+import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_TRANSFER_OPPO
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.google.gson.annotations.SerializedName
 
 class OpportunityEntity {
 }
 
-data class OpportunityListItemEntity(
-    @SerializedName("req_id")
-    val id:Int,
-    @SerializedName("customer_id")
-    val customerId:String?,
-    val title:String?,
-    @SerializedName("hide_phone")
-    val phone:String?,
-    @SerializedName("follow_content")
-    val followContent:String?,
-    @SerializedName("follow_user_name")
-    val followUserName:String?,
-    @SerializedName("next_contact_time")
-    val nextContactTime:String?,
-    @SerializedName("arrival_time")
-    val arrivalTime:String?,
-    @SerializedName("reserve_time")
-    val reserveTime:String?,
-    @SerializedName("req_phase")
-    val reqPhase:String,
-    @SerializedName("orderstatus")
-    val orderStatus:String?
 
-
-){
-    fun toShowArray():List<KeyValueEntity>{
-        val kvList = mutableListOf<KeyValueEntity>()
-        kvList.apply {
-            add(KeyValueEntity().apply {
-                key = "联系电话"
-                `val` = this@OpportunityListItemEntity.phone
-            })
-            when(reqPhase){
-                "220"->{
-                    if (!nextContactTime.isNullOrEmpty()){
-                        add(KeyValueEntity().apply {
-                            key = "下次回访时间"
-                            `val` = nextContactTime
-                        })
-                    }
-                }
-                "230"->{
-                    if (!nextContactTime.isNullOrEmpty()){
-                        add(KeyValueEntity().apply {
-                            key = "下次回访时间"
-                            `val` = nextContactTime
-                        })
-                    }
-                }
-                "240"->{
-                    if (!reserveTime.isNullOrEmpty()){
-                        add(KeyValueEntity().apply {
-                            key = "计划进店时间"
-                            `val` = reserveTime
-                        })
-                    }
-                }
-                "210"->{
-                    if (!orderStatus.isNullOrEmpty()&&orderStatus=="3"){
-                        if (!arrivalTime.isNullOrEmpty()){
-                            add(KeyValueEntity().apply {
-                                key = "进店时间"
-                                `val` = arrivalTime
-                            })
-                        }
-                    }
-                }
-                "250"->{
-                    if (!arrivalTime.isNullOrEmpty()){
-                        add(KeyValueEntity().apply {
-                            key = "进店时间"
-                            `val` = arrivalTime
-                        })
-                    }
-                }
-
-            }
-            add(KeyValueEntity().apply {
-                key = "最新沟通记录"
-                `val` = followContent?:"无最新沟通记录"
-            })
-            add(KeyValueEntity().apply {
-                key = "跟进人"
-                `val` = followUserName
-            })
-
-            return kvList
-        }
-    }
-
-    fun genBottomButtons():List<ButtonTypeEntity>{
-        val buttons = mutableListOf<ButtonTypeEntity>()
-        buttons.add(ButtonTypeEntity().apply {
-            name = "打电话"
-            type = 1
-        })
-        buttons.add(ButtonTypeEntity().apply {
-            if ((reqPhase == "230" || reqPhase == "240")&&(orderStatus.isNullOrEmpty()||orderStatus == "0")){
-                name = "下发订单"
-                type = 2
-            }else{
-                name = "写跟进"
-                type = 3
-            }
-        })
-        return buttons
-    }
-
-}
 
 
 data class OpportunityDetailEntity(
@@ -201,7 +110,7 @@ data class OpportunityDetailEntity(
             })
             add(KeyValueEntity().apply {
                 key = "客户姓名"
-                `val` = name
+                `val` = this@OpportunityDetailEntity.name
             })
             add(KeyValueEntity().apply {
                 key = "联系方式"
@@ -278,22 +187,22 @@ data class OpportunityDetailEntity(
             add(KeyValueEntity().apply {
                 key = "订单状态"
                 `val` = when(order?.orderStatus){
-                    "0"->{
+                    ORDER_NONE->{
                         ""
                     }
-                    "1"->{
+                    ORDER_TO_BE_SIGNED->{
                         "待签约"
                     }
-                    "2"->{
+                    ORDER_SIGNED->{
                         "已签约"
                     }
-                    "3"->{
+                    ORDER_CHARGED->{
                         "已退单"
                     }
-                    "4"->{
+                    ORDER_CANCELED->{
                         "已取消"
                     }
-                    "6"->{
+                    ORDER_COMPLETED->{
                         "已完成"
                     }
                     else->{
@@ -377,16 +286,16 @@ data class OpportunityDetailEntity(
 
     fun genBottomButtons():List<ButtonTypeEntity>{
         val buttons = mutableListOf<ButtonTypeEntity>()
-        if ((phase == "230" || phase == "240")&&(order?.orderStatus.isNullOrEmpty()||order?.orderStatus == "0")){
+        if ((phase == "230" || phase == "240")&&(order == null || order.orderStatus.isNullOrEmpty()|| order.orderStatus == "0")){
             buttons.add(ButtonTypeEntity().apply {
                 name = "下发订单"
-                type = 2
+                type = ACTION_DISPATCH_ORDER
             })
         }
 
         buttons.add(ButtonTypeEntity().apply {
             name = "写跟进"
-            type = 1
+            type = ACTION_FOLLOW
         })
         return buttons
     }
@@ -394,85 +303,59 @@ data class OpportunityDetailEntity(
     fun genMoreButtons():List<ButtonTypeEntity>{
         val buttons = mutableListOf<ButtonTypeEntity>()
         when(phase){
-            "200"->{
+            OPPO_TO_BE_INVITED->{
                 buttons.apply {
                     add(ButtonTypeEntity().apply {
                         name = "归档机会"
-                        type = 5
+                        type = ACTION_DELETE_OPPO
                     })
                     add(ButtonTypeEntity().apply {
                         name = "编辑机会"
-                        type = 3
+                        type = ACTION_EDIT_OPPO
                     })
                     add(ButtonTypeEntity().apply {
                         name = "转移"
-                        type = 4
+                        type = ACTION_TRANSFER_OPPO
                     })
                 }
             }
-            "220"->{
+            OPPO_CUSTOMER_TBD,OPPO_CUSTOMER_EFFECTIVE,OPPO_INVITATION_SUCCESSFUL->{
                 buttons.apply {
                     add(ButtonTypeEntity().apply {
                         name = "编辑机会"
-                        type = 3
+                        type = ACTION_EDIT_OPPO
                     })
                     add(ButtonTypeEntity().apply {
                         name = "转移"
-                        type = 4
+                        type = ACTION_TRANSFER_OPPO
                     })
                 }
             }
-            "230"->{
-                buttons.apply {
-                    add(ButtonTypeEntity().apply {
-                        name = "编辑机会"
-                        type = 3
-                    })
-                    add(ButtonTypeEntity().apply {
-                        name = "转移"
-                        type = 4
-                    })
-                }
-            }
-            "240"->{
-                buttons.apply {
-                    if (order?.orderStatus!=null||order?.orderStatus.toString()=="0"){
-                        add(ButtonTypeEntity().apply {
-                            name = "编辑机会"
-                            type = 3
-                        })
-                    }
-                    add(ButtonTypeEntity().apply {
-                        name = "转移"
-                        type = 4
-                    })
-                }
-            }
-            "210"->{
+            OPPO_INVALID_CUSTOMER->{
                 buttons.apply {
                     add(ButtonTypeEntity().apply {
                         name = "归档机会"
-                        type = 5
+                        type = ACTION_DELETE_OPPO
                     })
                     add(ButtonTypeEntity().apply {
                         name = "编辑机会"
-                        type = 3
+                        type = ACTION_EDIT_OPPO
                     })
                 }
             }
-            "250"->{
+            OPPO_ENTERED_STORE->{
                 buttons.apply {
                     add(ButtonTypeEntity().apply {
                         name = "转移"
-                        type = 4
+                        type = ACTION_TRANSFER_OPPO
                     })
                 }
             }
-            "260"->{
+            OPPO_DELETED->{
                 buttons.apply {
                     add(ButtonTypeEntity().apply {
                         name = "编辑机会"
-                        type = 3
+                        type = ACTION_EDIT_OPPO
                     })
                 }
             }

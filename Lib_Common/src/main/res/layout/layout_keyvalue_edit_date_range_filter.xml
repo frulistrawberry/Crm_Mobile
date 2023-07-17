@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/kv_edit_key_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16">
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4A4C5C"
+            android:textSize="15sp"
+            app:font_textStyle="NORMAL" />
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_required_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="*"
+            android:textColor="#FF1E5A"
+            android:textSize="12sp"
+            app:font_textStyle="HALF_BOLD" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="15dp">
+        <LinearLayout
+            android:id="@+id/kv_edit_value_start_time_ll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/dp_28"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/common_button_round_gray_stroke">
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/kv_edit_value_start_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择起始时间"
+                android:textSize="12sp"
+                android:textColor="#C5C5CE"
+                app:font_textStyle="LIGHT"/>
+            <ImageView
+                android:id="@+id/kv_edit_value_start_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:src="@mipmap/ic_arrow_right"/>
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_0.5"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:background="@color/COLOR_C2C5DB"
+            />
+        <LinearLayout
+            android:id="@+id/kv_edit_value_end_time_ll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/dp_28"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/common_button_round_gray_stroke">
+            <com.baihe.lib_common.ui.widget.font.FontTextView
+                android:id="@+id/kv_edit_value_end_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择起始时间"
+                android:textSize="12sp"
+                android:textColor="#C5C5CE"
+                app:font_textStyle="LIGHT"
+                />
+            <ImageView
+                android:id="@+id/kv_edit_value_end_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:src="@mipmap/ic_arrow_right"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

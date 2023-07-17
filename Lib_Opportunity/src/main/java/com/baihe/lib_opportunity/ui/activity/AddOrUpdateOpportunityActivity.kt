@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.baihe.lib_common.constant.KeyConstant
+import com.baihe.lib_common.constant.KeyConstant.KEY_CUSTOMER_ID
+import com.baihe.lib_common.constant.KeyConstant.KEY_OPPO_ID
 import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
@@ -20,7 +22,7 @@ import com.dylanc.loadingstateview.ViewType
 class AddOrUpdateOpportunityActivity:
     BaseMvvmActivity<OppoActivityAddOrUpdateOpportunityBinding, OpportunityViewModel>() {
     private val oppoId:String? by lazy {
-        intent.getStringExtra("oppoId")
+        intent.getStringExtra(KEY_OPPO_ID)
     }
 
     private var customerId:String? = null
@@ -31,8 +33,8 @@ class AddOrUpdateOpportunityActivity:
         fun start(context: Context, oppoId:String?=null
                   ,customerId:String?=null){
             val intent = Intent(context,AddOrUpdateOpportunityActivity::class.java).apply {
-                putExtra("oppoId",oppoId)
-                putExtra("customerId",customerId)
+                putExtra(KEY_OPPO_ID,oppoId)
+                putExtra(KEY_CUSTOMER_ID,customerId)
             }
             if (context is Activity)
                 context.startActivityForResult(intent, RequestCode.REQUEST_ADD_CUSTOMER)
@@ -85,6 +87,55 @@ class AddOrUpdateOpportunityActivity:
 
         }
 
+        mViewModel.customerLiveData.observe(this){
+            it?.let {customer->
+                mBinding.kvlOpportunity.data?.let {
+                    it.forEach {keyValueEntity ->
+                        when(keyValueEntity.name){
+                            "来源渠道"-> {
+                                customer.let { customerDetailEntity ->
+                                    keyValueEntity.is_channge = "1"
+                                    keyValueEntity.value = customerDetailEntity.sourceChannelId
+                                    keyValueEntity.defaultValue= customerDetailEntity.sourceChannel
+                                }
+                            }
+                            "客户姓名" ->{
+                                customer.let { customerDetailEntity ->
+                                    keyValueEntity.is_channge = "1"
+                                    keyValueEntity.value = customerDetailEntity.name
+                                    keyValueEntity.defaultValue= customerDetailEntity.name
+                                }
+                            }
+                            "联系方式" ->{
+                                customer.let { customerDetailEntity ->
+                                    keyValueEntity.is_channge = "1"
+                                    keyValueEntity.value = "${customerDetailEntity.see_phone?:""},${customerDetailEntity.wechat?:""}"
+                                    keyValueEntity.defaultValue= "${customerDetailEntity.phone?:""},${customerDetailEntity.wechat?:""}"
+                                }
+                            }
+                            "提供人" ->{
+                                customer.let { customerDetailEntity ->
+                                    keyValueEntity.is_channge = "2"
+                                    keyValueEntity.channelId = customerDetailEntity.sourceChannelId
+                                    keyValueEntity.value = customerDetailEntity.recordUserId
+                                    keyValueEntity.defaultValue= customerDetailEntity.recordUser
+                                }
+                            }
+                            "客户身份"->{
+                                customer.let { customerDetailEntity ->
+                                    keyValueEntity.is_channge = "2"
+                                    keyValueEntity.value = customerDetailEntity.identityId
+                                    keyValueEntity.defaultValue= customerDetailEntity.identity
+                                }
+                            }
+
+                        }
+                    }
+                }
+                mBinding.kvlOpportunity.refresh()
+            }
+        }
+
         mViewModel.oppoAddOrUpdateLiveData.observe(this){
             if (it){
                 setResult(RESULT_OK)
@@ -96,7 +147,10 @@ class AddOrUpdateOpportunityActivity:
 
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {
-            title = "新增销售机会"
+            if (!oppoId.isNullOrEmpty())
+                title = "新增销售机会"
+            else
+                title = "编辑销售机会"
             navIcon = R.mipmap.navigation_icon
         }
         mBinding.srlRoot.setEnableLoadMore(false)
@@ -116,47 +170,21 @@ class AddOrUpdateOpportunityActivity:
 
     override fun initData() {
         super.initData()
-        customerId = intent.getStringExtra("customerId")
+        customerId = intent.getStringExtra(KEY_CUSTOMER_ID)
         mViewModel.getOppoTemple(oppoId,customerId)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RequestCode.REQUEST_SELECT_CUSTOMER && resultCode == RESULT_OK){
-            if (data != null) {
-                val bundle = data.extras
-                if (bundle != null) {
-                    customerId = bundle.getString(KeyConstant.KEY_CUSTOMER_ID)
-                    val name = bundle.getString(KeyConstant.KEY_CUSTOMER_NAME)
-                    val cipherPhone = bundle.getString(KeyConstant.KEY_CUSTOMER_PHONE_CIPHER_TXT)
-                    val plainPhone = bundle.getString(KeyConstant.KEY_CUSTOMER_PHONE_PLAIN_TXT)
-                    val wechat = bundle.getString(KeyConstant.KEY_CUSTOMER_WECHAT)
-                    val identity = bundle.getString(KeyConstant.KEY_CUSTOMER_IDENTITY)
-                    val identityTxt = bundle.getString(KeyConstant.KEY_CUSTOMER_IDENTITY_TXT)
-                    val nameKV =  mBinding.kvlOpportunity.findEntityByParamKey("name")
-                    val contactKV =  mBinding.kvlOpportunity.findEntityByName("联系方式")
-                    val identityKV =  mBinding.kvlOpportunity.findEntityByParamKey("identity")
-                    if (nameKV!=null){
-                        nameKV.is_channge = "1"
-                        nameKV.value = name
-                        nameKV.defaultValue = name
-                    }
-                    if (contactKV!=null){
-                        contactKV.is_channge = "1"
-                        contactKV.value = "${plainPhone},${wechat}"
-                        contactKV.defaultValue = "${cipherPhone},${wechat}"
-                    }
-                    if (identityKV!=null){
-                        identityKV.is_channge = "1"
-                        identityKV.value = identity
-                        identityKV.defaultValue = identityTxt
-                    }
-                    mBinding.kvlOpportunity.refresh()
-
-
-                }
-
+            customerId = data?.let {
+                    data.getStringExtra(KEY_CUSTOMER_ID)
             }
+            customerId?.let {
+                mViewModel.getCustomerInfo(it)
+            }
+
+
         }
     }
 }

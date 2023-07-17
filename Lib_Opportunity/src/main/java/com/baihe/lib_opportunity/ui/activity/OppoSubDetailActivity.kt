@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import com.baihe.lib_common.R
+import com.baihe.lib_common.constant.KeyConstant
+import com.baihe.lib_common.constant.KeyConstant.KEY_OPPO_ID
 import com.baihe.lib_common.ui.dialog.MoreActionDialog
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
@@ -20,14 +22,14 @@ import com.dylanc.loadingstateview.ViewType
 class OppoSubDetailActivity:
     BaseMvvmActivity<OppoActivitySubDetailBinding, OpportunityViewModel>() {
     private val oppoId by lazy {
-        intent.getStringExtra("oppoId")
+        intent.getStringExtra(KEY_OPPO_ID)
     }
 
     companion object{
         fun start(context: Context, oppoId:String){
             val intent = Intent(context,OppoSubDetailActivity::class.java)
             intent.apply {
-                putExtra("oppoId",oppoId)
+                putExtra(KEY_OPPO_ID,oppoId)
             }
             context.startActivity(intent)
         }

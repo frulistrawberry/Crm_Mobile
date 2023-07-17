@@ -58,7 +58,7 @@ class AddOrUpdateCustomerActivity :BaseMvvmActivity<CustomerActivityAddOrUpdateC
                 dismissLoadingDialog()
         }
         mViewModel.customerTempleLiveData.observe(this){
-            mBinding.kvlCustomer.setData(it)
+            mBinding.kvlCustomer.data = it
         }
 
         mViewModel.customerAddOrUpdateLiveData.observe(this){

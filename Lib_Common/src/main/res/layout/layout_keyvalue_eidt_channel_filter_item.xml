@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/kv_edit_key_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:gravity="center_vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4A4C5C"
+            android:textSize="15sp"
+            app:font_textStyle="NORMAL" />
+
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_key_required_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="*"
+            android:textColor="#FF1E5A"
+            android:textSize="12sp"
+            app:font_textStyle="HALF_BOLD" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/kv_edit_value_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_28"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="@drawable/common_button_round_gray_stroke"
+        android:layout_marginStart="12dp">
+        <com.baihe.lib_common.ui.widget.font.FontTextView
+            android:id="@+id/kv_edit_value_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#FFC5C5CE"
+            android:textSize="12sp"
+            android:text="选择来源渠道"
+            app:font_textStyle="LIGHT"
+            />
+        <ImageView
+            android:id="@+id/kv_edit_value_right_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_arrow_right"/>
+
+    </LinearLayout>
+
+
+</com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>
