@@ -81,16 +81,10 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
 
     /**注销账号之后释放资源*/
     private fun releaseRes() {
-        mViewModel.viewModelScope.launch {
-            try {
-                PushHelper.logoutAccount()
-                UserServiceProvider.clearUserInfo()
-                CookieJarImpl.getInstance().cookieStore.removeAll()
-                LoginServiceProvider.login(this@SettingActivity)
-            } catch (ex: ApiException) {
-                LogUtil.e(ex)
-            }
-        }
+        val loginService: ILoginService =
+            ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
+                .navigation() as ILoginService
+        loginService.logout(this, this)
     }
 
     override fun initListener() {
@@ -119,11 +113,7 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
         }
         mBinding.tvSetting.click {
             //退出登录
-            val loginService: ILoginService =
-                ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
-                    .navigation() as ILoginService
-            loginService.logout(this, this)
-            finish()
+            releaseRes()
         }
     }
 
