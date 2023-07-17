@@ -8,6 +8,7 @@ import android.widget.LinearLayout.LayoutParams
 import androidx.core.widget.doOnTextChanged
 import com.baihe.lib_common.databinding.CommonTitleViewBinding
 import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.onSearchListener
+import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.searchHint
 import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.showSearch
 import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.showSearchBehind
 import com.baihe.lib_framework.ext.ViewExt.click
@@ -111,6 +112,7 @@ class ToolbarViewDelegate: BaseToolbarViewDelegate() {
                     llSearch.visible()
                 }else{
                     llSearch.gone()
+                    etSearch2.hint = config.searchHint?:"请输入机会名称/手机号/客户姓名"
                     etSearch2.setOnEditorActionListener { textView, actionId, _ ->
                         if (actionId == EditorInfo.IME_ACTION_SEARCH){
                             val keywords = textView.text.toString().trim()
@@ -127,16 +129,16 @@ class ToolbarViewDelegate: BaseToolbarViewDelegate() {
                     }
                     etSearch2.doOnTextChanged{ text, _, _, _ ->
                         if (text?.isNotEmpty() == true){
-                            btnCancel.visible()
+                            btnCancel2.visible()
                         }else{
-                            btnCancel.gone()
+                            btnCancel2.gone()
                         }
                     }
                     btnCancel2.click {
-                        etSearch.setText("")
+                        etSearch2.setText("")
                         config.onSearchListener?.invoke("")
-                        etSearch.clearFocus()
-                        KeyboardUtils.hideInputMethod(etSearch)
+                        etSearch2.clearFocus()
+                        KeyboardUtils.hideInputMethod(etSearch2)
                     }
                     cvSearch.visible()
                 }

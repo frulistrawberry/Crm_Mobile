@@ -31,9 +31,6 @@ import com.dylanc.loadingstateview.ViewType
 class SelectCustomerActivity: BaseMvvmActivity<CustomerActivitySelectBinding, CustomerViewModel>() {
     private var page = 1
     private var keywords = ""
-    val commonViewModel by lazy {
-        ViewModelProvider(this).get(CommonViewModel::class.java)
-    }
     private  val adapter by lazy {
         CustomerSelectAdapter(this).apply {
             onItemClickListener = { _, position->
@@ -58,12 +55,6 @@ class SelectCustomerActivity: BaseMvvmActivity<CustomerActivitySelectBinding, Cu
 
     override fun initViewModel() {
         super.initViewModel()
-        commonViewModel.loadingDialogLiveData.observe(this){
-            if (it){
-                showLoadingDialog()
-            }else
-                dismissLoadingDialog()
-        }
         mViewModel.loadingStateLiveData.observe(this){
             when(it){
                 ViewType.LOADING ->{
@@ -142,15 +133,7 @@ class SelectCustomerActivity: BaseMvvmActivity<CustomerActivitySelectBinding, Cu
             for (datum in adapter.getData()) {
                 if (datum.isCheck){
                     val data = Intent().apply {
-                        putExtras(Bundle().apply {
-                            putString(KeyConstant.KEY_CUSTOMER_ID,datum.id.toString())
-                            putString(KeyConstant.KEY_CUSTOMER_NAME,datum.name)
-                            putString(KeyConstant.KEY_CUSTOMER_PHONE_CIPHER_TXT,datum.phone)
-                            putString(KeyConstant.KEY_CUSTOMER_PHONE_PLAIN_TXT,datum.see_phone)
-                            putString(KeyConstant.KEY_CUSTOMER_WECHAT,datum.wechat)
-                            putString(KeyConstant.KEY_CUSTOMER_IDENTITY,datum.identity.toString())
-                            putString(KeyConstant.KEY_CUSTOMER_IDENTITY_TXT,datum.identity_txt)
-                        })
+                        putExtra(KeyConstant.KEY_CUSTOMER_ID,datum.id.toString())
                     }
                     setResult(RESULT_OK,data)
                     finish()

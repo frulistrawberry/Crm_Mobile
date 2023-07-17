@@ -22,10 +22,14 @@ object RoutePath {
      */
     const val CUSTOMER_SERVICE_CUSTOMER = "/customer/service/customer"
 
+    const val CONTRACT_SERVICE_CONTRACT = "/contract/service/contract"
+
     /**
      * 机会模块-机会服务
      */
     const val OPPORTUNITY_SERVICE_OPPORTUNITY = "/opportunity/service/opportunity"
+
+    const val ORDER_SERVICE_ORDER = "/order/service/order"
 
 
     /**

@@ -12,7 +12,7 @@ import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.ListData
 import com.baihe.lib_message.constant.UrlConstant
 
-class MessageRepository(lifecycleOwner: LifecycleOwner?) : BaseRepository(lifecycleOwner) {
+class MessageRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecycleOwner) {
 
     /**
      *

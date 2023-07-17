@@ -25,7 +25,7 @@ class CustomerDetailActivity:
     }
 
     private val reqAdapter by lazy {
-        ReqListAdapter()
+        ReqListAdapter(this)
     }
 
     private val followAdapter by lazy {

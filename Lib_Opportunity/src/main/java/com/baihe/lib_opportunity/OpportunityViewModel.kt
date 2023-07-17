@@ -1,6 +1,9 @@
 package com.baihe.lib_opportunity
 
 import androidx.lifecycle.MutableLiveData
+import com.baihe.lib_common.entity.CustomerDetailEntity
+import com.baihe.lib_common.entity.OpportunityListItemEntity
+import com.baihe.lib_common.provider.CustomerServiceProvider
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_common.viewmodel.BaseViewModel
 import com.baihe.lib_opportunity.api.OpportunityRepository
@@ -29,6 +32,22 @@ class OpportunityViewModel: BaseViewModel() {
     val oppoAddOrUpdateLiveData:MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
+
+    val customerLiveData:MutableLiveData<CustomerDetailEntity> by lazy {
+        MutableLiveData<CustomerDetailEntity>()
+    }
+
+    fun getCustomerInfo(customerId: String){
+        loadingDialogLiveData.value = true
+        launchUI({
+                _,_-> loadingDialogLiveData.value = false
+        }){
+            val data = CustomerServiceProvider.getCustomerInfo(customerId,this)
+            customerLiveData.value = data
+            loadingDialogLiveData.value = false
+        }
+    }
+
 
     fun getOppoList(page:Int,isHistorical:String="0",keywords:String?=null,filter:LinkedHashMap<String,Any?>?=null){
         loadingStateLiveData.value = ViewType.LOADING

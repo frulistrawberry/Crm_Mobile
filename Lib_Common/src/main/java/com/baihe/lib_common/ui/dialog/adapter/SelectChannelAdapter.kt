@@ -1,86 +1,67 @@
 package com.baihe.lib_common.ui.dialog.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.baihe.lib_common.databinding.DialogItemChannelSecondLevelBinding
-import com.baihe.lib_common.entity.ChannelEntity
+import com.baihe.lib_common.R
+import com.baihe.lib_common.databinding.DialogItemChannelFirstLevelBinding
+import com.baihe.lib_common.ui.widget.font.FontStyle
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
-import com.baihe.lib_framework.adapter.BaseViewHolder
-import com.baihe.lib_framework.ext.RecyclerViewExt.divider
-import com.baihe.lib_framework.ext.ViewExt.gone
-import com.baihe.lib_framework.ext.ViewExt.visible
+import com.baihe.lib_framework.utils.ResUtils
 
+@SuppressLint("NotifyDataSetChanged")
 class SelectChannelAdapter:
-    BaseRecyclerViewAdapter<ChannelEntity, DialogItemChannelSecondLevelBinding>() {
-    var selectPosition:Int = -1
-    var lastSelectPosition:Int = -1
-    var childSelectPosition:Int = -1
-    var keywords:String? = null
-    var onItemSelectListener:((view: View, position:Int,childPosition:Int)->Unit)? = null
-    var needAllExpand = false
+    BaseRecyclerViewAdapter<KeyValueEntity, DialogItemChannelFirstLevelBinding>() {
+    var selectPosition = 0
+    private var lastPosition = -1
+    private var nextPosition = 1
+    var onItemSelectListener:((position:Int)->Unit)? = null
 
     init {
-        onItemClickListener = {view, position ->
-            lastSelectPosition = selectPosition
+        lastPosition = selectPosition-1
+        nextPosition = selectPosition+1
+        onItemClickListener = { _, position ->
+            lastPosition = position-1
+            nextPosition = position+1
             selectPosition = position
-            notifyItemChanged(position)
-            if (lastSelectPosition!=-1)
-                notifyItemChanged(lastSelectPosition)
-            onItemSelectListener?.invoke(view,position,childSelectPosition)
-
+            notifyDataSetChanged()
+            onItemSelectListener?.invoke(position)
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onBindDefViewHolder(
-        holder: BaseBindViewHolder<DialogItemChannelSecondLevelBinding>,
-        item: ChannelEntity?,
+        holder: BaseBindViewHolder<DialogItemChannelFirstLevelBinding>,
+        item: KeyValueEntity?,
         position: Int
     ) {
-        holder.binding.bottomSelectItemNameTv.text = item?.label
-        holder.binding.bottomSelectItemCheckedCb.isChecked = selectPosition == position
-        if (position == selectPosition || (keywords?.isEmpty() == false) && selectPosition == -1){
-            val childChannelList = item?.children
-            if (childChannelList?.isEmpty() == true)
-                holder.binding.rvChild.gone()
-            else{
-                holder.binding.rvChild.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = SelectChannelChildAdapter(childSelectPosition).apply {
-                        keywords = this@SelectChannelAdapter.keywords?:""
-                        setData(childChannelList)
-                        onItemSelectListener = {_,childPosition ->
-                            needAllExpand = false
-                            this@SelectChannelAdapter.selectPosition = position
-                            childSelectPosition = childPosition
-                            this@SelectChannelAdapter.notifyDataSetChanged()
-
-                        }
-                    }
-                    divider(Color.parseColor("#FFE6E6EC"))
-
-                }
-                holder.binding.rvChild.visible()
-            }
+        holder.binding.tvLabel.text = item?.label
+        if (position == selectPosition){
+            holder.binding.llParent.background = ResUtils.getColorDrawable(R.color.white)
+            holder.binding.tvLabel.fontStyle = FontStyle.HALF_BOLD
         }else{
-            holder.binding.rvChild.gone()
+            holder.binding.tvLabel.fontStyle = FontStyle.LIGHT
+            when (position) {
+                lastPosition -> {
+                    holder.binding.llParent.background = ResUtils.getImageFromResource(R.drawable.common_bottom_right_round_f6f7fc)
+                }
+                nextPosition -> {
+                    holder.binding.llParent.background = ResUtils.getImageFromResource(R.drawable.common_top_right_round_f6f7fc)
+                }
+                else -> {
+                    holder.binding.llParent.background = ResUtils.getColorDrawable(R.color.COLOR_FFF6F7FC)
+                }
+            }
+
         }
     }
-
-
-
-
 
     override fun getViewBinding(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): DialogItemChannelSecondLevelBinding {
-        return DialogItemChannelSecondLevelBinding.inflate(layoutInflater,parent,false)
+    ): DialogItemChannelFirstLevelBinding {
+        return DialogItemChannelFirstLevelBinding.inflate(layoutInflater,parent,false)
     }
 }

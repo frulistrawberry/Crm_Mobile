@@ -22,18 +22,18 @@ ext {
             frameworkLibVersion    :'1.0.0.0-beta-9-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-4-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-3-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-beta-34-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-35-SNAPSHOT',
 
 
             //models
-            userLibVersion         :'1.0.0.0-beta-6-SNAPSHOT',
-            homeLibVersion         :'1.0.0.0-beta-10-SNAPSHOT',
-            loginLibVersion        :'1.0.0.0-beta-5-SNAPSHOT',
-            customerLibVersion     :'1.0.0.0-beta-10-SNAPSHOT',
+            userLibVersion         :'1.0.0.0-beta-8-SNAPSHOT',
+            homeLibVersion         :'1.0.0.0-beta-11-SNAPSHOT',
+            loginLibVersion        :'1.0.0.0-beta-6-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-beta-11-SNAPSHOT',
             messageLibVersion      :'1.0.0.0-beta-2-SNAPSHOT',
-            orderLibVersion        :'1.0.0.0-beta-2-SNAPSHOT',
-            opportunityLibVersion  :'1.0.0.0-beta-6-SNAPSHOT',
-            contractLibVersion     :'1.0.0.0-beta-2-SNAPSHOT',
+            orderLibVersion        :'1.0.0.0-beta-3-SNAPSHOT',
+            opportunityLibVersion  :'1.0.0.0-beta-7-SNAPSHOT',
+            contractLibVersion     :'1.0.0.0-beta-3-SNAPSHOT',
 
 
             //test
@@ -131,9 +131,7 @@ ext {
             aroutreApi        : "com.alibaba:arouter-api:${dependVersion["aroutreApiVersion"]}",
             arouterCompiler   : "com.alibaba:arouter-compiler:${dependVersion["arouterCompilerVersion"]}",
             //权限处理
-            rxPermission      : "com.github.tbruyelle:rxpermissions:${dependVersion["permissionsVersion"]}",
-            rxjava            : "io.reactivex.rxjava3:rxjava:${dependVersion["rxjavaVersion"]}",
-            rxandroid         : "io.reactivex.rxjava3:rxandroid:${dependVersion["rxandroidVersion"]}",
+            permission        : "com.yanzhenjie:permission:2.0.3",
             //推送
             tps               : "com.tencent.tpns:tpns:${dependVersion["tpsVersion"]}",
             //日志

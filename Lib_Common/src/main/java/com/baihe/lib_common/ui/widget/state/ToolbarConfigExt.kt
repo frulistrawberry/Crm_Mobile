@@ -7,6 +7,7 @@ object ToolbarConfigExt {
     var ToolbarConfig.showSearch:Boolean? by toolbarExtras()
     var ToolbarConfig.onSearchListener:((keywords:String)->Unit)? by toolbarExtras()
     var ToolbarConfig.showSearchBehind:Boolean? by toolbarExtras()
+    var ToolbarConfig.searchHint:String? by toolbarExtras()
 
     @JvmOverloads
     fun ToolbarConfig.showSearch(showSearchBehind:Boolean = true,onSearchListener:(keywords:String)->Unit){
@@ -14,4 +15,5 @@ object ToolbarConfigExt {
         this.showSearchBehind = showSearchBehind
         showSearch = true
     }
+
 }

@@ -3,17 +3,21 @@ package com.baihe.lib_common.ui.dialog.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.baihe.lib_common.R
 import com.baihe.lib_common.databinding.DialogItemSelectBinding
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
+
 @SuppressLint("NotifyDataSetChanged")
-class SingleSelectAdapter(val selectDataAdapter: SelectDataAdapter): BaseRecyclerViewAdapter<String, DialogItemSelectBinding>() {
-    var selectPosition = selectDataAdapter.initSelectDataPosition()
+class SingleSelectAdapter: BaseRecyclerViewAdapter<KeyValueEntity, DialogItemSelectBinding>() {
+    var selectPosition:Int = -1
     init {
-        setData(MutableList(selectDataAdapter.getCount()) { "" })
-        onItemClickListener = { _, position->
+        onItemClickListener = { _, position ->
+            val tempPosition = selectPosition
             selectPosition = position
-            notifyDataSetChanged()
+            notifyItemChanged(position)
+            notifyItemChanged(tempPosition)
         }
     }
 
@@ -27,10 +31,14 @@ class SingleSelectAdapter(val selectDataAdapter: SelectDataAdapter): BaseRecycle
 
     override fun onBindDefViewHolder(
         holder: BaseBindViewHolder<DialogItemSelectBinding>,
-        item: String?,
+        item: KeyValueEntity?,
         position: Int
     ) {
-        holder.binding.bottomSelectItemNameTv.text = selectDataAdapter.getText(position)
-        holder.binding.bottomSelectItemCheckedCb.isChecked = selectPosition == position
+        holder.binding.bottomSelectItemNameTv.text = item?.name
+        if (selectPosition == position){
+            holder.binding.bottomSelectItemCheckedCb.setImageResource(R.mipmap.ic_check)
+        }else{
+            holder.binding.bottomSelectItemCheckedCb.setImageResource(R.mipmap.ic_uncheck)
+        }
     }
 }

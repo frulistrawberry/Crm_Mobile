@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.baihe.lib_common.R
+import com.baihe.lib_common.entity.OpportunityListItemEntity
 import com.baihe.lib_common.utils.FormatUtils
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
@@ -13,7 +14,6 @@ import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.ext.ViewExt.gone
 import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.utils.ResUtils
-import com.baihe.lib_opportunity.OpportunityListItemEntity
 import com.baihe.lib_opportunity.databinding.OppoItemOpportunityListBinding
 
 class OpportunityListAdapter:
@@ -76,7 +76,7 @@ class OpportunityListAdapter:
         holder.binding.btnCall.text = buttons?.get(0)?.name
         holder.binding.btnRight.text = buttons?.get(1)?.name
         holder.binding.btnRight.click {
-            onButtonActionListener?.invoke(item?.id.toString(),item?.customerId?:"",item?.orderStatus,buttons?.get(1)?.type?:-1)
+            onButtonActionListener?.invoke(item?.id!!,item?.customerId?:"",item?.orderStatus,buttons?.get(1)?.type?:-1)
         }
         holder.binding.btnCall.click {
             onButtonActionListener?.invoke(item?.customerId.toString(),item?.customerId?:"",item?.orderStatus,buttons?.get(0)?.type?:-1)

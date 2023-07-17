@@ -7,8 +7,13 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.OpportunityDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.AddOrUpdateOpportunityActivity" />
-        <activity android:name=".ui.activity.ActionActivity" />
-        <activity android:name=".ui.activity.OppoSubDetailActivity" />
+        <activity android:name=".ui.activity.AddOrUpdateOpportunityActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.OppoSubDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.DispatchOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.OpportunityTransferActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

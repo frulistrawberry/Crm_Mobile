@@ -8,16 +8,13 @@ import com.baihe.lib_common.entity.*
 import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
-import com.baihe.lib_common.http.exception.ApiException
 import com.baihe.lib_common.http.exception.ExceptionHandler
 import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.Data
-import com.baihe.lib_common.http.response.ListData
 import com.baihe.lib_common.provider.UserServiceProvider
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.helper.AppHelper
-import com.baihe.lib_framework.log.LogUtil
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.nio.charset.Charset
 
@@ -43,11 +40,11 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
         }
     }
 
-    suspend fun getUserChannelList():List<ChannelEntity>?{
+    suspend fun getUserChannelList():List<KeyValueEntity>?{
         return requestResponse {
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.GET_USER_CHANNEL_LIST,null))
-                .execute(object : ResponseClass<BaseResponse<List<ChannelEntity>>>() {})
+                .execute(object : ResponseClass<BaseResponse<List<KeyValueEntity>>>() {})
         }
     }
 
@@ -58,6 +55,7 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
                 .putParamValue("companyId",UserServiceProvider.getCompanyId())
                 .putParamValue("type","customer")
                 .putParamValue("status","1")
+                .putParamValue("companyLineId","2")
                 .putParamValue("platform","Mobile")
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.ALL_DIA_OUT,params.getParamValue()))
@@ -73,6 +71,17 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
                 .api(CommonApi(UrlConstant.FOLLOW_DETAIL,params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<FollowEntity>>() {})
         }
+    }
+
+    suspend fun getPhotoList():List<LocalPhotoEntity>?{
+        return requestResponse {
+            val albumParser = AlbumParser(AppHelper.getApplication())
+            albumParser.parseAlbum()
+            val photoInfos = albumParser.photoInfos
+            val data  = Data(photoInfos,0,"3.5.0")
+            BaseResponse(200,"请求成功",data)
+        }
+
     }
 
     suspend fun addReqFollow(params:LinkedHashMap<String,Any?>):Any?{

@@ -21,7 +21,6 @@
             app:tabIndicatorColor="#FF6C8EFF"
             app:tabIndicatorFullWidth="false"
             app:tabMaxWidth="@dimen/dp_200"
-            app:tabMinWidth="@dimen/dp_100"
             app:tabMode="fixed"
             app:tabSelectedTextColor="#FF6C8EFF"
             app:tabTextColor="#FF4A4C5C"/>

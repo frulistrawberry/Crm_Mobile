@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.databinding.DialogBottomSelectBinding
-import com.baihe.lib_common.ui.dialog.adapter.SelectDataAdapter
-import com.baihe.lib_common.ui.dialog.adapter.SingleSelectAdapter
+import com.baihe.lib_common.ui.dialog.adapter.MultiSelectAdapter
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.ext.RecyclerViewExt.divider
 import com.baihe.lib_framework.ext.ViewExt.click
@@ -18,7 +18,10 @@ class BottomSelectMultiDialog {
         private val mBinding by lazy {
             DialogBottomSelectBinding.inflate(LayoutInflater.from(context))
         }
-        private lateinit var singleSelectAdapter: SingleSelectAdapter
+
+        private val adapter:MultiSelectAdapter by lazy {
+            MultiSelectAdapter(context)
+        }
 
         init {
             setContentView(mBinding.root)
@@ -27,26 +30,66 @@ class BottomSelectMultiDialog {
             setHeight(WindowManager.LayoutParams.WRAP_CONTENT)
             setGravity(Gravity.BOTTOM)
             mBinding.bottomSelectListRv.layoutManager = LinearLayoutManager(context)
+            mBinding.bottomSelectListRv.adapter = adapter
+            mBinding.bottomSelectListRv.divider(includeLast = false)
             mBinding.bottomSelectCancelIv.click {
                 dismiss()
             }
 
         }
 
-        fun setSelectDataAdapter(selectDataAdapter: SelectDataAdapter): Builder {
-            singleSelectAdapter = SingleSelectAdapter(selectDataAdapter)
-            mBinding.bottomSelectListRv.adapter = singleSelectAdapter
-            return this
-        }
 
         fun setTitle(title:String): Builder {
             mBinding.bottomSelectTitleTv.text = title
             return this
         }
 
-        fun setOnConfirmClickListener(onConfirm:(dialog: Dialog?, position:Int)->Unit): Builder {
+        fun setData(data:List<KeyValueEntity>?,defaultValue:String?):Builder{
+            var defParenPosition = -1
+            var defChildPosition = -1
+            data?.forEach{parent ->
+                if (parent.value == defaultValue){
+                    defParenPosition = data.indexOf(parent)
+                    return@forEach
+                }
+                if (!parent.children.isNullOrEmpty()){
+                    parent.children.forEach { child ->
+                        if (child.value == defaultValue){
+                            defParenPosition = data.indexOf(parent)
+                            defChildPosition = parent.children.indexOf(child)
+                            return@forEach
+                        }
+                    }
+                }
+            }
+            adapter.selectPosition = defParenPosition
+            adapter.childSelectPosition = defChildPosition
+            adapter.setData(data)
+            return this
+        }
+        fun setOnConfirmClickListener(onConfirm:(dialog: Dialog?, value:String,label:String)->Unit): Builder {
             mBinding.bottomSelectConfirmTv.click {
-                onConfirm.invoke(dialog, singleSelectAdapter.selectPosition)
+                dismiss()
+                if (adapter.selectPosition == -1)
+                    return@click
+                val data = adapter.getData()
+                var value:String
+                var label:String
+                data.let {
+                    value = data[adapter.selectPosition].value
+                    label = data[adapter.selectPosition].label
+                }
+                if (adapter.childSelectPosition!=-1){
+                    data.let {
+                        value = data[adapter.selectPosition]
+                            .children[adapter.childSelectPosition]
+                            .value
+                        label = data[adapter.selectPosition]
+                            .children[adapter.childSelectPosition]
+                            .label
+                    }
+                }
+                onConfirm.invoke(dialog, value,label)
             }
             return this
         }

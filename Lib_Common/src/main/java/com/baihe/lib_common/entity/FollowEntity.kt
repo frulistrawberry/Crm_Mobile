@@ -26,8 +26,12 @@ data class FollowEntity(
     val reserve_time:String,
     val comment:String,
     val attachment:String?,
+    val daodian_comment:String?,
+    val follow_create:String?,
+    val daodian_time:String?,
     @SerializedName("row")
-    val content:List<KeyValueEntity>?
+    val content:List<KeyValueEntity>?,
+    val follow:List<FollowEntity>?
 
 ){
     fun showArray():List<KeyValueEntity>{

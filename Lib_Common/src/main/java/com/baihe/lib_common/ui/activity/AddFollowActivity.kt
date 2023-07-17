@@ -20,18 +20,12 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
     val type by lazy{
         intent.getIntExtra("type",-1)
     }
-
     val reqId by lazy {
         intent.getStringExtra("reqId")
     }
     val customerId by lazy {
         intent.getStringExtra("customerId")
     }
-
-    val reqPhase by lazy {
-        intent.getStringExtra("reqPhase")
-    }
-
     val orderStatus by lazy {
         intent.getStringExtra("orderStatus")
     }
@@ -84,6 +78,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
             val kvList = mutableListOf<KeyValueEntity>()
             if (orderStatus == null || orderStatus == "0"||orderStatus == "3"||orderStatus == "4"){
                 kvList.apply {
+                    //跟进方式
                     add(KeyValueEntity().also {item->
                         item.name = "跟进方式"
                         item.is_channge = "2"
@@ -106,6 +101,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                             })
                         }
                     })
+                    //跟进结果
                     add(KeyValueEntity().also {item->
                         item.name = "跟进结果"
                         item.is_channge = "2"
@@ -128,6 +124,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                             })
                         }
                     })
+                    //无效原因
                     add(KeyValueEntity().also {item->
                         item.name = "无效原因"
                         item.is_channge = "2"
@@ -147,6 +144,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                             })
                         }
                     })
+                    //预约进店
                     add(KeyValueEntity().also {item->
                         item.name = "预约进店"
                         item.is_channge = "2"
@@ -165,6 +163,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                             })
                         }
                     })
+                    //进店时间
                     add(KeyValueEntity().also {item->
                         item.name = "进店时间"
                         item.is_channge = "2"
@@ -173,6 +172,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                         item.type = "datetime"
                         item.paramKey = "arrival_time"
                     })
+                    //下次回访时间
                     add(KeyValueEntity().also {item->
                         item.name = "下次回访时间"
                         item.is_channge = "2"
@@ -181,6 +181,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                         item.type = "datetime"
                         item.paramKey = "next_contact_time"
                     })
+                    //沟通内容
                     add(KeyValueEntity().also {item->
                         item.name = "沟通内容"
                         item.is_channge = "2"
@@ -189,12 +190,13 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                         item.type = "input"
                         item.paramKey = "comment"
                     })
+                    //下发订单
                     add(KeyValueEntity().also {item->
                         item.name = "下发订单"
                         item.is_channge = "2"
                         item.is_true = "2"
                         item.is_open = "1"
-                        item.type = "companyUser"
+                        item.type = "userlist"
                         item.paramKey = "ownerId"
                     })
                 }
@@ -251,60 +253,62 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
         }
         mBinding.kvlOpportunity.setOnItemActionListener(object :OnItemActionListener(){
             override fun onEvent(
-                keyValueEntity: KeyValueEntity?,
-                itemAction: KeyValueEditLayout.ItemAction?
+                keyValueEntity: KeyValueEntity,
+                itemType: KeyValueEditLayout.ItemType?
             ) {
-                if (keyValueEntity?.paramKey == "status"){
-                    if (keyValueEntity.value=="210"){
+                keyValueEntity.paramKey?.let {
+                    if (keyValueEntity.paramKey == "status"){
                         val kvEntity = mBinding.kvlOpportunity.findEntityByParamKey("uncomment")
-                        kvEntity.is_open = "1"
                         val kvEntity1 = mBinding.kvlOpportunity.findEntityByParamKey("next_contact_time")
-                        kvEntity1.is_true = "2"
-                        kvEntity1.is_open = "1"
                         val kvEntity2 = mBinding.kvlOpportunity.findEntityByParamKey("arrival_tyep")
-                        kvEntity2.is_true = "2"
-                        kvEntity2.is_open = "2"
                         val kvEntity3 = mBinding.kvlOpportunity.findEntityByParamKey("arrival_time")
-                        kvEntity3.is_true = "2"
-                        kvEntity3.is_open = "2"
                         val kvEntity4 = mBinding.kvlOpportunity.findEntityByParamKey("ownerId")
-                        kvEntity4.is_true = "2"
-                        kvEntity4.is_open = "2"
-                    }else if (keyValueEntity.value == "220"){
-                        val kvEntity = mBinding.kvlOpportunity.findEntityByParamKey("uncomment")
-                        kvEntity.is_open = "2"
-                        val kvEntity1 = mBinding.kvlOpportunity.findEntityByParamKey("next_contact_time")
-                        kvEntity1.is_true = "1"
-                        kvEntity1.is_open = "1"
-                        val kvEntity2 = mBinding.kvlOpportunity.findEntityByParamKey("arrival_tyep")
-                        kvEntity2.is_true = "2"
-                        kvEntity2.is_open = "2"
-                        val kvEntity3 = mBinding.kvlOpportunity.findEntityByParamKey("arrival_time")
-                        kvEntity3.is_true = "2"
-                        kvEntity3.is_open = "2"
-                        val kvEntity4 = mBinding.kvlOpportunity.findEntityByParamKey("ownerId")
-                        kvEntity4.is_true = "2"
-                        kvEntity4.is_open = "2"
-                    }
-                    if(keyValueEntity.value == "230"){
-                        val kvEntity = mBinding.kvlOpportunity.findEntityByParamKey("uncomment")
-                        kvEntity.is_open = "2"
-                        val kvEntity1 = mBinding.kvlOpportunity.findEntityByParamKey("next_contact_time")
-                        kvEntity1.is_true = "2"
-                        kvEntity1.is_open = "1"
-                        val kvEntity2 = mBinding.kvlOpportunity.findEntityByParamKey("arrival_tyep")
-                        kvEntity2.is_true = "1"
-                        kvEntity2.is_open = "1"
-                        val kvEntity3 = mBinding.kvlOpportunity.findEntityByParamKey("arrival_time")
-                        kvEntity3.is_true = "2"
-                        kvEntity3.is_open = "2"
-                        val kvEntity4 = mBinding.kvlOpportunity.findEntityByParamKey("ownerId")
-                        kvEntity4.is_true = "2"
-                        kvEntity4.is_open = "1"
-                    }
-                    mBinding.kvlOpportunity.refresh()
+                        when(keyValueEntity.value){
+                            "210"->{
+                                kvEntity.is_open = "1"
+                                kvEntity1.is_true = "2"
 
+                                kvEntity1.is_open = "1"
+                                kvEntity2.is_true = "2"
 
+                                kvEntity2.is_open = "2"
+
+                                kvEntity3.is_open = "2"
+
+                                kvEntity4.is_open = "2"
+                            }
+                            "220" ->{
+                                kvEntity.is_open = "2"
+
+                                kvEntity1.is_true = "1"
+                                kvEntity1.is_open = "1"
+
+                                kvEntity2.is_true = "2"
+                                kvEntity2.is_open = "2"
+
+                                kvEntity3.is_true = "2"
+                                kvEntity3.is_open = "2"
+
+                                kvEntity4.is_true = "2"
+                                kvEntity4.is_open = "2"
+                            }
+                            "230" ->{
+                                kvEntity.is_open = "2"
+
+                                kvEntity1.is_true = "2"
+                                kvEntity1.is_open = "1"
+
+                                kvEntity2.is_true = "1"
+                                kvEntity2.is_open = "1"
+
+                                kvEntity3.is_open = "2"
+
+                                kvEntity4.is_true = "2"
+                                kvEntity4.is_open = "1"
+                            }
+                        }
+                        mBinding.kvlOpportunity.refresh()
+                    }
                 }
 
                 if (keyValueEntity?.paramKey == "arrival_tyep"){
@@ -314,7 +318,6 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
                         kvEntity.is_true = "1"
                     }else{
                         kvEntity.is_open = "2"
-                        kvEntity.is_true = "2"
                     }
                     mBinding.kvlOpportunity.refreshItem(kvEntity)
                 }

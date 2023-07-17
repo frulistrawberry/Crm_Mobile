@@ -1,6 +1,7 @@
 package com.baihe.lib_common.provider
 
 import android.content.Context
+import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath.CUSTOMER_SERVICE_CUSTOMER
@@ -23,6 +24,7 @@ object CustomerServiceProvider {
 
     /**
      * 客户详情
+     * @param id 客户Id
      */
     @JvmStatic
     fun toCustomerDetail(context: Context,id:String) = customerService.toCustomerDetail(context,id)
@@ -35,4 +37,7 @@ object CustomerServiceProvider {
 
     @JvmStatic
     fun chooseCustomer(context: Context) = customerService.chooseCustomer(context)
+
+    @JvmStatic
+    suspend fun getCustomerInfo(customerId: String,lifecycleOwner: LifecycleOwner) = customerService.getCustomerInfo(customerId,lifecycleOwner)
 }

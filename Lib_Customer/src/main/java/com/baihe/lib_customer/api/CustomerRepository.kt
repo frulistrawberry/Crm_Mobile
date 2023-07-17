@@ -3,6 +3,7 @@ package com.baihe.lib_customer.api
 import androidx.lifecycle.LifecycleOwner
 import com.baihe.http.EasyHttp
 import com.baihe.http.model.ResponseClass
+import com.baihe.lib_common.entity.CustomerDetailEntity
 import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
@@ -10,7 +11,6 @@ import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.Data
 import com.baihe.lib_common.http.response.ListData
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
-import com.baihe.lib_customer.CustomerDetailEntity
 import com.baihe.lib_customer.CustomerListItemEntity
 import com.baihe.lib_customer.constant.UrlConstant
 
@@ -27,7 +27,7 @@ class CustomerRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
         }
     }
 
-    suspend fun customerDetail(customerId:String):CustomerDetailEntity? {
+    suspend fun customerDetail(customerId:String): CustomerDetailEntity? {
         return requestResponse {
             val params = JsonParam.newInstance()
                 .putParamValue("customerId",customerId)

@@ -11,7 +11,7 @@ import kotlinx.coroutines.withTimeout
  * @date   2023/2/23 23:31
  * @desc   基础仓库
  */
-open class BaseRepository(val lifecycleOwner: LifecycleOwner?) {
+open class BaseRepository(val lifecycleOwner: LifecycleOwner) {
 
     /**
      * IO中处理请求

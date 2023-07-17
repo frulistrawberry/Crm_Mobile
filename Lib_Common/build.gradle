@@ -61,6 +61,7 @@ dependencies {
     api rootProject.depsLibs.PickerView
     api rootProject.depsLibs.navigationUI
     api rootProject.depsLibs.frameworkLib
+    api rootProject.depsLibs.permission
     api "com.belerweb:pinyin4j:2.5.0"
 }
 
@@ -74,7 +75,7 @@ afterEvaluate{
             Arr(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'common'
-                version '1.0.0.0-beta-34-SNAPSHOT'
+                version '1.0.0.0-beta-35-SNAPSHOT'
                 afterEvaluate { artifact(tasks.getByName("bundleDebugAar")) }
                 artifact generateSourcesJar
                 pom.withXml {
