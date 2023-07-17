@@ -80,7 +80,7 @@ class MessageFragmentViewModel : BaseViewModel() {
 
     /**
      * 设置已读
-     * @param type 0 全部 / 1 特定消息
+     * @param type 1 全部 / 0 特定消息
      * @param noticeId 消息Id
      */
     fun setMessageRead(type: Int, noticeId: String?) {

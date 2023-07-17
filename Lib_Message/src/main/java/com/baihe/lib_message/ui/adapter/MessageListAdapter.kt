@@ -1,6 +1,7 @@
 package com.baihe.lib_message.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.baihe.lib_common.entity.MessageEntity
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
@@ -31,8 +32,12 @@ class MessageListAdapter : BaseRecyclerViewAdapter<MessageEntity, MessageItemLay
         holder.binding.tvContent.text = item?.text
         holder.binding.tvCheck.text = item?.btn
         holder.binding.tvTime.text = item?.createTime
-        holder.itemView.setOnClickListener {
-
+        item?.let {
+            if (it.unRead) {
+                holder.binding.viewReadStatus.visibility = View.VISIBLE
+            } else {
+                holder.binding.viewReadStatus.visibility = View.GONE
+            }
         }
     }
 
