@@ -22,59 +22,70 @@ import com.baihe.lib_framework.utils.ResUtils
 
 class ReqListAdapter(val context: Context):
     BaseRecyclerViewAdapter<ReqInfoEntity, CommonItemCustomerListReqBinding>() {
+
+
+    init {
+        onItemClickListener = {_,position ->
+            val item = getItem(position)
+            item?.let {
+                OpportunityServiceProvider.toOpportunityDetail(context,item.id)
+            }
+
+        }
+    }
     @SuppressLint("SetTextI18n")
     override fun onBindDefViewHolder(
         holder: BaseBindViewHolder<CommonItemCustomerListReqBinding>,
         item: ReqInfoEntity?,
         position: Int
     ) {
-        holder.binding.tvTitle.text = item?.title?:""
-
-        if (item?.reqOwner.isNullOrEmpty()){
-            holder.binding.tvReq.gone()
-        }else{
-            holder.binding.tvReq.text = "邀约-${item?.reqOwner}"
-            holder.binding.tvReq.visible()
-        }
-        if (item?.orderOwner.isNullOrEmpty()){
-            holder.binding.tvOrder.gone()
-        }else{
-            holder.binding.tvOrder.text = "销售-${item?.orderOwner}"
-            holder.binding.tvOrder.visible()
-        }
-        val statusText = FormatUtils.formatOppoLabel(item?.phase)
-        if (statusText!=null){
-            val labelBg = statusText.bgColor
-            if (!labelBg.isNullOrEmpty() && labelBg.startsWith("#")){
-
-                if (statusText.mode == Mode.FILL){
-                    val labelDrawable = ResUtils.getImageFromResource(R.drawable.bg_round_label_solid) as GradientDrawable
-                    labelDrawable.setColor(Color.parseColor(labelBg))
-                    holder.binding.tvPhase.background = labelDrawable
-                }
-
-                else{
-                    val labelDrawable = ResUtils.getImageFromResource(R.drawable.bg_round_label_stroke) as GradientDrawable
-                    labelDrawable.setStroke(DpToPx.dpToPx(0.5f).toInt(),Color.parseColor(labelBg))
-                    holder.binding.tvPhase.background = labelDrawable
-                }
-
-
+        item?.let {
+            holder.binding.tvTitle.text = item.title?:""
+            if (item.reqOwner.isNullOrEmpty()){
+                holder.binding.tvReq.gone()
             }else{
-                holder.binding.tvPhase.background = null
+                holder.binding.tvReq.text = "邀约-${item?.reqOwner}"
+                holder.binding.tvReq.visible()
             }
-            holder.binding.tvPhase.text = statusText.text
-            holder.binding.tvPhase.setTextColor(Color.parseColor(statusText.textColor))
-            holder.binding.tvPhase.visible()
-        }else{
-            holder.binding.tvPhase.invisible()
-        }
-        onItemClickListener = {_,_ ->
-            item?.let {
-                OpportunityServiceProvider.toOpportunityDetail(context,item.id)
+            if (item.orderOwner.isNullOrEmpty()){
+                holder.binding.tvOrder.gone()
+            }else{
+                holder.binding.tvOrder.text = "销售-${item.orderOwner}"
+                holder.binding.tvOrder.visible()
             }
+            var statusText = FormatUtils.formatOppoLabel(item.phase)
+            if (!item.order_phase.isNullOrEmpty())
+                statusText = FormatUtils.formatOrderLabel(item.order_phase)
+            if (statusText!=null){
+                val labelBg = statusText.bgColor
+                if (!labelBg.isNullOrEmpty() && labelBg.startsWith("#")){
 
+                    if (statusText.mode == Mode.FILL){
+                        val labelDrawable = ResUtils.getImageFromResource(R.drawable.bg_round_label_solid) as GradientDrawable
+                        labelDrawable.setColor(Color.parseColor(labelBg))
+                        holder.binding.tvPhase.background = labelDrawable
+                    }
+
+                    else{
+                        val labelDrawable = ResUtils.getImageFromResource(R.drawable.bg_round_label_stroke) as GradientDrawable
+                        labelDrawable.setStroke(DpToPx.dpToPx(0.5f).toInt(),Color.parseColor(labelBg))
+                        holder.binding.tvPhase.background = labelDrawable
+                    }
+                }else{
+                    holder.binding.tvPhase.background = null
+                }
+                holder.binding.tvPhase.text = statusText.text
+                holder.binding.tvPhase.setTextColor(Color.parseColor(statusText.textColor))
+                holder.binding.tvPhase.visible()
+            }else{
+                holder.binding.tvPhase.invisible()
+            }
         }
+
+
+
+
+
     }
 
     override fun getViewBinding(

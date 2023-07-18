@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_common.provider.LoginServiceProvider
+import com.baihe.lib_common.provider.MainServiceProvider
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseActivity
 import com.baihe.lib_framework.base.BaseViewBindActivity
@@ -18,25 +19,18 @@ class SplashActivity:BaseViewBindActivity<ActivitySplashBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
 
-        countDownCoroutines(3, lifecycleScope, onTick = {
+        countDownCoroutines(2, lifecycleScope, onTick = {
 
         }) {
             if (!UserServiceProvider.getUserId().isNullOrEmpty()){
-                startActivity(Intent(this,MainActivity::class.java))
-                finish()
+                MainServiceProvider.toMain(this)
             }else{
                 LoginServiceProvider.login(this)
             }
-        }
-
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RequestCode.REQUEST_LOGIN && resultCode == RESULT_OK){
-            startActivity(Intent(this,MainActivity::class.java))
             finish()
         }
+
+
     }
+
 }

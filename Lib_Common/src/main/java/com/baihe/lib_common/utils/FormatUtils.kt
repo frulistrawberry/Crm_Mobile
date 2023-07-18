@@ -139,5 +139,52 @@ object FormatUtils {
         return statusText
     }
 
+    fun formatOrderLabel(orderStatus: String):StatusText{
+        val statusText = StatusText()
+        when(orderStatus){
+            ORDER_TO_BE_SIGNED->{
+                statusText.apply {
+                    text = "待签约"
+                    textColor = "#FFE08B01"
+                    bgColor = "#FFE08B01"
+                    mode = StatusText.Mode.STROKE
+                }
+            }
+            ORDER_SIGNED->{
+                statusText.apply {
+                    text = "已签约"
+                    textColor = "#FF5BA433"
+                    bgColor = "#FF5BA433"
+                    mode = StatusText.Mode.STROKE
+                }
+            }
+            ORDER_CHARGED->{
+                statusText.apply {
+                    text = "已退单"
+                    textColor = "#FF898A8D"
+                    bgColor = "#FF898A8D"
+                    mode = StatusText.Mode.STROKE
+                }
+            }
+            ORDER_CANCELED->{
+                statusText.apply {
+                    text = "已取消"
+                    textColor = "#FF898A8D"
+                    bgColor = "#FF898A8D"
+                    mode = StatusText.Mode.STROKE
+                }
+            }
+            ORDER_COMPLETED->{
+                statusText.apply {
+                    text = "已完成"
+                    textColor = "#FF5BA433"
+                    bgColor = "#FF5BA433"
+                    mode = StatusText.Mode.STROKE
+                }
+            }
+        }
+        return statusText
+    }
+
 
 }

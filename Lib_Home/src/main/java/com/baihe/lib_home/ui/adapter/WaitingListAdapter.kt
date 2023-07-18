@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.baihe.lib_common.provider.OpportunityServiceProvider
+import com.baihe.lib_common.provider.OrderServiceProvider
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
 import com.baihe.lib_framework.ext.ViewExt.gone
@@ -16,13 +18,28 @@ import com.baihe.lib_home.WaitingEntity
 import com.baihe.lib_home.databinding.HomeItemWaitingListBinding
 
 class WaitingListAdapter(private val context:Context): BaseRecyclerViewAdapter<WaitingEntity, HomeItemWaitingListBinding>() {
+
+    init {
+        onItemClickListener = {_,position->
+            val item = getItem(position)
+            item?.let {
+                if (item.tag == "3" || item.tag == "4"){
+                    OrderServiceProvider.toOrderDetail(context,item.data_id)
+                }else{
+                    OpportunityServiceProvider.toOpportunityDetail(context,item.data_id)
+                }
+            }
+
+        }
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindDefViewHolder(
         holder: BaseBindViewHolder<HomeItemWaitingListBinding>,
         item: WaitingEntity?,
         position: Int) {
         holder.binding.tvTitle.text = item?.name
-        if (item?.type == 4)
+        if (item?.type == "4")
             holder.binding.tvOverdue.visible()
         else
             holder.binding.tvOverdue.gone()
@@ -42,10 +59,12 @@ class WaitingListAdapter(private val context:Context): BaseRecyclerViewAdapter<W
         }else{
             holder.binding.tvTag.gone()
         }
-        if (item?.tag == "1")
+        if (item?.tag == "1"){
             holder.binding.tvTip.visible()
-        else
+        }
+        else{
             holder.binding.tvTip.gone()
+        }
         holder.binding.kvlWaiting.setData(item?.showArray())
 
 

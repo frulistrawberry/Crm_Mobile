@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.baihe.lib_common.R;
+import com.baihe.lib_common.ext.StringExt;
 import com.baihe.lib_common.provider.CustomerServiceProvider;
 import com.baihe.lib_common.ui.dialog.SelectChannelDialog;
 import com.baihe.lib_common.ui.dialog.SelectCompanyUserDialog;
@@ -304,7 +305,12 @@ public class KeyValueEditLayout extends LinearLayout {
                             return null;
                         }
                         if (!TextUtils.isEmpty(keyValueEntity.getPhone())) {
-                            data.put("phone", keyValueEntity.getPhone());
+                            if (StringExt.INSTANCE.isPhone(keyValueEntity.getPhone())){
+                                data.put("phone", keyValueEntity.getPhone());
+                            }
+                            else {
+                                TipsToast.INSTANCE.showTips("手机号格式不正确");
+                            }
                         }
                         if (!TextUtils.isEmpty(keyValueEntity.getWechat())) {
                             data.put("wechat", keyValueEntity.getWechat());

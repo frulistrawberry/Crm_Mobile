@@ -1,4 +1,4 @@
-package com.baihe.lihepro
+package com.baihe.lib_main
 
 import android.os.Bundle
 import android.widget.RadioGroup
@@ -8,12 +8,9 @@ import com.baihe.lib_common.provider.HomeServiceProvider
 import com.baihe.lib_common.provider.MessageServiceProvider
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseViewBindActivity
-import com.baihe.lib_home.ui.fragment.HomeFragment
-import com.baihe.lib_message.ui.fragment.MessageFragment
-import com.baihe.lib_user.ui.MineFragment
-import com.baihe.lihepro.databinding.ActivityMainBinding
+import com.baihe.lib_main.databinding.MainActivityBinding
 
-class MainActivity : BaseViewBindActivity<ActivityMainBinding>() {
+class MainActivity : BaseViewBindActivity<MainActivityBinding>() {
     companion object{
         const val TAG_HOME = "TAG_HOME"
         const val TAG_MESSAGE = "TAG_MESSAGE"

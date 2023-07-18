@@ -169,6 +169,7 @@ data class WaitingEntity(
     @SerializedName("arrival_time")
     val arrivalTime: String,
     val category: String,
+    val data_id: String,
     @SerializedName("category_txt")
     val categoryTxt: String,
     @SerializedName("customer_id")
@@ -180,7 +181,7 @@ data class WaitingEntity(
     @SerializedName("next_contact_time")
     val nextContactTime: String,
     val phone: String,
-    val type: Int,
+    val type: String,
     val tag:String
 
 ){
@@ -188,25 +189,25 @@ data class WaitingEntity(
         val statusText = StatusText()
         when(type){
             //新机会
-            1 ->{
+             "1"->{
                 statusText.text = "新机会"
                 statusText.textColor = "#6CB643"
                 statusText.bgColor = "#298AFF00"
             }
             //待跟进
-            2->{
+            "2"->{
                 statusText.text = "待跟进"
                 statusText.textColor = "#E08B01"
                 statusText.bgColor = "#1FFFB600"
             }
             //新订单
-            3->{
+            "3"->{
                 statusText.text = "新订单"
                 statusText.textColor = "#677EFF"
                 statusText.bgColor = "#1A6984FF"
             }
             //已逾期
-            4->{
+            "4"->{
                 statusText.text = "已逾期"
                 statusText.textColor = "#F11E1E"
                 statusText.bgColor = "#14FF2C2C"

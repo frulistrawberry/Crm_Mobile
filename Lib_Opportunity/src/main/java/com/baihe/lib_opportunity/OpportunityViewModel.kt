@@ -99,11 +99,14 @@ class OpportunityViewModel: BaseViewModel() {
         launchUI({
                 _,_-> loadingDialogLiveData.value = false
         }) {
+
+            if (!customerId.isNullOrEmpty()){
+                params["customerId"] = customerId
+            }
             if (oppoId.isNullOrEmpty())
                 opportunityRepository.addOpportunity(params)
             else{
                 params["reqId"] = oppoId
-                params["customerId"] = customerId
                 opportunityRepository.updateOpportunity(params)
             }
             oppoAddOrUpdateLiveData.value = true

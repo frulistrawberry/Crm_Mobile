@@ -35,7 +35,6 @@ class LoginServiceImp:ILoginService {
                 loginRepository.logout()
                 PushHelper.logoutAccount()
                 UserServiceProvider.clearUserInfo()
-
                 CookieJarImpl.getInstance().cookieStore.removeAll()
                 login(AppHelper.getApplication())
 

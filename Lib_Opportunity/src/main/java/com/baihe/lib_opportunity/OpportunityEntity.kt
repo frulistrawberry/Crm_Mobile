@@ -53,6 +53,7 @@ data class OpportunityDetailEntity(
     val wedding_date_from:String?,
     val wedding_date_end:String?,
     val create_time:String?,
+    val update_time:String?,
     val follow_create:String?,
     val follow:List<FollowEntity>?
 ){
@@ -89,6 +90,10 @@ data class OpportunityDetailEntity(
                 `val` = identity
             })
             add(KeyValueEntity().apply {
+                key = "提供人"
+                `val` = owner
+            })
+            add(KeyValueEntity().apply {
                 key = "备注"
                 `val` = remark
             })
@@ -115,6 +120,8 @@ data class OpportunityDetailEntity(
             add(KeyValueEntity().apply {
                 key = "联系方式"
                 `val` = this@OpportunityDetailEntity.phone
+                action = "call"
+                icon = "ic_call"
             })
             add(KeyValueEntity().apply {
                 key = "业务品类"
@@ -154,7 +161,7 @@ data class OpportunityDetailEntity(
             })
             add(KeyValueEntity().apply {
                 key = "最新编辑时间"
-                `val` = follow_create
+                `val` = update_time
             })
             add(KeyValueEntity().apply {
                 key = "备注"

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_75"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_main_tab"
+        android:background="@drawable/main_tab"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

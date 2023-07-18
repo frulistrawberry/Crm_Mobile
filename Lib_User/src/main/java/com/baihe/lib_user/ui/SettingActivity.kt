@@ -81,10 +81,7 @@ class SettingActivity : BaseMvvmActivity<UserActivitySettingBinding, UserViewMod
 
     /**注销账号之后释放资源*/
     private fun releaseRes() {
-        val loginService: ILoginService =
-            ARouter.getInstance().build(RoutePath.LOGIN_SERVICE_LOGIN)
-                .navigation() as ILoginService
-        loginService.logout(this, this)
+        LoginServiceProvider.logout(this,this)
     }
 
     override fun initListener() {

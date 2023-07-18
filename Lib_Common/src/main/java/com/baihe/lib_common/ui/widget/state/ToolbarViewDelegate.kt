@@ -84,9 +84,7 @@ class ToolbarViewDelegate: BaseToolbarViewDelegate() {
                     etSearch.setOnEditorActionListener { textView, actionId, _ ->
                         if (actionId == EditorInfo.IME_ACTION_SEARCH){
                             val keywords = textView.text.toString().trim()
-                            if (keywords.isNotEmpty()){
-                                config.onSearchListener?.invoke(keywords)
-                            }
+                            config.onSearchListener?.invoke(keywords)
                             etSearch.clearFocus()
                             KeyboardUtils.hideInputMethod(etSearch)
 
@@ -116,9 +114,8 @@ class ToolbarViewDelegate: BaseToolbarViewDelegate() {
                     etSearch2.setOnEditorActionListener { textView, actionId, _ ->
                         if (actionId == EditorInfo.IME_ACTION_SEARCH){
                             val keywords = textView.text.toString().trim()
-                            if (keywords.isNotEmpty()){
-                                config.onSearchListener?.invoke(keywords)
-                            }
+                            config.onSearchListener?.invoke(keywords)
+
                             etSearch.clearFocus()
                             KeyboardUtils.hideInputMethod(etSearch)
 

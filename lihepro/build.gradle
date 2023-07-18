@@ -119,6 +119,7 @@ dependencies{
     implementation project(path:':Lib_Message')
     implementation project(path:':Lib_Order')
     implementation project(path:':Lib_Contract')
+    implementation project(path:':Lib_Main')
 //    implementation rootProject.depsLibs.loginLib
 //    implementation rootProject.depsLibs.userLib
 //    implementation rootProject.depsLibs.homeLib
@@ -126,6 +127,8 @@ dependencies{
 //    implementation rootProject.depsLibs.opportunityLib
 //    implementation rootProject.depsLibs.orderLib
 //    implementation rootProject.depsLibs.contractLib
+//    implementation rootProject.depsLibs.messageLib
+//    implementation rootProject.depsLibs.mainLib
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 }

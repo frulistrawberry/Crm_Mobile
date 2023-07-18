@@ -24,6 +24,10 @@ dependencies {
     if (isBuildModule.toBoolean()){
         implementation rootProject.depsLibs.loginLib
         implementation rootProject.depsLibs.userLib
+        implementation rootProject.depsLibs.customerLib
+        implementation rootProject.depsLibs.opportunityLib
+        implementation rootProject.depsLibs.orderLib
+        implementation rootProject.depsLibs.contractLib
     }
     api rootProject.depsLibs.MPChartAndroid
 }
@@ -35,7 +39,7 @@ afterEvaluate{
                 Arr(MavenPublication) {
                     groupId 'com.wedding.crm.lib'
                     artifactId 'home'
-                    version '1.0.0.0-beta-13-SNAPSHOT'
+                    version '1.0.0.0-beta-15-SNAPSHOT'
                     afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                     artifact generateSourcesJar
                     pom.withXml {

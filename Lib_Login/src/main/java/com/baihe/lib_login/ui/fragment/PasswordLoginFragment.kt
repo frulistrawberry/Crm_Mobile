@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
 import com.baihe.lib_common.ext.StringExt.isPhone
+import com.baihe.lib_common.provider.MainServiceProvider
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_framework.base.BaseMvvmFragment
 import com.baihe.lib_framework.ext.*
@@ -51,9 +52,11 @@ class PasswordLoginFragment: BaseMvvmFragment<LoginFragmentPasswordLoginBinding,
             dismissLoadingDialog()
             if (success){
                 showToast("登录成功")
+                MainServiceProvider.toMain(requireContext())
+                activity?.setResult(RESULT_OK)
+                activity?.finish()
             }
-            activity?.setResult(RESULT_OK)
-            activity?.finish()
+
         }
     }
 

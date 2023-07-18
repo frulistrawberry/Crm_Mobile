@@ -33,7 +33,7 @@ object RoutePath {
 
 
     /**
-     * 主页模块-消息服务
+     * 模块-消息服务
      */
     const val HOME_SERVICE_MESSAGE = "/message/service/message"
 
@@ -52,5 +52,10 @@ object RoutePath {
      * 用户模块-个人资料
      */
     const val USER_SERVICE_INFO = "/user/service/info"
+
+    /**
+     * 主页服务
+     */
+    const val MAIN_SERVICE_MAIN = "/main/service/main"
 
 }

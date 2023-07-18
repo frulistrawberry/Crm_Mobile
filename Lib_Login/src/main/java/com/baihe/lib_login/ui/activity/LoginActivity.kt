@@ -15,9 +15,9 @@ class LoginActivity: BaseActivity() {
         fun start(context: Context){
             val starter = Intent(context, LoginActivity::class.java)
             if (context is Application) {
-                starter.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                starter.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                context.startActivity(starter)
+                val intent = Intent(context, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
                 return
             }
             if (context is Activity){

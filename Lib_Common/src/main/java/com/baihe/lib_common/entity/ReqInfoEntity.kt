@@ -10,5 +10,6 @@ data class ReqInfoEntity(
     @SerializedName("order_owner")
     val orderOwner:String?,
     val id:String,
+    val order_phase:String?,
     val phase:String?
 )
