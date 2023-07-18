@@ -8,6 +8,7 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://repo1.maven.org/maven2/'}
+        maven {url 'https://developer.huawei.com/repo/'}
         maven {
             allowInsecureProtocol = true
             url "http://10.240.210.158:8081/repository/maven-public/"
@@ -21,6 +22,7 @@ buildscript {
 
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0'
         classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.huawei.agconnect:agcp:1.6.0.300'
     }
 }
 
@@ -30,6 +32,7 @@ allprojects{
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://repo1.maven.org/maven2/'}
+        maven {url 'https://developer.huawei.com/repo/'}
 
         maven {
             allowInsecureProtocol = true

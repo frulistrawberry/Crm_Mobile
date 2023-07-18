@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
+apply plugin: 'com.huawei.agconnect'
 android {
     compileSdk rootProject.android.compileSdk
     buildToolsVersion rootProject.android.buildToolsVersion
@@ -62,6 +63,11 @@ dependencies {
     api rootProject.depsLibs.navigationUI
     api rootProject.depsLibs.frameworkLib
     api rootProject.depsLibs.permission
+    implementation 'com.tencent.tpns:vivo:1.3.5.0-release'
+    implementation 'com.tencent.tpns:xiaomi:1.3.5.0-release'
+    implementation 'com.tencent.tpns:huawei:1.3.5.0-release'
+    implementation 'com.huawei.hms:push:6.5.0.300'
+    implementation 'com.tencent.tpns:oppo:1.3.5.0-release'
     api "com.belerweb:pinyin4j:2.5.0"
 }
 
@@ -75,7 +81,7 @@ afterEvaluate{
             Arr(MavenPublication) {
                 groupId 'com.wedding.crm.lib'
                 artifactId 'common'
-                version '1.0.0.0-beta-36-SNAPSHOT'
+                version '1.0.0.0-beta-38-SNAPSHOT'
                 afterEvaluate { artifact(tasks.getByName("bundleDebugAar")) }
                 artifact generateSourcesJar
                 pom.withXml {

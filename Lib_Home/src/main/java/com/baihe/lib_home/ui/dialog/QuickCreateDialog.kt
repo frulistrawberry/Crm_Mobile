@@ -1,5 +1,6 @@
 package com.baihe.lib_home.ui.dialog
 
+import android.app.Activity
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.manager.AppManager
 import com.baihe.lib_common.R
+import com.baihe.lib_common.provider.OrderServiceProvider
 import com.baihe.lib_home.databinding.HomeDialogQuickCreateBinding
 
 class QuickCreateDialog {
@@ -35,10 +37,11 @@ class QuickCreateDialog {
                 AlertDialog.Builder(context)
                     .setText(R.id.button1,"已有，去选择")
                     .setText(R.id.button2,"暂无，去新增")
+                    .setContent("是否已有销售机会")
                     .setOnClickListener(R.id.button1,object :BaseDialog.OnClickListener{
                         override fun onClick(dialog: BaseDialog?, view: View) {
                             dialog?.dismiss()
-                            // TODO: 选择机会
+                            OrderServiceProvider.toAddOrder(context as Activity,1)
                         }
 
                     })
@@ -46,9 +49,10 @@ class QuickCreateDialog {
                         override fun onClick(dialog: BaseDialog?, view: View) {
                             dialog?.dismiss()
                             // TODO: 新增机会
+                            OrderServiceProvider.toAddOrder(context as Activity,2)
                         }
 
-                    })
+                    }).create().show()
             }
             mBinding.btnCancel.click {
                 dialog?.dismiss()

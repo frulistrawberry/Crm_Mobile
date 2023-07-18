@@ -1,5 +1,6 @@
 package com.baihe.lib_common.provider
 
+import android.app.Activity
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
@@ -27,4 +28,6 @@ object OrderServiceProvider {
      */
     @JvmStatic
     fun toOrderDetail(context: Context,orderId:String) = service.toOrderDetail(context,orderId)
+
+    fun toAddOrder(context: Activity,type:Int) = service.toAddOrder(context,type)
 }

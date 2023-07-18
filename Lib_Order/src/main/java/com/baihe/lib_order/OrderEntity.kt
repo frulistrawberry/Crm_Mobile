@@ -327,7 +327,7 @@ data class OrderDetailEntity(
         })
         statusList.add(OrderStatus().apply {
             statusTxt = "已进店"
-            date = lamp?.yaoyue_time
+            date = lamp?.daodian_time
             opportunityInfo?.let {
                 status = when(opportunityInfo.req_phase){
                     OPPO_ENTERED_STORE->{
@@ -345,7 +345,7 @@ data class OrderDetailEntity(
         })
         statusList.add(OrderStatus().apply {
             statusTxt = "已签约"
-            date = lamp?.yaoyue_time
+            date = lamp?.qianyue_time
             opportunityInfo?.let {
                 status = when(opportunityInfo.orderstatus){
                     ORDER_SIGNED->{
@@ -362,7 +362,7 @@ data class OrderDetailEntity(
         })
         statusList.add(OrderStatus().apply {
             statusTxt = "已完成"
-            date = lamp?.yaoyue_time
+            date = lamp?.wancheng_time
             opportunityInfo?.let {
                 status = when(opportunityInfo.orderstatus){
                     ORDER_COMPLETED->{

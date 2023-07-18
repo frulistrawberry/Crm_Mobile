@@ -11,6 +11,7 @@ import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.ui.dialog.BottomSelectDialog
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.base.BaseMvvmActivity
@@ -137,17 +138,6 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
                  mBinding.button2.gone()
             }
         }
-        mViewModel.orderTempleLiveData.observe(this){orderTempleEntity->
-            orderTempleEntity?.let {
-                orderTempleEntity.oppoTemple?.let {
-                    mBinding.kvlOpportunity.data = orderTempleEntity.oppoTemple
-                }
-               orderTempleEntity.oppoList?.let {
-                   adapter.setData(orderTempleEntity.oppoList)
-               }
-
-            }
-        }
         mViewModel.createOrderLiveData.observe(this){
             when(action){
                 ACTION_ORDER_NEXT ->{
@@ -169,6 +159,18 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
         }
         mViewModel.oppoTempleLiveData.observe(this){
             mBinding.kvlOpportunity.data = it
+            val kvItem = mBinding.kvlOpportunity.findEntityByParamKey("followUserId")
+            if (kvItem!=null){
+                if (kvItem.value.isNullOrEmpty()){
+                    kvItem.value = UserServiceProvider.getUserId()
+                }
+                if (kvItem.defaultValue.isNullOrEmpty()){
+                    kvItem.defaultValue = UserServiceProvider.getUser()?.name
+                }
+                mBinding.kvlOpportunity.refreshItem(kvItem)
+            }
+
+
         }
 
         mViewModel.customerLiveData.observe(this){

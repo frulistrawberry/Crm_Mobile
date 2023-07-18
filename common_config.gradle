@@ -27,7 +27,10 @@ android {
         if (isBuildModule.toBoolean()){
             manifestPlaceholders = [
                     XG_ACCESS_ID : rootProject.sdkConfig.XG_ACCESS_ID,
-                    XG_ACCESS_KEY : rootProject.sdkConfig.XG_ACCESS_KEY
+                    XG_ACCESS_KEY : rootProject.sdkConfig.XG_ACCESS_KEY,
+                    VIVO_APPID : rootProject.sdkConfig.VIVO_APPID,
+                    VIVO_APPKEY : rootProject.sdkConfig.VIVO_APPKEY,
+
             ]
         }
     }
@@ -79,8 +82,8 @@ android {
 }
 
 dependencies {
-//    implementation rootProject.depsLibs.commonLib
-    api project(path:':Lib_Common')
+    implementation rootProject.depsLibs.commonLib
+//    api project(path:':Lib_Common')
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 }

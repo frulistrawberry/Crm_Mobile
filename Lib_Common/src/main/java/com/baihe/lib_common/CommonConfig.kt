@@ -1,6 +1,7 @@
 package com.baihe.lib_common
 
 import android.app.Application
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.http.EasyConfig
 import com.baihe.http.ssl.HttpSslFactory
@@ -24,6 +25,9 @@ import com.baihe.lib_framework.utils.DeviceInfoUtils
 import com.dylanc.loadingstateview.LoadingStateView
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.tencent.android.tpush.XGIOperateCallback
+import com.tencent.android.tpush.XGPushConfig
+import com.tencent.android.tpush.XGPushManager
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
@@ -47,8 +51,33 @@ object CommonConfig {
         initHttp(isDebug)
         initImageLoader()
         initCommonUi()
+        initPush()
 
 
+    }
+
+    private fun initPush() {
+        XGPushConfig.enableDebug(AppHelper.getApplication(), BuildConfig.DEBUG)
+        XGPushConfig.setOppoPushAppId(AppHelper.getApplication(), "ea9afa6fc4a0466cbc96a8a1ed2640d6")
+        XGPushConfig.setOppoPushAppKey(AppHelper.getApplication(), "b3c4ff4ac4734b419620764ed584fd18")
+
+        XGPushConfig.setMiPushAppId(AppHelper.getApplication(), "2882303761518222692")
+        XGPushConfig.setMiPushAppKey(AppHelper.getApplication(), "5641822277692")
+
+        XGPushConfig.enableOtherPush(AppHelper.getApplication(), true)
+        XGPushManager.registerPush(AppHelper.getApplication(), object : XGIOperateCallback {
+            override fun onSuccess(data: Any, flag: Int) {
+                //token在设备卸载重装的时候有可能会变
+                LogUtil.d("LihePush", "注册成功，设备token为：$data")
+                //更新http拦截器里的device_token
+                EasyConfig.getInstance()
+                    .addParam("device_token", XGPushConfig.getToken(AppHelper.getApplication()))
+            }
+
+            override fun onFail(data: Any, errCode: Int, msg: String) {
+                LogUtil.d("LihePush", "注册失败，错误码：$errCode,错误信息：$msg")
+            }
+        })
     }
 
     private fun initCommonUi() {
@@ -90,7 +119,6 @@ object CommonConfig {
             retryTime = 2000
             isLogEnabled = isDebug
             logTag = "EasyHttp"
-//            logStrategy = HttpLogStrategy()
             val params = HashMap<String, String>().apply {
                 put("apver", AppManager.getAppVersionName(AppHelper.getApplication()))
                 put("appId", "20")

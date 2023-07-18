@@ -173,7 +173,7 @@ data class WaitingEntity(
     val categoryTxt: String,
     @SerializedName("customer_id")
     val customerId: Int,
-    @SerializedName("follow_txt")
+    @SerializedName("content")
     val followTxt: String,
     val id: Int,
     val name: String,
@@ -219,7 +219,7 @@ data class WaitingEntity(
         val showArray = mutableListOf<KeyValueEntity>()
         showArray.add(KeyValueEntity().apply {
             key = "联系电话"
-            `val` = phone
+            `val` = this@WaitingEntity.phone
         })
         if ("2"==tag || "4"==tag){
             showArray.add(KeyValueEntity().apply {

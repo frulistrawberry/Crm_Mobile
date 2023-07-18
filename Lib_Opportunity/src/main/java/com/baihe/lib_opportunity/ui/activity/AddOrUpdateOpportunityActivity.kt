@@ -72,7 +72,7 @@ class AddOrUpdateOpportunityActivity:
                 dismissLoadingDialog()
         }
         mViewModel.oppoTempleLiveData.observe(this){
-            mBinding.kvlOpportunity.setData(it)
+            mBinding.kvlOpportunity.data = it
             val kvItem = mBinding.kvlOpportunity.findEntityByParamKey("followUserId")
             if (kvItem!=null){
                 if (kvItem.value.isNullOrEmpty()){
@@ -147,11 +147,10 @@ class AddOrUpdateOpportunityActivity:
 
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {
-            if (!oppoId.isNullOrEmpty())
-                title = "新增销售机会"
+            title = if (oppoId.isNullOrEmpty())
+                "新增销售机会"
             else
-                title = "编辑销售机会"
-            navIcon = R.mipmap.navigation_icon
+                "编辑销售机会"
         }
         mBinding.srlRoot.setEnableLoadMore(false)
     }

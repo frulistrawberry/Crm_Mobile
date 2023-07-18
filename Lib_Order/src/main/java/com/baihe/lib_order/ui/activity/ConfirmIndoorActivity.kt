@@ -87,7 +87,7 @@ class ConfirmIndoorActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderVie
                 item.name = "到店时间"
                 item.is_channge = "2"
                 item.is_true = "2"
-                item.is_open = "2"
+                item.is_open = "1"
                 item.type = "datetime"
                 item.paramKey = "arrival_time"
             })

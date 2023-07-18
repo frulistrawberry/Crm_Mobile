@@ -28,7 +28,9 @@ android {
 
         manifestPlaceholders = [
                 XG_ACCESS_ID : "1580001576",
-                XG_ACCESS_KEY: "AJMRFQTVY2L8"
+                XG_ACCESS_KEY : "AJMRFQTVY2L8",
+                VIVO_APPID:"103013008",
+                VIVO_APPKEY:"a04b9399b60ae4eef5692a6751ec4598",
         ]
     }
     signingConfigs {

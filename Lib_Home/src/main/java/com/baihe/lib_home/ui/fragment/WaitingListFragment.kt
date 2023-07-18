@@ -13,7 +13,13 @@ import com.dylanc.loadingstateview.ViewType
 class WaitingListFragment private constructor(): BaseMvvmFragment<CommonSrlListBinding, HomeViewModel>() {
     private var page = 1
     private  val adapter by lazy {
-        WaitingListAdapter(requireContext())
+        WaitingListAdapter(requireContext()).apply {
+            onItemClickListener = {view, position ->
+                val item = getItem(position)
+
+
+            }
+        }
     }
     private val type by lazy {
         arguments?.getString("type")
