@@ -106,7 +106,7 @@
                         android:id="@+id/btn_cancel2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_del"
+                        android:src="@mipmap/ic_clear"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -191,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:src="@mipmap/ic_del"/>
+                    android:src="@mipmap/ic_clear"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

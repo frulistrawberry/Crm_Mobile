@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/update_key_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/update_value_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/update_key_tv" />
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/rule_key_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_view1" />
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/rule_value_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="0dp"
@@ -91,7 +91,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rule_key_tv" />
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/push_key_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/push_key_tv" />
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/delete_key_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_view3" />
 
-        <TextView
+        <com.baihe.lib_common.ui.widget.font.FontTextView
             android:id="@+id/delete_value_tv"
             style="@style/font_normal_15_4A4C5C"
             android:layout_width="0dp"
@@ -150,7 +150,7 @@
             app:layout_constraintTop_toBottomOf="@+id/divider_view3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <com.baihe.lib_common.ui.widget.font.FontTextView
         android:id="@+id/tv_setting"
         style="@style/font_light_14_4A4C5C"
         android:layout_width="match_parent"

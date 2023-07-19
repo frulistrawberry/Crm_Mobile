@@ -76,7 +76,8 @@ class OpportunityListAdapter:
         holder.binding.btnCall.text = buttons?.get(0)?.name
         holder.binding.btnRight.text = buttons?.get(1)?.name
         holder.binding.btnRight.click {
-            onButtonActionListener?.invoke(item?.id!!,item?.customerId?:"",item?.orderStatus,buttons?.get(1)?.type?:-1)
+            onButtonActionListener?.invoke(item?.id!!,
+                item.customerId ?:"", item.orderStatus,buttons?.get(1)?.type?:-1)
         }
         holder.binding.btnCall.click {
             onButtonActionListener?.invoke(item?.customerId.toString(),item?.customerId?:"",item?.orderStatus,buttons?.get(0)?.type?:-1)

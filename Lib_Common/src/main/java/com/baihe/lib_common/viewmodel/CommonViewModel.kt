@@ -35,6 +35,9 @@ class CommonViewModel:BaseViewModel() {
     val photoLiveData:MutableLiveData<List<LocalPhotoEntity>> by lazy {
         MutableLiveData<List<LocalPhotoEntity>>()
     }
+    val uploadLiveData:MutableLiveData<List<String?>> by lazy {
+        MutableLiveData<List<String?>>()
+    }
     private val repository :CommonRepository by lazy {
         CommonRepository(this)
     }
@@ -108,14 +111,16 @@ class CommonViewModel:BaseViewModel() {
             }
         }
     }
-    fun addReqFollow(params:LinkedHashMap<String,Any?>){
+    fun addReqFollow(params:LinkedHashMap<String,Any?>,filePathList: List<String>?){
         loadingDialogLiveData.value = true
         launchUI({
                 _,_-> loadingDialogLiveData.value = false
         }) {
 
-            repository.addReqFollow(params)
-
+            if (filePathList.isNullOrEmpty())
+                repository.addFollow(params)
+            else
+                repository.addReqFollowWithAttachment(params,filePathList)
             stateLiveData.value = true
             loadingDialogLiveData.value = false
         }

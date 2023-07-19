@@ -3,14 +3,20 @@ package com.baihe.lib_contract.api
 import androidx.lifecycle.LifecycleOwner
 import com.baihe.http.EasyHttp
 import com.baihe.http.model.ResponseClass
+import com.baihe.lib_common.entity.CustomerDetailEntity
+import com.baihe.lib_common.entity.TempleEntity
 import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
 import com.baihe.lib_common.http.response.ListData
+import com.baihe.lib_common.provider.CustomerServiceProvider
 import com.baihe.lib_contract.ContractDetailEntity
 import com.baihe.lib_contract.ContractListItemEntity
 import com.baihe.lib_contract.constant.UrlConstant
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 
 class Repository(lifecycleOwner: LifecycleOwner):BaseRepository(lifecycleOwner) {
 
@@ -34,5 +40,21 @@ class Repository(lifecycleOwner: LifecycleOwner):BaseRepository(lifecycleOwner) 
                 .api(CommonApi(UrlConstant.CONTRACT_DETAIL,params.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<ContractDetailEntity>>() {})
         }
+    }
+
+    suspend fun getContractTemple(orderId: String?=null): TempleEntity?{
+        return requestResponse {
+                val jsonParam = JsonParam.newInstance()
+                if (!orderId.isNullOrEmpty()){
+                    jsonParam.putParamValue("orderId",orderId)
+                }
+                EasyHttp.get(lifecycleOwner)
+                    .api(CommonApi(UrlConstant.CONTRACT_TEMP,jsonParam.getParamValue()))
+                    .execute(object : ResponseClass<BaseResponse<TempleEntity>>() {})
+        }
+
+
+
+
     }
 }

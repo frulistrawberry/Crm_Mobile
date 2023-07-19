@@ -198,18 +198,22 @@ class OrderViewModel: BaseViewModel() {
         }
     }
 
-    fun chargebackOrder(params:LinkedHashMap<String,Any?>){
+    fun chargebackOrder(params:LinkedHashMap<String,Any?>,attachment:List<String>? = null){
         loadingDialogLiveData.value = true
         launchUI({
                 _,_-> loadingDialogLiveData.value = false
         }) {
 
-            repository.chargeBackOrder(params)
+            if (attachment.isNullOrEmpty())
+                repository.chargeBackOrder(params)
+            else
+                repository.chargeBackOrderWithAttachment(params,attachment)
 
             stateLiveData.value = true
             loadingDialogLiveData.value = false
         }
     }
+
 
     fun getOppoTemple(){
         loadingStateLiveData.value = ViewType.LOADING

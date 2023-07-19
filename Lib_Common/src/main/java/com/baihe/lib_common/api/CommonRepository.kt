@@ -17,9 +17,9 @@ import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.helper.AppHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
+import java.io.File
 import java.nio.charset.Charset
 
 class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
@@ -88,7 +88,31 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
 
     }
 
-    suspend fun addReqFollow(params:LinkedHashMap<String,Any?>):Any?{
+    @OptIn(FlowPreview::class)
+    suspend fun addReqFollowWithAttachment(params:LinkedHashMap<String,Any?>, filePathList: List<String>):Any?{
+        val repository = CommonRepository(lifecycleOwner)
+        var result:Any? = null
+        flow {
+                emit(repository.batchUploadFiles(filePathList))
+            }.flatMapConcat {fileUrls->
+                flow {
+                    val attachment = StringBuffer()
+                    fileUrls.forEach {
+                        attachment.append(it)
+                        if (fileUrls.indexOf(it)<fileUrls.size-1)
+                            attachment.append(",")
+                    }
+                    params["attachment"] = attachment
+                    val submit = addFollow(params)
+                    emit(submit)
+                }
+            }.collect {
+                 result = it
+            }
+        return result
+    }
+
+    suspend fun addFollow(params:LinkedHashMap<String,Any?>):Any?{
         return requestResponse {
             val jsonParam = JsonParam.newInstance()
                 .putParamValue(params)
@@ -116,13 +140,24 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
         }
     }
 
-//    suspend fun uploadFile(filePathList:List<String>):Any{
-//        return requestResponse {
-//            val result = mutableListOf<String>()
-//            filePathList.asFlow().onEach {
-//
-//            }}
-//    }
+    suspend fun batchUploadFiles(filePathList:List<String>):List<String?>{
+        return flow {
+            filePathList.forEach{
+                val result = uploadFile(it)
+                emit(result?.full_path)
+            }
+        }.toList()
+    }
+
+    private suspend fun uploadFile(filePath:String):UploadResultEntity?{
+        return requestResponse {
+            EasyHttp.post(lifecycleOwner)
+                .api(UploadApi(File(filePath)))
+                .execute(object : ResponseClass<BaseResponse<UploadResultEntity>>() {})
+        }
+    }
+
+
 
 
 

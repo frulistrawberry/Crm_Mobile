@@ -32,6 +32,8 @@ import com.baihe.lib_common.ui.widget.FlowLayout;
 import com.baihe.lib_common.ui.widget.keyvalue.adapter.AttachImageAdapter;
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity;
 import com.baihe.lib_framework.toast.TipsToast;
+import com.baihe.lib_framework.utils.DpToPx;
+import com.baihe.lib_framework.utils.ViewUtils;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 
 import java.lang.reflect.Field;
@@ -348,6 +350,19 @@ public class KeyValueEditLayout extends LinearLayout {
         return data;
     }
 
+    public List<String> getAttachment(){
+        List<String> attachment = new ArrayList<>();
+        if (kvList == null)
+            return null;
+        for (KeyValueEntity valueEntity : kvList) {
+            if (getItemType(valueEntity) == ItemType.UPLOAD){
+                return valueEntity.getAttach();
+            }
+        }
+        return attachment;
+
+    }
+
 
 
 
@@ -431,7 +446,7 @@ public class KeyValueEditLayout extends LinearLayout {
                 setItemValueForFollowResult(itemView, keyValueEntity);
                 break;
             case UPLOAD:
-                setItemValueForForUpload(itemView,keyValueEntity);
+                setItemValueForUpload(itemView,keyValueEntity);
                 break;
             default:
                 setItemValueForNormal(itemView, keyValueEntity);
@@ -440,7 +455,7 @@ public class KeyValueEditLayout extends LinearLayout {
         setItemEvent(keyValueEntity);
     }
 
-    private void setItemValueForForUpload(View itemView, KeyValueEntity keyValueEntity) {
+    private void setItemValueForUpload(View itemView, KeyValueEntity keyValueEntity) {
         TextView kv_edit_key_tv = itemView.findViewById(R.id.kv_edit_key_tv);
         TextView kv_edit_key_required_tv = itemView.findViewById(R.id.kv_edit_key_required_tv);
         RecyclerView kv_edit_value_image_rv = itemView.findViewById(R.id.rv_image);
@@ -452,11 +467,13 @@ public class KeyValueEditLayout extends LinearLayout {
             kv_edit_key_required_tv.setVisibility(View.INVISIBLE);
         }
         kv_edit_value_image_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
-        AttachImageAdapter adapter = new AttachImageAdapter();
+        AttachImageAdapter adapter = new AttachImageAdapter(AttachImageAdapter.MODE_EDIT);
         View addImageView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_item_attach,kv_edit_value_image_rv,false);
         ImageView imageView = addImageView.findViewById(R.id.imageview);
-        imageView.setImageResource(R.mipmap.ic_photo_add);
+        imageView.setImageResource(R.mipmap.ic_photo_add_dark);
+        ViewUtils.INSTANCE.setClipViewCornerRadius(imageView, DpToPx.dpToPx(14));
         adapter.addFootView(addImageView,-1);
+        adapter.setSpanCount(2);
         kv_edit_value_image_rv.setAdapter(adapter);
         if (!TextUtils.isEmpty(keyValueEntity.getValue())){
             String[] images = keyValueEntity.getValue().split(",");

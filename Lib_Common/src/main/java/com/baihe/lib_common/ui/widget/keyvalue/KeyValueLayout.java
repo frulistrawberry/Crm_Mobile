@@ -242,7 +242,7 @@ public class KeyValueLayout extends LinearLayout {
                 kv_value_right_icon_iv.setVisibility(GONE);
                 kv_value_attach_rv.setVisibility(VISIBLE);
                 kv_value_attach_rv.setLayoutManager(new GridLayoutManager(context,2));
-                AttachImageAdapter adapter = new AttachImageAdapter();
+                AttachImageAdapter adapter = new AttachImageAdapter(AttachImageAdapter.MODE_VIEW);
                 kv_value_attach_rv.setAdapter(adapter);
                 adapter.setData(keyValueEntity.getAttach());
             }

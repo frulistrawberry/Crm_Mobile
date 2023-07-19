@@ -111,9 +111,6 @@ class CustomerDetailActivity:
         mBinding.btnEdit.click {
             AddOrUpdateCustomerActivity.start(this,customerId)
         }
-        reqAdapter.onItemClickListener = { _, position->
-            val item = reqAdapter.getData()[position]
-        }
 
 
     }

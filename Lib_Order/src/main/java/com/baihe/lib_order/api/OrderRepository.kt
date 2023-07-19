@@ -3,6 +3,7 @@ package com.baihe.lib_order.api
 import androidx.lifecycle.LifecycleOwner
 import com.baihe.http.EasyHttp
 import com.baihe.http.model.ResponseClass
+import com.baihe.lib_common.api.CommonRepository
 import com.baihe.lib_common.entity.OpportunityListItemEntity
 import com.baihe.lib_common.entity.ResultEntity
 import com.baihe.lib_common.entity.TempleEntity
@@ -90,6 +91,30 @@ class OrderRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
                 .api(CommonApi(UrlConstant.ORDER_CHARGE_BACK,jsonParam.getParamValue()))
                 .execute(object : ResponseClass<BaseResponse<Any>>() {})
         }
+    }
+
+    @OptIn(FlowPreview::class)
+    suspend fun chargeBackOrderWithAttachment(params: LinkedHashMap<String, Any?>, attachmentList:List<String>):Any?{
+        val repository = CommonRepository(lifecycleOwner)
+        var result:Any? = null
+        flow {
+            emit(repository.batchUploadFiles(attachmentList))
+        }.flatMapConcat {fileUrls->
+            flow {
+                val attachment = StringBuffer()
+                fileUrls.forEach {
+                    attachment.append(it)
+                    if (fileUrls.indexOf(it)<fileUrls.size-1)
+                        attachment.append(",")
+                }
+                params["file"] = attachment
+                val submit = chargeBackOrder(params)
+                emit(submit)
+            }
+        }.collect {
+            result = it
+        }
+        return result
     }
 
     suspend fun transferOrder(params:LinkedHashMap<String,Any?>):Any?{

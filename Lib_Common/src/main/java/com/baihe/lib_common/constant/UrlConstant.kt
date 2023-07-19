@@ -7,5 +7,5 @@ object UrlConstant {
     const val FOLLOW_DETAIL = "/owner/customer/followDetail"
     const val SEARCH_USER = "/owner/user/searchUser"
     const val FOLLOW_LOG = "/owner/customer/followLog"
-    const val UPLOAD = "/owner/customer/followLog"
+    const val UPLOAD = "/owner/common/upload"
 }

@@ -3,7 +3,10 @@ package com.baihe.lib_order.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.baihe.lib_common.R
 import com.baihe.lib_common.constant.KeyConstant
 import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_common.databinding.ActivityAddFollowBinding
@@ -12,16 +15,20 @@ import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ui.activity.PhotoPickActivity
 import com.baihe.lib_common.ui.widget.keyvalue.KeyValueEditLayout
 import com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout.OnItemActionListener
+import com.baihe.lib_common.ui.widget.keyvalue.adapter.AttachImageAdapter
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.log.LogUtil
+import com.baihe.lib_framework.utils.DpToPx
+import com.baihe.lib_framework.utils.ViewUtils
 import com.baihe.lib_order.ui.OrderViewModel
 
 class OrderChargebackActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderViewModel>() {
     private val orderId: String by lazy {
         intent.getStringExtra(KeyConstant.KEY_ORDER_ID)
     }
+
 
     companion object{
         fun start(context: Activity, orderId:String){
@@ -96,9 +103,10 @@ class OrderChargebackActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderV
         super.initListener()
         mBinding.btnCommit.click {
             val params = mBinding.kvlOpportunity.commit()
+            val attachment = mBinding.kvlOpportunity.attachment
             params?.let {
                 params["order_id"] = orderId
-                mViewModel.chargebackOrder(params)
+                mViewModel.chargebackOrder(params,attachment)
             }
 
 
@@ -121,10 +129,17 @@ class OrderChargebackActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderV
         if (requestCode == RequestCode.REQUEST_PHOTO && resultCode == RESULT_OK){
             data?.let {
                 val imageList = data.getStringArrayListExtra(KeyConstant.KEY_PHOTOS)
-                imageList?.let {
-                    imageList.forEach {
-                        LogUtil.d("imageList",it)
-                    }
+                val imagePaths = StringBuilder()
+                imageList.forEach {
+                    imagePaths.append(it)
+                    if (imageList.indexOf(it)<imageList.size-1)
+                        imagePaths.append(",")
+                }
+                val keyValueEntity = mBinding.kvlOpportunity.findEntityByParamKey("file")
+                keyValueEntity?.let {
+                    keyValueEntity.value = imagePaths.toString()
+                    keyValueEntity.attach = imageList
+                    mBinding.kvlOpportunity.refreshItem(keyValueEntity)
                 }
             }
         }

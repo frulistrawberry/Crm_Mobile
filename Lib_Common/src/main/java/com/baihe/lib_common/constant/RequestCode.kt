@@ -13,4 +13,5 @@ object RequestCode {
     const val REQUEST_ADD_ORDER = 1009
     const val REQUEST_ADD_PEOPLE = 1010
     const val REQUEST_TRANSFER_ORDER = 10011
+    const val REQUEST_ADD_CONTRACT = 10012
 }

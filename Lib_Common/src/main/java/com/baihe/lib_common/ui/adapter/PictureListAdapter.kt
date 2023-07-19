@@ -1,5 +1,6 @@
 package com.baihe.lib_common.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.baihe.imageloader.ImageLoaderUtils
@@ -13,11 +14,36 @@ import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.manager.AppManager
 import com.baihe.lib_framework.utils.DpToPx
 
+@SuppressLint("NotifyDataSetChanged")
 class PictureListAdapter: BaseRecyclerViewAdapter<LocalPhotoEntity, ItemPhotoListBinding>() {
 
     val selectPhotos = mutableListOf<LocalPhotoEntity>()
 
     var maxSize:Int = 9
+
+    init {
+        onItemClickListener = { _, position ->
+            val selectItem = getItem(position)
+            selectItem?.let {
+                if (selectPhotos.contains(selectItem)){
+                    selectPhotos.remove(selectItem)
+                    notifyItemChanged(position)
+                }else{
+                    if (selectPhotos.size<maxSize){
+                        selectPhotos.add(selectItem)
+                        notifyItemChanged(position)
+                    }else{
+                        notifyDataSetChanged()
+                    }
+
+
+                }
+            }
+
+
+        }
+
+    }
 
 
 
@@ -59,24 +85,6 @@ class PictureListAdapter: BaseRecyclerViewAdapter<LocalPhotoEntity, ItemPhotoLis
             else
                 holder.binding.vMask.visible()
 
-            onItemClickListener = { _, position ->
-                val selectItem = getItem(position)
-                selectItem?.let {
-                    if (selectPhotos.contains(selectItem)){
-                        selectPhotos.remove(selectItem)
-                        notifyItemChanged(position)
-                    }else{
-                        if (selectPhotos.size<maxSize){
-                            selectPhotos.add(selectItem)
-                            notifyItemChanged(position)
-                        }
-
-
-                    }
-                }
-
-
-            }
 
 
         }

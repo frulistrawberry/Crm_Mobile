@@ -1,6 +1,8 @@
 package com.baihe.lib_contract
 
 import androidx.lifecycle.MutableLiveData
+import com.baihe.lib_common.entity.CustomerDetailEntity
+import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_common.viewmodel.BaseViewModel
 import com.baihe.lib_contract.api.Repository
 import com.dylanc.loadingstateview.ViewType
@@ -21,6 +23,12 @@ class ContractViewModel: BaseViewModel() {
 
     val detailLiveData:MutableLiveData<ContractDetailEntity> by lazy {
         MutableLiveData<ContractDetailEntity>()
+    }
+    val tempLiveData:MutableLiveData<List<KeyValueEntity>> by lazy {
+        MutableLiveData<List<KeyValueEntity>>()
+    }
+    val customerLiveData:MutableLiveData<CustomerDetailEntity> by lazy {
+        MutableLiveData<CustomerDetailEntity>()
     }
 
     fun getContractList(page:Int,name:String = ""){
@@ -50,5 +58,9 @@ class ContractViewModel: BaseViewModel() {
                 loadingStateLiveData.value = ViewType.CONTENT
             }
         }
+    }
+
+    fun getContractTemp(orderId:String?=null){
+        
     }
 }

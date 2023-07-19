@@ -29,7 +29,6 @@ class MoreActionDialog {
             setContentView(mBinding.root)
             setAnimStyle(BaseDialog.AnimStyle.BOTTOM)
             setWidth((AppManager.getScreenWidthPx()*0.37).toInt())
-            setHeight(WindowManager.LayoutParams.WRAP_CONTENT)
             setGravity(Gravity.BOTTOM.or(Gravity.START))
             setThemeStyle(R.style.MoreActionDialogTheme)
             setAnimStyle(R.style.AlphaAnimStyle)
