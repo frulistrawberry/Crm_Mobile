@@ -38,14 +38,9 @@ class OrderViewModel: BaseViewModel() {
         MutableLiveData<List<OpportunityListItemEntity>>()
     }
 
-    val orderTempleLiveData:MutableLiveData<OrderTempleEntity> by lazy {
-        MutableLiveData<OrderTempleEntity>()
-    }
+
 
     val createOrderLiveData:MutableLiveData<ResultEntity> by lazy {
-        MutableLiveData<ResultEntity>()
-    }
-    val contractConfigLiveData:MutableLiveData<ResultEntity> by lazy {
         MutableLiveData<ResultEntity>()
     }
 
@@ -245,15 +240,7 @@ class OrderViewModel: BaseViewModel() {
         }
     }
 
-    fun getContractConfig(){
-        launchUI({
-                _,_->
-        }){
-            val result = repository.getCompanyConfig()
-            contractConfigLiveData.value = result
-        }
 
-    }
 
 
 

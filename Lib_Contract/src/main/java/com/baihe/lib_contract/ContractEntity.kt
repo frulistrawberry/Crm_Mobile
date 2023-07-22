@@ -55,7 +55,7 @@ data class ContractDetailEntity(
     val contact_mobile_txt: String,
     val contract_alias: String,
     val contract_id: Int,
-    val contract_pic: List<String>?,
+    val contract_pic: String?,
     val contract_type: String,
     val create_by: Int,
     val create_by_txt: String,
@@ -77,7 +77,7 @@ data class ContractDetailEntity(
     val hotel_hall_txt: Any,
     val hotel_tables: String?,
     val name: String,
-    val order_id: Int,
+    val order_id: String,
     val other_price: String,
     val owner_id: String,
     val owner_id_txt: String,
@@ -196,7 +196,14 @@ data class ContractDetailEntity(
         kvList.add(KeyValueEntity().apply {
             key = "合同照片"
             `val` = ""
-            attach = contract_pic
+            attach = mutableListOf()
+            if (contract_pic?.contains(",") == true){
+                val urls = contract_pic.split(",")
+                attach.addAll(urls)
+            }else if (!contract_pic.isNullOrEmpty()){
+                attach.add(contract_pic)
+
+            }
         })
         kvList.add(KeyValueEntity().apply {
             key = "合同备注"
@@ -206,4 +213,60 @@ data class ContractDetailEntity(
 
         return kvList
     }
+
+    fun additionalShowArray():List<KeyValueEntity>{
+        val kvList = mutableListOf<KeyValueEntity>()
+        kvList.add(KeyValueEntity().apply {
+            key = "新娘姓名"
+            `val` = bride
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "新郎手机号"
+            `val` = groom_mobile
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "联系人姓名"
+            `val` = contact
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "联系人电话"
+            `val` = contact_mobile
+
+
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "联系人身份"
+            `val` = contact_identity_txt
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "场地费用"
+            `val` = cd_price
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "其他价格"
+            `val` = other_price
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "服务费用"
+            `val` = servicer_ate
+        })
+        return kvList
+    }
+
+    fun basicShowArray():List<KeyValueEntity>{
+        val kvList = mutableListOf<KeyValueEntity>()
+        kvList.add(KeyValueEntity().apply {
+            key = "合同创建时间"
+            `val` = sign_date
+        })
+        kvList.add(KeyValueEntity().apply {
+            key = "合同创建人"
+            `val` = create_by_txt
+        })
+        return kvList
+    }
 }
+
+data class TempleEntity(val row:ContractTemple)
+
+data class ContractTemple(val contractInfo:List<KeyValueEntity>,val contract:List<KeyValueEntity>)

@@ -1,7 +1,6 @@
 package com.baihe.lib_contract
 
 import androidx.lifecycle.MutableLiveData
-import com.baihe.lib_common.entity.CustomerDetailEntity
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_common.viewmodel.BaseViewModel
 import com.baihe.lib_contract.api.Repository
@@ -24,12 +23,14 @@ class ContractViewModel: BaseViewModel() {
     val detailLiveData:MutableLiveData<ContractDetailEntity> by lazy {
         MutableLiveData<ContractDetailEntity>()
     }
-    val tempLiveData:MutableLiveData<List<KeyValueEntity>> by lazy {
-        MutableLiveData<List<KeyValueEntity>>()
+    val tempLiveData:MutableLiveData<ContractTemple> by lazy {
+        MutableLiveData<ContractTemple>()
     }
-    val customerLiveData:MutableLiveData<CustomerDetailEntity> by lazy {
-        MutableLiveData<CustomerDetailEntity>()
+    val resultLiveData:MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
     }
+
+
 
     fun getContractList(page:Int,name:String = ""){
         loadingStateLiveData.value = ViewType.LOADING
@@ -60,7 +61,48 @@ class ContractViewModel: BaseViewModel() {
         }
     }
 
-    fun getContractTemp(orderId:String?=null){
-        
+    fun getContractTemp(orderId: String?,contractId: String?=null){
+        loadingStateLiveData.value = ViewType.LOADING
+        launchUI({
+                _,_-> loadingStateLiveData.value = ViewType.ERROR
+        }){
+            val data = repository.getContractTemple(orderId,contractId)
+            if (data==null)
+                loadingStateLiveData.value = ViewType.EMPTY
+            else{
+                tempLiveData.value = data.row
+                loadingStateLiveData.value = ViewType.CONTENT
+            }
+        }
     }
+
+    fun addOrUpdateContract(params:LinkedHashMap<String,Any?>,orderId: String?,contractId: String?=null,attachment:List<String>){
+        loadingDialogLiveData.value = true
+        launchUI({
+                _,_-> loadingDialogLiveData.value = false
+        }) {
+
+            if (!orderId.isNullOrEmpty()){
+                params["orderId"] = orderId
+            }
+            if (contractId.isNullOrEmpty()){
+                if (attachment.isEmpty()){
+                    repository.addContract(params)
+                }else{
+                    repository.addContractWithAttachment(params,attachment)
+                }
+            }
+            else{
+                params["contractId"] = contractId
+                if (attachment.isEmpty()){
+                    repository.updateContract(params)
+                }else{
+                    repository.updateContractWithAttachment(params,attachment)
+                }
+            }
+            resultLiveData.value = true
+        }
+    }
+
+
 }

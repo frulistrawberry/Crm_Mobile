@@ -3,6 +3,7 @@ package com.baihe.lib_message
 import androidx.lifecycle.MutableLiveData
 import com.baihe.lib_common.entity.MessageEntity
 import com.baihe.lib_common.entity.MessageInfoEntity
+import com.baihe.lib_common.http.response.ListData
 import com.baihe.lib_common.viewmodel.BaseViewModel
 import com.baihe.lib_login.api.MessageRepository
 import com.dylanc.loadingstateview.ViewType
@@ -16,8 +17,12 @@ import com.dylanc.loadingstateview.ViewType
 class MessageFragmentViewModel : BaseViewModel() {
     var page = 1;
 
-    val messagesInfoEntity: MutableLiveData<MessageInfoEntity> by lazy {
-        MutableLiveData<MessageInfoEntity>()
+    val messagesInfoEntity: MutableLiveData<ListData<MessageEntity>> by lazy {
+        MutableLiveData<ListData<MessageEntity>>()
+    }
+
+    val unreadCountLiveData: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
     }
 
     private val messageRepository: MessageRepository by lazy {
@@ -46,7 +51,7 @@ class MessageFragmentViewModel : BaseViewModel() {
                     loadingStateLiveData.value = ViewType.ERROR
                 }) {
                     val messageListData = messageRepository.getMessages(page)
-                    if (messageListData == null || messageListData.rows.isEmpty()) {
+                    if (messageListData == null || messageListData.rows.isNullOrEmpty()) {
                         loadingStateLiveData.value = ViewType.EMPTY
                     } else {
                         messagesInfoEntity.value = messageListData
@@ -88,6 +93,15 @@ class MessageFragmentViewModel : BaseViewModel() {
             val result = messageRepository.setMessageRead(type, noticeId)
             if (result != null) {
                 setReadResultData.value = setReadResultData.value as Int + 1
+            }
+        }
+    }
+
+    fun getMessageUnreadCount(){
+        launchUI({ _, _ -> }) {
+            val messageListData = messageRepository.getMessages(1,1)
+            if (messageListData != null) {
+                unreadCountLiveData.value = messageListData.total
             }
         }
     }

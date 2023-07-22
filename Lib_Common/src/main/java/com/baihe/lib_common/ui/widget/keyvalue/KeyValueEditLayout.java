@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -62,6 +63,8 @@ public class KeyValueEditLayout extends LinearLayout {
         MULTI_SELECT("multipleSelect"),
 
         AMOUNT("amount"),
+        NUMBER("number"),
+        PHONE("phone"),
 
         COLLECTION("collection"),
         COLLECTION_MULTIPLE("collectionMultiple"),
@@ -69,6 +72,7 @@ public class KeyValueEditLayout extends LinearLayout {
         READ_ONLY("readonly"),
         CONTACT("contact"),
         DATE_TIME("datetime"),
+        DATE_TIME2("dateTime"),
         DATE_TIME_RANGE("dateTimeRange"),
         RECORD_USER("recordUser"),
         COMPANY_USER("userlist"),
@@ -312,6 +316,7 @@ public class KeyValueEditLayout extends LinearLayout {
                             }
                             else {
                                 TipsToast.INSTANCE.showTips("手机号格式不正确");
+                                break;
                             }
                         }
                         if (!TextUtils.isEmpty(keyValueEntity.getWechat())) {
@@ -425,6 +430,8 @@ public class KeyValueEditLayout extends LinearLayout {
         switch (itemType){
             case INPUT:
             case AMOUNT:
+            case NUMBER:
+            case PHONE:
             case CUSTOMER_SELECT:
                 setItemValueForInput(itemView, keyValueEntity);
                 break;
@@ -692,9 +699,21 @@ public class KeyValueEditLayout extends LinearLayout {
         final EditText kv_edit_value_text_et = itemView.findViewById(R.id.kv_edit_value_text_et);
         final TextView kv_edit_choose_tv = itemView.findViewById(R.id.kv_edit_choose_tv);
         kv_edit_key_tv.setText(keyValueEntity.getName());
+        switch (getItemType(keyValueEntity)){
+            case NUMBER:
+                kv_edit_value_text_et.setInputType(InputType.TYPE_CLASS_NUMBER);
+                break;
+            case PHONE:
+                kv_edit_value_text_et.setInputType(InputType.TYPE_CLASS_PHONE);
+                break;
+            case AMOUNT:
+                kv_edit_value_text_et.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                break;
+
+        }
         //清除EditText绑定
         try {
-             Field field = TextView.class.getDeclaredField("mListeners");
+            Field field = TextView.class.getDeclaredField("mListeners");
             field.setAccessible(true);
             List<TextWatcher> listeners = (List<TextWatcher>) field.get(kv_edit_value_text_et);
             if (listeners != null) {
@@ -1070,7 +1089,7 @@ public class KeyValueEditLayout extends LinearLayout {
         }else if (ItemType.COLLECTION_MULTIPLE_LEVEL == itemType) {  //多级单选
             collectionWithChildAction(keyValueEntity);
         }
-        else if (ItemType.DATE_TIME == itemType){
+        else if (ItemType.DATE_TIME == itemType || ItemType.DATE_TIME2 == itemType){
             timeAction(keyValueEntity);
         }else if (ItemType.FOLLOW_RESULT == itemType) {
             followResultAction(keyValueEntity);
@@ -1177,8 +1196,13 @@ public class KeyValueEditLayout extends LinearLayout {
         }
 
         //时间处理
+        String dateFormatter = keyValueEntity.getDateFormatter();
+        if (TextUtils.isEmpty(dateFormatter))
+            dateFormatter = "yyyy-MM-dd HH:mm:ss";
+        dateFormatter.replace("ii","ss");
         @SuppressLint("SimpleDateFormat")
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final SimpleDateFormat format = new SimpleDateFormat(dateFormatter);
+        String finalDateFormatter = dateFormatter;
         kv_edit_value_ll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1194,7 +1218,7 @@ public class KeyValueEditLayout extends LinearLayout {
 
 
 
-                DateDialogUtils.INSTANCE.createDateTimePickerView(getContext(), "请选择"+keyValueEntity.getName(),(date, v1) -> {
+                DateDialogUtils.createDateTimePickerView(getContext(), "请选择"+keyValueEntity.getName(),(date, v1) -> {
                     String selectTime = format.format(date);
                     //更新item
                     keyValueEntity.setDefaultValue(selectTime);
@@ -1203,7 +1227,7 @@ public class KeyValueEditLayout extends LinearLayout {
                     if (listener != null) {
                         listener.onEvent(keyValueEntity, getItemType(keyValueEntity));
                     }
-                }).show();
+                }, finalDateFormatter).show();
             }
         });
     }
@@ -1780,7 +1804,10 @@ public class KeyValueEditLayout extends LinearLayout {
             return ItemType.DATE_TIME_RANGE;
         }else if (ItemType.DATE_TIME.valueOf().equals(type)) {
             return ItemType.DATE_TIME;
-        }else if (ItemType.COLLECTION.valueOf().equals(type)) {
+
+        }else if (ItemType.DATE_TIME2.valueOf().equals(type)) {
+            return ItemType.DATE_TIME2;
+        } else if (ItemType.COLLECTION.valueOf().equals(type)) {
             return ItemType.COLLECTION;
         }else if (ItemType.COLLECTION_MULTIPLE.valueOf().equals(type)) {
             return ItemType.COLLECTION_MULTIPLE;
@@ -1804,6 +1831,10 @@ public class KeyValueEditLayout extends LinearLayout {
             return ItemType.DATE_TIME_RANGE_FILTER;
         }else if (ItemType.UPLOAD.valueOf().equals(type)) {
             return ItemType.UPLOAD;
+        }else if (ItemType.NUMBER.valueOf().equals(type)) {
+            return ItemType.NUMBER;
+        }else if (ItemType.PHONE.valueOf().equals(type)) {
+            return ItemType.PHONE;
         }
         else {
             return ItemType.READ_ONLY;
@@ -1832,6 +1863,9 @@ public class KeyValueEditLayout extends LinearLayout {
         View childView;
         switch (itemType){
             case INPUT:
+            case NUMBER:
+            case PHONE:
+            case AMOUNT:
             case CUSTOMER_SELECT:
                 childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_edit_input_item, this, false);
                 break;
@@ -1843,9 +1877,6 @@ public class KeyValueEditLayout extends LinearLayout {
                 break;
             case DATE_TIME_RANGE_FILTER:
                 childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_edit_date_range_filter,this,false);
-                break;
-            case AMOUNT:
-                childView = LayoutInflater.from(getContext()).inflate(R.layout.layout_keyvalue_edit_amount_item,this,false);
                 break;
             case COLLECTION:
             case COLLECTION_MULTIPLE:

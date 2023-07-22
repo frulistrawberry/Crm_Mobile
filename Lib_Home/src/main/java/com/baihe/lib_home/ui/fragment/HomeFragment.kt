@@ -222,7 +222,7 @@ class HomeFragment: BaseMvvmFragment<HomeFragmentHomeBinding, HomeViewModel>() {
             OrderServiceProvider.toOrderList(requireContext())
         }
         decorDelegate.mBinding.btnContract.click {
-            ContractServiceProvider.toCustomerList(requireContext())
+            ContractServiceProvider.toContractList(requireContext())
         }
         decorDelegate.mBinding.btnBossSea.click {
             bossSeaDialog.show()

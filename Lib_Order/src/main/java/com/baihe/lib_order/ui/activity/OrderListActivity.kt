@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import com.baihe.lib_common.R
 import com.baihe.lib_common.databinding.CommonTabViewpagerBinding
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.ui.adapter.ViewPager2Adapter
 import com.baihe.lib_common.ui.dialog.AlertDialog
 import com.baihe.lib_common.ui.widget.state.ToolbarConfigExt.showSearch
@@ -42,22 +43,26 @@ class OrderListActivity: BaseViewBindActivity<CommonTabViewpagerBinding>() {
                 (fragment as OrderListFragment).refresh(keywords)
             }
             rightIcon(R.mipmap.ic_create_black){
-                AlertDialog.Builder(this@OrderListActivity)
-                    .setContent("是否已有销售机会")
-                    .setText(R.id.button1,"已有，去选择")
-                    .setText(R.id.button2,"没有，去新增")
-                    .setOnClickListener(R.id.button1,object :BaseDialog.OnClickListener{
-                        override fun onClick(dialog: BaseDialog?, view: View) {
-                            AddOrderActivity.start(this@OrderListActivity,AddOrderActivity.MODE_OPPO_SELECT)
-                        }
+                if (UserServiceProvider.isCompanyNeedContract()){
+                    AlertDialog.Builder(this@OrderListActivity)
+                        .setContent("是否已有销售机会")
+                        .setText(R.id.button1,"已有，去选择")
+                        .setText(R.id.button2,"没有，去新增")
+                        .setOnClickListener(R.id.button1,object :BaseDialog.OnClickListener{
+                            override fun onClick(dialog: BaseDialog?, view: View) {
+                                AddOrderActivity.start(this@OrderListActivity,AddOrderActivity.MODE_OPPO_SELECT)
+                            }
 
-                    })
-                    .setOnClickListener(R.id.button2,object :BaseDialog.OnClickListener{
-                        override fun onClick(dialog: BaseDialog?, view: View) {
-                            AddOrderActivity.start(this@OrderListActivity,AddOrderActivity.MODE_OPPO_ADD)
-                        }
+                        })
+                        .setOnClickListener(R.id.button2,object :BaseDialog.OnClickListener{
+                            override fun onClick(dialog: BaseDialog?, view: View) {
+                                AddOrderActivity.start(this@OrderListActivity,AddOrderActivity.MODE_OPPO_ADD)
+                            }
 
-                    }).create().show()
+                        }).create().show()
+                }else{
+                    AddOrderActivity.start(this@OrderListActivity,AddOrderActivity.MODE_OPPO_ADD)
+                }
             }
         }
         mBinding.layoutTab.apply {

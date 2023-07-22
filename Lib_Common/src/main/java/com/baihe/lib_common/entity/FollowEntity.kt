@@ -96,11 +96,13 @@ data class FollowEntity(
                 key = "附件"
                 `val` = ""
                 attach = mutableListOf()
-                val urls = attachment?.split(",")?: mutableListOf()
-                if (urls.isEmpty() && !attachment.isNullOrEmpty()){
-                    attach.add(attachment)
-                }else{
+
+                if (attachment?.contains(",") == true){
+                    val urls = attachment.split(",")
                     attach.addAll(urls)
+                }else if (!attachment.isNullOrEmpty()){
+                    attach.add(attachment)
+
                 }
             })
             add(KeyValueEntity().apply {

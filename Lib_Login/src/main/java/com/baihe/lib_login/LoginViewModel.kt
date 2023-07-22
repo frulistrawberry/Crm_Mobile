@@ -23,7 +23,6 @@ class LoginViewModel:BaseViewModel() {
             loginLiveData.value = false
         }){
             val userEntity = repository.passWordLogin(userName,passWord)
-            saveUser(userEntity)
             loginLiveData.value = true
         }
     }
@@ -34,7 +33,6 @@ class LoginViewModel:BaseViewModel() {
             loginLiveData.postValue(false)
         }){
             val userEntity = repository.verifyCodeLogin(userName,verifyCode)
-            saveUser(userEntity)
             loginLiveData.postValue( true)
         }
     }
@@ -49,8 +47,6 @@ class LoginViewModel:BaseViewModel() {
         }
     }
 
-    private fun saveUser(user:UserEntity?){
-        UserServiceProvider.saveUser(user)
-    }
+
 
 }

@@ -8,4 +8,6 @@ object UrlConstant {
     const val CHECK_VERSION = "/owner/common/upgrade"
     const val SET_PUSH = "/owner/user/notice"
     const val DELETE_ACCOUNT = "/outer/setting/byebye"
+    const val CONTRACT_CONFIG = "/owner/customer/config"
+
 }

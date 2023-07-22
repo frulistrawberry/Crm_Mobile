@@ -4,6 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.LifecycleOwner
 import com.baihe.http.EasyHttp
 import com.baihe.http.model.ResponseClass
+import com.baihe.lib_common.entity.ResultEntity
 import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
@@ -19,6 +20,14 @@ class UserRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecycleO
             EasyHttp.get(lifecycleOwner)
                 .api(CommonApi(UrlConstant.GET_BOSS_SEA, null))
                 .execute(object : ResponseClass<BaseResponse<List<BossSeaEntity>>>() {})
+        }
+    }
+
+    suspend fun getCompanyConfig(): ResultEntity?{
+        return requestResponse {
+            EasyHttp.get(lifecycleOwner)
+                .api(CommonApi(UrlConstant.CONTRACT_CONFIG,null))
+                .execute(object :ResponseClass<BaseResponse<ResultEntity>>() {})
         }
     }
 

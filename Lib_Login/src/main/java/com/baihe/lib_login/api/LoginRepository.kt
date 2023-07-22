@@ -8,7 +8,12 @@ import com.baihe.lib_common.http.BaseRepository
 import com.baihe.lib_common.http.api.CommonApi
 import com.baihe.lib_common.http.api.JsonParam
 import com.baihe.lib_common.http.response.BaseResponse
+import com.baihe.lib_common.provider.UserServiceProvider
+import com.baihe.lib_framework.storage.StorageManager
 import com.baihe.lib_login.constant.UrlConstant
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flow
 
 class LoginRepository(lifecycleOwner: LifecycleOwner):BaseRepository(lifecycleOwner) {
 
@@ -32,11 +37,40 @@ class LoginRepository(lifecycleOwner: LifecycleOwner):BaseRepository(lifecycleOw
     }
 
     suspend fun passWordLogin(userName: String,passWord: String):UserEntity?{
-        return login(userName = userName,passWord = passWord)
+        var result:UserEntity? = null
+        flow {
+            emit(login(userName = userName,passWord = passWord))
+        }.flatMapConcat {
+            flow {
+                UserServiceProvider.saveUser(it)
+                val needContract = UserServiceProvider.getCompanyConfig(lifecycleOwner)?.is_contract
+                UserServiceProvider.saveCompanyContractConfig("1"==needContract)
+                emit(it)
+            }
+        }.collect {
+            result = it
+        }
+
+
+        return result
     }
 
     suspend fun verifyCodeLogin(userName: String,verifyCode: String):UserEntity?{
-        return login(userName = userName,verifyCode = verifyCode)
+        var result:UserEntity? = null
+        flow {
+            emit(login(userName = userName,verifyCode = verifyCode))
+        }.flatMapConcat {
+            flow {
+                UserServiceProvider.saveUser(it)
+                val needContract = UserServiceProvider.getCompanyConfig(lifecycleOwner)?.is_contract
+                UserServiceProvider.saveCompanyContractConfig("1"==needContract)
+                emit(it)
+            }
+        }.collect {
+            result = it
+        }
+        return result
+
     }
 
 

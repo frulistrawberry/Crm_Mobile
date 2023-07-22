@@ -51,7 +51,7 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         mViewModel.loadingStateLiveData.observe(this) {
             when (it) {
                 ViewType.LOADING -> {
-                    if (mBinding?.smartRefreshLayout!!.isRefreshing)
+                    if (!mBinding?.smartRefreshLayout!!.isRefreshing)
                         showLoadingView()
                 }
                 ViewType.CONTENT -> {
@@ -71,9 +71,6 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         }
 
         mViewModel.messagesInfoEntity.observe(this) {
-            updateToolbar {
-                title = "未读(${it.total})"
-            }
             if (mViewModel.page > 1) {
                 mBinding?.smartRefreshLayout!!.finishLoadMore()
                 messageAdapter.addAll(it.rows)
@@ -84,7 +81,14 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
         }
 
         mViewModel.setReadResultData.observe(this) {
-            mBinding?.smartRefreshLayout!!.autoRefresh()
+            mViewModel.getMessages(0)
+            mViewModel.getMessageUnreadCount()
+        }
+
+        mViewModel.unreadCountLiveData.observe(this){
+            updateToolbar {
+                title = "未读(${it})"
+            }
         }
     }
 
@@ -136,6 +140,7 @@ class MessageFragment : BaseMvvmFragment<MessageFragmentLayoutBinding, MessageFr
     override fun initData() {
         super.initData()
         mViewModel.getMessages(0)
+        mViewModel.getMessageUnreadCount()
     }
 
 }

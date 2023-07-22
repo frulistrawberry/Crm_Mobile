@@ -2,7 +2,9 @@ package com.baihe.lib_common.service
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.template.IProvider
+import com.baihe.lib_common.entity.ResultEntity
 import com.baihe.lib_common.entity.UserEntity
 import com.baihe.lib_framework.base.BaseDialog
 
@@ -32,6 +34,12 @@ interface IUserService :IProvider{
      * 获取用户公司id
      */
     fun getCompanyId():String?
+
+    fun isCompanyNeedContract():Boolean
+
+    suspend fun getContractConfig(lifecycleOwner: LifecycleOwner):ResultEntity?
+
+    fun saveCompanyContractConfig(isCompanyNeedContract:Boolean)
 
     /**
      * 获取用户公司名称

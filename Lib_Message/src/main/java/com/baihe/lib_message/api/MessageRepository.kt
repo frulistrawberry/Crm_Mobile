@@ -20,17 +20,17 @@ class MessageRepository(lifecycleOwner: LifecycleOwner) : BaseRepository(lifecyc
      * 获取消息列表
      * @param page 一次请求多少
      */
-    public suspend fun getMessages(page: Int): MessageInfoEntity? {
+    public suspend fun getMessages(page: Int,unread:Int = 3): ListData<MessageEntity>? {
         return requestResponse {
             val userId = UserServiceProvider.getUserId()
             val params = JsonParam.newInstance()
                 .putParamValue("push_id", userId)
                 .putParamValue("page", page)
                 .putParamValue("pageSize", 10)
-                .putParamValue("unread", 3)
+                .putParamValue("unread", unread)
             EasyHttp.post(lifecycleOwner)
                 .api(CommonApi(UrlConstant.MESSAGE, params.getParamValue()))
-                .execute(object : ResponseClass<BaseResponse<MessageInfoEntity>>() {})
+                .execute(object : ResponseClass<BaseResponse<ListData<MessageEntity>>>() {})
         }
     }
 

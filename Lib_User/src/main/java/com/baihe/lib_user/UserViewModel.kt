@@ -1,6 +1,7 @@
 package com.baihe.lib_user
 
 import androidx.lifecycle.MutableLiveData
+import com.baihe.lib_common.entity.ResultEntity
 import com.baihe.lib_common.viewmodel.BaseViewModel
 import com.baihe.lib_user.api.UserRepository
 
@@ -21,12 +22,26 @@ class UserViewModel : BaseViewModel() {
     val versionLiveData: MutableLiveData<VersionEntity> by lazy {
         MutableLiveData<VersionEntity>()
     }
+    val contractConfigLiveData:MutableLiveData<ResultEntity> by lazy {
+        MutableLiveData<ResultEntity>()
+    }
+
 
     val pushSwitchLiveData: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
     }
     val deleteAccountLiveData: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
+    }
+
+    fun getContractConfig(){
+        launchUI({
+                _,_->
+        }){
+            val result = userRepository.getCompanyConfig()
+            contractConfigLiveData.value = result
+        }
+
     }
 
     fun getBossSea() {

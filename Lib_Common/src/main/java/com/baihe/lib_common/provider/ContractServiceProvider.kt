@@ -1,5 +1,6 @@
 package com.baihe.lib_common.provider
 
+import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Autowired
@@ -22,13 +23,17 @@ object ContractServiceProvider {
      * 合同列表页
      */
     @JvmStatic
-    fun toCustomerList(context: Context) = service.toContractList(context)
+    fun toContractList(context: Context) = service.toContractList(context)
+
 
     /**
      * 合同详情页
      * @param contractId 合同Id
      */
     @JvmStatic
-    fun toCustomerDetail(context: Context,contractId:String) = service.toContractDetail(context,contractId)
+    fun toContractDetail(context: Context,contractId:String) = service.toContractDetail(context,contractId)
+
+    @JvmStatic
+    fun toAddOrUpdateContract(act:Activity,orderId:String,contractId:String?=null) = service.toAddOrUpdateContract(act,orderId,contractId)
 
 }

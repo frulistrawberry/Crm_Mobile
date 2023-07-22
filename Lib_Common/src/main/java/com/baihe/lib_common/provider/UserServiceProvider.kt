@@ -2,6 +2,7 @@ package com.baihe.lib_common.provider
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath.USER_SERVICE_USER
@@ -23,6 +24,12 @@ object UserServiceProvider {
     fun getCompanyId() = userService.getCompanyId()
 
     @JvmStatic
+    fun isCompanyNeedContract() = userService.isCompanyNeedContract()
+
+    @JvmStatic
+    suspend fun  getCompanyConfig(lifecycleOwner: LifecycleOwner) = userService.getContractConfig(lifecycleOwner)
+
+    @JvmStatic
     fun getCompanyName() = userService.getCompanyName()
 
     @JvmStatic
@@ -35,6 +42,7 @@ object UserServiceProvider {
 
     @JvmStatic
     fun saveUser(user: UserEntity?) = userService.saveUserInfo(user)
+    fun saveCompanyContractConfig(isCompanyNeedContract: Boolean) = userService.saveCompanyContractConfig(isCompanyNeedContract)
 
     @JvmStatic
     fun getUser() = userService.getUserInfo()

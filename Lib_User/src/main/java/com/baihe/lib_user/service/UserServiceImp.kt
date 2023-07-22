@@ -2,18 +2,22 @@ package com.baihe.lib_user.service
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.baihe.http.EasyConfig
 import com.baihe.lib_common.constant.RoutePath.USER_SERVICE_USER
+import com.baihe.lib_common.entity.ResultEntity
 import com.baihe.lib_common.entity.UserEntity
 import com.baihe.lib_common.service.IUserService
 import com.baihe.lib_common.ui.activity.WebActivity
 import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.storage.StorageManager
+import com.baihe.lib_user.api.UserRepository
 import com.baihe.lib_user.constant.CacheConstant
 import com.baihe.lib_user.constant.UrlConstant
 import com.baihe.lib_user.dialog.BossSeaDialog
 import com.baihe.lib_user.ui.MineFragment
+import com.hp.hpl.sparta.Sparta.Cache
 
 @Route(path = USER_SERVICE_USER)
 class UserServiceImp : IUserService {
@@ -43,6 +47,19 @@ class UserServiceImp : IUserService {
         return StorageManager.get(CacheConstant.USER_COMPANY_ID, "") as String
     }
 
+    override fun isCompanyNeedContract(): Boolean {
+        return StorageManager.get(CacheConstant.USER_COMPANY_NEED_CONTRACT,false) as Boolean
+    }
+
+    override suspend fun getContractConfig(lifecycleOwner: LifecycleOwner): ResultEntity? {
+        val repository = UserRepository(lifecycleOwner)
+        return repository.getCompanyConfig()
+    }
+
+    override fun saveCompanyContractConfig(isCompanyNeedContract: Boolean) {
+        StorageManager.put(CacheConstant.USER_COMPANY_NEED_CONTRACT,isCompanyNeedContract)
+    }
+
     override fun getCompanyName(): String? {
         return StorageManager.get(CacheConstant.USER_COMPANY_NAME, "") as String
     }
@@ -51,6 +68,7 @@ class UserServiceImp : IUserService {
         StorageManager.remove(CacheConstant.USER_INFO_DATA)
         StorageManager.remove(CacheConstant.USER_ID)
         StorageManager.remove(CacheConstant.USER_COMPANY_ID)
+        StorageManager.remove(CacheConstant.USER_COMPANY_NEED_CONTRACT)
         EasyConfig.getInstance().removeParam("userId")
         EasyConfig.getInstance().removeParam("companyId")
     }

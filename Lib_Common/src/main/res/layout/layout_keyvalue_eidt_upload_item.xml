@@ -39,11 +39,11 @@
         android:id="@+id/rv_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_6"
         android:layout_marginBottom="@dimen/dp_16"
-        android:layout_marginLeft="@dimen/dp_10"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
+        tools:listitem="@layout/layout_keyvalue_item_attach"
         tools:itemCount="2" />
 
 </com.baihe.lib_common.ui.widget.keyvalue.KeyValueItemLayout>

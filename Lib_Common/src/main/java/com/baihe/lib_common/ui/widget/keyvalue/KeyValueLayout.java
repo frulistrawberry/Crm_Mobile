@@ -25,6 +25,7 @@ import com.baihe.lib_common.ui.widget.font.FontStyle;
 import com.baihe.lib_common.ui.widget.font.FontTextView;
 import com.baihe.lib_framework.utils.DpToPx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KeyValueLayout extends LinearLayout {
@@ -192,6 +193,7 @@ public class KeyValueLayout extends LinearLayout {
 
 
     }
+
 
     private View createChildView(){
         View childView = LayoutInflater.from(context).inflate(R.layout.layout_keyvalue_item, this, false);

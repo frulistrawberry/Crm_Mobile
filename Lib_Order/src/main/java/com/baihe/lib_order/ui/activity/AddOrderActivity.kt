@@ -11,6 +11,7 @@ import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
+import com.baihe.lib_common.provider.ContractServiceProvider
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.ui.dialog.BottomSelectDialog
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
@@ -50,6 +51,9 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
         }
     }
 
+    private val isCompanyNeedContract by lazy {
+        UserServiceProvider.isCompanyNeedContract()
+    }
     private var customerId:String? = null
     private var page = 1
     private var action = ACTION_ORDER_SAVE
@@ -131,18 +135,12 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
 
         }
 
-        mViewModel.contractConfigLiveData.observe(this){
-            if ("1" == it?.is_contract){
-                mBinding.button2.visible()
-            }else{
-                 mBinding.button2.gone()
-            }
-        }
+
         mViewModel.createOrderLiveData.observe(this){
             when(action){
                 ACTION_ORDER_NEXT ->{
-                    val orderId = it.order_id
-                    // TODO: 创建合同
+                    //  创建合同
+                    ContractServiceProvider.toAddOrUpdateContract(this@AddOrderActivity,it.order_id!!)
                 }
                 ACTION_ORDER_SAVE ->{
                     setResult(RESULT_OK)
@@ -232,6 +230,18 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
             adapter = this@AddOrderActivity.adapter
             divider(includeLast = false)
         }
+        if (isCompanyNeedContract){
+            mBinding.btnMode.visible()
+            mBinding.button1.visible()
+            mBinding.button2.visible()
+            toggleMode()
+        }else{
+            mBinding.btnMode.gone()
+            mBinding.button2.gone()
+            mBinding.button1.visible()
+            mode = MODE_OPPO_ADD
+            toggleMode()
+        }
 
     }
 
@@ -267,7 +277,6 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
     override fun initData() {
         super.initData()
         mode = intent.getIntExtra(KeyConstant.KEY_ORDER_MODE, MODE_OPPO_ADD)
-        mViewModel.getContractConfig()
         toggleMode()
     }
 
@@ -300,6 +309,9 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
                 mBinding.tvMode.text = "暂无，需新增"
                 mBinding.srlSelectMode.gone()
                 mBinding.llAddMode.visible()
+                if (isCompanyNeedContract)
+                    mBinding.button2.visible()
+                mBinding.button1.visible()
             }
             MODE_OPPO_SELECT ->{
                 page = 1
@@ -307,6 +319,8 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
                 mBinding.tvMode.text = "已有，去选择"
                 mBinding.llAddMode.gone()
                 mBinding.srlSelectMode.visible()
+                mBinding.button2.visible()
+                mBinding.button1.gone()
             }
         }
     }

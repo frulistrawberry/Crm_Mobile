@@ -17,8 +17,10 @@ import com.baihe.lib_framework.base.BaseDialog
 import com.baihe.lib_framework.ext.RecyclerViewExt.divider
 import com.baihe.lib_framework.ext.ResourcesExt.color
 import com.baihe.lib_framework.ext.ViewExt.click
+import com.baihe.lib_framework.storage.StorageManager
 import com.baihe.lib_framework.utils.DpToPx
 import com.baihe.lib_user.UserViewModel
+import com.baihe.lib_user.constant.CacheConstant
 import com.baihe.lib_user.databinding.UserDialogBossSeaBinding
 
 
@@ -64,6 +66,7 @@ class BossSeaDialog {
                            UserServiceProvider.saveUser(user)
                            adapter?.notifyDataSetChanged()
                            onCompanySelectListener?.invoke(id,name)
+                           userViewModel.getContractConfig()
                            dialog?.dismiss()
                        }
                        setData(it)
@@ -74,6 +77,16 @@ class BossSeaDialog {
                        }
                    }
 
+               }
+           }
+
+           userViewModel.contractConfigLiveData.observe(activity){
+               it?.let {
+                   if ("1" == it.is_contract){
+                       StorageManager.put(CacheConstant.USER_COMPANY_NEED_CONTRACT,true)
+                   }else{
+                       StorageManager.put(CacheConstant.USER_COMPANY_NEED_CONTRACT,false)
+                   }
                }
            }
 

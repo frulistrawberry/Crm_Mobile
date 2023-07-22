@@ -188,13 +188,7 @@ class OrderRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
         }
     }
 
-    suspend fun getCompanyConfig():ResultEntity?{
-        return requestResponse {
-            EasyHttp.get(lifecycleOwner)
-                .api(CommonApi(UrlConstant.CONTRACT_CONFIG,null))
-                .execute(object :ResponseClass<BaseResponse<ResultEntity>>() {})
-        }
-    }
+
 
 
 

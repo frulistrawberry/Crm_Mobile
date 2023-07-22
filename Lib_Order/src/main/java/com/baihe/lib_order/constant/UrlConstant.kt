@@ -11,5 +11,4 @@ object UrlConstant {
     const val ORDER_DETAIL = "/owner/order/orderDetails"
     const val ORDER_CHARGE_BACK = "/owner/order/chargeback"
     const val ORDER_SIGN = "/owner/order/newSign"
-    const val CONTRACT_CONFIG = "/owner/customer/config"
 }

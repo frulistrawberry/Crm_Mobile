@@ -23,7 +23,7 @@ import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.provider.ContractServiceProvider
 import com.baihe.lib_common.provider.OpportunityServiceProvider
-import com.baihe.lib_common.ui.activity.FollowDetailActivity
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.ui.adapter.FollowListAdapter
 import com.baihe.lib_common.ui.dialog.MoreActionDialog
 import com.baihe.lib_common.viewmodel.CommonViewModel
@@ -32,12 +32,10 @@ import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.ext.ViewExt.gone
 import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.log.LogUtil
-import com.baihe.lib_framework.utils.ResUtils
 import com.baihe.lib_order.databinding.OrderActivityOrderDetailBinding
 import com.baihe.lib_order.ui.OrderViewModel
 import com.baihe.lib_order.ui.adapter.OrderStatusAdapter
 import com.dylanc.loadingstateview.ViewType
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 
 class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, OrderViewModel>() {
 
@@ -56,9 +54,14 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
     private val orderId by lazy {
         intent.getStringExtra(KEY_ORDER_ID)
     }
+
+    private val isCompanyNeedContract by lazy {
+        UserServiceProvider.isCompanyNeedContract()
+    }
     private var reqId:String? = null;
     private var customerId:String? = null;
     private var contractId:String? = null;
+    private var order_phase:String? = null;
 
     companion object{
         fun start(context:Context,orderId:String){
@@ -102,6 +105,7 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
             detailEntity.opportunityInfo?.let {opportunityInfo->
                 reqId = opportunityInfo.req_id
                 customerId = opportunityInfo.customer_id
+                order_phase = opportunityInfo.order_phase_status
                 mBinding.tvTitle.text = opportunityInfo.title
                 if (opportunityInfo.orderstatus == StatusConstant.ORDER_TO_BE_SIGNED){
                     mBinding.tvPhase.text = opportunityInfo.order_phase_status
@@ -245,7 +249,7 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
 
         mBinding.btnContractMore.click {
             // TODO: 合同详情
-            ContractServiceProvider.toCustomerDetail(this,contractId!!)
+            ContractServiceProvider.toContractDetail(this,contractId!!)
         }
         mBinding.btnPeopleMore.click {
             PeopleDetailActivity.start(this,orderId)
@@ -267,7 +271,14 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
     private fun buttonClick(type: Int) {
         when(type){
             ACTION_SIGN->{
-                SignActivity.start(this,orderId)
+
+                if (order_phase == StatusConstant.ORDER_PHASE_STORE_TO_BE_ENTERED){
+                    PreSignActivity.start(this,reqId!!,orderId)
+                }else if (isCompanyNeedContract){
+                    ContractServiceProvider.toAddOrUpdateContract(this,orderId)
+                }else{
+                    SignActivity.start(this,orderId)
+                }
             }
             ACTION_CONFIRM_ARRIVAL->{
                 ConfirmIndoorActivity.start(this,reqId!!,orderId)

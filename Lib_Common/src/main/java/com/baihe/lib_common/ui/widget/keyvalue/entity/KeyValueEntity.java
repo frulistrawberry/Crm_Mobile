@@ -52,6 +52,16 @@ public class KeyValueEntity implements Serializable {
 
     private String subDefaultValue;
 
+    private String dateFormatter;
+
+    public String getDateFormatter() {
+        return dateFormatter;
+    }
+
+    public void setDateFormatter(String dateFormatter) {
+        this.dateFormatter = dateFormatter;
+    }
+
     public String getSubParamKey() {
         return subParamKey;
     }
