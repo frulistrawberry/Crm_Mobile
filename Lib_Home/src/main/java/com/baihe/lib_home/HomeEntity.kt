@@ -170,6 +170,7 @@ data class WaitingEntity(
     val arrivalTime: String,
     val category: String,
     val data_id: String,
+    val title: String,
     @SerializedName("category_txt")
     val categoryTxt: String,
     @SerializedName("customer_id")

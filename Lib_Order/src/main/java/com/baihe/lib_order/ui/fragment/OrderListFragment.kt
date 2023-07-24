@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.baihe.lib_common.constant.KeyConstant
 import com.baihe.lib_common.constant.KeyConstant.KEY_OPPO_PHASE
 import com.baihe.lib_common.constant.KeyConstant.KEY_ORDER_TYPE
+import com.baihe.lib_common.constant.StatusConstant
 import com.baihe.lib_common.databinding.CommonSrlListBinding
 import com.baihe.lib_common.entity.ButtonTypeEntity
 import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_CALL
@@ -16,7 +17,9 @@ import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_DISPATCH_OR
 import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_FOLLOW
 import com.baihe.lib_common.ext.FragmentExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.FragmentExt.showLoadingDialog
+import com.baihe.lib_common.provider.ContractServiceProvider
 import com.baihe.lib_common.provider.OpportunityServiceProvider
+import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.ui.activity.AddFollowActivity
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmFragment
@@ -30,35 +33,45 @@ class OrderListFragment: BaseMvvmFragment<CommonSrlListBinding, OrderViewModel>(
     private val type by lazy {
         arguments?.getString(KEY_ORDER_TYPE,"0")
     }
+    private val isCompanyNeedContract by lazy {
+        UserServiceProvider.isCompanyNeedContract()
+    }
     private val adapter by lazy {
         OrderListAdapter().apply {
-            onButtonActionListener = {orderId,reqId,customerId, action ->
+            onButtonActionListener = {item, action ->
                 when(action){
                     ButtonTypeEntity.ACTION_SIGN->{
-                        SignActivity.start(this@OrderListFragment,orderId)
+                        if (item.order_phase == StatusConstant.ORDER_PHASE_STORE_TO_BE_ENTERED){
+                            PreSignActivity.start(requireActivity(), item.req_id,item.order_id)
+                        }else if (isCompanyNeedContract){
+                            ContractServiceProvider.toAddOrUpdateContract(requireActivity(),item.order_id)
+                        }else{
+                            SignActivity.start(requireActivity(),item.order_id)
+                        }
                     }
                     ButtonTypeEntity.ACTION_CONFIRM_ARRIVAL->{
-                        ConfirmIndoorActivity.start(this@OrderListFragment, reqId,orderId)
+                        ConfirmIndoorActivity.start(this@OrderListFragment, item.req_id,item.order_id)
                     }
                     ButtonTypeEntity.ACTION_SET_PEOPLE->{
-                        AddPeopleActivity.start(this@OrderListFragment,orderId)
+                        AddPeopleActivity.start(this@OrderListFragment,item.order_id)
                     }
                     ButtonTypeEntity.ACTION_TRANSFER_ORDER->{
-                        OrderTransferActivity.start(this@OrderListFragment,orderId)
+                        OrderTransferActivity.start(this@OrderListFragment,item.order_id)
                     }
                     ButtonTypeEntity.ACTION_EDIT_ORDER->{
-                        OpportunityServiceProvider.toEditOppo(requireContext(), reqId, customerId)
+                        OpportunityServiceProvider.toEditOppo(requireContext(), item.req_id, item.customer_id,"编辑订单")
                     }
                     ButtonTypeEntity.ACTION_CHARGE_ORDER->{
-                        OrderChargebackActivity.start(this@OrderListFragment,orderId)
+                        OrderChargebackActivity.start(this@OrderListFragment,item.order_id)
                     }
                     ButtonTypeEntity.ACTION_EDIT_CONTRACT->{
                     }
                     ACTION_FOLLOW ->{
-                        com.baihe.lib_order.ui.activity.AddFollowActivity.start(this@OrderListFragment,reqId!!,customerId!!,orderId)
+                        com.baihe.lib_order.ui.activity.AddFollowActivity.start(requireActivity(),
+                            item.req_id, item.customer_id,item.order_id)
                     }
                     ACTION_CALL->{
-                        commonViewModel.call(customerId)
+                        commonViewModel.call(item.customer_id)
                     }
                 }
 

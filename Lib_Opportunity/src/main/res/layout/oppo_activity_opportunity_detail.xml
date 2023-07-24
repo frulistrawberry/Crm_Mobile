@@ -152,6 +152,7 @@
                             android:layout_weight="1"
                             android:text="订单信息" />
                         <com.baihe.lib_common.ui.widget.font.FontTextView
+                            android:id="@+id/btn_order"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/font_light_12_4A4C5C"

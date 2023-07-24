@@ -237,7 +237,7 @@ public class KeyValueLayout extends LinearLayout {
             kv_key_tv.setText(key + (keyColon ? "：" : ""));
         }
         if (kv_value_tv != null) {
-            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() :!TextUtils.isEmpty(keyValueEntity.getDefaultValue())? keyValueEntity.getDefaultValue(): "未填写";
+            String value = !TextUtils.isEmpty(keyValueEntity.getVal()) ? keyValueEntity.getVal() :!TextUtils.isEmpty(keyValueEntity.getDefaultValue())? keyValueEntity.getDefaultValue(): !TextUtils.isEmpty(keyValueEntity.getDefaultvalue())?keyValueEntity.getDefaultvalue():"未填写";
             kv_value_tv.setText(value);
             if (keyValueEntity.getAttach() != null) {
                 kv_value_tv.setText("");

@@ -24,18 +24,18 @@ ext {
             frameworkLibVersion    :'1.0.0.0-beta-9-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-4-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-3-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-beta-39-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-40-SNAPSHOT',
 
 
-            userLibVersion         :'1.0.0.0-beta-12-SNAPSHOT',
-            homeLibVersion         :'1.0.0.0-beta-15-SNAPSHOT',
-            loginLibVersion        :'1.0.0.0-beta-10-SNAPSHOT',
-            customerLibVersion     :'1.0.0.0-beta-13-SNAPSHOT',
-            messageLibVersion      :'1.0.0.0-beta-10-SNAPSHOT',
-            orderLibVersion        :'1.0.0.0-beta-5-SNAPSHOT',
-            opportunityLibVersion  :'1.0.0.0-beta-11-SNAPSHOT',
-            contractLibVersion     :'1.0.0.0-beta-5-SNAPSHOT',
-            mainLibVersion         :'1.0.0.0-beta-2-SNAPSHOT',
+            userLibVersion         :'1.0.0.0-beta-13-SNAPSHOT',
+            homeLibVersion         :'1.0.0.0-beta-16-SNAPSHOT',
+            loginLibVersion        :'1.0.0.0-beta-11-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-beta-14-SNAPSHOT',
+            messageLibVersion      :'1.0.0.0-beta-11-SNAPSHOT',
+            orderLibVersion        :'1.0.0.0-beta-8-SNAPSHOT',
+            opportunityLibVersion  :'1.0.0.0-beta-12-SNAPSHOT',
+            contractLibVersion     :'1.0.0.0-beta-6-SNAPSHOT',
+            mainLibVersion         :'1.0.0.0-beta-3-SNAPSHOT',
 
 
             //test

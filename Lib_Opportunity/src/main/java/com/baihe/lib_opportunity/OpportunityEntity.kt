@@ -55,6 +55,10 @@ data class OpportunityDetailEntity(
     val create_time:String?,
     val update_time:String?,
     val follow_create:String?,
+    val viewcustomer:Boolean,
+    val vieworder:Boolean,
+    val viewReaser:Boolean,
+    val viewoppotion:Boolean,
     val follow:List<FollowEntity>?
 ){
     fun toBasicShowArray():List<KeyValueEntity>{
@@ -63,8 +67,11 @@ data class OpportunityDetailEntity(
             add(KeyValueEntity().apply {
                 key = "客户姓名"
                 `val` = this@OpportunityDetailEntity.name
-                text = "查看客户"
-                action = "jump"
+                if (viewcustomer){
+                    text = "查看客户"
+                    action = "jump"
+                }
+
 
             })
             add(KeyValueEntity().apply {
@@ -174,6 +181,9 @@ data class OpportunityDetailEntity(
 
     fun toReserveShowArray():List<KeyValueEntity>{
         val kvList = mutableListOf<KeyValueEntity>()
+        if (reserve == null || reserve.arrivalTime.isNullOrEmpty()){
+            return kvList
+        }
         kvList.apply {
             add(KeyValueEntity().apply {
                 key = "计划到店时间"

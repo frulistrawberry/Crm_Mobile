@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.baihe.lib_common.constant.KeyConstant
 import com.baihe.lib_common.constant.KeyConstant.KEY_CUSTOMER_ID
 import com.baihe.lib_common.constant.KeyConstant.KEY_OPPO_ID
+import com.baihe.lib_common.constant.KeyConstant.KEY_TITLE
 import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
@@ -25,16 +26,21 @@ class AddOrUpdateOpportunityActivity:
         intent.getStringExtra(KEY_OPPO_ID)
     }
 
+    private val title:String? by lazy {
+        intent.getStringExtra(KEY_TITLE)
+    }
+
     private var customerId:String? = null
 
 
     companion object{
         @JvmStatic
         fun start(context: Context, oppoId:String?=null
-                  ,customerId:String?=null){
+                  ,customerId:String?=null,title:String?=null){
             val intent = Intent(context,AddOrUpdateOpportunityActivity::class.java).apply {
                 putExtra(KEY_OPPO_ID,oppoId)
                 putExtra(KEY_CUSTOMER_ID,customerId)
+                putExtra(KEY_TITLE,title)
             }
             if (context is Activity)
                 context.startActivityForResult(intent, RequestCode.REQUEST_ADD_CUSTOMER)
@@ -151,6 +157,8 @@ class AddOrUpdateOpportunityActivity:
                 "新增销售机会"
             else
                 "编辑销售机会"
+            if (!title.isNullOrEmpty())
+                title
         }
         mBinding.srlRoot.setEnableLoadMore(false)
     }

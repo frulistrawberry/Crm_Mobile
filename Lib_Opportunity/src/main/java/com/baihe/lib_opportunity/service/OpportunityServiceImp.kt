@@ -16,8 +16,8 @@ import com.baihe.lib_opportunity.ui.activity.OpportunityListActivity
 
 @Route(path = RoutePath.OPPORTUNITY_SERVICE_OPPORTUNITY)
 class OpportunityServiceImp:IOpportunityService {
-    override fun createOrUpdateOpportunity(context: Context, oppoId: String?, customerId: String?) {
-        AddOrUpdateOpportunityActivity.start(context,oppoId,customerId)
+    override fun createOrUpdateOpportunity(context: Context, oppoId: String?, customerId: String?,title:String?) {
+        AddOrUpdateOpportunityActivity.start(context,oppoId,customerId,title)
     }
 
     override suspend fun addOpportunity(lifecycleOwner: LifecycleOwner,params: LinkedHashMap<String, Any?>): ResultEntity? {
@@ -49,8 +49,8 @@ class OpportunityServiceImp:IOpportunityService {
         OpportunityDetailActivity.start(context,id)
     }
 
-    override fun toEditOppo(context: Context, id: String,customerId: String) {
-        AddOrUpdateOpportunityActivity.start(context,id,customerId)
+    override fun toEditOppo(context: Context, id: String,customerId: String,title: String?) {
+        AddOrUpdateOpportunityActivity.start(context,id,customerId,title)
     }
 
     override fun toOpportunityList(context: Context) {

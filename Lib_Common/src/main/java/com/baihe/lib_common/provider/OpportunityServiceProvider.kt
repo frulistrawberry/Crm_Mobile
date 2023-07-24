@@ -36,13 +36,13 @@ object OpportunityServiceProvider {
     /**
      * 编辑机会
      */
-    fun toEditOppo(context: Context,reqId: String,customerId: String) = service.toEditOppo(context,reqId,customerId)
+    fun toEditOppo(context: Context,reqId: String,customerId: String,title:String?=null) = service.toEditOppo(context,reqId,customerId,title)
 
     /**
      * 创建机会
      */
     @JvmStatic
-    fun createOrUpdateOpportunity(context: Context,oppoId:String?=null, customerId:String?=null) = service.createOrUpdateOpportunity(context,oppoId,customerId)
+    fun createOrUpdateOpportunity(context: Context,oppoId:String?=null, customerId:String?=null,title:String?=null) = service.createOrUpdateOpportunity(context,oppoId,customerId,title)
 
     @JvmStatic
     suspend fun addOpportunity(lifecycleOwner: LifecycleOwner, params:LinkedHashMap<String,Any?>):ResultEntity? = service.addOpportunity(lifecycleOwner,params)

@@ -24,7 +24,7 @@ data class OpportunityListItemEntity(
     val nextContactTime:String?,
     @SerializedName("arrival_time")
     val arrivalTime:String?,
-    @SerializedName("reserve_time")
+    @SerializedName("est_arrival_time")
     val reserveTime:String?,
     @SerializedName("req_phase")
     val reqPhase:String,

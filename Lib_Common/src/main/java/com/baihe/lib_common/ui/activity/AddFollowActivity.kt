@@ -21,6 +21,7 @@ import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
+import com.baihe.lib_framework.ext.ViewExt.visible
 import com.baihe.lib_framework.manager.AppManager
 import com.baihe.lib_framework.utils.DpToPx
 import com.baihe.lib_framework.utils.ViewUtils
@@ -97,6 +98,7 @@ class AddFollowActivity: BaseMvvmActivity<ActivityAddFollowBinding, CommonViewMo
             title = "录入跟进"
             navIcon = R.mipmap.navigation_icon
         }
+        mBinding.llAttachment.visible()
 
         val kvList = mutableListOf<KeyValueEntity>()
         if (orderStatus == null || orderStatus == "0"||orderStatus == "3"||orderStatus == "4"){

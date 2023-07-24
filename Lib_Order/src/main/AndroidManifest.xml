@@ -16,5 +16,6 @@
         <activity android:name=".ui.activity.OrderTransferActivity" />
         <activity android:name=".ui.activity.OrderChargebackActivity" />
         <activity android:name=".ui.activity.SignActivity" />
+        <activity android:name=".ui.activity.PreSignActivity" />
     </application>
 </manifest>

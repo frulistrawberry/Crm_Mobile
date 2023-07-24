@@ -13,9 +13,9 @@ interface IOpportunityService : IProvider {
     fun toOpportunityList(context:Context)
 
     fun toOpportunityDetail(context: Context,id:String)
-    fun toEditOppo(context: Context,reqId:String,customerId: String)
+    fun toEditOppo(context: Context,reqId:String,customerId: String,title:String?=null)
 
-    fun createOrUpdateOpportunity(context: Context,oppoId:String?=null,customerId:String?=null)
+    fun createOrUpdateOpportunity(context: Context,oppoId:String?=null,customerId:String?=null,title:String?=null)
     suspend fun addOpportunity(lifecycleOwner: LifecycleOwner,params:LinkedHashMap<String,Any?>): ResultEntity?
 
     suspend fun updateOpportunity(lifecycleOwner: LifecycleOwner,params:LinkedHashMap<String,Any?>):Any?

@@ -143,6 +143,10 @@ data class OrderListItemEntity(
             key = "最新沟通记录"
             `val` = follow_content
         })
+        showArray.add(KeyValueEntity().apply {
+            key = "跟进人"
+            `val` = owner_id_name
+        })
         return showArray
     }
 
@@ -416,6 +420,8 @@ data class OrderDetailEntity(
     }
     fun contractShowArray():List<KeyValueEntity>?{
         contractInfo?.let {
+            if (contractInfo.id.isNullOrEmpty())
+                return null
             val kvList = mutableListOf<KeyValueEntity>()
             kvList.add(KeyValueEntity().apply {
                 key = "合同编号"
@@ -442,10 +448,10 @@ data class OrderDetailEntity(
                         name = "签约"
                         type = ACTION_SIGN
                     })
-                    buttons.add(ButtonTypeEntity().apply {
-                        name = "写跟进"
-                        type = ACTION_FOLLOW
-                    })
+//                    buttons.add(ButtonTypeEntity().apply {
+//                        name = "写跟进"
+//                        type = ACTION_FOLLOW
+//                    })
                 }
                 ORDER_PHASE_EFFECTIVE_ARRIVAL->{
                     buttons.add(ButtonTypeEntity().apply {
@@ -482,10 +488,10 @@ data class OrderDetailEntity(
                         name = "签约"
                         type = ACTION_SIGN
                     })
-                    buttons.add(ButtonTypeEntity().apply {
-                        name = "写跟进"
-                        type = ACTION_FOLLOW
-                    })
+//                    buttons.add(ButtonTypeEntity().apply {
+//                        name = "写跟进"
+//                        type = ACTION_FOLLOW
+//                    })
                 }
                 ORDER_PHASE_CUSTOMER_TBD->{
                     buttons.add(ButtonTypeEntity().apply {
@@ -508,10 +514,10 @@ data class OrderDetailEntity(
                         name = "签约"
                         type = ACTION_SIGN
                     })
-                    buttons.add(ButtonTypeEntity().apply {
-                        name = "写跟进"
-                        type = ACTION_FOLLOW
-                    })
+//                    buttons.add(ButtonTypeEntity().apply {
+//                        name = "写跟进"
+//                        type = ACTION_FOLLOW
+//                    })
                 }
 
 
@@ -650,8 +656,8 @@ data class OrderDetailEntity(
                 ORDER_CANCELED,
                 ORDER_CHARGED->{
                     buttons.add(ButtonTypeEntity().apply {
-                        name = "写跟进"
-                        type = ACTION_FOLLOW
+                        name = "编辑订单"
+                        type = ACTION_EDIT_ORDER
                     })
                 }
             }

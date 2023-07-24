@@ -15,7 +15,7 @@ import com.baihe.lib_order.databinding.OrderListItemBinding
 
 class OrderListAdapter: BaseRecyclerViewAdapter<OrderListItemEntity, OrderListItemBinding>() {
 
-    var onButtonActionListener:((orderId:String,oppoId:String,customerId:String,type:Int)->Unit)? =null
+    var onButtonActionListener:((item:OrderListItemEntity,type:Int)->Unit)? =null
     override fun getViewBinding(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
@@ -56,7 +56,7 @@ class OrderListAdapter: BaseRecyclerViewAdapter<OrderListItemEntity, OrderListIt
                         holder.binding.llButtons.getChildAt(index+1) as TextView
                     button.text = buttonEntity.name
                     button.click {
-                        onButtonActionListener?.invoke(item.order_id,item.req_id,item.customer_id,buttonEntity.type)
+                        onButtonActionListener?.invoke(item,buttonEntity.type)
                     }
                     button.visible()
 

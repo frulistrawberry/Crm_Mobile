@@ -290,7 +290,7 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
                 OrderTransferActivity.start(this,orderId)
             }
             ACTION_EDIT_ORDER->{
-                OpportunityServiceProvider.toEditOppo(this,reqId!!,customerId!!)
+                OpportunityServiceProvider.toEditOppo(this,reqId!!,customerId!!,"编辑订单")
             }
             ACTION_CHARGE_ORDER->{
                 OrderChargebackActivity.start(this,orderId)

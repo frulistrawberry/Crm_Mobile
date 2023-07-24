@@ -14,6 +14,7 @@ import com.baihe.lib_contract.ContractViewModel
 import com.baihe.lib_contract.databinding.ContractActivityContractDetailBinding
 import com.baihe.lib_framework.base.BaseMvvmActivity
 import com.baihe.lib_framework.ext.ViewExt.click
+import com.baihe.lib_framework.ext.ViewExt.gone
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -74,6 +75,9 @@ class PreviewContractActivity:
             title = "合同预览"
         }
         mBinding.btnCommit.text = "确认提交"
+        mBinding.srlRoot.setEnableLoadMore(false)
+        mBinding.srlRoot.setEnableRefresh(false)
+        mBinding.llBasic.gone()
     }
 
     override fun initListener() {

@@ -60,6 +60,7 @@ public class KeyValueEditLayout extends LinearLayout {
     public enum ItemType {
         INPUT("input"),
         SINGLE_SELECT("select"),
+        PLAN_TYPE("planType"),
         MULTI_SELECT("multipleSelect"),
 
         AMOUNT("amount"),
@@ -303,8 +304,9 @@ public class KeyValueEditLayout extends LinearLayout {
                         }
                         break;
                     case CONTACT:
-                        String phone = keyValueEntity.getPhone();
                         String wechat = keyValueEntity.getWechat();
+
+                        String phone = keyValueEntity.getSeePhone();
 
                         if (TextUtils.isEmpty(wechat)&&TextUtils.isEmpty(phone) && "1".equals(keyValueEntity.getIs_true())) {
                             TipsToast.INSTANCE.showTips("联系方式至少填一项");
@@ -316,7 +318,7 @@ public class KeyValueEditLayout extends LinearLayout {
                             }
                             else {
                                 TipsToast.INSTANCE.showTips("手机号格式不正确");
-                                break;
+                                return null;
                             }
                         }
                         if (!TextUtils.isEmpty(keyValueEntity.getWechat())) {
@@ -707,7 +709,7 @@ public class KeyValueEditLayout extends LinearLayout {
                 kv_edit_value_text_et.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
             case AMOUNT:
-                kv_edit_value_text_et.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                kv_edit_value_text_et.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 break;
 
         }
@@ -835,16 +837,27 @@ public class KeyValueEditLayout extends LinearLayout {
         } else {
             kv_edit_key_required_tv.setVisibility(View.INVISIBLE);
         }
-        String value = keyValueEntity.getDefaultValue();
+        String defaultValue = keyValueEntity.getDefaultValue();
+        String value = keyValueEntity.getValue();
         String phone = "";
         String wechat = "";
+        String seePhone = "";
 
-        if (!TextUtils.isEmpty(value) && value.contains(SEPARATOR) && value.split(SEPARATOR).length > 0 && value.split(SEPARATOR).length <= 2) {
-            if (value.split(SEPARATOR).length == 1) {
-                phone = value.split(SEPARATOR)[0];
+        if (!TextUtils.isEmpty(defaultValue) && defaultValue.contains(SEPARATOR) && defaultValue.split(SEPARATOR).length > 0 && defaultValue.split(SEPARATOR).length <= 2) {
+            if (defaultValue.split(SEPARATOR).length == 1) {
+                phone = defaultValue.split(SEPARATOR)[0];
                 wechat = "";
             } else {
-                phone = value.split(SEPARATOR)[0];
+                phone = defaultValue.split(SEPARATOR)[0];
+                wechat = defaultValue.split(SEPARATOR)[1];
+            }
+        }
+        if (!TextUtils.isEmpty(value) && value.contains(SEPARATOR) && value.split(SEPARATOR).length > 0 && value.split(SEPARATOR).length <= 2) {
+            if (value.split(SEPARATOR).length == 1) {
+                seePhone = value.split(SEPARATOR)[0];
+                wechat = "";
+            } else {
+                seePhone = value.split(SEPARATOR)[0];
                 wechat = value.split(SEPARATOR)[1];
             }
         }
@@ -884,6 +897,7 @@ public class KeyValueEditLayout extends LinearLayout {
 
         }
         keyValueEntity.setPhone(phone);
+        keyValueEntity.setSeePhone(seePhone);
         keyValueEntity.setWechat(wechat);
 
         kv_edit_value_phone_et.addTextChangedListener(new TextWatcher() {
@@ -1070,7 +1084,7 @@ public class KeyValueEditLayout extends LinearLayout {
      */
     private void setItemEvent(KeyValueEntity keyValueEntity) {
         ItemType itemType = getItemType(keyValueEntity);
-        if (ItemType.SINGLE_SELECT == itemType) {  //单选
+        if (ItemType.SINGLE_SELECT == itemType || ItemType.PLAN_TYPE == itemType) {  //单选
             singleSelectAction(keyValueEntity);
         }else if (ItemType.MULTI_SELECT == itemType){
             multiSelectAction(keyValueEntity);
@@ -1794,7 +1808,7 @@ public class KeyValueEditLayout extends LinearLayout {
             return ItemType.INPUT;
         } else if (ItemType.CONTACT.valueOf().equals(type)) {
             return ItemType.CONTACT;
-        } else if (ItemType.SINGLE_SELECT.valueOf().equals(type)) {
+        } else if (ItemType.SINGLE_SELECT.valueOf().equals(type)||ItemType.PLAN_TYPE.valueOf().equals(type)) {
             return ItemType.SINGLE_SELECT;
         } else if (ItemType.CHANNEL.valueOf().equals(type)) {
             return ItemType.CHANNEL;

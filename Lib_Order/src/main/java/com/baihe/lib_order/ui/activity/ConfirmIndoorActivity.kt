@@ -86,7 +86,7 @@ class ConfirmIndoorActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderVie
             add(KeyValueEntity().also { item->
                 item.name = "到店时间"
                 item.is_channge = "2"
-                item.is_true = "2"
+                item.is_true = "1"
                 item.is_open = "1"
                 item.type = "datetime"
                 item.paramKey = "arrival_time"

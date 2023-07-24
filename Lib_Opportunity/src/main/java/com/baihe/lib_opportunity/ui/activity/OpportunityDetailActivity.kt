@@ -18,6 +18,7 @@ import com.baihe.lib_common.entity.ButtonTypeEntity.Companion.ACTION_TRANSFER_OP
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.provider.CustomerServiceProvider
+import com.baihe.lib_common.provider.OrderServiceProvider
 import com.baihe.lib_common.ui.activity.AddFollowActivity
 import com.baihe.lib_common.ui.activity.FollowDetailActivity
 import com.baihe.lib_common.ui.adapter.FollowListAdapter
@@ -54,6 +55,7 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
 
      var orderStatus:String?=null
      var customerId:String?=null
+    var canSeeCustomer:Boolean = false
 
     companion object{
         fun start(context: Context, oppoId:String){
@@ -119,7 +121,7 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
                 mBinding.tvPhase.gone()
             }
             mBinding.kvlBasic.setData(it.toBasicShowArray())
-            if (it.reserve != null) {
+            if (it.toReserveShowArray().isNotEmpty()) {
                 mBinding.kvlReq.setData(it.toReserveShowArray())
                 mBinding.llReq.visible()
             }else{
@@ -169,6 +171,25 @@ class OpportunityDetailActivity:BaseMvvmActivity<OppoActivityOpportunityDetailBi
             mBinding.btnReqMore.click { view->
                 FollowDetailActivity.start(this,it?.reserve?.id?:"")
             }
+            mBinding.btnOrder.click {view->
+                it?.order?.id?.let {
+                    OrderServiceProvider.toOrderDetail(this, it)
+                }
+
+            }
+
+            if (it.viewoppotion)
+                mBinding.btnSubDetail.visible()
+            else
+                mBinding.btnSubDetail.gone()
+            if (it.viewReaser){
+                mBinding.btnReqMore.visible()
+            }else
+                mBinding.btnReqMore.gone()
+            if (it.vieworder){
+                mBinding.btnOrder.visible()
+            }else
+                mBinding.btnOrder.gone()
 
 
 

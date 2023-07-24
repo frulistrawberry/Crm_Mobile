@@ -119,6 +119,8 @@ class DispatchOrderActivity:
                     TipsToast.showTips("请选择是否到店")
                     return@click
                 }
+                params["reqId"] = reqId
+                params["customerId"] = customerId
                 mViewModel.dispatchOrder(params)
             }
         }

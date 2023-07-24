@@ -25,7 +25,7 @@ class ContractListAdapter:
         item?.let {
             holder.binding.tvAmount.text = item.sign_amount
             holder.binding.tvTitle.text = item.contract_alias
-            holder.binding.tvNum.text = item.system_no
+            holder.binding.tvNum.text = "合同编号：${item.system_no}"
             holder.binding.kvlContract.setData(item.showArray())
         }
 

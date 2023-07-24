@@ -54,6 +54,16 @@ public class KeyValueEntity implements Serializable {
 
     private String dateFormatter;
 
+    private String defaultvalue;
+
+    public String getDefaultvalue() {
+        return defaultvalue;
+    }
+
+    public void setDefaultvalue(String defaultvalue) {
+        this.defaultvalue = defaultvalue;
+    }
+
     public String getDateFormatter() {
         return dateFormatter;
     }
@@ -87,9 +97,11 @@ public class KeyValueEntity implements Serializable {
     }
 
     /**
-     * 本地标记手机号
+     * 本地标记手机号(密文)
      */
     private String phone;
+
+    private String seePhone;
     /**
      * 本地标记微信号
      */
@@ -182,6 +194,14 @@ public class KeyValueEntity implements Serializable {
 
     public void setAttach(List<String> attach) {
         this.attach = attach;
+    }
+
+    public String getSeePhone() {
+        return seePhone;
+    }
+
+    public void setSeePhone(String seePhone) {
+        this.seePhone = seePhone;
     }
 
     //---------------------------------KeyValueLayout-------------------//

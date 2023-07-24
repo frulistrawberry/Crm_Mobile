@@ -135,7 +135,7 @@ data class ContractDetailEntity(
         })
         kvList.add(KeyValueEntity().apply {
             key = "执行时间"
-            `val` = ""
+            `val` = wedding_date
         })
         kvList.add(KeyValueEntity().apply {
             key = "选择回款计划"
@@ -163,7 +163,7 @@ data class ContractDetailEntity(
         })
         kvList.add(KeyValueEntity().apply {
             key = "回款时间"
-            `val` = ""
+            `val` = plan_receivables_date3
         })
         kvList.add(KeyValueEntity().apply {
             key = "场地名称"
@@ -175,11 +175,11 @@ data class ContractDetailEntity(
         })
         kvList.add(KeyValueEntity().apply {
             key = "档期日期"
-            `val` = dq_endTime
+            `val` = wedding_date
         })
         kvList.add(KeyValueEntity().apply {
             key = "档期时段"
-            `val` = schedule
+            `val` = schedule_txt
         })
         kvList.add(KeyValueEntity().apply {
             key = "婚礼桌数"

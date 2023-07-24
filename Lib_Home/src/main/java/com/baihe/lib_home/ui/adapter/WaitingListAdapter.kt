@@ -38,7 +38,7 @@ class WaitingListAdapter(private val context:Context): BaseRecyclerViewAdapter<W
         holder: BaseBindViewHolder<HomeItemWaitingListBinding>,
         item: WaitingEntity?,
         position: Int) {
-        holder.binding.tvTitle.text = item?.name
+        holder.binding.tvTitle.text = item?.title
         if (item?.type == "4")
             holder.binding.tvOverdue.visible()
         else
