@@ -12,6 +12,8 @@ import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ui.widget.keyvalue.KeyValueEditLayout
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.base.BaseMvvmActivity
+import com.baihe.lib_framework.ext.TimeExt.formattedDateTime
+import com.baihe.lib_framework.ext.TimeExt.formattedTime
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_order.ui.OrderViewModel
 
@@ -84,12 +86,15 @@ class ConfirmIndoorActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderVie
             })
             //进店时间
             add(KeyValueEntity().also { item->
+                val dateTime = System.currentTimeMillis().formattedDateTime()
                 item.name = "到店时间"
                 item.is_channge = "2"
                 item.is_true = "1"
                 item.is_open = "1"
                 item.type = "datetime"
                 item.paramKey = "arrival_time"
+                item.value = dateTime
+                item.defaultValue = dateTime
             })
             add(KeyValueEntity().also { item->
                 item.name = "是否需要回访"

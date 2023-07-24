@@ -30,7 +30,7 @@ afterEvaluate{
                 Arr(MavenPublication) {
                     groupId 'com.wedding.crm.lib'
                     artifactId 'contract'
-                    version '1.0.0.0-beta-6-SNAPSHOT'
+                    version '1.0.0.0-beta-8-SNAPSHOT'
                     afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
                     artifact generateSourcesJar
                     pom.withXml {

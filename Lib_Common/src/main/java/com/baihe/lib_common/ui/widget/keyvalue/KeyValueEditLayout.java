@@ -770,6 +770,12 @@ public class KeyValueEditLayout extends LinearLayout {
             @Override
             public void afterTextChanged(Editable s) {
                 String value = s.toString().trim();
+                if(getItemType(keyValueEntity)==ItemType.PHONE){
+                    if (value.length()>11){
+                        kv_edit_value_text_et.setText(value.substring(0,11));
+                        kv_edit_value_text_et.setSelection(11);
+                    }
+                }
                 keyValueEntity.setDefaultValue(value);
                 keyValueEntity.setValue(value);
                 if (listener != null) {
@@ -915,6 +921,7 @@ public class KeyValueEditLayout extends LinearLayout {
             public void afterTextChanged(Editable s) {
                 String phone = s.toString().trim();
                 keyValueEntity.setPhone(phone);
+                keyValueEntity.setSeePhone(phone);
                 keyValueEntity.setValue(phone + SEPARATOR + keyValueEntity.getWechat());
                 keyValueEntity.setDefaultValue(keyValueEntity.getValue());
                 if (listener != null) {
@@ -1125,6 +1132,7 @@ public class KeyValueEditLayout extends LinearLayout {
             return;
         }
         RecyclerView rvImages = itemView.findViewById(R.id.rv_image);
+        rvImages.getLayoutParams().width = DpToPx.dpToPx(188);
         AttachImageAdapter adapter = (AttachImageAdapter) rvImages.getAdapter();
         assert adapter != null;
         View addImageView = Objects.requireNonNull(adapter.getFooterBinding()).findViewById(R.id.imageview);

@@ -21,20 +21,20 @@ ext {
 
     dependVersion = [
             //libs
-            frameworkLibVersion    :'1.0.0.0-beta-9-SNAPSHOT',
+            frameworkLibVersion    :'1.0.0.0-beta-10-SNAPSHOT',
             networkLibVersion      :'1.0.0.0-beta-4-SNAPSHOT',
             imageLoaderLibVersion  :'1.0.0.0-beta-3-SNAPSHOT',
-            commonLibVersion       :'1.0.0.0-beta-40-SNAPSHOT',
+            commonLibVersion       :'1.0.0.0-beta-41-SNAPSHOT',
 
 
             userLibVersion         :'1.0.0.0-beta-13-SNAPSHOT',
             homeLibVersion         :'1.0.0.0-beta-16-SNAPSHOT',
             loginLibVersion        :'1.0.0.0-beta-11-SNAPSHOT',
-            customerLibVersion     :'1.0.0.0-beta-14-SNAPSHOT',
+            customerLibVersion     :'1.0.0.0-beta-15-SNAPSHOT',
             messageLibVersion      :'1.0.0.0-beta-11-SNAPSHOT',
-            orderLibVersion        :'1.0.0.0-beta-8-SNAPSHOT',
-            opportunityLibVersion  :'1.0.0.0-beta-12-SNAPSHOT',
-            contractLibVersion     :'1.0.0.0-beta-6-SNAPSHOT',
+            orderLibVersion        :'1.0.0.0-beta-9-SNAPSHOT',
+            opportunityLibVersion  :'1.0.0.0-beta-13-SNAPSHOT',
+            contractLibVersion     :'1.0.0.0-beta-7-SNAPSHOT',
             mainLibVersion         :'1.0.0.0-beta-3-SNAPSHOT',
 
 
