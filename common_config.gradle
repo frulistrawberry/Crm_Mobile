@@ -82,8 +82,8 @@ android {
 }
 
 dependencies {
-    implementation rootProject.depsLibs.commonLib
-//    api project(path:':Lib_Common')
+//    implementation rootProject.depsLibs.commonLib
+    api project(path:':Lib_Common')
     implementation rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 }
