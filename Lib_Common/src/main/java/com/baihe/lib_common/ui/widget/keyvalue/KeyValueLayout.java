@@ -25,7 +25,6 @@ import com.baihe.lib_common.ui.widget.font.FontStyle;
 import com.baihe.lib_common.ui.widget.font.FontTextView;
 import com.baihe.lib_framework.utils.DpToPx;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class KeyValueLayout extends LinearLayout {
@@ -89,16 +88,16 @@ public class KeyValueLayout extends LinearLayout {
     private void init(Context context, AttributeSet attrs, int defStyleAttr){
         this.context = context;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KeyValueLayout, defStyleAttr, 0);
-        kvSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_kv_space, DpToPx.dpToPx( 4));
-        itemSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_item_space, DpToPx.dpToPx(12));
-        keyTextSize = DpToPx.pxToSp( typedArray.getDimension(R.styleable.KeyValueLayout_kv_key_textSize, DpToPx.spToPx( 14)));
+      kvSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_kv_space, Utils.dp2pxForInt(context, 4));
+
+        itemSpace = typedArray.getDimensionPixelSize(R.styleable.KeyValueLayout_kv_item_space, Utils.dp2pxForInt(context, 12));
+        keyTextSize = Utils.pxTosp(context, typedArray.getDimension(R.styleable.KeyValueLayout_kv_key_textSize, Utils.sp2px(context, 14)));
         keyTextColor = typedArray.getColor(R.styleable.KeyValueLayout_kv_key_textColor, Color.parseColor("#4A4C5C"));
         keyColon = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_colon, true);
         keyEqualWidth = typedArray.getBoolean(R.styleable.KeyValueLayout_kv_key_equal_width, true);
-        valueTextSize = DpToPx.pxToSp( typedArray.getDimension(R.styleable.KeyValueLayout_kv_value_textSize, DpToPx.spToPx( 14)));
+        valueTextSize = Utils.pxTosp(context, typedArray.getDimension(R.styleable.KeyValueLayout_kv_value_textSize, Utils.sp2px(context, 14)));
         valueTextColor = typedArray.getColor(R.styleable.KeyValueLayout_kv_value_textColor, Color.parseColor("#4A4C5C"));
         valueMaxLine = typedArray.getInteger(R.styleable.KeyValueLayout_kv_value_maxLine, 0);
-
         int keyFontStyleValue = typedArray.getInt(R.styleable.KeyValueLayout_kv_key_textStyle, FontStyle.LIGHT.valueOf());
         switch (keyFontStyleValue) {
             case FontTextView.LIGHT_VALUE:
@@ -167,11 +166,13 @@ public class KeyValueLayout extends LinearLayout {
             return;
         int childCount = getChildCount();
         int dataSize = kvList.size();
-        if (childCount > dataSize) {  //清除多余数据子View
+        if (childCount > dataSize) {
+            //清除多余数据子View
             for (int i = childCount - 1; i >= dataSize; i--) {
                 removeViewAt(i);
             }
-        } else if (childCount < dataSize) { //数据子View不够用，添加
+        } else if (childCount < dataSize) {
+            //数据子View不够用，添加
             for (int i = childCount; i < dataSize; i++) {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                 if (i > 0) {
@@ -216,10 +217,12 @@ public class KeyValueLayout extends LinearLayout {
         keyLayoutParams.rightMargin = kvSpace;
         RelativeLayout kv_value_rl = childView.findViewById(R.id.kv_value_rl);
         LinearLayout.LayoutParams valueLayoutParams = (LayoutParams) kv_value_rl.getLayoutParams();
-        if (keyTextSize == valueTextSize) { //一样大top
+        if (keyTextSize == valueTextSize) {
+            //一样大top
             keyLayoutParams.gravity = Gravity.TOP;
             valueLayoutParams.gravity = Gravity.TOP;
-        } else { //不一样居中
+        } else {
+            //不一样居中
             keyLayoutParams.gravity = Gravity.CENTER_VERTICAL;
             valueLayoutParams.gravity = Gravity.CENTER_VERTICAL;
         }
@@ -293,21 +296,18 @@ public class KeyValueLayout extends LinearLayout {
             }
         }
 
-        setAction(view, kv_value_right_ll, keyValueEntity);
+        setAction(kv_value_right_ll, keyValueEntity);
     }
 
-    private void setAction(View itemView, LinearLayout rightView, KeyValueEntity keyValueEntity) {
+    private void setAction(LinearLayout rightView, KeyValueEntity keyValueEntity) {
         String action = keyValueEntity.getAction();
-        rightView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ItemAction itemAction = getItemAction(action);
-                if (itemAction == null) {
-                    return;
-                }
-                if (listener!=null){
-                    listener.onEvent(keyValueEntity,itemAction);
-                }
+        rightView.setOnClickListener(view -> {
+            ItemAction itemAction = getItemAction(action);
+            if (itemAction == null) {
+                return;
+            }
+            if (listener!=null){
+                listener.onEvent(keyValueEntity,itemAction);
             }
         });
 

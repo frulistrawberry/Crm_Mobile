@@ -24,7 +24,7 @@ class SelectCompanyUserDialog {
             DialogBottomSelectBinding.inflate(LayoutInflater.from(context))
         }
         private val adapter by lazy{
-            SingleSelectAdapter()
+            SingleSelectAdapter(context)
         }
         private val option by lazy {
             mutableListOf<KeyValueEntity>()

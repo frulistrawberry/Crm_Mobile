@@ -30,7 +30,7 @@ class MyInfoActivity : BaseMvvmActivity<UserActivityInfoBinding, UserViewModel>(
             val mineInfoItemLayout = MyInfoItemLayout(this)
             mineInfoItemLayout.setTitle(titleItems[i])
             if (i == 0) {
-                userService.getUserInfo()?.let { mineInfoItemLayout.setTvContent(it.name) }
+                userService.getUserInfo()?.let { mineInfoItemLayout.setTvContent(it.account) }
             }
 
             if (i == 1) {
@@ -43,11 +43,11 @@ class MyInfoActivity : BaseMvvmActivity<UserActivityInfoBinding, UserViewModel>(
 
 
             if (i == 3) {
-                userService.getUserInfo()?.let { mineInfoItemLayout.setTvContent(it.company_name) }
+                userService.getUserInfo()?.let { mineInfoItemLayout.setTvContent(it.structure_txt!!) }
             }
 
             if (i == 4) {
-                userService.getUserInfo()?.let { mineInfoItemLayout.setTvContent(it.company_tag) }
+                userService.getUserInfo()?.let { mineInfoItemLayout.setTvContent(it.role_txt!!) }
             }
 
             if (i == 5) {

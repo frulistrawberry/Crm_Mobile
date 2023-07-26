@@ -41,10 +41,10 @@ class OrderListFragment: BaseMvvmFragment<CommonSrlListBinding, OrderViewModel>(
             onButtonActionListener = {item, action ->
                 when(action){
                     ButtonTypeEntity.ACTION_SIGN->{
-                        if (item.order_phase == StatusConstant.ORDER_PHASE_STORE_TO_BE_ENTERED){
+                        if (item.order_phase == StatusConstant.ORDER_PHASE_STORE_TO_BE_ENTERED|| item.order_phase == StatusConstant.ORDER_PHASE_CUSTOMER_EFFECTIVE){
                             PreSignActivity.start(requireActivity(), item.req_id,item.order_id)
                         }else if (isCompanyNeedContract){
-                            ContractServiceProvider.toAddOrUpdateContract(requireActivity(),item.order_id)
+                            ContractServiceProvider.toAddOrUpdateContract(this@OrderListFragment,item.order_id)
                         }else{
                             SignActivity.start(requireActivity(),item.order_id)
                         }

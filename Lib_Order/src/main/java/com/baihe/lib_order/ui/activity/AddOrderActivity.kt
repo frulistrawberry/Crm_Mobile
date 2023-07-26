@@ -83,7 +83,7 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
         })
         BottomSelectDialog.Builder(this)
             .setData(items,mode.toString())
-            .setOnConfirmClickListener { _, value, name ->
+            .setOnConfirmClickListener { _, value, name,_ ->
                 mBinding.tvMode.text = name
                 mode = value.toInt()
                 toggleMode()
@@ -334,8 +334,10 @@ class AddOrderActivity: BaseMvvmActivity<OrderActivityAddOrderBinding, OrderView
             customerId?.let {
                 mViewModel.getCustomerInfo(it)
             }
-
-
+        }
+        if (requestCode == RequestCode.REQUEST_ADD_CONTRACT && resultCode == RESULT_OK){
+            setResult(RESULT_OK)
+            finish()
         }
     }
 }

@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/srl_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dp_20"
                 android:paddingRight="@dimen/dp_20"
-                android:paddingBottom="@dimen/dp_60"
+                android:paddingBottom="@dimen/dp_100"
                 android:orientation="vertical">
+                <com.baihe.lib_common.ui.widget.font.FontTextView
+                    android:id="@+id/tv_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:textSize="@dimen/dp_12"
+                    app:font_textStyle="NORMAL"
+                    android:visibility="gone"
+                    android:textColor="#FFFF1E5A"
+                    android:text="请确认合同信息是否有误？"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_16"
                     android:padding="@dimen/dp_20"
                     android:background="@drawable/common_round_white"
                     android:orientation="vertical">
@@ -66,42 +78,48 @@
 
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_28"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_sub_title_flag" />
-
-                    <com.baihe.lib_common.ui.widget.font.FontTextView
-                        style="@style/font_half_bold_16_4A4C5C"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_weight="1"
-                        android:text="基础信息" />
-
-
-                </LinearLayout>
-                <LinearLayout
                     android:id="@+id/ll_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:padding="@dimen/dp_20"
-                    android:background="@drawable/common_round_white"
                     android:orientation="vertical">
-                    <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
-                        android:id="@+id/kvl_info_basic"
-                        android:visibility="visible"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_28"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_sub_title_flag" />
+
+                        <com.baihe.lib_common.ui.widget.font.FontTextView
+                            style="@style/font_half_bold_16_4A4C5C"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_16"
+                            android:layout_weight="1"
+                            android:text="基础信息" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:padding="@dimen/dp_20"
+                        android:background="@drawable/common_round_white"
+                        android:orientation="vertical">
+                        <com.baihe.lib_common.ui.widget.keyvalue.KeyValueLayout
+                            android:id="@+id/kvl_info_basic"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

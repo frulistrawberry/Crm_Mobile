@@ -27,7 +27,7 @@ object TimeExt{
 
     @SuppressLint("SimpleDateFormat")
     fun Long.formattedDateTime():String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
         return sdf.format(this)
     }
 

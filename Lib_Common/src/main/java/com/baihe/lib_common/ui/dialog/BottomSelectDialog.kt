@@ -21,7 +21,7 @@ class BottomSelectDialog {
             DialogBottomSelectBinding.inflate(LayoutInflater.from(context))
         }
         private val adapter by lazy{
-            SingleSelectAdapter()
+            SingleSelectAdapter(context)
         }
 
         init {
@@ -47,30 +47,60 @@ class BottomSelectDialog {
 
         fun setData(data:List<KeyValueEntity>?, defaultValue:String?):Builder {
             var defParenPosition = -1
+            var defChildPosition = -1
             data?.forEach{parent ->
                 if (parent.value == defaultValue){
                     defParenPosition = data.indexOf(parent)
                     return@forEach
                 }
+                if (!parent.children.isNullOrEmpty()){
+                    parent.children.forEach { child ->
+                        if (child.value == defaultValue){
+                            defParenPosition = data.indexOf(parent)
+                            defChildPosition = parent.children.indexOf(child)
+                            return@forEach
+                        }
+                    }
+                }
             }
             adapter.selectPosition = defParenPosition
+            adapter.childSelectPosition = defChildPosition
             adapter.setData(data)
             return this
         }
 
-        fun setOnConfirmClickListener(onConfirm:(dialog: Dialog?,value:String,name:String)->Unit): Builder {
+        fun setOnConfirmClickListener(onConfirm:(dialog: Dialog?,value:String,name:String,subValue:String?)->Unit): Builder {
             mBinding.bottomSelectConfirmTv.click {
                 dismiss()
                 if (adapter.selectPosition == -1)
                     return@click
                 val data = adapter.getData()
                 var value:String
-                var name:String
+                var label:String?
+                var subValue:String? = null
                 data.let {
                     value = data[adapter.selectPosition].value
-                    name = data[adapter.selectPosition].name
+                    label = data[adapter.selectPosition].label
+                    if (label.isNullOrEmpty()){
+                        label = data[adapter.selectPosition].name
+                    }
                 }
-                onConfirm.invoke(dialog, value,name)
+                if (adapter.childSelectPosition!=-1){
+                    data.let {
+                        subValue = data[adapter.selectPosition]
+                            .children[adapter.childSelectPosition]
+                            .value
+                        label = data[adapter.selectPosition]
+                            .children[adapter.childSelectPosition]
+                            .label
+                        if (label.isNullOrEmpty()){
+                            label = data[adapter.selectPosition]
+                                .children[adapter.childSelectPosition]
+                                .name
+                        }
+                    }
+                }
+                onConfirm.invoke(dialog, value,label?:"",subValue)
             }
             return this
         }

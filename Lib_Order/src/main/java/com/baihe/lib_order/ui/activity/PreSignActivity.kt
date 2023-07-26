@@ -67,7 +67,7 @@ class PreSignActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderViewModel
 
     override fun initView(savedInstanceState: Bundle?) {
         setToolbar {
-            title = "完成签约"
+            title = "销售订单"
         }
         mBinding.btnCommit.text = "下一步"
         val kvList = mutableListOf<KeyValueEntity>()
@@ -76,7 +76,7 @@ class PreSignActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderViewModel
             add(KeyValueEntity().also { item->
                 item.name = "到店时间"
                 item.is_channge = "2"
-                item.is_true = "2"
+                item.is_true = "1"
                 item.is_open = "1"
                 item.type = "datetime"
                 item.paramKey = "arrival_time"
@@ -103,6 +103,14 @@ class PreSignActivity: BaseMvvmActivity<ActivityAddFollowBinding, OrderViewModel
             if (params!=null){
                 mViewModel.confirmIndoor(params)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK){
+            setResult(RESULT_OK)
+            finish()
         }
     }
 }

@@ -44,20 +44,35 @@ class BottomSelectMultiDialog {
             return this
         }
 
-        fun setData(data:List<KeyValueEntity>?,defaultValue:String?):Builder{
-            var defParenPosition = -1
-            var defChildPosition = -1
+        fun setData(data:List<KeyValueEntity>?,defaultValue:String?,defaultSubValue:String?):Builder{
+            val defParenPosition = mutableListOf<Int>()
+            val defChildPosition = mutableListOf<Int>()
+            val defaultValues:MutableList<String> = if (defaultValue?.contains(",") == true){
+                defaultValue.split(",").toMutableList()
+            }else if (!defaultValue.isNullOrEmpty()){
+                mutableListOf<String>().also {
+                    it.add(defaultValue)
+                }
+            }else{
+                mutableListOf()
+            }
+            val subDefaultValues = if (defaultSubValue?.contains(",") == true){
+                defaultSubValue.split(",").toMutableList()
+            }else if (!defaultSubValue.isNullOrEmpty()){
+                mutableListOf<String>().also {
+                    it.add(defaultSubValue)
+                }
+            }else{
+                mutableListOf()
+            }
             data?.forEach{parent ->
-                if (parent.value == defaultValue){
-                    defParenPosition = data.indexOf(parent)
-                    return@forEach
+                if (defaultValues.contains(parent.value) ){
+                    defParenPosition.add(data.indexOf(parent))
                 }
                 if (!parent.children.isNullOrEmpty()){
                     parent.children.forEach { child ->
-                        if (child.value == defaultValue){
-                            defParenPosition = data.indexOf(parent)
-                            defChildPosition = parent.children.indexOf(child)
-                            return@forEach
+                        if (subDefaultValues.contains(child.value)){
+                            defChildPosition.add(parent.children.indexOf(child))
                         }
                     }
                 }
@@ -67,29 +82,44 @@ class BottomSelectMultiDialog {
             adapter.setData(data)
             return this
         }
-        fun setOnConfirmClickListener(onConfirm:(dialog: Dialog?, value:String,label:String)->Unit): Builder {
+        fun setOnConfirmClickListener(onConfirm:(dialog: Dialog?, value:String,label:String,subValue:String?)->Unit): Builder {
             mBinding.bottomSelectConfirmTv.click {
                 dismiss()
-                if (adapter.selectPosition == -1)
+                if (adapter.selectPosition.isEmpty())
                     return@click
                 val data = adapter.getData()
                 var value:String
                 var label:String
+                var subValue:String? = null
                 data.let {
-                    value = data[adapter.selectPosition].value
-                    label = data[adapter.selectPosition].label
-                }
-                if (adapter.childSelectPosition!=-1){
-                    data.let {
-                        value = data[adapter.selectPosition]
-                            .children[adapter.childSelectPosition]
-                            .value
-                        label = data[adapter.selectPosition]
-                            .children[adapter.childSelectPosition]
-                            .label
+                    val valueSb = StringBuilder()
+                    val labelSb = StringBuilder()
+                    adapter.selectPosition.forEach { parentSelect ->
+                        valueSb.append(data[parentSelect].value)
+                        labelSb.append(data[parentSelect].label)
+                        if (adapter.selectPosition.indexOf(parentSelect)<adapter.selectPosition.size-1){
+                            valueSb.append(",")
+                            labelSb.append(",")
+                        }
+                        if (adapter.childSelectPosition.isNotEmpty()){
+                            val subValueSb = StringBuilder()
+                            if (!data[parentSelect].children.isNullOrEmpty()){
+                                adapter.childSelectPosition.forEach {
+                                    subValueSb.append(data[parentSelect].children[it].value)
+                                    if (adapter.childSelectPosition.indexOf(it)<adapter.childSelectPosition.size-1){
+                                        subValueSb.append(",")
+                                    }
+                                }
+                            }
+
+                            subValue  = subValueSb.toString()
+                        }
                     }
+                    value = valueSb.toString()
+                    label = labelSb.toString()
                 }
-                onConfirm.invoke(dialog, value,label)
+
+                onConfirm.invoke(dialog, value,label,subValue)
             }
             return this
         }

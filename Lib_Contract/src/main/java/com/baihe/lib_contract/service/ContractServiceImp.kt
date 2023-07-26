@@ -2,6 +2,7 @@ package com.baihe.lib_contract.service
 
 import android.app.Activity
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.baihe.lib_common.constant.RoutePath
 import com.baihe.lib_common.service.IContractService
@@ -19,7 +20,11 @@ class ContractServiceImp:IContractService {
         ContractDetailActivity.start(context,id)
     }
 
-    override fun toAddOrUpdateContract(act: Activity, orderId: String, contractId: String?) {
-        AddOrUpdateContractActivity.start(act,orderId,contractId)
+    override fun toAddOrUpdateContract(act: Activity, orderId: String, contractId: String?,needPreview:Boolean) {
+        AddOrUpdateContractActivity.start(act,orderId,contractId,needPreview)
+    }
+
+    override fun toAddOrUpdateContract(act: Fragment, orderId: String, contractId: String?,needPreview:Boolean) {
+        AddOrUpdateContractActivity.start(act,orderId,contractId,needPreview)
     }
 }

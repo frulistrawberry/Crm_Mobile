@@ -23,7 +23,7 @@ data class FollowEntity(
     val contact_way_txt:String,
     val phase_txt:String,
     val reserve_txt:String,
-    val reserve_time:String,
+    val reserve_time:String?,
     val comment:String,
     val attachment:String?,
     val daodian_comment:String?,
@@ -81,8 +81,12 @@ data class FollowEntity(
                 `val` = reserve_txt
             })
             add(KeyValueEntity().apply {
-                key = "预约时间"
-                `val` = reserve_time
+                key = "预约进店时间"
+                `val` = if (reserve_time.isNullOrEmpty()){
+                    "无"
+                }else{
+                    reserve_time
+                }
             })
             add(KeyValueEntity().apply {
                 key = "下次回访时间"

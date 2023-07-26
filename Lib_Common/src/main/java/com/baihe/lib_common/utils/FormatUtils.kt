@@ -80,7 +80,6 @@ object FormatUtils {
         }
         return statusText
     }
-
     fun formatOrderLabelWithDispatch(phase:String?,orderStatus:String?):StatusText?{
         val statusText = StatusText()
         if (orderStatus!=null && orderStatus.isNotEmpty() && orderStatus!="0"){
@@ -138,7 +137,6 @@ object FormatUtils {
         }
         return statusText
     }
-
     fun formatOrderLabel(orderStatus: String):StatusText{
         val statusText = StatusText()
         when(orderStatus){
@@ -185,6 +183,4 @@ object FormatUtils {
         }
         return statusText
     }
-
-
 }

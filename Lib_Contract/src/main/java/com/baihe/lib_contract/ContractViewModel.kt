@@ -83,7 +83,7 @@ class ContractViewModel: BaseViewModel() {
         }) {
 
             if (!orderId.isNullOrEmpty()){
-                params["orderId"] = orderId
+                params["order_id"] = orderId
             }
             if (contractId.isNullOrEmpty()){
                 if (attachment.isEmpty()){
@@ -93,7 +93,7 @@ class ContractViewModel: BaseViewModel() {
                 }
             }
             else{
-                params["contractId"] = contractId
+                params["contract_id"] = contractId
                 if (attachment.isEmpty()){
                     repository.updateContract(params)
                 }else{

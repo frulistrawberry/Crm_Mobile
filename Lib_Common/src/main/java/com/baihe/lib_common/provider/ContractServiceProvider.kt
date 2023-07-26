@@ -2,6 +2,7 @@ package com.baihe.lib_common.provider
 
 import android.app.Activity
 import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
@@ -34,6 +35,8 @@ object ContractServiceProvider {
     fun toContractDetail(context: Context,contractId:String) = service.toContractDetail(context,contractId)
 
     @JvmStatic
-    fun toAddOrUpdateContract(act:Activity,orderId:String,contractId:String?=null) = service.toAddOrUpdateContract(act,orderId,contractId)
+    fun toAddOrUpdateContract(act:Activity,orderId:String,contractId:String?=null,needPreview:Boolean = true) = service.toAddOrUpdateContract(act,orderId,contractId,needPreview)
+    @JvmStatic
+    fun toAddOrUpdateContract(act:Fragment,orderId:String,contractId:String?=null,needPreview: Boolean = true) = service.toAddOrUpdateContract(act,orderId,contractId,needPreview)
 
 }

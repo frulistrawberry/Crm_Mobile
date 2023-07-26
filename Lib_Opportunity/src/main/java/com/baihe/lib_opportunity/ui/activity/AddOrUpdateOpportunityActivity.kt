@@ -157,8 +157,8 @@ class AddOrUpdateOpportunityActivity:
                 "新增销售机会"
             else
                 "编辑销售机会"
-            if (!title.isNullOrEmpty())
-                title
+            if (!this@AddOrUpdateOpportunityActivity.title.isNullOrEmpty())
+               title = this@AddOrUpdateOpportunityActivity.title
         }
         mBinding.srlRoot.setEnableLoadMore(false)
     }

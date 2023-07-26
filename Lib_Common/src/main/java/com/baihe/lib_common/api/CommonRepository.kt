@@ -143,8 +143,13 @@ class CommonRepository(lifecycle: LifecycleOwner): BaseRepository(lifecycle) {
     suspend fun batchUploadFiles(filePathList:List<String>):List<String?>{
         return flow {
             filePathList.forEach{
-                val result = uploadFile(it)
-                emit(result?.full_path)
+                if (it.startsWith("http")){
+                    emit(it)
+                }else{
+                    val result = uploadFile(it)
+                    emit(result?.full_path)
+                }
+
             }
         }.toList()
     }

@@ -105,7 +105,7 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
             detailEntity.opportunityInfo?.let {opportunityInfo->
                 reqId = opportunityInfo.req_id
                 customerId = opportunityInfo.customer_id
-                order_phase = opportunityInfo.order_phase_status
+                order_phase = opportunityInfo.order_phase
                 mBinding.tvTitle.text = opportunityInfo.title
                 if (opportunityInfo.orderstatus == StatusConstant.ORDER_TO_BE_SIGNED){
                     mBinding.tvPhase.text = opportunityInfo.order_phase_status
@@ -272,7 +272,7 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
         when(type){
             ACTION_SIGN->{
 
-                if (order_phase == StatusConstant.ORDER_PHASE_STORE_TO_BE_ENTERED){
+                if (order_phase == StatusConstant.ORDER_PHASE_STORE_TO_BE_ENTERED || order_phase == StatusConstant.ORDER_PHASE_CUSTOMER_EFFECTIVE){
                     PreSignActivity.start(this,reqId!!,orderId)
                 }else if (isCompanyNeedContract){
                     ContractServiceProvider.toAddOrUpdateContract(this,orderId)
@@ -296,6 +296,7 @@ class OrderDetailActivity: BaseMvvmActivity<OrderActivityOrderDetailBinding, Ord
                 OrderChargebackActivity.start(this,orderId)
             }
             ACTION_EDIT_CONTRACT->{
+                ContractServiceProvider.toAddOrUpdateContract(this,orderId,contractId)
             }
             ACTION_FOLLOW ->{
                 AddFollowActivity.start(this,reqId!!,customerId!!,orderId)

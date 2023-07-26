@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_60">
+                android:paddingBottom="@dimen/dp_100">
                 <com.baihe.lib_common.ui.widget.keyvalue.KeyValueEditLayout
                     android:id="@+id/kvl_contract"
                     android:layout_width="match_parent"

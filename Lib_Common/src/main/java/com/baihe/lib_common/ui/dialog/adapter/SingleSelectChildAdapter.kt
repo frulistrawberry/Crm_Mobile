@@ -1,33 +1,28 @@
 package com.baihe.lib_common.ui.dialog.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.baihe.lib_common.R
-
 import com.baihe.lib_common.databinding.DialogItemSelectChildBinding
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_framework.adapter.BaseBindViewHolder
 import com.baihe.lib_framework.adapter.BaseRecyclerViewAdapter
 import com.baihe.lib_framework.ext.SpanExt.colorSpan
 
+class SingleSelectChildAdapter(val context: Context): BaseRecyclerViewAdapter<KeyValueEntity, DialogItemSelectChildBinding>() {
 
-@SuppressLint("NotifyDataSetChanged")
-class MultiSelectChildAdapter(val context:Context): BaseRecyclerViewAdapter<KeyValueEntity, DialogItemSelectChildBinding>() {
-
-    var selectPosition:MutableList<Int> = mutableListOf()
+    var selectPosition:Int = -1
     var parentPosition:Int = -1
     var keywords:String = ""
     var onChildSelectListener:((position:Int,parentPosition:Int)->Unit)? = null
     init {
         onItemClickListener = { _, position ->
-            if (selectPosition.contains(position))
-                selectPosition.remove(position)
-            else
-                selectPosition.add(position)
-            notifyDataSetChanged()
+            val tempPosition = selectPosition
+            selectPosition = position
+            notifyItemChanged(position)
+            notifyItemChanged(tempPosition)
             onChildSelectListener?.invoke(position,parentPosition)
         }
     }
@@ -55,7 +50,7 @@ class MultiSelectChildAdapter(val context:Context): BaseRecyclerViewAdapter<KeyV
                 }
             }
         }
-        if (selectPosition.contains(position) ){
+        if (selectPosition == position){
             holder.binding.bottomSelectItemCheckedCb.setImageResource(R.mipmap.ic_check)
         }else{
             holder.binding.bottomSelectItemCheckedCb.setImageResource(R.mipmap.ic_uncheck)

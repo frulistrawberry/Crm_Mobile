@@ -18,7 +18,7 @@ open class BaseRepository(val lifecycleOwner: LifecycleOwner) {
      */
     suspend fun <T> requestResponse(requestCall: suspend () -> BaseResponse<T>?): T? {
         val response = withContext(Dispatchers.IO) {
-            withTimeout(10 * 1000) {
+            withTimeout(600 * 1000) {
                 requestCall()
             }
         } ?:return null

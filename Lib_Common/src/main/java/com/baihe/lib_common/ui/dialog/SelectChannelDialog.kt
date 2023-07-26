@@ -14,6 +14,7 @@ import com.baihe.lib_common.ui.dialog.adapter.SelectChannelAdapter
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
 import com.baihe.lib_common.ui.dialog.adapter.MultiSelectAdapter
+import com.baihe.lib_common.ui.dialog.adapter.SingleSelectAdapter
 import com.baihe.lib_common.ui.widget.keyvalue.entity.KeyValueEntity
 import com.baihe.lib_common.viewmodel.CommonViewModel
 import com.baihe.lib_framework.base.BaseActivity
@@ -51,7 +52,7 @@ class SelectChannelDialog {
         }
 
         private val rightAdapter by lazy {
-            MultiSelectAdapter(context)
+            SingleSelectAdapter(context)
         }
         private var defaultValue: String? = null
 

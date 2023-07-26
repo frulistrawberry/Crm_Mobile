@@ -23,6 +23,14 @@ package com.baihe.lib_common.entity
      */
     var company_tag: String,
     /**
+     * 所属部门
+     */
+    var structure_txt: String?,
+    /**
+     * 角色
+     */
+    var role_txt: String?,
+    /**
      * 用户Id
      */
     var id: Int,

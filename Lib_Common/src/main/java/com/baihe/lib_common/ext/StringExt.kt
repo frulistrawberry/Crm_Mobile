@@ -14,4 +14,16 @@ object StringExt{
             m.matches()
         }
     }
+
+    fun String.isPassword():Boolean{
+        val regex = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%^&*()-_=+\\[{\\]}\\|;:'\",<.>/?])|(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%^&*()-_=+\\[{\\]}\\|;:'\",<.>/?])|(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()-_=+\\[{\\]}\\|;:'\",<.>/?])).{8,}$"
+        return if (length<8||length>15){
+            false
+        }else{
+            val p = Pattern.compile(regex)
+            val m = p.matcher(this)
+            m.matches()
+        }
+
+    }
 }

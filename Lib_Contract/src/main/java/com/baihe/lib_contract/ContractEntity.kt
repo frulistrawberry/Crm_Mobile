@@ -74,7 +74,7 @@ data class ContractDetailEntity(
     val groom_mobile_txt: String,
     val hotel: String,
     val hotel_hall: String,
-    val hotel_hall_txt: Any,
+    val hotel_hall_txt: String,
     val hotel_tables: String?,
     val name: String,
     val order_id: String,
@@ -171,7 +171,7 @@ data class ContractDetailEntity(
         })
         kvList.add(KeyValueEntity().apply {
             key = "宴会厅"
-            `val` = hotel_hall
+            `val` = hotel_hall_txt
         })
         kvList.add(KeyValueEntity().apply {
             key = "档期日期"

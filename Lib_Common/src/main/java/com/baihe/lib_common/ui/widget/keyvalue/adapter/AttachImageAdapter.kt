@@ -24,6 +24,8 @@ class AttachImageAdapter(val mode:Int = 1): BaseRecyclerViewAdapter<String, Layo
 
     var spanCount = 4
 
+    var onDeleteListener:((position:Int)->Unit?)? = null
+
 
     init {
 
@@ -53,6 +55,7 @@ class AttachImageAdapter(val mode:Int = 1): BaseRecyclerViewAdapter<String, Layo
         }
         holder.binding.btnDel.click {
             getData().removeAt(position)
+            onDeleteListener?.invoke(position)
             notifyDataSetChanged()
         }
         ImageLoaderUtils.getInstance().loadCornerImage(holder.binding.imageview.context,holder.binding.imageview,item,DpToPx.dpToPx(14))

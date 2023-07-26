@@ -6,9 +6,11 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.baihe.lib_common.constant.RoutePath
 import com.baihe.lib_common.ext.ActivityExt.dismissLoadingDialog
 import com.baihe.lib_common.ext.ActivityExt.showLoadingDialog
+import com.baihe.lib_common.ext.StringExt.isPassword
 import com.baihe.lib_common.provider.UserServiceProvider
 import com.baihe.lib_common.service.ILoginService
 import com.baihe.lib_framework.base.BaseMvvmActivity
+import com.baihe.lib_framework.ext.ResourcesExt.string
 import com.baihe.lib_framework.ext.ViewExt.click
 import com.baihe.lib_framework.toast.TipsToast
 import com.baihe.lib_user.R
@@ -70,6 +72,10 @@ class UpdatePasswordActivity :
         }
         if (newPas.isEmpty()) {
             TipsToast.showTips("新密码不能为空~")
+            return
+        }
+        if (!newPas.isPassword()){
+            showToast(string(R.string.user_setting_tip))
             return
         }
         if (confirmPas.isEmpty()) {

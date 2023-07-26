@@ -34,6 +34,7 @@ data class OpportunityDetailEntity(
     val phone: String?,
     @SerializedName("category_txt")
     val category:String?,
+    val final_category_txt:String?,
     @SerializedName("follow_user_id_txt")
     val followUser:String?,
     val name:String?,
@@ -136,7 +137,7 @@ data class OpportunityDetailEntity(
             })
             add(KeyValueEntity().apply {
                 key = "业务子品类"
-                `val` = sub_category
+                `val` = final_category_txt
             })
             add(KeyValueEntity().apply {
                 key = "跟进人"

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.baihe.lib_common.constant.KeyConstant
+import com.baihe.lib_common.constant.RequestCode
 import com.baihe.lib_contract.ContractViewModel
 import com.baihe.lib_contract.databinding.ContractActivityContractDetailBinding
 import com.baihe.lib_framework.base.BaseMvvmActivity
@@ -84,5 +85,11 @@ class ContractDetailActivity:
     override fun initData() {
         super.initData()
         mViewModel.getContractDetail(contractId)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RequestCode.REQUEST_ADD_CONTRACT && resultCode == RESULT_OK)
+            mViewModel.getContractDetail(contractId)
     }
 }

@@ -5,7 +5,8 @@
     <application>
         <activity android:name=".ui.activity.ContractListActivity" />
         <activity android:name=".ui.activity.ContractDetailActivity" />
-        <activity android:name=".ui.activity.AddOrUpdateContractActivity" />
+        <activity android:name=".ui.activity.AddOrUpdateContractActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.activity.PreviewContractActivity" />
     </application>
 </manifest>
